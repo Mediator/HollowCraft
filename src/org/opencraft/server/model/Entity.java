@@ -1,4 +1,4 @@
-package org.opencraft.server;
+package org.opencraft.server.model;
 
 /*
  * OpenCraft License
@@ -34,15 +34,10 @@ package org.opencraft.server;
  */
 
 /**
- * Holds global constants for the OpenCraft server.
+ * Represents a player or mob.
  * @author Graham Edgecombe
  *
  */
-public final class Constants {
-	
-	/**
-	 * The default Minecraft port.
-	 */
-	public static final int PORT = 25565;
+public abstract class Entity {
 
 }

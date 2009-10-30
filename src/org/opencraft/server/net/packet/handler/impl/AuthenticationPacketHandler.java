@@ -46,7 +46,7 @@ import org.opencraft.server.net.packet.handler.PacketHandler;
  * @author Graham Edgecombe
  *
  */
-public class AuthenticationPacketHandler implements PacketHandler {
+public final class AuthenticationPacketHandler implements PacketHandler {
 	
 	/**
 	 * Logger instance.
