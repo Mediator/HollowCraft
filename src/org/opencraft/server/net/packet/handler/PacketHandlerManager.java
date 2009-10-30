@@ -1,4 +1,4 @@
-package org.opencraft.server.net.event;
+package org.opencraft.server.net.packet.handler;
 
 /*
  * OpenCraft License
