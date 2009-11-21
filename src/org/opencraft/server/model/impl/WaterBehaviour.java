@@ -1,4 +1,4 @@
-package org.opencraft.server.model;
+package org.opencraft.server.model.impl;
 
 /*
  * OpenCraft License
@@ -33,22 +33,26 @@ package org.opencraft.server.model;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+import org.opencraft.server.model.BlockBehaviour;
+import org.opencraft.server.model.Level;
+
 /**
- * Contains various methods handling block behavior.
+ * A block behaviour that handles water (outward and downward expansion).
  * @author Brett Russell
- * @author Graham Edgecombe
- * 
+ *
  */
-public interface BlockBehavior {
-	
-	/**
-	 * Applies a behaviour to a block.
-	 * @param level The level.
-	 * @param x The x coordinate.
-	 * @param y The y coordinate.
-	 * @param z The z coordinate.
-	 * @param type The block type.
-	 */
-	public void apply(Level level, int x, int y, int z, int type);
-	
+public class WaterBehaviour implements BlockBehaviour {
+
+	@Override
+	public void apply(Level level, int x, int y, int z, int type) {
+		if(z > 0) {
+			int tgtZ = z - 1;
+			if(level.getBlock(x, y, tgtZ) == 0) {
+				int src = level.getBlock(x, y, z);
+				level.setBlock(x, y, z, 0);
+				level.setBlock(x, y, tgtZ, src);
+			}
+		}
+	}
+
 }

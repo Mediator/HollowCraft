@@ -1,4 +1,4 @@
-package org.opencraft.server.model.impl;
+package org.opencraft.server.model;
 
 /*
  * OpenCraft License
@@ -33,32 +33,22 @@ package org.opencraft.server.model.impl;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.server.model.BlockBehaviour;
-import org.opencraft.server.model.Level;
-
 /**
- * A block behaviour that applies gravity to a block.
- * Lets a block fall to the lowest possible unoccupied square (z-axis).
- * @author Graham Edgecombe
+ * Contains various methods handling block behavior.
  * @author Brett Russell
- *
+ * @author Graham Edgecombe
+ * 
  */
-public class GravityBehaviour implements BlockBehaviour {
-
-	@Override
-	public void apply(Level level, int x, int y, int z, int type) {
-		int src = level.getBlock(x, y, z);
-		for(int i = z-1; i >= 0; i--) {
-			if(level.getBlock(x, y, i) != 0) {
-				level.setBlock(x, y, z, 0);
-				level.setBlock(x, y, i+1, src);
-				return;
-			}
-			if(i == 0) {
-				level.setBlock(x, y, z, 0);
-				level.setBlock(x, y, i, src);
-			}
-		}
-	}
-
+public interface BlockBehaviour {
+	
+	/**
+	 * Applies a behaviour to a block.
+	 * @param level The level.
+	 * @param x The x coordinate.
+	 * @param y The y coordinate.
+	 * @param z The z coordinate.
+	 * @param type The block type.
+	 */
+	public void apply(Level level, int x, int y, int z, int type);
+	
 }
