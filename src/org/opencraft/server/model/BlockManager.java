@@ -1,6 +1,5 @@
 package org.opencraft.server.model;
 
-
 /*
  * OpenCraft License
  * 
@@ -34,42 +33,69 @@ package org.opencraft.server.model;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+import java.util.LinkedList;
+import java.util.List;
+
+import org.opencraft.server.io.PersistenceManager;
+
 /**
- * Contains various methods handling block behavior.
- * @author Brett Russell
+ * A class which manages <code>BlockDefinition</code>s and <code>BlockBehaviour</code>s.
  * @author Graham Edgecombe
- * 
+ * @author Brett Russell
+ *
  */
-public interface BlockBehaviour {
+public final class BlockManager {
 	
 	/**
-	 * Applies a behaviour to a block.
-	 * @param level The level.
-	 * @param x The x coordinate.
-	 * @param y The y coordinate.
-	 * @param z The z coordinate.
-	 * @param type The block type.
+	 * The packet manager instance.
 	 */
-	public void handlePassive(Level level, int x, int y, int z, int type);
+	private static final BlockManager INSTANCE = (BlockManager) PersistenceManager.getPersistenceManager().load("data/blocks.xml");
 	
 	/**
-	 * Applies a behaviour to a block.
-	 * @param level The level.
-	 * @param x The x coordinate.
-	 * @param y The y coordinate.
-	 * @param z The z coordinate.
-	 * @param type The block type.
+	 * Gets the packet manager instance.
+	 * @return The packet manager instance.
 	 */
-	public void handleDestroy(Level level, int x, int y, int z, int type);
+	public static BlockManager getBlockManager() {
+		return INSTANCE;
+	}
 	
 	/**
-	 * Applies a behaviour to a block.
-	 * @param level The level.
-	 * @param x The x coordinate.
-	 * @param y The y coordinate.
-	 * @param z The z coordinate.
-	 * @param type The block type.
+	 * A list of the blocks.
 	 */
-	public void handleScheduledBehaviour(Level level, int x, int y, int z, int type);
+	private List<BlockDefinition> blockList = new LinkedList<BlockDefinition>();
 	
+	/**
+	 * The block array (faster access by opcode than list iteration).
+	 */
+	private transient BlockDefinition[] blocksArray;
+	
+	/**
+	 * Default private constructor.
+	 */
+	private BlockManager() {
+		/* empty */
+	}
+	
+	/**
+	 * Resolves the block manager after deserialization.
+	 * @return The resolved object.
+	 */
+	private Object readResolve() {
+		blocksArray = new BlockDefinition[256];
+		for(BlockDefinition def : blockList) {
+			blocksArray[def.getId()] = def;
+		}
+		return this;
+	}
+
+	/**
+	 * Gets an incoming block definition.
+	 * @param id The id.
+	 * @return The block definition.
+	 */
+	public BlockDefinition getBlock(int id) {
+		return blocksArray[id];
+	}
+
+
 }
