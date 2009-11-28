@@ -1,4 +1,6 @@
-package org.opencraft.server.game;
+package org.opencraft.server.cmd;
+
+import org.opencraft.server.model.Player;
 
 /*
  * OpenCraft License
@@ -33,21 +35,18 @@ package org.opencraft.server.game;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.util.Map;
-
-import org.opencraft.server.cmd.Command;
-
 /**
- * An interface which represents a specific type of game mode.
+ * Represents a specific command.
  * @author Graham Edgecombe
- * 
+ *
  */
-public interface GameMode {
+public interface Command {
 	
 	/**
-	 * Gets a map of commands that are supported in this game mode.
-	 * @return The map of commands.
+	 * Executes this command for the specified player.
+	 * @param player The player.
+	 * @param args The arguments.
 	 */
-	public Map<String, Command> getCommands();
+	public void execute(Player player, String[] args);
 
 }

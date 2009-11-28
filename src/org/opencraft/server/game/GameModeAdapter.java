@@ -33,21 +33,36 @@ package org.opencraft.server.game;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.opencraft.server.cmd.Command;
 
 /**
- * An interface which represents a specific type of game mode.
+ * An implementation of a game mode that does the majority of the work for the
+ * game mode developer.
  * @author Graham Edgecombe
- * 
+ *
  */
-public interface GameMode {
+public abstract class GameModeAdapter implements GameMode {
+
+	/**
+	 * The command map.
+	 */
+	private final Map<String, Command> commands = new HashMap<String, Command>();
 	
 	/**
-	 * Gets a map of commands that are supported in this game mode.
-	 * @return The map of commands.
+	 * Adds a command
+	 * @param name The command name.
+	 * @param command The command.
 	 */
-	public Map<String, Command> getCommands();
+	public void registerCommand(String name, Command command) {
+		commands.put(name, command);
+	}
+	
+	@Override
+	public Map<String, Command> getCommands() {
+		return commands;
+	}
 
 }
