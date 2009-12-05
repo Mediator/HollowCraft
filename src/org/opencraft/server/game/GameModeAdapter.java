@@ -37,6 +37,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.opencraft.server.cmd.Command;
+import org.opencraft.server.model.Level;
+import org.opencraft.server.model.Player;
+import org.opencraft.server.model.World;
 
 /**
  * An implementation of a game mode that does the majority of the work for the
@@ -63,6 +66,22 @@ public abstract class GameModeAdapter implements GameMode {
 	@Override
 	public Map<String, Command> getCommands() {
 		return commands;
+	}
+	
+	//Default implementation
+	public void playerConnected(Player player) {
+		World.getWorld().broadcast("Welcome " + player.getName());
+	}
+	
+	//Default implementation
+	public void setBlock(Player player, Level level, int x, int y, int z, int mode, int type)
+	{
+		level.setBlock(x, y, z, (byte) (mode == 1 ? type : 0));
+	}
+	
+	//Default implementation
+	public void playerDisconnected(Player player) {
+		World.getWorld().broadcast(player.getName() + " disconnected.");
 	}
 
 }

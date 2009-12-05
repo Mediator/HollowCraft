@@ -1,4 +1,4 @@
-package org.opencraft.server.game;
+package org.opencraft.server.game.impl;
 
 /*
  * OpenCraft License
@@ -33,44 +33,42 @@ package org.opencraft.server.game;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
-
-import org.opencraft.server.cmd.Command;
-import org.opencraft.server.model.Level;
+import org.opencraft.server.game.GameModeAdapter;
 import org.opencraft.server.model.Player;
+import org.opencraft.server.model.World;
 
-/**
- * An interface which represents a specific type of game mode.
- * @author Graham Edgecombe
+/*
+ * An experimental game mode. Useful for testing things.
+ * Currently logs players in memory and greets them accordingly.
  * @author Søren Enevoldsen
  */
-public interface GameMode {
-	
-	/**
-	 * Gets a map of commands that are supported in this game mode.
-	 * @return The map of commands.
-	 */
-	public Map<String, Command> getCommands();
 
-	/**
-	 * Notification of player connected
-	 * @param player The connected player
-	 */
-	public void playerConnected(Player player);
+public class ExperimentalGameMode extends GameModeAdapter {
+
+	private Map<String,Date> visitors = new HashMap<String,Date>();
 	
-	/**
-	 * Event handler for a player disconnect
-	 * Remember player has already disconnected!
-	 * @param player The disconnected player
-	 */
-	public void playerDisconnected(Player player);
+	@Override
+	public void playerConnected(Player player) {
+		String name = player.getName();
+		//New player?
+		if (!visitors.containsKey(name)) {
+			World.getWorld().broadcast("Welcome " + name + ".");
+		}
+		else {
+			//Welcome back.
+			String lastConnectDate = DateFormat.getDateTimeInstance(DateFormat.SHORT,
+					DateFormat.SHORT).format(visitors.get(name));
+			World.getWorld().broadcast("Welcome back " + name + ".");
+			player.getSession().getActionSender().sendChatMessage("You last connect was: " + lastConnectDate + ".");
+			
+		}
+		
+		//Remember connection time
+		visitors.put(name, new Date());
+	}
 	
-	/**
-	 * Handles block adding and removing
-	 * @param player The player setting the block
-	 * @param level The level
-	 * @param mode 1/0 adding/removing
-	 * @param type typeId of the block
-	 */
-	public void setBlock(Player player, Level level, int x, int y, int z, int mode, int type);
 }
