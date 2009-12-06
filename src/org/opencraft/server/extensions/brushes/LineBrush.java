@@ -48,12 +48,13 @@ public class LineBrush extends Brush {
 	
 	public LineBrush() {
 		setMaxRadius(6);
-	};
+	}
 	
 	public LineBrush(int radius) {
 		setMaxRadius(6);
 		setRadius(radius);
 	}
+	
 	
 	@Override
 	protected void paintBlocks(Player player, int x, int y, int z, boolean build, int type) {

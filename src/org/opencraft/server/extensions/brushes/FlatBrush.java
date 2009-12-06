@@ -33,30 +33,30 @@ package org.opencraft.server.extensions.brushes;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.server.model.World;
+import org.opencraft.server.extensions.brushes.Brush;
 import org.opencraft.server.model.Player;
+import org.opencraft.server.model.World;
 
 /**
- * Makes a diamond
+ * A brush that creates a flat area (1 in height)
  * @author Søren Enevoldsen
  *
  */
 
-public class DiamondBrush extends Brush {
-
-	public DiamondBrush() {}
+public class FlatBrush extends Brush {
 	
-	public DiamondBrush(int radius) {
+	public FlatBrush() {}
+	
+	public FlatBrush(int radius) {
 		setRadius(radius);
 	}
 
 	@Override
 	protected void paintBlocks(Player player, int x, int y, int z, boolean build, int type) {
-		for (int offsetZ=-radius; offsetZ<=radius; offsetZ++)
 			for (int offsetY=-radius; offsetY<=radius; offsetY++)
 				for (int offsetX=-radius; offsetX<=radius; offsetX++)
-					if (positionIsBuildable(offsetX+x, offsetY+y, offsetZ+z) == build &&
-							Math.abs(offsetX)+Math.abs(offsetY)+Math.abs(offsetZ) <= Math.abs(radius))
-						World.getWorld().getLevel().setBlock(offsetX+x, offsetY+y, offsetZ+z, type);
+					if (positionIsBuildable(offsetX+x, offsetY+y, z) == build)
+						World.getWorld().getLevel().setBlock(offsetX+x, offsetY+y, z, type);
 	}
+	
 }
