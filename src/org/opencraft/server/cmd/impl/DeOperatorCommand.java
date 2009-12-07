@@ -1,4 +1,4 @@
-package org.opencraft.server.extensions.brushes;
+package org.opencraft.server.cmd.impl;
 
 /*
  * OpenCraft License
@@ -33,29 +33,41 @@ package org.opencraft.server.extensions.brushes;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.server.model.Level;
+import org.opencraft.server.cmd.Command;
+import org.opencraft.server.cmd.CommandParameters;
 import org.opencraft.server.model.Player;
-
+import org.opencraft.server.model.World;
 
 /**
- * The standard brush used to paint with
+ * Official /deop command
+ *  **NEEDS PERSISTENCE**
  * @author Søren Enevoldsen
  *
  */
 
-public class StandardBrush extends BrushAdapter {
-	
-	public StandardBrush() {
-		maxWidth = 1;
-		maxHeight = 1;
-		maxLength = 1;
-		setRadius(0);
-		useForDelete(true);
-	}
+public class DeOperatorCommand implements Command {
 
 	@Override
-	protected void paintBlocks(Player player, Level level, int x, int y, int z, boolean add,	int type) {
-		if ((positionIsBuildable(x,y,z) == add))
-		level.setBlock(x, y, z, type);
+	public void execute(Player player, CommandParameters params) {
+		//Player using command is OP?
+		if (player.getAttribute("isOperator") != null && player.getAttribute("IsOperator").equals("true")) {
+			if (params.getArgumentCount() == 1) {		
+				for (Player other : World.getWorld().getPlayerList().getPlayers()) {
+					if (other.getName().equals(params.getStringArgument(0))) {
+						other.removeAttribute("IsOperator");
+						other.getActionSender().sendChatMessage("You are no longer an OP");
+						player.getActionSender().sendChatMessage(other.getName() + " is no longer an OP");
+						return;
+					}
+				}
+				//Player not found
+				player.getActionSender().sendChatMessage(params.getStringArgument(0) + " was not found");
+			}
+			else
+				player.getActionSender().sendChatMessage("Wrong number of arguments");
+				player.getActionSender().sendChatMessage("/deop <name>");
+		}
+		else
+			player.getActionSender().sendChatMessage("You must be OP to do that");			
 	}
 }

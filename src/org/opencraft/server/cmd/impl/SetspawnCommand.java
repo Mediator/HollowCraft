@@ -1,4 +1,4 @@
-package org.opencraft.server.extensions.brushes;
+package org.opencraft.server.cmd.impl;
 
 /*
  * OpenCraft License
@@ -33,29 +33,27 @@ package org.opencraft.server.extensions.brushes;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.server.model.Level;
+import org.opencraft.server.cmd.Command;
+import org.opencraft.server.cmd.CommandParameters;
 import org.opencraft.server.model.Player;
-
+import org.opencraft.server.model.World;
 
 /**
- * The standard brush used to paint with
+ * Official /setspawn command
  * @author Søren Enevoldsen
  *
  */
 
-public class StandardBrush extends BrushAdapter {
-	
-	public StandardBrush() {
-		maxWidth = 1;
-		maxHeight = 1;
-		maxLength = 1;
-		setRadius(0);
-		useForDelete(true);
-	}
+public class SetspawnCommand implements Command {
 
 	@Override
-	protected void paintBlocks(Player player, Level level, int x, int y, int z, boolean add,	int type) {
-		if ((positionIsBuildable(x,y,z) == add))
-		level.setBlock(x, y, z, type);
+	public void execute(Player player, CommandParameters params) {
+		//Player using command is OP?
+		if (player.getAttribute("isOperator") != null && player.getAttribute("IsOperator").equals("true")) {
+			World.getWorld().getLevel().setSpawnPosition(player.getPosition());
+			World.getWorld().getLevel().setSpawnRotation(player.getRotation());
+		}
+		else
+			player.getActionSender().sendChatMessage("You must be OP to do that");			
 	}
 }
