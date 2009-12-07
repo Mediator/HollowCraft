@@ -1,9 +1,14 @@
 package org.opencraft.server.cmd.impl;
 
+import org.opencraft.server.cmd.Command;
+import org.opencraft.server.cmd.CommandParameters;
+import org.opencraft.server.model.Player;
+import org.opencraft.server.model.World;
+
 /*
  * OpenCraft License
  * 
- * Copyright (c) 2009 Søren Enevoldsen.
+ * Copyright (c) 2009 Graham Edgecombe, Søren Enevoldsen and Brett Russell.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,23 +38,18 @@ package org.opencraft.server.cmd.impl;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.server.cmd.Command;
-import org.opencraft.server.cmd.CommandParameters;
-import org.opencraft.server.model.Player;
-import org.opencraft.server.model.World;
-
 /**
- * Official /op command
+ * Official /deop command
  *  **NEEDS PERSISTENCE**
  * @author Søren Enevoldsen
  *
  */
 
-public class OperatorCommand implements Command {
+public class KickCommand implements Command {
 
-	private static final OperatorCommand INSTANCE = new OperatorCommand();
+	private static final KickCommand INSTANCE = new KickCommand();
 	
-	public static OperatorCommand getCommand() {
+	public static KickCommand getCommand() {
 		return INSTANCE;
 	}
 	
@@ -60,9 +60,8 @@ public class OperatorCommand implements Command {
 			if (params.getArgumentCount() == 1) {		
 				for (Player other : World.getWorld().getPlayerList().getPlayers()) {
 					if (other.getName().equals(params.getStringArgument(0))) {
-						other.setAttribute("IsOperator", "true");
-						other.getActionSender().sendChatMessage("You are now an OP");
-						player.getActionSender().sendChatMessage(other.getName() + " is now an OP");
+						other.getSession().close();
+						player.getActionSender().sendChatMessage(other.getName() + " has been kicked");
 						return;
 					}
 				}
@@ -71,7 +70,7 @@ public class OperatorCommand implements Command {
 			}
 			else
 				player.getActionSender().sendChatMessage("Wrong number of arguments");
-				player.getActionSender().sendChatMessage("/op <name>");
+				player.getActionSender().sendChatMessage("/kick <name>");
 		}
 		else
 			player.getActionSender().sendChatMessage("You must be OP to do that");			

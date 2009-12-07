@@ -46,6 +46,12 @@ import org.opencraft.server.model.World;
 
 public class SayCommand implements Command {
 
+	private static final SayCommand INSTANCE = new SayCommand();
+	
+	public static SayCommand getCommand() {
+		return INSTANCE;
+	}
+	
 	@Override
 	public void execute(Player player, CommandParameters params) {
 		//Player using command is OP?
