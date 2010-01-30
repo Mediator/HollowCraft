@@ -1,9 +1,8 @@
-package org.opencraft.server.net.packet.handler.impl;
 
 /*
  * OpenCraft License
  * 
- * Copyright (c) 2009 Graham Edgecombe, Søren Enevoldsen and Brett Russell.
+ * Copyright (c) 2009 Graham Edgecombe, Søren Enevoldsen and Brett Russell. Mark Farrell
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,33 +31,80 @@ package org.opencraft.server.net.packet.handler.impl;
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+package org.opencraft.server.net;
 
-import org.opencraft.server.model.Player;
-import org.opencraft.server.model.Position;
-import org.opencraft.server.model.Rotation;
-import org.opencraft.server.net.MinecraftSession;
+import java.util.ArrayDeque;
+import java.util.Queue;
+
+import org.apache.mina.core.session.IoSession;
 import org.opencraft.server.net.packet.Packet;
-import org.opencraft.server.net.packet.handler.PacketHandler;
 
 /**
- * A packet handler which handles movement packets.
- * @author Graham Edgecombe
+ * @author Mark Farrell
+ * The base class for all sessions .
  */
-public class MovementPacketHandler implements PacketHandler<MinecraftSession> {
+public abstract class OCSession extends Connectable{
 	
-	@Override
-	public void handlePacket(MinecraftSession session, Packet packet) {
-		if (!session.isAuthenticated()) {
-			return;
-		}
-		final int x = packet.getNumericField("x").intValue();
-		final int y = packet.getNumericField("y").intValue();
-		final int z = packet.getNumericField("z").intValue();
-		final int rotation = packet.getNumericField("rotation").intValue();
-		final int look = packet.getNumericField("look").intValue();
-		final Player player = session.getPlayer();
-		player.setPosition(new Position(x, y, z));
-		player.setRotation(new Rotation(rotation, look));
+
+	
+	/**
+	 * The <code>IoSession</code> associated with this
+	 * <code>MinecraftSession</code>.
+	 */
+	protected final IoSession session;
+
+	/**
+	 * Creates the Minecraft session.
+	 * @param session The <code>IoSession</code>.
+	 */
+	public OCSession(IoSession session) {
+		this.session = session;
 	}
 	
+
+	
+	/**
+	 * Sets the state to authenticated.
+	 */
+	public void setAuthenticated() {
+		this.state = State.AUTHENTICATED;
+	}
+	
+	/**
+	 * Sets the state to ready.
+	 */
+	public void setReady() {
+		this.state = State.READY;
+	}
+	
+	/**
+	 * Sends a packet. This method may be called from multiple threads.
+	 * @param packet The packet to send.
+	 */
+	public void send(Packet packet) {
+			this.send(packet, session);
+	}
+	
+	/**
+	 * Closes this session.
+	 */
+	public void close() {
+		session.close(false);
+	}
+	
+	/**
+	 * Called when this session is to be destroyed, should release any
+	 * resources.
+	 */
+	public abstract void destroy();
+	
+	
+
+
+	
+	/**
+	 * Handles a packet.
+	 * @param packet The packet to handle.
+	 */
+	public abstract void handle(Packet packet);
 }

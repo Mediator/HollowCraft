@@ -42,7 +42,7 @@ import org.opencraft.server.net.packet.handler.PacketHandler;
  * A packet handler which handles the construction packet.
  * @author Graham Edgecombe
  */
-public class ConstructionPacketHandler implements PacketHandler {
+public class ConstructionPacketHandler implements PacketHandler<MinecraftSession> {
 	
 	@Override
 	public void handlePacket(MinecraftSession session, Packet packet) {
