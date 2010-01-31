@@ -54,7 +54,7 @@ import org.opencraft.server.model.World;
  * @author Søren Enevoldsen
  */
 
-public class ExperimentalGameMode extends GameModeAdapter {
+public class ExperimentalGameMode extends GameModeAdapter<Player> {
 	
 	/**
 	 * A map of players who have connected.
