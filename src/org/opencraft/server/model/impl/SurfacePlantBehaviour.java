@@ -38,6 +38,8 @@ import org.opencraft.server.model.BlockConstants;
 import org.opencraft.server.model.BlockManager;
 import org.opencraft.server.model.Level;
 
+import java.util.Random;
+
 /**
  * A block behaviour that handles plants which require dirt and sunlight to
  * survive.
@@ -52,13 +54,26 @@ public class SurfacePlantBehaviour implements BlockBehaviour {
 	
 	@Override
 	public void handlePassive(Level level, int x, int y, int z, int type) {
-		
+		level.queueActiveBlockUpdate(x, y, z);
 	}
 	
 	@Override
 	public void handleScheduledBehaviour(Level level, int x, int y, int z, int type) {
+		level.queueActiveBlockUpdate(x, y, z);
+		Random r = new Random();
 		if (BlockManager.getBlockManager().getBlock(level.getBlock(x, y, z - 1)).getId() != BlockConstants.DIRT && BlockManager.getBlockManager().getBlock(level.getBlock(x, y, z - 1)).getId() != BlockConstants.GRASS || level.getLightDepth(x, y) > z || BlockManager.getBlockManager().getBlock(level.getBlock(x, y, z + 1)).isLiquid()) {
 			level.setBlock(x, y, z, BlockConstants.AIR);
+		}
+		int spongeRadius = 2;
+		for (int spongeX = -1 * spongeRadius; spongeX <= spongeRadius; spongeX++) {
+			for (int spongeY = -1 * spongeRadius; spongeY <= spongeRadius; spongeY++) {
+				for (int spongeZ = -1 * spongeRadius; spongeZ <= spongeRadius; spongeZ++) {
+					if (level.getBlock(x + spongeX, y + spongeY, z + spongeZ) == BlockConstants.WATER || level.getBlock(x + spongeX, y + spongeY, z + spongeZ) == BlockConstants.STILL_WATER && r.nextBoolean() ) {
+						level.setBlock(x + spongeX, y + spongeY, z + spongeZ, BlockConstants.AIR);
+						return;
+					}
+				}
+			}
 		}
 	}
 	
