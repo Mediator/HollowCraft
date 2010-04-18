@@ -79,8 +79,10 @@ public class TeleportCommand implements Command {
 				}
 				// Player not found
 				player.getActionSender().sendChatMessage(params.getStringArgument(0) + " was not found");
-			} else
+				return;
+			} else {
 				player.getActionSender().sendChatMessage("Wrong number of arguments");
+			}
 			player.getActionSender().sendChatMessage("/tp <name>");
 		} else
 			player.getActionSender().sendChatMessage("You must be OP to do that");
