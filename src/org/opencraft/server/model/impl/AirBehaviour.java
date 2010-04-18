@@ -33,44 +33,23 @@ package org.opencraft.server.model.impl;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+import org.opencraft.server.Configuration;
 import org.opencraft.server.model.BlockBehaviour;
 import org.opencraft.server.model.BlockConstants;
 import org.opencraft.server.model.BlockManager;
 import org.opencraft.server.model.Level;
+import java.util.Random;
 
 /**
- * A block behaviour that applies gravity to a block. Lets a block fall to the
- * lowest possible unoccupied square (z-axis).
- * @author Graham Edgecombe
+ * A block behaviour that handles water. Takes into account water's preference
+ * for downward flow.
  * @author Brett Russell
  */
-public class GravityBehaviour implements BlockBehaviour {
+public class AirBehaviour implements BlockBehaviour {
 	
 	@Override
 	public void handlePassive(Level level, int x, int y, int z, int type) {
-		if (z == 0 || BlockManager.getBlockManager().getBlock(level.getBlock(x, y, z - 1)).isSolid())
-			return;
-		if (BlockManager.getBlockManager().getBlock(level.getBlock(x-1, y, z)).isSolid())
-			return;
-		if (BlockManager.getBlockManager().getBlock(level.getBlock(x+1, y, z)).isSolid())
-			return;
-		if (BlockManager.getBlockManager().getBlock(level.getBlock(x, y-1, z)).isSolid())
-			return;
-		if (BlockManager.getBlockManager().getBlock(level.getBlock(x, y+1, z)).isSolid())
-			return;
-		if (BlockManager.getBlockManager().getBlock(level.getBlock(x, y, z+1)).isSolid())
-			return;
-		for (int i = z - 1; i >= 0; i--) {
-			// find the first solid block below our gravity-affected block, or
-			// the bottom of the map if none
-			if (i == 0 || BlockManager.getBlockManager().getBlock(level.getBlock(x, y, i)).isSolid()) {
-				// drop it on top of that block
-				level.setBlock(x, y, z, BlockConstants.AIR);
-				level.setBlock(x, y, i + (i == 0 && !BlockManager.getBlockManager().getBlock(level.getBlock(x, y, i)).isSolid() ? 0 : 1), type);
-				return;
-			}
-		}
-		
+		level.queueActiveBlockUpdate(x, y, z);
 	}
 	
 	@Override
@@ -80,7 +59,15 @@ public class GravityBehaviour implements BlockBehaviour {
 	
 	@Override
 	public void handleScheduledBehaviour(Level level, int x, int y, int z, int type) {
-		
+		if (z < level.getDepth()/2) {
+			if (x == 0)
+				level.setBlock(x, y, z, BlockConstants.WATER);
+			if (x == level.getWidth()-1)
+				level.setBlock(x, y, z, BlockConstants.WATER);
+			if (y == 0)
+				level.setBlock(x, y, z, BlockConstants.WATER);
+			if (y == level.getHeight()-1)
+				level.setBlock(x, y, z, BlockConstants.WATER);
+		}
 	}
-	
 }

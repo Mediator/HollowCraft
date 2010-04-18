@@ -41,9 +41,10 @@ POSSIBILITY OF SUCH DAMAGE.
       <liquid>false</liquid>
       <blocksLight>false</blocksLight>
       <halfBlock>false</halfBlock>
-      <behaviourName></behaviourName>
-      <doesThink>false</doesThink>
+      <behaviourName>org.opencraft.server.model.impl.AirBehaviour</behaviourName>
+      <doesThink>true</doesThink>
       <isPlant>false</isPlant>
+      <thinkTimer>100</thinkTimer>
     </block>
     <block>
       <bid>1</bid>
@@ -52,7 +53,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <liquid>false</liquid>
       <blocksLight>true</blocksLight>
       <halfBlock>false</halfBlock>
-      <behaviourName></behaviourName>
+      <behaviourName>org.opencraft.server.model.impl.GravityBehaviour</behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
     </block>
@@ -75,7 +76,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <liquid>false</liquid>
       <blocksLight>true</blocksLight>
       <halfBlock>false</halfBlock>
-      <behaviourName></behaviourName>
+      <behaviourName>org.opencraft.server.model.impl.GravityBehaviour</behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
     </block>
