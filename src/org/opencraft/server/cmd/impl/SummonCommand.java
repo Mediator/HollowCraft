@@ -1,4 +1,4 @@
-package org.opencraft.server.game;
+package org.opencraft.server.cmd.impl;
 
 /*
  * OpenCraft License
@@ -33,61 +33,59 @@ package org.opencraft.server.game;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.util.Map;
-
 import org.opencraft.server.cmd.Command;
-import org.opencraft.server.model.Level;
+import org.opencraft.server.cmd.CommandParameters;
 import org.opencraft.server.model.Player;
+import org.opencraft.server.model.World;
 
 /**
- * An interface which represents a specific type of game mode.
- * @author Graham Edgecombe
- * @author Søren Enevoldsen
+ * Official /summon command
+ * @author Adam Liszka
  */
-public interface GameMode<P extends Player> {
-	
-	/**
-	 * Gets a map of commands that are supported in this game mode.
-	 * @return The map of commands.
-	 */
-	public Map<String, Command> getCommands();
 
-	 /**
-	  * Lists all the commands for use by a command like /help
-	  */
-	public String listCommands();
+public class SummonCommand implements Command {
 	
 	/**
-	 * Called every 100ms BEFORE each tick.
+	 * The instance of this command.
 	 */
-	public void tick();
+	private static final SummonCommand INSTANCE = new SummonCommand();
 	
 	/**
-	 * Notification of player connected
-	 * @param player The connected player
+	 * Gets the singleton instance of this command.
+	 * @return The singleton instance of this command.
 	 */
-	public void playerConnected(P player);
+	public static SummonCommand getCommand() {
+		return INSTANCE;
+	}
 	
 	/**
-	 * Event handler for a player disconnect Remember player has already
-	 * disconnected!
-	 * @param player The disconnected player
+	 * Default private constructor.
 	 */
-	public void playerDisconnected(P player);
+	private SummonCommand() {
+		/* empty */
+	}
 	
-	/**
-	 * Handles block adding and removing
-	 * @param player The player setting the block
-	 * @param level The level
-	 * @param mode 1/0 adding/removing
-	 * @param type typeId of the block
-	 */
-	public void setBlock(P player, Level level, int x, int y, int z, int mode, int type);
-	
-	/**
-	 * Broadcasts a chat message.
-	 * @param player The sending player.
-	 * @param message The chat message.
-	 */
-	public void broadcastChatMessage(P player, String message);
+	@Override
+	public void execute(Player player, CommandParameters params) {
+		// Player using command is OP?
+		if (player.getAttribute("IsOperator") != null && player.getAttribute("IsOperator").equals("true")) {
+			if (params.getArgumentCount() == 1) {
+				for (Player other : World.getWorld().getPlayerList().getPlayers()) {
+					if (other.getName().toLowerCase().equals(params.getStringArgument(0).toLowerCase())) {
+						//TODO: Make the player face each other?
+						other.setPosition(player.getPosition());
+						other.setRotation(player.getRotation());
+						return;
+					}
+				}
+				// Player not found
+				player.getActionSender().sendChatMessage(params.getStringArgument(0) + " was not found");
+				return;
+			} else {
+				player.getActionSender().sendChatMessage("Wrong number of arguments");
+			}
+			player.getActionSender().sendChatMessage("/summon <name>");
+		} else
+			player.getActionSender().sendChatMessage("You must be OP to do that");
+	}
 }

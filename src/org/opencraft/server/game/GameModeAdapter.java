@@ -43,6 +43,9 @@ import org.opencraft.server.cmd.impl.OperatorCommand;
 import org.opencraft.server.cmd.impl.SayCommand;
 import org.opencraft.server.cmd.impl.SetspawnCommand;
 import org.opencraft.server.cmd.impl.TeleportCommand;
+import org.opencraft.server.cmd.impl.SummonCommand;
+import org.opencraft.server.cmd.impl.SpawnCommand;
+import org.opencraft.server.cmd.impl.HelpCommand;
 import org.opencraft.server.model.Level;
 import org.opencraft.server.model.Player;
 import org.opencraft.server.model.World;
@@ -70,6 +73,9 @@ public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 		registerCommand("kick", KickCommand.getCommand());
 		registerCommand("tp", TeleportCommand.getCommand());
 		registerCommand("setspawn", SetspawnCommand.getCommand());
+		registerCommand("summon", SummonCommand.getCommand());
+		registerCommand("spawn", SpawnCommand.getCommand());
+		registerCommand("help", HelpCommand.getCommand());
 	}
 	
 	/**
@@ -79,6 +85,19 @@ public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 	 */
 	public void registerCommand(String name, Command command) {
 		commands.put(name, command);
+	}
+
+	/**
+	 * Lists all the commands for use by a command like /help
+	 */
+	//TODO: Alphabatize?
+	public String listCommands() {
+		String cmds = "";
+		for(String key : commands.keySet()) {
+			cmds += "/" + key + ", ";
+		}
+		// the last chars are ", " and are unneeded
+		return cmds.substring(0, cmds.length()-2);
 	}
 	
 	@Override

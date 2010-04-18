@@ -1,4 +1,4 @@
-package org.opencraft.server.game;
+package org.opencraft.server.cmd.impl;
 
 /*
  * OpenCraft License
@@ -33,61 +33,60 @@ package org.opencraft.server.game;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.util.Map;
-
 import org.opencraft.server.cmd.Command;
-import org.opencraft.server.model.Level;
+import org.opencraft.server.cmd.CommandParameters;
 import org.opencraft.server.model.Player;
+import org.opencraft.server.model.World;
 
 /**
- * An interface which represents a specific type of game mode.
- * @author Graham Edgecombe
- * @author Søren Enevoldsen
+ * Official /help command
+ * @author Adam Liszka
  */
-public interface GameMode<P extends Player> {
-	
-	/**
-	 * Gets a map of commands that are supported in this game mode.
-	 * @return The map of commands.
-	 */
-	public Map<String, Command> getCommands();
 
-	 /**
-	  * Lists all the commands for use by a command like /help
-	  */
-	public String listCommands();
+public class HelpCommand implements Command {
 	
 	/**
-	 * Called every 100ms BEFORE each tick.
+	 * The instance of this command.
 	 */
-	public void tick();
+	private static final HelpCommand INSTANCE = new HelpCommand();
 	
 	/**
-	 * Notification of player connected
-	 * @param player The connected player
+	 * Gets the singleton instance of this command.
+	 * @return The singleton instance of this command.
 	 */
-	public void playerConnected(P player);
+	public static HelpCommand getCommand() {
+		return INSTANCE;
+	}
 	
 	/**
-	 * Event handler for a player disconnect Remember player has already
-	 * disconnected!
-	 * @param player The disconnected player
+	 * Default private constructor.
 	 */
-	public void playerDisconnected(P player);
+	private HelpCommand() {
+		/* empty */
+	}
 	
-	/**
-	 * Handles block adding and removing
-	 * @param player The player setting the block
-	 * @param level The level
-	 * @param mode 1/0 adding/removing
-	 * @param type typeId of the block
-	 */
-	public void setBlock(P player, Level level, int x, int y, int z, int mode, int type);
-	
-	/**
-	 * Broadcasts a chat message.
-	 * @param player The sending player.
-	 * @param message The chat message.
-	 */
-	public void broadcastChatMessage(P player, String message);
+	@Override
+	public void execute(Player player, CommandParameters params) {
+		String message = World.getWorld().getGameMode().listCommands();
+		while (message.length() > 0) {
+			// this is a short list so send it and leave
+			if (message.length() < 64) {
+				player.getActionSender().sendChatMessage(message);
+				return;
+			}
+
+			int end = 64;
+			while (end > 0) {
+				// Look for a space in which to nicely break up the list
+				// does NOT cover commands that are greater than 64 characters in length
+				if (message.charAt(end) == ' ') {
+					// chop the string up and send the first chunk
+					player.getActionSender().sendChatMessage(message.substring(0, end));
+					message = message.substring(end+1, message.length());
+					break;
+				}
+				end -= 1;
+			}
+		}
+	}
 }
