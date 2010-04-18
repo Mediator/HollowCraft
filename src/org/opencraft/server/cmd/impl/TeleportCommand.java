@@ -72,8 +72,7 @@ public class TeleportCommand implements Command {
 			if (params.getArgumentCount() == 1) {
 				for (Player other : World.getWorld().getPlayerList().getPlayers()) {
 					if (other.getName().toLowerCase().equals(params.getStringArgument(0).toLowerCase())) {
-						player.setPosition(other.getPosition());
-						player.setRotation(other.getRotation());
+						player.teleport(other.getPosition(), other.getRotation());
 						return;
 					}
 				}
