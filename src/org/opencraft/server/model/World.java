@@ -37,6 +37,9 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
+import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
 
 import org.opencraft.server.Configuration;
 import org.opencraft.server.Constants;
@@ -142,6 +145,19 @@ public final class World {
 	 * @param verificationKey The verification key.
 	 */
 	public void register(MinecraftSession session, String username, String verificationKey) {
+		// check if the player is banned
+		try {
+			File banned = new File("data/banned.txt");
+			Scanner fread = new Scanner(banned);
+			while (fread.hasNextLine()) {
+				if (username.equalsIgnoreCase(fread.nextLine())) {
+					session.getActionSender().sendLoginFailure("Banned.");
+					break;
+				}
+			}
+			fread.close();
+		} catch (IOException e) { }
+
 		// verify name
 		if (Configuration.getConfiguration().isVerifyingNames()) {
 			long salt = HeartbeatManager.getHeartbeatManager().getSalt();
@@ -169,6 +185,7 @@ public final class World {
 		// disconnect any existing players with the same name
 		for (Player p : playerList.getPlayers()) {
 			if (p.getName().equalsIgnoreCase(username)) {
+				// Should it not be the person attempting to connect who gets dropped?
 				p.getSession().getActionSender().sendLoginFailure("Logged in from another computer.");
 				break;
 			}
@@ -180,6 +197,20 @@ public final class World {
 			return;
 		}
 		// final setup
+
+		// set op rights
+		try {
+			File ops = new File("data/ops.txt");
+			Scanner fread = new Scanner(ops);
+			while (fread.hasNextLine()) {
+				if (username.equalsIgnoreCase(fread.nextLine())) {
+					player.setAttribute("IsOperator","true");
+					break;
+				}
+			}
+			fread.close();
+		} catch (IOException e) { }
+
 		session.setPlayer(player);
 		final Configuration c = Configuration.getConfiguration();
 		session.getActionSender().sendLoginResponse(Constants.PROTOCOL_VERSION, c.getName(), c.getMessage(), false);
