@@ -10,7 +10,7 @@
 		<mkdir dir="bin"/>
 	</target>
 	<target name="build" depends="init">
-		<javac srcdir="src" classpath="${toString:libs}" destdir="bin"/>
+		<javac srcdir="src" classpath="${toString:libs}" destdir="bin" debug="true"/>
 	</target>
 	<target name="clean">
 		<delete dir="bin"/>

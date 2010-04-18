@@ -84,6 +84,11 @@ public class Configuration {
 	 * The server name.
 	 */
 	private String name;
+
+	/**
+	 * The server port.
+	 */
+	private int port;
 	
 	/**
 	 * The server MOTD.
@@ -131,6 +136,7 @@ public class Configuration {
 	 */
 	public Configuration(Properties props) {
 		name = props.getProperty("name", "OpenCraft Server");
+		port = Integer.valueOf(props.getProperty("port", "25565"));
 		message = props.getProperty("message", "http://opencraft.sf.net/");
 		maximumPlayers = Integer.valueOf(props.getProperty("max_players", "16"));
 		publicServer = Boolean.valueOf(props.getProperty("public", "false"));
@@ -147,6 +153,14 @@ public class Configuration {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * Gets the server port.
+	 * @return The server port.
+	 */
+	public int getPort() {
+		return port;
 	}
 	
 	/**

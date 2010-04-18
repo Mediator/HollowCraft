@@ -70,7 +70,7 @@ public class HeartbeatTask extends ScheduledTask {
 		parameters.put("users", String.valueOf(World.getWorld().getPlayerList().size()));
 		parameters.put("max", String.valueOf(Configuration.getConfiguration().getMaximumPlayers()));
 		parameters.put("public", String.valueOf(Configuration.getConfiguration().isPublicServer()));
-		parameters.put("port", String.valueOf(Constants.PORT));
+		parameters.put("port", String.valueOf(Configuration.getConfiguration().getPort()));
 		parameters.put("salt", String.valueOf(HeartbeatManager.getHeartbeatManager().getSalt()));
 		parameters.put("version", String.valueOf(Constants.PROTOCOL_VERSION));
 		HeartbeatManager.getHeartbeatManager().sendHeartbeat(parameters);

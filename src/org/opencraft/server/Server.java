@@ -99,8 +99,8 @@ public final class Server {
 	 */
 	public void start() throws IOException {
 		logger.info("Initializing server...");
-		logger.info("Binding to port " + Constants.PORT + "...");
-		acceptor.bind(new InetSocketAddress(Constants.PORT));
+		logger.info("Binding to port " + Configuration.getConfiguration().getPort() + "...");
+		acceptor.bind(new InetSocketAddress(Configuration.getConfiguration().getPort()));
 		logger.info("Ready for connections.");
 	}
 	
