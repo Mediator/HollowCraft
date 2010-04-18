@@ -38,6 +38,7 @@ import org.opencraft.server.model.BlockBehaviour;
 import org.opencraft.server.model.BlockConstants;
 import org.opencraft.server.model.BlockManager;
 import org.opencraft.server.model.Level;
+import java.util.Random;
 
 /**
  * A block behaviour that handles water. Takes into account water's preference
@@ -65,46 +66,48 @@ public class WaterBehaviour implements BlockBehaviour {
 		
 		int spongeRadius = Configuration.getConfiguration().getSpongeRadius();
 		
-		// preference: spread downward
-		OUTERMOST_DOWNWARD: for (int offsetZ = z - 1; offsetZ >= 0; offsetZ--) {
-			for (int spongeX = (-1 * spongeRadius); spongeX <= spongeRadius; spongeX++) {
-				for (int spongeY = (-1 * spongeRadius); spongeY <= spongeRadius; spongeY++) {
-					for (int spongeZ = (-1 * spongeRadius); spongeZ <= spongeRadius; spongeZ++) {
-						if (level.getBlock(x + spongeX, y + spongeY, offsetZ + spongeZ) == BlockConstants.SPONGE)
-							break OUTERMOST_DOWNWARD;
-					}
+
+		for (int spongeX = (-1 * spongeRadius); spongeX <= spongeRadius; spongeX++) {
+			for (int spongeY = (-1 * spongeRadius); spongeY <= spongeRadius; spongeY++) {
+				for (int spongeZ = (-1 * spongeRadius); spongeZ <= spongeRadius; spongeZ++) {
+					if (level.getBlock(x + spongeX, y + spongeY, z + spongeZ) == BlockConstants.SPONGE)
+						return;
 				}
 			}
-			
-			byte thisBlock = level.getBlock(x, y, offsetZ);
-			
-			// check for lava
-			if (thisBlock == BlockConstants.LAVA || thisBlock == BlockConstants.STILL_LAVA) {
-				level.setBlock(x, y, offsetZ, BlockConstants.STONE);
-			} else if (!BlockManager.getBlockManager().getBlock(thisBlock).isSolid() && !BlockManager.getBlockManager().getBlock(thisBlock).isLiquid()) {
-				level.setBlock(x, y, offsetZ, BlockConstants.WATER);
-			} else
-				break;
 		}
+
 		
-		// then, spread outward
-		OUTERMOST_OUTWARD: for (int i = 0; i <= spreadRules.length - 1; i++) {
-			byte thisOutwardBlock = level.getBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2]);
-			
-			for (int spongeX = (-1 * spongeRadius); spongeX <= spongeRadius; spongeX++) {
-				for (int spongeY = (-1 * spongeRadius); spongeY <= spongeRadius; spongeY++) {
-					for (int spongeZ = (-1 * spongeRadius); spongeZ <= spongeRadius; spongeZ++) {
-						if (level.getBlock(x + spreadRules[i][0] + spongeX, y + spreadRules[i][1] + spongeY, z + spreadRules[i][2] + spongeZ) == BlockConstants.SPONGE)
-							break OUTERMOST_OUTWARD;
+		byte underBlock = level.getBlock(x, y, z - 1);
+		// there is lava under me
+		if (underBlock == BlockConstants.LAVA || underBlock == BlockConstants.STILL_LAVA) {
+			level.setBlock(x, y, z, BlockConstants.AIR);
+			level.setBlock(x, y, z - 1, BlockConstants.STONE);
+		// move me down
+		} else if (!BlockManager.getBlockManager().getBlock(underBlock).isSolid() && !BlockManager.getBlockManager().getBlock(underBlock).isLiquid()) {
+			level.setBlock(x, y, z - 1, BlockConstants.WATER);
+			level.setBlock(x, y, z, BlockConstants.AIR);
+		// spread outward
+		} else {
+			Random r = new Random();
+			OUTERMOST_OUTWARD: for (int i = 0; i <= spreadRules.length - 1; i++) {
+				byte thisOutwardBlock = level.getBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2]);
+				
+				for (int spongeX = (-1 * spongeRadius); spongeX <= spongeRadius; spongeX++) {
+					for (int spongeY = (-1 * spongeRadius); spongeY <= spongeRadius; spongeY++) {
+						for (int spongeZ = (-1 * spongeRadius); spongeZ <= spongeRadius; spongeZ++) {
+							if (level.getBlock(x + spreadRules[i][0] + spongeX, y + spreadRules[i][1] + spongeY, z + spreadRules[i][2] + spongeZ) == BlockConstants.SPONGE)
+								break OUTERMOST_OUTWARD;
+						}
 					}
 				}
-			}
-			
-			// check for lava
-			if (thisOutwardBlock == BlockConstants.LAVA || thisOutwardBlock == BlockConstants.STILL_LAVA) {
-				level.setBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2], BlockConstants.STONE);
-			} else if (!BlockManager.getBlockManager().getBlock(thisOutwardBlock).isSolid() && !BlockManager.getBlockManager().getBlock(thisOutwardBlock).isLiquid()) {
-				level.setBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2], BlockConstants.WATER);
+				
+				// check for lava
+				if (thisOutwardBlock == BlockConstants.LAVA || thisOutwardBlock == BlockConstants.STILL_LAVA) {
+					level.setBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2], BlockConstants.STONE);
+				} else if (!BlockManager.getBlockManager().getBlock(thisOutwardBlock).isSolid() && !BlockManager.getBlockManager().getBlock(thisOutwardBlock).isLiquid()) {
+					level.setBlock(x, y, z, BlockConstants.AIR);
+					level.setBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2], BlockConstants.WATER);
+				}
 			}
 		}
 	}
