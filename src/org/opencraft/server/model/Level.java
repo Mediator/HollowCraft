@@ -37,6 +37,11 @@ import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Random;
+import org.opencraft.server.task.ScheduledTask;
+import org.opencraft.server.task.TaskQueue;
+import java.util.logging.Logger;
+import java.lang.Math;
 
 /**
  * Represents the actual level.
@@ -94,6 +99,8 @@ public final class Level {
 	 * A queue of positions to update at the next tick.
 	 */
 	private Queue<Position> updateQueue = new ArrayDeque<Position>();
+
+	private static final Logger logger = Logger.getLogger(Level.class.getName());
 	
 	/**
 	 * Generates a level.
@@ -104,7 +111,7 @@ public final class Level {
 		this.depth = 64;
 		this.blocks = new byte[width][height][depth];
 		this.lightDepths = new short[width][height];
-		this.spawnPosition = new Position(0, 0, 50);
+		this.spawnPosition = new Position(width*16, height*16, depth*32);
 		this.spawnRotation = new Rotation(0, 0);
 		for (int i = 0; i < 256; i++) {
 			BlockDefinition b = BlockManager.getBlockManager().getBlock(i);
@@ -113,21 +120,14 @@ public final class Level {
 				activeTimers.put(i, System.currentTimeMillis());
 			}
 		}
-		for(int z = 0; z < depth / 2; z++) {
-			for(int x = 0; x < width; x++) {
-				for(int y = 0; y < height; y++) {
-					int type = z == (depth / 2 - 1) ? BlockConstants.GRASS : BlockConstants.DIRT;
-					if((x == 0 || y == 0 || x == width - 1 || y == height - 1) && (z == (depth / 2 - 1) || z == (depth / 2 - 2))) {
-						type = BlockConstants.WATER;
-					}
-					this.blocks[x][y][z] = (byte) type;
-				}
-			}
-		}
-		/*Random random = new Random();
+		
+		Random random = new Random();
 		int[][] heights = new int[width][height];
 		int maxHeight = 1;
-		for(int i = 0; i < 100000; i++) {
+		int iterations = 10000;
+		for(int i = 0; i < iterations; i++) {
+			if (i % 1000 == 0)
+				logger.info("Raising terrain: "+i+"/"+iterations);
 			int x = random.nextInt(width);
 			int y = random.nextInt(height);
 			int radius = random.nextInt(10) + 4;
@@ -145,7 +145,8 @@ public final class Level {
 		}
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
-				int h = (depth / 2) + (heights[x][y] * (depth / 2) / maxHeight);
+				//int h = (depth / 2) + (heights[x][y] * (depth / 2) / maxHeight);
+				int h = (depth/4) + heights[x][y] * (depth /2) / maxHeight;
 				int d = random.nextInt(8) - 4;
 				for(int z = 0; z < h; z++) {
 					int type = BlockConstants.DIRT;
@@ -157,7 +158,68 @@ public final class Level {
 					blocks[x][y][z] = (byte) type;
 				}
 			}
-		}*/
+		}
+		int bubbleCount = 100;
+		for (int i = 0; i < bubbleCount;i++) {
+			logger.info("Generating erosion bubbles: "+i+"/"+bubbleCount);
+			int x = random.nextInt(width);
+			int y = random.nextInt(height);
+			int z = random.nextInt(depth);
+			int radius = random.nextInt(30)+20;
+			radius = 6;
+			int type = random.nextInt(100);
+			if (type > 90)
+				type = BlockConstants.LAVA;
+			else if (type > 45)
+				type = BlockConstants.AIR;
+			else
+				type = BlockConstants.WATER;
+			for (int m = 0;m < 2; m++) {
+				BUBBLE_GEN: for(int j = x-radius;j<x+radius*2;j++) {
+					if (j < 0)
+						j = 0;
+					if (j >= width)
+						break BUBBLE_GEN;
+					for(int k = y-radius;k<y+radius*2;k++) {
+						if (k < 0)
+							k = 0;
+						if (k >= width)
+							break BUBBLE_GEN;
+						for (int l = z-radius;l<z+radius;l++) {
+							if (l < 0)
+								l = 0;
+							if (l >= depth)
+								break BUBBLE_GEN;
+							double distance = Math.sqrt(Math.pow(j-x, 2)+Math.pow(k-y, 2)+Math.pow(l-z, 2));
+							if (Math.abs(distance/radius) <= Math.abs(random.nextGaussian()))
+								blocks[j][k][l] = (byte) type;
+						}
+					}
+				}
+				x++;
+			}
+		}
+
+		for (int z = 0; z < depth / 2; z++) {
+			for (int x = 0;x < width; x++) {
+				blocks[x][0][z] = (byte) BlockConstants.WATER;
+				blocks[x][height-1][z] = (byte) BlockConstants.WATER;
+				queueActiveBlockUpdate(x, 0, z);
+				queueActiveBlockUpdate(x, height-1, z);
+			}
+			for (int y = 0; y < height; y++) {
+				blocks[0][y][z] = (byte) BlockConstants.WATER;
+				blocks[width-1][y][z] = (byte) BlockConstants.WATER;
+				queueActiveBlockUpdate(0, y, z);
+				queueActiveBlockUpdate(width-1, y, z);
+			}
+		}
+
+		for(int x = 0;x < width; x++) {
+			for (int y = 0; y < height; y++ ) {
+				blocks[x][y][0] = (byte) BlockConstants.LAVA;
+			}
+		}
 
 		recalculateAllLightDepths();
 	}
@@ -225,7 +287,7 @@ public final class Level {
 		for (int type = 0; type < 256; type++) {
 			if (activeBlocks.containsKey(type)) {
 				if (System.currentTimeMillis() - activeTimers.get(type) > BlockManager.getBlockManager().getBlock(type).getTimer()) {
-					int cyclesThisTick = (activeBlocks.get(type).size() > 20 ? 20 : activeBlocks.get(type).size());
+					int cyclesThisTick = (activeBlocks.get(type).size() > 600 ? 600 : activeBlocks.get(type).size());
 					for (int i = 0; i < cyclesThisTick; i++) {
 						Position pos = activeBlocks.get(type).poll();
 						if (pos == null)
@@ -399,7 +461,7 @@ public final class Level {
 		if (x >= 0 && y >= 0 && z >= 0 && x < width && y < height && z < depth) {
 			return blocks[x][y][z];
 		} else {
-			return 0;
+			return BlockConstants.STONE;
 		}
 	}
 	
