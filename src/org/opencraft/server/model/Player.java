@@ -137,5 +137,11 @@ public class Player extends Entity {
 	public Map<String, Object> getAttributes() {
 		return attributes;
 	}
+
+	public void teleport(Position position, Rotation rotation) {
+		setPosition(position);
+		setRotation(rotation);
+		session.getActionSender().sendTeleport(position, rotation);
+	}
 	
 }
