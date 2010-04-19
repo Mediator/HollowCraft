@@ -73,8 +73,7 @@ public class SummonCommand implements Command {
 				for (Player other : World.getWorld().getPlayerList().getPlayers()) {
 					if (other.getName().toLowerCase().equals(params.getStringArgument(0).toLowerCase())) {
 						//TODO: Make the player face each other?
-						other.setPosition(player.getPosition());
-						other.setRotation(player.getRotation());
+						other.teleport(player.getPosition(), player.getRotation());
 						return;
 					}
 				}
