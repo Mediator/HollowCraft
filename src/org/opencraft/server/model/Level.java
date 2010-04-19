@@ -121,90 +121,14 @@ public final class Level {
 				activeTimers.put(i, System.currentTimeMillis());
 			}
 		}
-		
-		Random random = new Random();
-		int[][] heights = new int[width][height];
-		int maxHeight = 1;
-		int iterations = 1000;
-		for(int i = 0; i < iterations; i++) {
-			if (i % 1000 == 0)
-				logger.info("Raising terrain: "+i+"/"+iterations);
-			int x = random.nextInt(width);
-			int y = random.nextInt(height);
-			int ry = random.nextInt(10) + 4;
-			int rx = random.nextInt(10) + 4;
-			for(int j = 0; j < width; j++) {
-				for(int k = 0; k < height; k++) {
-					int mod = (rx * ry) - (k - x) * (k - x) - (j - y) * (j - y);
-					if(mod > 0) {
-						heights[j][k] += mod;
-						if(heights[j][k] > maxHeight) {
-							maxHeight = heights[j][k];
-						}
-					}
-				}
-			}
-		}
 
-		for(int x = 0; x < width; x++) {
-			for(int y = 0; y < height; y++) {
-				//int h = (depth / 2) + (heights[x][y] * (depth / 2) / maxHeight);
-				int h = (depth/2) + (heights[x][y] * (depth /2) / maxHeight)/2 - 2;
-				int d = random.nextInt(8) - 4;
-				for(int z = 0; z < h; z++) {
-					int type = BlockConstants.DIRT;
-					if(z == (h - 1)) {
-						type = BlockConstants.GRASS;
-					} else if(z <= (depth / 2 + d)) {
-						type = BlockConstants.STONE;
-					}
-					blocks[x][y][z] = (byte) type;
-				}
-			}
-		}
-
-		int bubbleCount = 100;
-		for (int i = 0; i < bubbleCount;i++) {
-			logger.info("Generating underground erosion bubbles: "+i+"/"+bubbleCount);
-			int x = random.nextInt(width);
-			int y = random.nextInt(height);
-			int z = random.nextInt(depth/4);
-			int radius = random.nextInt(70)+50;
-			radius = 6;
-			int type = random.nextInt(100);
-			if (type > 90)
-				type = BlockConstants.LAVA;
-			else if (type > 45)
-				type = BlockConstants.AIR;
-			else
-				type = BlockConstants.WATER;
-			for (int m = 0;m < 2; m++) {
-				BUBBLE_GEN: for(int j = x-radius;j<x+radius*2;j++) {
-					if (j < 0)
-						j = 0;
-					if (j >= width)
-						break BUBBLE_GEN;
-					for(int k = y-radius;k<y+radius*2;k++) {
-						if (k < 0)
-							k = 0;
-						if (k >= width)
-							break BUBBLE_GEN;
-						for (int l = z-radius;l<z+radius;l++) {
-							if (l < 0)
-								l = 0;
-							if (l >= depth)
-								break BUBBLE_GEN;
-							double distance = Math.sqrt(Math.pow(j-x, 2)+Math.pow(k-y, 2)+Math.pow(l-z, 2));
-							if (Math.abs(distance/radius) <= Math.abs(random.nextGaussian())) {
-								blocks[j][k][l] = (byte) type;
-							}
-						}
-					}
-				}
-				x++;
-			}
-		}
-
+		Builder b = new Builder(width, height, depth);
+		b.sculptHills(10000, 5);
+		b.generateCaverns(100);
+		b.buildLavaBed(2);
+		b.carveLake();
+		blocks = b.getBlocks();
+	
 		for (int x = 0;x < width; x++) {
 			logger.info("Activating ocean: "+(x*2)+"/"+(width*2+height*2));
 			queueTileUpdate(x, 0, depth/2-1);
@@ -215,29 +139,6 @@ public final class Level {
 			logger.info("Activating ocean: "+(y*2+width*2)+"/"+(width*2+height*2));
 			queueTileUpdate(0, y, depth/2-1);
 			queueTileUpdate(width-1, y, depth/2-1);
-		}
-
-		/*for (int z = 0; z < depth / 2; z++) {
-			logger.info("Building ocean: "+z+"/"+(depth/2));
-			for (int x = 0;x < width; x++) {
-				blocks[x][0][z] = (byte) BlockConstants.WATER;
-				blocks[x][height-1][z] = (byte) BlockConstants.WATER;
-				queueActiveBlockUpdate(x, 0, z);
-				queueActiveBlockUpdate(x, height-1, z);
-			}
-			for (int y = 0; y < height; y++) {
-				blocks[0][y][z] = (byte) BlockConstants.WATER;
-				blocks[width-1][y][z] = (byte) BlockConstants.WATER;
-				queueActiveBlockUpdate(0, y, z);
-				queueActiveBlockUpdate(width-1, y, z);
-			}
-		}*/
-
-		for(int x = 0;x < width; x++) {
-			logger.info("Building lava bed: "+(x*height)+"/"+(width*height));
-			for (int y = 0; y < height; y++ ) {
-				blocks[x][y][0] = (byte) BlockConstants.LAVA;
-			}
 		}
 
 		recalculateAllLightDepths();
