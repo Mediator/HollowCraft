@@ -180,7 +180,7 @@ public class Builder {
 	public void carveLake() {
 		int x = m_random.nextInt(m_width);
 		int y = m_random.nextInt(m_height);
-		int avgDepth = (m_random.nextInt(3)+4)*m_scale;
+		int avgDepth = (m_random.nextInt(3)+1)*m_scale;
 		int radius = (m_random.nextInt(30)+40)*m_scale;
 		carveLake(x, y, new ArrayList<Position>(), radius, avgDepth);
 	}
@@ -190,19 +190,20 @@ public class Builder {
 			return;
 		Position cur = new Position(x, y, 0);
 		for(Position p : visited)
-			if (p.equals(cur))
+			if (p.equals(cur)) {
+				visited.add(cur);
 				return;
+			}
 		visited.add(cur);
-		if (x < 0 || y < 0 || x > m_width || y > m_height)
+		if (x < 0 || y < 0 || x >= m_width || y >= m_height)
 			return;
-		for(int z = m_depth/3;z<m_depth/2+depth*3-3 && z < m_depth;z++)
+		for(int z = m_depth/2-depth;z < m_depth;z++)
 			blocks[x][y][z] = (byte) BlockConstants.AIR;
-		for(int z = m_depth/3;z>m_depth/2+depth-2 && z > 0;z--)
+		for(int z = m_depth/2-depth;z<m_depth/2-depth && z < m_depth;z++)
 			blocks[x][y][z] = (byte) BlockConstants.WATER;
 		carveLake(x+1, y, visited, distance-1, depth);
 		carveLake(x, y+1, visited, distance-1, depth);
 		carveLake(x-1, y, visited, distance-1, depth);
 		carveLake(x, y-1, visited, distance-1, depth);
-		visited.remove(cur);
 	}
 }

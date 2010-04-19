@@ -123,7 +123,7 @@ public final class Level {
 		}
 
 		Builder b = new Builder(width, height, depth);
-		b.sculptHills(10000, 5);
+		b.sculptHills(10000, 7);
 		b.generateCaverns(100);
 		b.buildLavaBed(2);
 		b.carveLake();
