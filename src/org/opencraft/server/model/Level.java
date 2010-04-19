@@ -38,6 +38,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
+import java.util.ArrayList;
 import org.opencraft.server.task.ScheduledTask;
 import org.opencraft.server.task.TaskQueue;
 import java.util.logging.Logger;
@@ -124,16 +125,17 @@ public final class Level {
 		Random random = new Random();
 		int[][] heights = new int[width][height];
 		int maxHeight = 1;
-		int iterations = 10000;
+		int iterations = 1000;
 		for(int i = 0; i < iterations; i++) {
 			if (i % 1000 == 0)
 				logger.info("Raising terrain: "+i+"/"+iterations);
 			int x = random.nextInt(width);
 			int y = random.nextInt(height);
-			int radius = random.nextInt(10) + 4;
+			int ry = random.nextInt(10) + 4;
+			int rx = random.nextInt(10) + 4;
 			for(int j = 0; j < width; j++) {
 				for(int k = 0; k < height; k++) {
-					int mod = (radius * radius) - (k - x) * (k - x) - (j - y) * (j - y);
+					int mod = (rx * ry) - (k - x) * (k - x) - (j - y) * (j - y);
 					if(mod > 0) {
 						heights[j][k] += mod;
 						if(heights[j][k] > maxHeight) {
@@ -143,10 +145,11 @@ public final class Level {
 				}
 			}
 		}
+
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
 				//int h = (depth / 2) + (heights[x][y] * (depth / 2) / maxHeight);
-				int h = (depth/4) + heights[x][y] * (depth /2) / maxHeight;
+				int h = (depth/2) + (heights[x][y] * (depth /2) / maxHeight)/2 - 2;
 				int d = random.nextInt(8) - 4;
 				for(int z = 0; z < h; z++) {
 					int type = BlockConstants.DIRT;
@@ -159,13 +162,14 @@ public final class Level {
 				}
 			}
 		}
+
 		int bubbleCount = 100;
 		for (int i = 0; i < bubbleCount;i++) {
-			logger.info("Generating erosion bubbles: "+i+"/"+bubbleCount);
+			logger.info("Generating underground erosion bubbles: "+i+"/"+bubbleCount);
 			int x = random.nextInt(width);
 			int y = random.nextInt(height);
-			int z = random.nextInt(depth);
-			int radius = random.nextInt(30)+20;
+			int z = random.nextInt(depth/4);
+			int radius = random.nextInt(70)+50;
 			radius = 6;
 			int type = random.nextInt(100);
 			if (type > 90)
@@ -191,8 +195,9 @@ public final class Level {
 							if (l >= depth)
 								break BUBBLE_GEN;
 							double distance = Math.sqrt(Math.pow(j-x, 2)+Math.pow(k-y, 2)+Math.pow(l-z, 2));
-							if (Math.abs(distance/radius) <= Math.abs(random.nextGaussian()))
+							if (Math.abs(distance/radius) <= Math.abs(random.nextGaussian())) {
 								blocks[j][k][l] = (byte) type;
+							}
 						}
 					}
 				}
@@ -200,7 +205,20 @@ public final class Level {
 			}
 		}
 
-		for (int z = 0; z < depth / 2; z++) {
+		for (int x = 0;x < width; x++) {
+			logger.info("Activating ocean: "+(x*2)+"/"+(width*2+height*2));
+			queueTileUpdate(x, 0, depth/2-1);
+			queueTileUpdate(x, height-1, depth/2-1);
+		}
+
+		for (int y = 0;y < height; y++) {
+			logger.info("Activating ocean: "+(y*2+width*2)+"/"+(width*2+height*2));
+			queueTileUpdate(0, y, depth/2-1);
+			queueTileUpdate(width-1, y, depth/2-1);
+		}
+
+		/*for (int z = 0; z < depth / 2; z++) {
+			logger.info("Building ocean: "+z+"/"+(depth/2));
 			for (int x = 0;x < width; x++) {
 				blocks[x][0][z] = (byte) BlockConstants.WATER;
 				blocks[x][height-1][z] = (byte) BlockConstants.WATER;
@@ -213,9 +231,10 @@ public final class Level {
 				queueActiveBlockUpdate(0, y, z);
 				queueActiveBlockUpdate(width-1, y, z);
 			}
-		}
+		}*/
 
 		for(int x = 0;x < width; x++) {
+			logger.info("Building lava bed: "+(x*height)+"/"+(width*height));
 			for (int y = 0; y < height; y++ ) {
 				blocks[x][y][0] = (byte) BlockConstants.LAVA;
 			}
@@ -280,6 +299,12 @@ public final class Level {
 		Queue<Position> currentQueue = new ArrayDeque<Position>(updateQueue);
 		updateQueue.clear();
 		for (Position pos : currentQueue) {
+			if (BlockManager.getBlockManager().getBlock(this.getBlock(pos.getX(), pos.getY(), pos.getZ())).hasGravity()) {
+				if (!blockIsStable(pos.getX(), pos.getY(), pos.getZ())) {
+					setBlock(pos.getX(), pos.getY(), pos.getZ(), BlockConstants.AIR);
+					setBlock(pos.getX(), pos.getY(), pos.getZ()- 1, this.getBlock(pos.getX(), pos.getY(), pos.getZ()));
+				}
+			}
 			BlockManager.getBlockManager().getBlock(this.getBlock(pos.getX(), pos.getY(), pos.getZ())).behavePassive(this, pos.getX(), pos.getY(), pos.getZ());
 		}
 		// we only process up to 20 of each type of thinking block every tick,
@@ -287,7 +312,7 @@ public final class Level {
 		for (int type = 0; type < 256; type++) {
 			if (activeBlocks.containsKey(type)) {
 				if (System.currentTimeMillis() - activeTimers.get(type) > BlockManager.getBlockManager().getBlock(type).getTimer()) {
-					int cyclesThisTick = (activeBlocks.get(type).size() > 600 ? 600 : activeBlocks.get(type).size());
+					int cyclesThisTick = (activeBlocks.get(type).size() > 1000 ? 1000 : activeBlocks.get(type).size());
 					for (int i = 0; i < cyclesThisTick; i++) {
 						Position pos = activeBlocks.get(type).poll();
 						if (pos == null)
@@ -461,8 +486,52 @@ public final class Level {
 		if (x >= 0 && y >= 0 && z >= 0 && x < width && y < height && z < depth) {
 			return blocks[x][y][z];
 		} else {
-			return BlockConstants.STONE;
+			return (byte) BlockConstants.BEDROCK;
 		}
+	}
+
+
+	/**
+	 * Returns if a block is somehow touching bedrock
+	 * @param x The x coordinate.
+	 * @param y The y coordinate.
+	 * @param z The z coordinate.
+	 * @return If a block is stable
+	 */
+	public boolean blockIsStable(int x, int y, int z) {
+		return blockIsStable(x, y, z, new ArrayList<Position>(), 0);
+	}
+
+	private boolean blockIsStable(int x, int y, int z, ArrayList<Position> visited, int distance) {
+		Position p = new Position(x, y, z);
+		for (Position pos : visited) {
+			if (pos.equals(p)) {
+				visited.add(p);
+				return false;
+			}
+		}
+		visited.add(p);
+		if (distance > 30)
+			return true;
+		if (getBlock(x, y, z) == BlockConstants.BEDROCK)
+			return true;
+		if (!BlockManager.getBlockManager().getBlock(getBlock(x, y, z)).isSolid())
+			return false;
+		if (BlockManager.getBlockManager().getBlock(getBlock(x, y, z)).isLiquid())
+			return false;
+		if (blockIsStable(x, y, z-1, visited, distance+1))
+			return true;
+		if (blockIsStable(x+1, y, z, visited, distance+1))
+			return true;
+		if (blockIsStable(x-1, y, z, visited, distance+1))
+			return true;
+		if (blockIsStable(x, y+1, z, visited, distance+1))
+			return true;
+		if (blockIsStable(x, y-1, z, visited, distance+1))
+			return true;
+		if (blockIsStable(x, y, z+1, visited, distance+1))
+			return true;
+		return false;
 	}
 	
 	/**
