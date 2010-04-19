@@ -50,6 +50,7 @@ import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.persistence.SavedGameManager;
 import org.opencraft.server.persistence.SavePersistenceRequest;
 import org.opencraft.server.util.PlayerList;
+import org.opencraft.server.io.NBTLevelCreator;
 
 /**
  * Manages the in-game world.
@@ -91,7 +92,8 @@ public final class World {
 	/**
 	 * The level.
 	 */
-	private final Level level = new Level();
+	private Level level = NBTLevelCreator.getNBTLevelCreator().load("data/acmpc.mclevel");
+	//private final Level level = new Level();
 	
 	/**
 	 * The player list.

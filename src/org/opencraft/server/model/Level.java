@@ -3,7 +3,7 @@ package org.opencraft.server.model;
 /*
  * OpenCraft License
  * 
- * Copyright (c) 2009 Graham Edgecombe, Søren Enevoldsen and Brett Russell.
+ * Copyright (c) 2009 Graham Edgecombe, Sï¿½ren Enevoldsen and Brett Russell.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,6 +40,7 @@ import java.util.Queue;
 import java.util.Random;
 import org.opencraft.server.task.ScheduledTask;
 import org.opencraft.server.task.TaskQueue;
+import org.opencraft.server.model.Environment;
 import java.util.logging.Logger;
 import java.lang.Math;
 
@@ -50,89 +51,72 @@ import java.lang.Math;
  */
 public final class Level {
 	
-	/**
-	 * The level width.
-	 */
-	private int width;
+	protected String m_name = "Untitled";
+	protected String m_author = "ACM OpenCraft Crew";
+	protected long m_created = 0;
+	protected Environment m_env = new Environment();
+	protected int m_width = 256;
+	protected int m_height = 256;
+	protected int m_depth = 64;
+	protected byte[][][] m_blocks = new byte[m_width][m_height][m_depth];
+	protected short[][] m_lightDepths = new short[m_width][m_height];
+	protected Rotation m_spawnRotation = new Rotation(0, 0);;
+	protected Position m_spawnPosition = new Position(m_width*16, m_height*16, m_depth*32);;
+	/** The active "thinking" blocks on the map. */
+	protected Map<Integer, ArrayDeque<Position>> m_activeBlocks = new HashMap<Integer, ArrayDeque<Position>>();
+	/** The timers for the active "thinking" blocks on the map. */
+	protected Map<Integer, Long> m_activeTimers = new HashMap<Integer, Long>();
+	/** A queue of positions to update at the next tick. */
+	protected Queue<Position> m_updateQueue = new ArrayDeque<Position>();
+	protected static final Logger m_logger = Logger.getLogger(Level.class.getName());
 	
-	/**
-	 * The level height.
-	 */
-	private int height;
-	
-	/**
-	 * The level depth.
-	 */
-	private int depth;
-	
-	/**
-	 * The blocks.
-	 */
-	private byte[][][] blocks;
-	
-	/**
-	 * Light depth array.
-	 */
-	private short[][] lightDepths;
-	
-	/**
-	 * The spawn rotation.
-	 */
-	private Rotation spawnRotation;
-	
-	/**
-	 * The spawn position.
-	 */
-	private Position spawnPosition;
-	
-	/**
-	 * The active "thinking" blocks on the map.
-	 */
-	private Map<Integer, ArrayDeque<Position>> activeBlocks = new HashMap<Integer, ArrayDeque<Position>>();
-	
-	/**
-	 * The timers for the active "thinking" blocks on the map.
-	 */
-	private Map<Integer, Long> activeTimers = new HashMap<Integer, Long>();
-	
-	/**
-	 * A queue of positions to update at the next tick.
-	 */
-	private Queue<Position> updateQueue = new ArrayDeque<Position>();
-
-	private static final Logger logger = Logger.getLogger(Level.class.getName());
-	
-	/**
-	 * Generates a level.
-	 */
 	public Level() {
-		this.width = 256;
-		this.height = 256;
-		this.depth = 64;
-		this.blocks = new byte[width][height][depth];
-		this.lightDepths = new short[width][height];
-		this.spawnPosition = new Position(width*16, height*16, depth*32);
-		this.spawnRotation = new Rotation(0, 0);
+		//GenLevel();
+	}
+
+	public Level(String name, String author, long createdOn, int width, int height, int depth, byte[][][] blocks, Environment env, Position spawnPos) {
+		m_name = name;
+		m_author = author;
+		m_created = createdOn;
+		m_env = env;
+		m_width = width;
+		m_height = height;
+		m_depth = depth;
+		m_blocks = blocks;
+		m_lightDepths = new short[m_width][m_height];
+		m_spawnPosition = spawnPos;
+		m_spawnRotation = new Rotation(0, 0);
+		recalculateAllLightDepths();
+	}
+
+	public void GenLevel() {
+		m_width = 256;
+		m_height = 256;
+		m_depth = 64;
+		m_blocks = new byte[m_width][m_height][m_depth];
+		m_lightDepths = new short[m_width][m_height];
+		m_spawnPosition = new Position(m_width*16, m_height*16, m_depth*32);
+		m_spawnRotation = new Rotation(0, 0);
 		for (int i = 0; i < 256; i++) {
 			BlockDefinition b = BlockManager.getBlockManager().getBlock(i);
 			if (b != null && b.doesThink()) {
-				activeBlocks.put(i, new ArrayDeque<Position>());
-				activeTimers.put(i, System.currentTimeMillis());
+				m_activeBlocks.put(i, new ArrayDeque<Position>());
+				m_activeTimers.put(i, System.currentTimeMillis());
 			}
 		}
 		
 		Random random = new Random();
-		int[][] heights = new int[width][height];
-		int maxHeight = 1;
+		int[][] heights = new int[m_width][m_height];
+		int maxHeight = 5;
 		int iterations = 10000;
 		for(int i = 0; i < iterations; i++) {
 			if (i % 1000 == 0)
-				logger.info("Raising terrain: "+i+"/"+iterations);
-			int x = random.nextInt(width);
-			int y = random.nextInt(height);
+				m_logger.info("Raising terrain: "+i+"/"+iterations);
+			int x = random.nextInt(m_width);
+			int y = random.nextInt(m_height);
 			int radius = random.nextInt(10) + 4;
-			for(int j = 0; j < width; j++) {
-				for(int k = 0; k < height; k++) {
+			for(int j = 0; j < m_width; j++) {
+				for(int k = 0; k < m_height; k++) {
 					int mod = (radius * radius) - (k - x) * (k - x) - (j - y) * (j - y);
 					if(mod > 0) {
 						heights[j][k] += mod;
@@ -143,23 +127,24 @@ public final class Level {
 				}
 			}
 		}
-		for(int x = 0; x < width; x++) {
-			for(int y = 0; y < height; y++) {
+		for(int x = 0; x < m_width; x++) {
+			for(int y = 0; y < m_height; y++) {
 				//int h = (depth / 2) + (heights[x][y] * (depth / 2) / maxHeight);
-				int h = (depth/4) + heights[x][y] * (depth /2) / maxHeight;
+				int h = (m_depth/4) + heights[x][y] * (m_depth /2) / maxHeight;
 				int d = random.nextInt(8) - 4;
 				for(int z = 0; z < h; z++) {
 					int type = BlockConstants.DIRT;
 					if(z == (h - 1)) {
 						type = BlockConstants.GRASS;
-					} else if(z <= (depth / 2 + d)) {
+					} else if(z <= (m_depth / 2 + d)) {
 						type = BlockConstants.STONE;
 					}
-					blocks[x][y][z] = (byte) type;
+					m_blocks[x][y][z] = (byte) type;
 				}
 			}
 		}
-		int bubbleCount = 100;
+		
+		/*int bubbleCount = 100;
 		for (int i = 0; i < bubbleCount;i++) {
 			logger.info("Generating erosion bubbles: "+i+"/"+bubbleCount);
 			int x = random.nextInt(width);
@@ -168,9 +153,9 @@ public final class Level {
 			int radius = random.nextInt(30)+20;
 			radius = 6;
 			int type = random.nextInt(100);
-			if (type > 90)
+			if (type > 95)
 				type = BlockConstants.LAVA;
-			else if (type > 45)
+			else if (type > 35)
 				type = BlockConstants.AIR;
 			else
 				type = BlockConstants.WATER;
@@ -198,26 +183,11 @@ public final class Level {
 				}
 				x++;
 			}
-		}
+		}*/
 
-		for (int z = 0; z < depth / 2; z++) {
-			for (int x = 0;x < width; x++) {
-				blocks[x][0][z] = (byte) BlockConstants.WATER;
-				blocks[x][height-1][z] = (byte) BlockConstants.WATER;
-				queueActiveBlockUpdate(x, 0, z);
-				queueActiveBlockUpdate(x, height-1, z);
-			}
-			for (int y = 0; y < height; y++) {
-				blocks[0][y][z] = (byte) BlockConstants.WATER;
-				blocks[width-1][y][z] = (byte) BlockConstants.WATER;
-				queueActiveBlockUpdate(0, y, z);
-				queueActiveBlockUpdate(width-1, y, z);
-			}
-		}
-
-		for(int x = 0;x < width; x++) {
-			for (int y = 0; y < height; y++ ) {
-				blocks[x][y][0] = (byte) BlockConstants.LAVA;
+		for(int x = 0;x < m_width; x++) {
+			for (int y = 0; y < m_height; y++ ) {
+				m_blocks[x][y][0] = (byte) BlockConstants.LAVA;
 			}
 		}
 
@@ -229,8 +199,8 @@ public final class Level {
 	 * should only be used when it really is necessary.
 	 */
 	public void recalculateAllLightDepths() {
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
+		for (int x = 0; x < m_width; x++) {
+			for (int y = 0; y < m_height; y++) {
 				recalculateLightDepth(x, y);
 			}
 		}
@@ -242,13 +212,13 @@ public final class Level {
 	 * @param y The y coordinates.
 	 */
 	public void recalculateLightDepth(int x, int y) {
-		for (int z = depth - 1; z >= 0; z--) {
-			if (BlockManager.getBlockManager().getBlock(blocks[x][y][z]).doesBlockLight()) {
-				lightDepths[x][y] = (short) z;
+		for (int z = m_depth - 1; z >= 0; z--) {
+			if (BlockManager.getBlockManager().getBlock(m_blocks[x][y][z]).doesBlockLight()) {
+				m_lightDepths[x][y] = (short) z;
 				return;
 			}
 		}
-		lightDepths[x][y] = (short) -1;
+		m_lightDepths[x][y] = (short) -1;
 	}
 	
 	/**
@@ -258,9 +228,9 @@ public final class Level {
 	 * @param depth The lowest-lit block.
 	 */
 	public void assignLightDepth(int x, int y, int depth) {
-		if (depth > this.height)
+		if (depth > m_height)
 			return;
-		lightDepths[x][y] = (short) depth;
+		m_lightDepths[x][y] = (short) depth;
 	}
 	
 	/**
@@ -270,71 +240,59 @@ public final class Level {
 	 * @return The light depth.
 	 */
 	public int getLightDepth(int x, int y) {
-		return lightDepths[x][y];
+		return m_lightDepths[x][y];
 	}
 	
 	/**
 	 * Performs physics updates on queued blocks.
 	 */
 	public void applyBlockBehaviour() {
-		Queue<Position> currentQueue = new ArrayDeque<Position>(updateQueue);
-		updateQueue.clear();
+		Queue<Position> currentQueue = new ArrayDeque<Position>(m_updateQueue);
+		m_updateQueue.clear();
 		for (Position pos : currentQueue) {
-			BlockManager.getBlockManager().getBlock(this.getBlock(pos.getX(), pos.getY(), pos.getZ())).behavePassive(this, pos.getX(), pos.getY(), pos.getZ());
+			BlockManager.getBlockManager().getBlock(getBlock(pos.getX(), pos.getY(), pos.getZ())).behavePassive(this, pos.getX(), pos.getY(), pos.getZ());
 		}
 		// we only process up to 20 of each type of thinking block every tick,
 		// or we'd probably be here all day.
 		for (int type = 0; type < 256; type++) {
-			if (activeBlocks.containsKey(type)) {
-				if (System.currentTimeMillis() - activeTimers.get(type) > BlockManager.getBlockManager().getBlock(type).getTimer()) {
-					int cyclesThisTick = (activeBlocks.get(type).size() > 600 ? 600 : activeBlocks.get(type).size());
+			if (m_activeBlocks.containsKey(type)) {
+				if (System.currentTimeMillis() - m_activeTimers.get(type) > BlockManager.getBlockManager().getBlock(type).getTimer()) {
+					int cyclesThisTick = (m_activeBlocks.get(type).size() > 600 ? 600 : m_activeBlocks.get(type).size());
 					for (int i = 0; i < cyclesThisTick; i++) {
-						Position pos = activeBlocks.get(type).poll();
+						Position pos = m_activeBlocks.get(type).poll();
 						if (pos == null)
 							break;
 						// the block that occupies this space might have
 						// changed.
-						if (this.getBlock(pos.getX(), pos.getY(), pos.getZ()) == type) {
+						if (getBlock(pos.getX(), pos.getY(), pos.getZ()) == type) {
 							// World.getWorld().broadcast("Processing thinker at ("+pos.getX()+","+pos.getY()+","+pos.getZ()+")");
 							BlockManager.getBlockManager().getBlock(type).behaveSchedule(this, pos.getX(), pos.getY(), pos.getZ());
 						}
 					}
-					activeTimers.put(type, System.currentTimeMillis());
+					m_activeTimers.put(type, System.currentTimeMillis());
 				}
 			}
 		}
 	}
 	
-	/**
-	 * Gets all of the blocks.
-	 * @return All of the blocks.
-	 */
+	public String getName() {
+		return m_name;
+	}
+
 	public byte[][][] getBlocks() {
-		return blocks;
+		return m_blocks;
 	}
 	
-	/**
-	 * Gets the width of the level.
-	 * @return The width of the level.
-	 */
 	public int getWidth() {
-		return width;
+		return m_width;
 	}
 	
-	/**
-	 * Gets the height of the level.
-	 * @return The height of the level.
-	 */
 	public int getHeight() {
-		return height;
+		return m_height;
 	}
 	
-	/**
-	 * Gets the depth of the level.
-	 * @return The depth of the level.
-	 */
 	public int getDepth() {
-		return depth;
+		return m_depth;
 	}
 	
 	/**
@@ -357,11 +315,11 @@ public final class Level {
 	 * @param updateSelf Update self flag.
 	 */
 	public void setBlock(int x, int y, int z, int type, boolean updateSelf) {
-		if (x < 0 || y < 0 || z < 0 || x >= width || y >= height || z >= depth) {
+		if (x < 0 || y < 0 || z < 0 || x >= m_width || y >= m_height || z >= m_depth) {
 			return;
 		}
-		byte formerBlock = this.getBlock(x, y, z);
-		blocks[x][y][z] = (byte) type;
+		byte formerBlock = getBlock(x, y, z);
+		m_blocks[x][y][z] = (byte) type;
 		for (Player player : World.getWorld().getPlayerList().getPlayers()) {
 			player.getSession().getActionSender().sendBlock(x, y, z, (byte) type);
 		}
@@ -371,17 +329,17 @@ public final class Level {
 		if (type == 0) {
 			BlockManager.getBlockManager().getBlock(formerBlock).behaveDestruct(this, x, y, z);
 			updateNeighboursAt(x, y, z);
-			if (this.getLightDepth(x, y) == z) {
-				this.recalculateLightDepth(x, y);
-				this.scheduleZPlantThink(x, y, z);
+			if (getLightDepth(x, y) == z) {
+				recalculateLightDepth(x, y);
+				scheduleZPlantThink(x, y, z);
 			}
 		}
 		if (BlockManager.getBlockManager().getBlock(type).doesThink()) {
-			activeBlocks.get(type).add(new Position(x, y, z));
+			m_activeBlocks.get(type).add(new Position(x, y, z));
 		}
 		if (BlockManager.getBlockManager().getBlock(type).doesBlockLight()) {
-			this.assignLightDepth(x, y, z);
-			this.scheduleZPlantThink(x, y, z);
+			assignLightDepth(x, y, z);
+			scheduleZPlantThink(x, y, z);
 		}
 		
 	}
@@ -427,10 +385,10 @@ public final class Level {
 	 * @param z Z coordinate.
 	 */
 	private void queueTileUpdate(int x, int y, int z) {
-		if (x >= 0 && y >= 0 && z >= 0 && x < width && y < height && z < depth) {
+		if (x >= 0 && y >= 0 && z >= 0 && x < m_width && y < m_height && z < m_depth) {
 			Position pos = new Position(x, y, z);
-			if (!updateQueue.contains(pos)) {
-				updateQueue.add(pos);
+			if (!m_updateQueue.contains(pos)) {
+				m_updateQueue.add(pos);
 			}
 		}
 	}
@@ -442,10 +400,10 @@ public final class Level {
 	 * @param z Z coordinate.
 	 */
 	public void queueActiveBlockUpdate(int x, int y, int z) {
-		if (x >= 0 && y >= 0 && z >= 0 && x < width && y < height && z < depth) {
-			int blockAt = this.getBlock(x, y, z);
+		if (x >= 0 && y >= 0 && z >= 0 && x < m_width && y < m_height && z < m_depth) {
+			int blockAt = getBlock(x, y, z);
 			if (BlockManager.getBlockManager().getBlock(blockAt).doesThink()) {
-				activeBlocks.get(blockAt).add(new Position(x, y, z));
+				m_activeBlocks.get(blockAt).add(new Position(x, y, z));
 			}
 		}
 	}
@@ -458,43 +416,27 @@ public final class Level {
 	 * @return The type id.
 	 */
 	public byte getBlock(int x, int y, int z) {
-		if (x >= 0 && y >= 0 && z >= 0 && x < width && y < height && z < depth) {
-			return blocks[x][y][z];
+		if (x >= 0 && y >= 0 && z >= 0 && x < m_width && y < m_height && z < m_depth) {
+			return m_blocks[x][y][z];
 		} else {
 			return BlockConstants.STONE;
 		}
 	}
 	
-	/**
-	 * Set the rotation of the character when spawned.
-	 * @param spawnRotation The rotation.
-	 */
 	public void setSpawnRotation(Rotation spawnRotation) {
-		this.spawnRotation = spawnRotation;
+		m_spawnRotation = spawnRotation;
 	}
-	
-	/**
-	 * Get the spawning rotation.
-	 * @return The spawning rotation.
-	 */
+
 	public Rotation getSpawnRotation() {
-		return spawnRotation;
+		return m_spawnRotation;
 	}
 	
-	/**
-	 * Set the spawn position.
-	 * @param spawnPosition The spawn position.
-	 */
 	public void setSpawnPosition(Position spawnPosition) {
-		this.spawnPosition = spawnPosition;
+		m_spawnPosition = spawnPosition;
 	}
 	
-	/**
-	 * Get the spawn position.
-	 * @return The spawn position.
-	 */
 	public Position getSpawnPosition() {
-		return spawnPosition;
+		return m_spawnPosition;
 	}
 	
 }

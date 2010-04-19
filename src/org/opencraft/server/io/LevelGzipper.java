@@ -33,12 +33,11 @@ package org.opencraft.server.io;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.zip.GZIPOutputStream;
+import java.util.zip.GZIPInputStream;
 
 import org.apache.mina.core.buffer.IoBuffer;
 import org.opencraft.server.model.Level;
@@ -123,5 +122,42 @@ public final class LevelGzipper {
 			}
 		});
 	}
-	
+
+	/**
+	 * Unzips a .dat level file and returns the contained level
+	 * @param filename The name of the file to unzip
+	 * @return The uncompressed Level
+	 */
+	/*
+	public Level load(String filename) {
+		Level level = null;
+		FileInputStream fis = null;
+		GZIPInputStream gzis = null;
+		ObjectInputStream in = null;
+		DataInputStream inputstream = null;
+		try {
+			fis = new FileInputStream(filename);
+			gzis = new GZIPInputStream(fis);
+			inputstream = new DataInputStream(gzis);
+			if((inputstream.readInt()) != 0x271bb788) {
+				return level;
+			}
+			if((inputstream.readByte()) > 2) {
+				System.out.println("Error: Level version > 2, this is unexpected!");
+				return level;
+			}
+			in = new ObjectInputStream(gzis);
+			level = (Level)in.readObject();
+			inputstream.close();
+			in.close();
+			System.out.println("Loading level "+filename+" successful");
+		} catch(IOException ex) {
+			ex.printStackTrace();
+		} catch(ClassNotFoundException ex) {
+			ex.printStackTrace();
+		}
+		return level;
+	}*/
+
+
 }
