@@ -16,8 +16,10 @@
 		<delete dir="bin"/>
 	</target>
 	<target name="rebuild" depends="clean,build"/>
-	<target name="run">
-		<java classname="org.opencraft.server.Server">
+	<target name="run-server" depends="build">
+		<java classname="org.opencraft.server.Server" fork="true">
+			<arg value="-Xms512m"/>
+			<arg value="-Xmx1024m"/>
 			<classpath>
 				<pathelement path="${toString:libs}"/>
 				<pathelement path="bin"/>
