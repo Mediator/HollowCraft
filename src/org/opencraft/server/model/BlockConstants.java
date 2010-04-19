@@ -46,6 +46,8 @@ public class BlockConstants {
 	private BlockConstants() {
 		/* empty */
 	}
+
+	public static final int BEDROCK = 100;
 	
 	public static final int AIR = 0;
 	
