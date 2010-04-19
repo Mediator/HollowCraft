@@ -89,4 +89,13 @@ public final class Position {
 	public int getZ() {
 		return z;
 	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (other instanceof Position) {
+			Position pos = (Position)other;
+			return pos.z == z && pos.y == y && pos.x == x;
+		}
+		return false;
+	}
 }
