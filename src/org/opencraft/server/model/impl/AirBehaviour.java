@@ -59,7 +59,10 @@ public class AirBehaviour implements BlockBehaviour {
 	
 	@Override
 	public void handleScheduledBehaviour(Level level, int x, int y, int z, int type) {
-		if (z < level.getDepth()/2) {
+		if (level.getBlock(x+1, y, z) == BlockConstants.WATER &&  level.getBlock(x-1, y, z) == BlockConstants.WATER && level.getBlock(x, y+1, z) == BlockConstants.WATER && level.getBlock(x, y-1, z) == BlockConstants.WATER) {
+			level.setBlock(x, y, z, BlockConstants.WATER);
+		}
+		if (z < level.getDepth()/2 && z > level.getDepth()/2-3) {
 			if (x == 0)
 				level.setBlock(x, y, z, BlockConstants.WATER);
 			if (x == level.getWidth()-1)

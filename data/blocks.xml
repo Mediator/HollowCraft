@@ -35,6 +35,18 @@ POSSIBILITY OF SUCH DAMAGE.
 <blocks>
   <blockList>
     <block>
+      <bid>100</bid>
+      <name>bedrock</name>
+      <solid>true</solid>
+      <liquid>false</liquid>
+      <blocksLight>true</blocksLight>
+      <halfBlock>false</halfBlock>
+      <behaviourName></behaviourName>
+      <doesThink>false</doesThink>
+      <isPlant>false</isPlant>
+      <gravity>false</gravity>
+    </block>
+    <block>
       <bid>0</bid>
       <name>air</name>
       <solid>false</solid>
@@ -45,6 +57,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>true</doesThink>
       <isPlant>false</isPlant>
       <thinkTimer>100</thinkTimer>
+      <gravity>false</gravity>
     </block>
     <block>
       <bid>1</bid>
@@ -53,9 +66,10 @@ POSSIBILITY OF SUCH DAMAGE.
       <liquid>false</liquid>
       <blocksLight>true</blocksLight>
       <halfBlock>false</halfBlock>
-      <behaviourName>org.opencraft.server.model.impl.GravityBehaviour</behaviourName>
+      <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>2</bid>
@@ -68,6 +82,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>true</doesThink>
       <isPlant>true</isPlant>
       <thinkTimer>10000</thinkTimer>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>3</bid>
@@ -76,9 +91,10 @@ POSSIBILITY OF SUCH DAMAGE.
       <liquid>false</liquid>
       <blocksLight>true</blocksLight>
       <halfBlock>false</halfBlock>
-      <behaviourName>org.opencraft.server.model.impl.GravityBehaviour</behaviourName>
+      <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>4</bid>
@@ -89,6 +105,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <halfBlock>false</halfBlock>
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>5</bid>
@@ -100,6 +117,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>6</bid>
@@ -112,6 +130,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>true</doesThink>
       <isPlant>true</isPlant>
       <thinkTimer>5000</thinkTimer>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>7</bid>
@@ -123,6 +142,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>false</gravity>
     </block>
     <block>
       <bid>8</bid>
@@ -133,8 +153,10 @@ POSSIBILITY OF SUCH DAMAGE.
       <halfBlock>false</halfBlock>
       <behaviourName>org.opencraft.server.model.impl.WaterBehaviour</behaviourName>
       <doesThink>true</doesThink>
+      <thinkTimer>100</thinkTimer>
       <isPlant>false</isPlant>
-      <thinkTimer>100</thinkTimer></block>
+      <gravity>false</gravity>
+    </block>
     <block>
       <bid>9</bid>
       <name>water_still</name>
@@ -145,6 +167,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>10</bid>
@@ -156,7 +179,9 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName>org.opencraft.server.model.impl.LavaBehaviour</behaviourName>
       <doesThink>true</doesThink>
       <isPlant>false</isPlant>
-      <thinkTimer>2200</thinkTimer></block>
+      <thinkTimer>2200</thinkTimer>
+      <gravity>false</gravity>
+    </block>
     <block>
       <bid>11</bid>
       <name>lava_still</name>
@@ -175,9 +200,10 @@ POSSIBILITY OF SUCH DAMAGE.
       <liquid>false</liquid>
       <blocksLight>true</blocksLight>
       <halfBlock>false</halfBlock>
-      <behaviourName>org.opencraft.server.model.impl.GravityBehaviour</behaviourName>
+      <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>13</bid>
@@ -186,9 +212,10 @@ POSSIBILITY OF SUCH DAMAGE.
       <liquid>false</liquid>
       <blocksLight>true</blocksLight>
       <halfBlock>false</halfBlock>
-      <behaviourName>org.opencraft.server.model.impl.GravityBehaviour</behaviourName>
+      <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>14</bid>
@@ -200,6 +227,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>15</bid>
@@ -211,6 +239,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>16</bid>
@@ -222,6 +251,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>17</bid>
@@ -233,6 +263,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>18</bid>
@@ -244,6 +275,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>19</bid>
@@ -255,6 +287,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName>org.opencraft.server.model.impl.SpongeBehaviour</behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>false</gravity>
     </block>
     <block>
       <bid>20</bid>
@@ -266,6 +299,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>21</bid>
@@ -277,6 +311,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>22</bid>
@@ -288,6 +323,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>23</bid>
@@ -299,6 +335,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>24</bid>
@@ -310,6 +347,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>25</bid>
@@ -321,6 +359,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>26</bid>
@@ -332,6 +371,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>27</bid>
@@ -343,6 +383,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>28</bid>
@@ -354,6 +395,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>29</bid>
@@ -365,6 +407,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>30</bid>
@@ -376,6 +419,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>31</bid>
@@ -387,6 +431,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>32</bid>
@@ -398,6 +443,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>33</bid>
@@ -409,6 +455,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>34</bid>
@@ -420,6 +467,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>35</bid>
@@ -431,6 +479,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>36</bid>
@@ -442,6 +491,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>37</bid>
@@ -454,6 +504,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>true</doesThink>
       <isPlant>true</isPlant>
       <thinkTimer>5000</thinkTimer>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>38</bid>
@@ -466,6 +517,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>true</doesThink>
       <isPlant>true</isPlant>
       <thinkTimer>5000</thinkTimer>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>39</bid>
@@ -478,6 +530,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>true</doesThink>
       <isPlant>true</isPlant>
       <thinkTimer>5000</thinkTimer>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>40</bid>
@@ -490,6 +543,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>true</doesThink>
       <isPlant>true</isPlant>
       <thinkTimer>5000</thinkTimer>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>41</bid>
@@ -501,6 +555,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>42</bid>
@@ -512,6 +567,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>43</bid>
@@ -523,6 +579,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>44</bid>
@@ -534,7 +591,9 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName>org.opencraft.server.model.impl.HalfBlockBehaviour</behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
-      <fullCounterpart>43</fullCounterpart></block>
+      <fullCounterpart>43</fullCounterpart>
+      <gravity>true</gravity>
+    </block>
     <block>
       <bid>45</bid>
       <name>brick_red</name>
@@ -545,6 +604,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>46</bid>
@@ -556,6 +616,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>47</bid>
@@ -567,6 +628,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>48</bid>
@@ -578,6 +640,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
     <block>
       <bid>49</bid>
@@ -589,6 +652,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+      <gravity>true</gravity>
     </block>
   </blockList>
 </blocks>

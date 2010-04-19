@@ -52,7 +52,7 @@ public final class NBTLevelCreator {
 			Position spawnPos = new Position(width*16, height*16, depth*32);
 			byte[][][] blocks = new byte[width][height][depth];
 
-			NBTInputStream nbtin = new NBTInputStream(new FileInputStream("data/acmpc.mclevel"));
+			NBTInputStream nbtin = new NBTInputStream(new FileInputStream(filename));
 
 			CompoundTag root = (CompoundTag)(nbtin.readTag());
 			//lvlname = root.getName(); //?
@@ -109,11 +109,12 @@ public final class NBTLevelCreator {
 					Map<String, Tag> aboutItems = about.getValue();
 					lvlname = ((StringTag)(aboutItems.get("Name"))).getValue();
 					author  = ((StringTag)(aboutItems.get("Author"))).getValue();
-					created = ((ShortTag)(aboutItems.get("CreatedOn"))).getValue();
+					created = ((LongTag)(aboutItems.get("CreatedOn"))).getValue();
 				}
 			}
+			nbtin.close();
 			lvl = new Level(lvlname, author, created, width, height, depth, blocks, env, spawnPos);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			lvl = new Level();
 		}
 
