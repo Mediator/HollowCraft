@@ -86,7 +86,7 @@ public class Builder {
 		int[][] heights = new int[m_width][m_height];
 		int maxHeight = 1;
 		for(int i = 0; i < iterations; i++) {
-			if (i % 1000 == 0)
+			if (i % 10000 == 0)
 				logger.info("Raising terrain: "+i+"/"+iterations);
 			int x = m_random.nextInt(m_width);
 			int y = m_random.nextInt(m_height);

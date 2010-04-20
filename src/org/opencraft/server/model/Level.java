@@ -39,11 +39,14 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
 import java.util.ArrayList;
-import org.opencraft.server.task.ScheduledTask;
-import org.opencraft.server.task.TaskQueue;
-import org.opencraft.server.model.Environment;
 import java.util.logging.Logger;
 import java.lang.Math;
+
+import org.opencraft.server.task.ScheduledTask;
+import org.opencraft.server.task.TaskQueue;
+import org.opencraft.server.task.impl.SaveLevelTask;
+import org.opencraft.server.model.Environment;
+import org.opencraft.server.io.NBTFileHandler;
 
 /**
  * Represents the actual level.
@@ -52,53 +55,53 @@ import java.lang.Math;
  */
 public final class Level {
 	
-	protected String m_name = "Untitled";
-	protected String m_author = "ACM OpenCraft Crew";
-	protected long m_created = 0;
-	protected Environment m_env = new Environment();
-	protected int m_width = 256;
-	protected int m_height = 256;
-	protected int m_depth = 64;
-	protected byte[][][] m_blocks = new byte[m_width][m_height][m_depth];
-	protected short[][] m_lightDepths = new short[m_width][m_height];
-	protected Rotation m_spawnRotation = new Rotation(0, 0);;
-	protected Position m_spawnPosition = new Position(m_width*16, m_height*16, m_depth*32);;
+	protected String m_name;
+	protected String m_author;
+	protected long m_created;
+	protected Environment m_env;
+
+	protected int m_width;
+	protected int m_height;
+	protected int m_depth;
+	protected byte[][][] m_blocks;
+	protected byte[][][] m_data;
+	protected short[][] m_lightDepths;
+	protected Rotation m_spawnRotation;
+	protected Position m_spawnPosition;
+
 	/** The active "thinking" blocks on the map. */
 	protected Map<Integer, ArrayDeque<Position>> m_activeBlocks = new HashMap<Integer, ArrayDeque<Position>>();
 	/** The timers for the active "thinking" blocks on the map. */
 	protected Map<Integer, Long> m_activeTimers = new HashMap<Integer, Long>();
 	/** A queue of positions to update at the next tick. */
 	protected Queue<Position> m_updateQueue = new ArrayDeque<Position>();
+
+	protected SaveLevelTask autosave = new SaveLevelTask(this);
+
 	protected static final Logger m_logger = Logger.getLogger(Level.class.getName());
 	
 	public Level() {
-		GenLevel();
+		TaskQueue.getTaskQueue().schedule(autosave);
 	}
 
-	public Level(String name, String author, long createdOn, int width, int height, int depth, byte[][][] blocks, Environment env, Position spawnPos) {
-		m_name = name;
-		m_author = author;
-		m_created = createdOn;
-		m_env = env;
+	public void generateLevel() {
+		generateLevel(256, 256, 64);
+	}
+
+	public void generateLevel(int width, int height, int depth) {
+		m_name = "Generated Level";
+		m_author = "ACM OpenCraft Crew";
+		m_created = (new java.util.Date()).getTime();
+		m_env = new Environment();
 		m_width = width;
 		m_height = height;
 		m_depth = depth;
-		m_blocks = blocks;
-		m_lightDepths = new short[m_width][m_height];
-		m_spawnPosition = spawnPos;
-		m_spawnRotation = new Rotation(0, 0);
-		recalculateAllLightDepths();
-		//GenLevel();
-	}
-
-	public void GenLevel() {
-		m_width = 256;
-		m_height = 256;
-		m_depth = 64;
 		m_blocks = new byte[m_width][m_height][m_depth];
+		m_data = new byte[m_width][m_height][m_depth];
 		m_lightDepths = new short[m_width][m_height];
 		m_spawnPosition = new Position(m_width*16, m_height*16, m_depth*32);
 		m_spawnRotation = new Rotation(0, 0);
+
 		for (int i = 0; i < 256; i++) {
 			BlockDefinition b = BlockManager.getBlockManager().getBlock(i);
 			if (b != null && b.doesThink()) {
@@ -128,6 +131,7 @@ public final class Level {
 		}
 
 		recalculateAllLightDepths();
+		NBTFileHandler.save(this, "data/testa.mclevel", true);
 	}
 	
 	/**
@@ -215,26 +219,6 @@ public final class Level {
 				}
 			}
 		}
-	}
-	
-	public String getName() {
-		return m_name;
-	}
-
-	public byte[][][] getBlocks() {
-		return m_blocks;
-	}
-	
-	public int getWidth() {
-		return m_width;
-	}
-	
-	public int getHeight() {
-		return m_height;
-	}
-	
-	public int getDepth() {
-		return m_depth;
 	}
 	
 	/**
@@ -408,7 +392,69 @@ public final class Level {
 			return true;
 		return false;
 	}
+
+	public String getName() {
+		return m_name;
+	}
+
+	public void setName(String name) {
+		m_name = name;
+	}
+
+	public String getAuthor() {
+		return m_author;
+	}
+
+	public void setAuthor(String author) {
+		m_author = author;
+	}
+
+	public byte[][][] getBlocks() {
+		return m_blocks;
+	}
+
+	public byte[][][] getData() {
+		return m_data;
+	}
+
+	public int getWidth() {
+		return m_width;
+	}
 	
+	public int getHeight() {
+		return m_height;
+	}
+	
+	public int getDepth() {
+		return m_depth;
+	}
+
+	public void setBlocks(byte[][][] blocks, byte[][][] data, int width, int height, int depth) {
+		m_blocks = blocks;
+		m_data = data;
+		m_width = width;
+		m_height = height;
+		m_depth = depth;
+		m_lightDepths = new short[m_width][m_height];
+		recalculateAllLightDepths();
+	}
+
+	public long getCreationDate() {
+		return m_created;
+	}
+
+	public void setCreationDate(long date) {
+		m_created = date;
+	}
+
+	public Environment getEnvironment() {
+		return m_env;
+	}
+
+	public void setEnvironment(Environment env) {
+		m_env = env;
+	}
+
 	public void setSpawnRotation(Rotation spawnRotation) {
 		m_spawnRotation = spawnRotation;
 	}
