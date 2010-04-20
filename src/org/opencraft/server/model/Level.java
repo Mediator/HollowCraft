@@ -194,11 +194,7 @@ public final class Level {
 		for (Position pos : currentQueue) {
 			if (BlockManager.getBlockManager().getBlock(this.getBlock(pos.getX(), pos.getY(), pos.getZ())).hasGravity()) {
 				if (!blockIsStable(pos.getX(), pos.getY(), pos.getZ())) {
-<<<<<<< HEAD
-					setBlock(pos.getX(), pos.getY(), pos.getZ()- 1, getBlock(pos.getX(), pos.getY(), pos.getZ()));
-=======
 					setBlock(pos.getX(), pos.getY(), pos.getZ() - 1, getBlock(pos.getX(), pos.getY(), pos.getZ()));
->>>>>>> 46d43be30b9c97fe1eef030236e91d73778f93b0
 					setBlock(pos.getX(), pos.getY(), pos.getZ(), BlockConstants.AIR);
 				}
 			}
