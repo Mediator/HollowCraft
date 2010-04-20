@@ -76,11 +76,12 @@ public final class Level {
 	/** A queue of positions to update at the next tick. */
 	protected Queue<Position> m_updateQueue = new ArrayDeque<Position>();
 
-	protected SaveLevelTask autosave = new SaveLevelTask(this);
+	protected SaveLevelTask autosave;
 
 	protected static final Logger m_logger = Logger.getLogger(Level.class.getName());
 	
 	public Level() {
+		autosave = new SaveLevelTask(this);
 		TaskQueue.getTaskQueue().schedule(autosave);
 	}
 
@@ -192,8 +193,8 @@ public final class Level {
 		for (Position pos : currentQueue) {
 			if (BlockManager.getBlockManager().getBlock(this.getBlock(pos.getX(), pos.getY(), pos.getZ())).hasGravity()) {
 				if (!blockIsStable(pos.getX(), pos.getY(), pos.getZ())) {
-					setBlock(pos.getX(), pos.getY(), pos.getZ(), BlockConstants.AIR);
 					setBlock(pos.getX(), pos.getY(), pos.getZ()- 1, getBlock(pos.getX(), pos.getY(), pos.getZ()));
+					setBlock(pos.getX(), pos.getY(), pos.getZ(), BlockConstants.AIR);
 				}
 			}
 			BlockManager.getBlockManager().getBlock(this.getBlock(pos.getX(), pos.getY(), pos.getZ())).behavePassive(this, pos.getX(), pos.getY(), pos.getZ());

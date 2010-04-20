@@ -51,6 +51,7 @@ import org.opencraft.server.persistence.SavedGameManager;
 import org.opencraft.server.persistence.SavePersistenceRequest;
 import org.opencraft.server.util.PlayerList;
 import org.opencraft.server.io.NBTFileHandler;
+import org.opencraft.server.io.BINFileHandler;
 
 /**
  * Manages the in-game world.
@@ -92,7 +93,9 @@ public final class World {
 	/**
 	 * The level.
 	 */
-	private Level level = NBTFileHandler.load("data/acmpc.mclevel");
+	private Level level = NBTFileHandler.load("data/maps/monkey_mines.mclevel");
+	//private Level level = BINFileHandler.load("data/maps/Monkey_Mines.dat");
+	//private Level level = new Level();
 	
 	/**
 	 * The player list.

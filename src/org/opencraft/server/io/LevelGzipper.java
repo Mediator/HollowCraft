@@ -3,7 +3,7 @@ package org.opencraft.server.io;
 /*
  * OpenCraft License
  * 
- * Copyright (c) 2009 Graham Edgecombe, Søren Enevoldsen and Brett Russell.
+ * Copyright (c) 2009 Graham Edgecombe, Sï¿½ren Enevoldsen and Brett Russell.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -122,42 +122,4 @@ public final class LevelGzipper {
 			}
 		});
 	}
-
-	/**
-	 * Unzips a .dat level file and returns the contained level
-	 * @param filename The name of the file to unzip
-	 * @return The uncompressed Level
-	 */
-	/*
-	public Level load(String filename) {
-		Level level = null;
-		FileInputStream fis = null;
-		GZIPInputStream gzis = null;
-		ObjectInputStream in = null;
-		DataInputStream inputstream = null;
-		try {
-			fis = new FileInputStream(filename);
-			gzis = new GZIPInputStream(fis);
-			inputstream = new DataInputStream(gzis);
-			if((inputstream.readInt()) != 0x271bb788) {
-				return level;
-			}
-			if((inputstream.readByte()) > 2) {
-				System.out.println("Error: Level version > 2, this is unexpected!");
-				return level;
-			}
-			in = new ObjectInputStream(gzis);
-			level = (Level)in.readObject();
-			inputstream.close();
-			in.close();
-			System.out.println("Loading level "+filename+" successful");
-		} catch(IOException ex) {
-			ex.printStackTrace();
-		} catch(ClassNotFoundException ex) {
-			ex.printStackTrace();
-		}
-		return level;
-	}*/
-
-
 }
