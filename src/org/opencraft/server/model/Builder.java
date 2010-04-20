@@ -184,25 +184,6 @@ public class Builder {
 			int radius = m_random.nextInt(10) + 4;
 			//sculptHill(x, y, height, radius);
 		}
-		/*(for(int i = 0; i < iterations; i++) {
-			if (i % 1000 == 0)
-				logger.info("Raising terrain: "+i+"/"+iterations);
-			int x = m_random.nextInt(m_width);
-			int y = m_random.nextInt(m_height);
-			int ry = m_random.nextInt(10) + 4;
-			int rx = m_random.nextInt(10) + 4;
-			for(int j = 0; j < m_width; j++) {
-				for(int k = 0; k < m_height; k++) {
-					int mod = (rx * ry) - (k - x) * (k - x) - (j - y) * (j - y);
-					if(mod > 0) {
-						heights[j][k] += mod;
-						if(heights[j][k] > maxHeight) {
-							maxHeight = heights[j][k];
-						}
-					}
-				}
-			}
-		}*/
 	}
 
 	public void generateCaverns(int count) {

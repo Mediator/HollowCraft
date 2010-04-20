@@ -3,7 +3,7 @@ package org.opencraft.server.model;
 /*
  * OpenCraft License
  * 
- * Copyright (c) 2009 Graham Edgecombe, Søren Enevoldsen and Brett Russell.
+ * Copyright (c) 2009 Graham Edgecombe, Sï¿½ren Enevoldsen and Brett Russell.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -50,7 +50,7 @@ import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.persistence.SavedGameManager;
 import org.opencraft.server.persistence.SavePersistenceRequest;
 import org.opencraft.server.util.PlayerList;
-import org.opencraft.server.io.NBTLevelCreator;
+import org.opencraft.server.io.NBTFileHandler;
 
 /**
  * Manages the in-game world.
@@ -92,8 +92,7 @@ public final class World {
 	/**
 	 * The level.
 	 */
-	private Level level = NBTLevelCreator.getNBTLevelCreator().load("data/acmpc.mclevel");
-	//private final Level level = new Level();
+	private Level level = NBTFileHandler.load("data/acmpc.mclevel");
 	
 	/**
 	 * The player list.

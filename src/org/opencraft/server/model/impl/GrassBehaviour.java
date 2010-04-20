@@ -3,7 +3,7 @@ package org.opencraft.server.model.impl;
 /*
  * OpenCraft License
  * 
- * Copyright (c) 2009 Graham Edgecombe, Søren Enevoldsen and Brett Russell.
+ * Copyright (c) 2009 Graham Edgecombe, Sï¿½ren Enevoldsen and Brett Russell.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -65,20 +65,28 @@ public class GrassBehaviour implements BlockBehaviour {
 			return;
 		}
 
-		// spread
-		/*if (level.getBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2]) == BlockConstants.DIRT) {
-			// Is the block above it liquid?
-			if (BlockManager.getBlockManager().getBlock(level.getBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2] + 1)).isLiquid()) {
-				break SEARCH_GRASS;
-			}
+		//spread
+		for (int h = (x == 0 ? 0 : -1); h <= (x == level.getWidth() - 1 ? 0 : 1); h++) {
+			for (int i = (y == 0 ? 0 : -1); i <= (y == level.getHeight() - 1 ? 0 : 1); i++) {
+				for (int j = (z == 0 ? 0 : -1); j <= (z == level.getDepth() - 1 ? 0 : 1); j++) {
+					if (level.getBlock(x + h, y + i, z + j) == BlockConstants.DIRT) {
+						if (z + j < level.getDepth()) {
+							// Is the block above it liquid?
+							if (BlockManager.getBlockManager().getBlock(level.getBlock(x + h, y + i, z + j + 1)).isLiquid()) {
+								break;
+							}
 
-			// Is the block smothered by something?
-			if (BlockManager.getBlockManager().getBlock(level.getBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2] + 1)).doesBlockLight()) {
-				break SEARCH_GRASS;
-			}
+							// Is the block smothered by something?
+							if (BlockManager.getBlockManager().getBlock(level.getBlock(x + h, y + i, z + j + 1)).doesBlockLight()) {
+								break;
+							}
+						}
 			
-			// Grow the grass
-			level.setBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2], BlockConstants.GRASS);
-		}*/
+						// Grow the grass
+						level.setBlock(x + h, y + i, z + j, BlockConstants.GRASS);
+					}
+				}
+			}
+		}
 	}
 }
