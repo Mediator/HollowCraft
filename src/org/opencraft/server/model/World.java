@@ -92,7 +92,8 @@ public final class World {
 	/**
 	 * The level.
 	 */
-	private Level level = NBTFileHandler.load("data/acmpc.mclevel");
+	//private Level level = NBTLevelCreator.getNBTLevelCreator().load("data/acmpc.mclevel");
+	private final Level level = new Level();
 	
 	/**
 	 * The player list.
