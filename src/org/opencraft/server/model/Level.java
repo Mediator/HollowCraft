@@ -115,6 +115,7 @@ public final class Level {
 		b.applyContour();
 		b.generateCaverns(100);
 		b.buildLavaBed(2);
+		b.simulateOceanFlood();
 		m_blocks = b.getBlocks();
 	
 		for (int x = 0;x < m_width; x++) {

@@ -61,11 +61,12 @@ public class Builder {
 	Random m_random;
 
 	public Builder(int width, int height, int depth) {
-		m_height = height;
-		m_width = width;
-		m_depth = depth;
-		blocks = new byte[width][height][depth];
+		m_height  = height;
+		m_width   = width;
+		m_depth   = depth;
+		blocks    = new byte[width][height][depth];
 		m_contour = new int[width][height];
+
 		for(int x = 0;x<m_width;x++)
 			for(int y = 0;y<m_height;y++)
 				m_contour[x][y] = 0;
@@ -305,5 +306,28 @@ public class Builder {
 
 		carveCanyon(nextX, nextY, tx, ty, depth);
 		sculptHill(x, y, -depth*m_scale, m_scale*5);
+	}
+
+	public void simulateOceanFlood() {
+		for (int x = 0; x < m_width; x++) {
+			for (int y = 0; y < m_height; y++) {
+				if (x - 1 < 0 || x + 1 == m_width ||
+				    blocks[x - 1][y][m_depth / 2] == BlockConstants.WATER ||
+				    blocks[x + 1][y][m_depth / 2] == BlockConstants.WATER ||
+				    y - 1 < 0 || y + 1 == m_height ||
+				    blocks[x][y - 1][m_depth / 2] == BlockConstants.WATER ||
+				    blocks[x][y + 1][m_depth / 2] == BlockConstants.WATER) {
+					for (int z = m_depth / 2 - 1; true; z--) {
+						if (z < 0) { break; }
+						if (blocks[x][y][z] == BlockConstants.AIR) {
+							blocks[x][y][z] = BlockConstants.WATER;
+						} else if (blocks[x][y][z + 1] == BlockConstants.WATER && (blocks[x][y][z] == BlockConstants.DIRT || blocks[x][y][z] == BlockConstants.GRASS)) {
+							blocks[x][y][z] = BlockConstants.SAND;
+							break;
+						}
+					}
+				}
+			}
+		}
 	}
 }
