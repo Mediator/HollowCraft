@@ -3,7 +3,7 @@ package org.opencraft.server;
 /*
  * OpenCraft License
  * 
- * Copyright (c) 2009 Graham Edgecombe, Søren Enevoldsen and Brett Russell.
+ * Copyright (c) 2009 Graham Edgecombe, Sï¿½ren Enevoldsen and Brett Russell.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -88,9 +88,9 @@ public final class Server {
 		SetManager.getSetManager().reloadSets();
 		acceptor.setHandler(new SessionHandler());
 		TaskQueue.getTaskQueue().schedule(new UpdateTask());
-		TaskQueue.getTaskQueue().schedule(new HeartbeatTask());
 		logger.info("Initializing game...");
 		World.getWorld();
+		TaskQueue.getTaskQueue().schedule(new HeartbeatTask());
 	}
 	
 	/**

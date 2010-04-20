@@ -285,7 +285,6 @@ public class SerializableLevel implements Serializable {
   	  			dis.close();
   	  			return;
   			}
-System.out.println("1");
   			ObjectInputStream ois = new ObjectInputStream(gzis);
 System.out.println("2");
   			SerializableLevel localLevel = (SerializableLevel)ois.readObject();

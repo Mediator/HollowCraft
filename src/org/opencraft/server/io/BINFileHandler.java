@@ -1,5 +1,6 @@
 package org.opencraft.server.io;
 
+import java.io.IOException;
 import org.opencraft.server.model.Position;
 import org.opencraft.server.model.Rotation;
 import org.opencraft.server.model.Level;
@@ -22,7 +23,7 @@ public final class BINFileHandler {
 	 * @param filename The name of the file to unzip
 	 * @return The uncompressed Level
 	 */
-	public static Level load(String filename) {
+	public static Level load(String filename) throws IOException {
 		Level lvl = new Level();
 
 		SerializableLevel loader = new SerializableLevel(filename);
@@ -56,9 +57,10 @@ public final class BINFileHandler {
 			lvl.setName(loader.getName());
 			lvl.setAuthor(loader.getCreator());
 			lvl.setCreationDate(loader.getCreateTime());
+
+			lvl.setFileType("bin");
 		} else {
-			System.out.println("FAILED TO LOAD BIN");
-			lvl.generateLevel();
+			throw new IOException("Failed to load BIN file");
 		}
 		
 

@@ -101,7 +101,7 @@ public class Builder {
 			}
 		}
 		for(int x = 0; x < m_width; x++) {
-			logger.info("Applying contour: "+(x*m_height)+"/"+(m_height*m_width));
+			//logger.info("Applying contour: "+(x*m_height)+"/"+(m_height*m_width));
 			for(int y = 0; y < m_height; y++) {
 				//int h = (depth / 2) + (heights[x][y] * (depth / 2) / maxHeight);
 				//int h = (m_depth/2) + (m_contour[x][y] * m_depth /2) / m_scale;
@@ -176,8 +176,8 @@ public class Builder {
 
 	public void sculptHills(int iterations) {
 		for(int i = 0; i < iterations; i++) {
-			if (i % 1000 == 0)
-				logger.info("Sculpting hills: "+i+"/"+iterations);
+			//if (i % 1000 == 0)
+				//logger.info("Sculpting hills: "+i+"/"+iterations);
 			int x = m_random.nextInt(m_width);
 			int y = m_random.nextInt(m_height);
 			int height = (m_random.nextInt(4)+3)*m_scale;
@@ -188,7 +188,7 @@ public class Builder {
 
 	public void generateCaverns(int count) {
 		for (int i = 0; i < count;i++) {
-			logger.info("Generating underground erosion bubbles: "+i+"/"+count);
+			//logger.info("Generating underground erosion bubbles: "+i+"/"+count);
 			int x = m_random.nextInt(m_width);
 			int y = m_random.nextInt(m_height);
 			int z = m_random.nextInt(m_depth/4);
@@ -232,7 +232,7 @@ public class Builder {
 	public void buildLavaBed(int depth) {
 		for (int z = 0;z < depth; z++) {
 			for(int x = 0;x < m_width; x++) {
-				logger.info("Building lava bed: "+(x*m_height)+"/"+(m_width*m_height));
+				//logger.info("Building lava bed: "+(x*m_height)+"/"+(m_width*m_height));
 				for (int y = 0; y < m_height; y++ ) {
 					blocks[x][y][z] = (byte) BlockConstants.LAVA;
 				}
