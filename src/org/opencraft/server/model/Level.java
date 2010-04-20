@@ -81,7 +81,8 @@ public final class Level {
 	protected static final Logger m_logger = Logger.getLogger(Level.class.getName());
 	
 	public Level() {
-		TaskQueue.getTaskQueue().schedule(autosave);
+		//TaskQueue.getTaskQueue().schedule(autosave);
+		generateLevel();
 	}
 
 	public void generateLevel() {
@@ -112,8 +113,10 @@ public final class Level {
 
 
 		Builder b = new Builder(m_width, m_height, m_depth);
-		b.sculptHills(10000);
+		b.setScale(2);
+		b.sculptHills(1000);
 		b.carveLake();
+		b.carveCanyon();
 		b.applyContour();
 		b.generateCaverns(100);
 		b.buildLavaBed(2);
