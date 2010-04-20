@@ -186,7 +186,7 @@ public class Builder {
 			int x = m_random.nextInt(m_width);
 			int y = m_random.nextInt(m_height);
 			int height = (m_random.nextInt(10)-5)*m_scale;
-			int radius = m_random.nextInt(10) + 5;
+			int radius = m_random.nextInt(20) + 15;
 			sculptHill(x, y, height, radius);
 		}
 	}
@@ -277,31 +277,35 @@ public class Builder {
 	}
 
 	public void carveCanyon() {
-		int startX = m_random.nextInt(m_width/2);
-		int stopX = m_random.nextInt(m_width/2);
-		int depth = (m_random.nextInt(4)+3)*m_scale;
-
-		carveCanyon(startX, 0, stopX, m_height, depth);
+		int startX = m_random.nextInt(m_width);
+		int startY = m_random.nextInt(m_height);
+		double direction = m_random.nextDouble()*Math.PI*2;
+		int depth = m_random.nextInt(4)+4*m_scale;
+		carveCanyon(startX, startY, direction, depth);
+		carveCanyon(startX, startY, m_random.nextDouble()*Math.PI*2, depth);
 	}
 
-	private void carveCanyon(int x, int y, int tx, int ty, int depth) {
-		if (y >= ty)
-			return;
+	private void carveCanyon(int x, int y, double direction, int depth) {
 		int nextX = x;
 		int nextY = y;
-		if (m_random.nextGaussian() < 1) {
-			nextX+=5;
-			nextY+=3;
-		} else {
-			nextY++;
-			nextX-=5;
+		while (nextX > 0 && nextY > 0 && nextY < m_height-1 && nextX < m_width-1) {
+			sculptHill(nextX, nextY, -depth, 10, true);
+			/*for(int i = Math.max(0,nextX-6);i<Math.min(m_width-1, nextX+6);i++) {
+				for(int j = Math.max(0,nextY-6);j<Math.min(m_height-1,nextY+6);j++) {
+					m_contour[i][j] = -depth;
+				}
+			}*/
+			double choice = m_random.nextGaussian();
+			if (choice > 0.7)
+				direction+=m_random.nextDouble()*Math.PI*2;
+			if (choice < -0.7)
+				direction-=m_random.nextDouble()*Math.PI*2;
+
+			double dx = Math.cos(direction);
+			double dy = Math.sin(direction);
+			nextX += Math.ceil(Math.abs(dx)) * ((dx < 0) ? -1 : 1) * 4;
+			nextY += Math.ceil(Math.abs(dy)) * ((dy < 0) ? -1 : 1) * 4;
 		}
-
-		x = Math.max(0, Math.min(m_width-1, x));
-		y = Math.max(0, Math.min(m_height-1, y));
-
-		carveCanyon(nextX, nextY, tx, ty, depth);
-		sculptHill(x, y, -depth, m_scale*7);
 	}
 
 	public void simulateOceanFlood() {
