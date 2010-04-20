@@ -61,11 +61,12 @@ public class Builder {
 	Random m_random;
 
 	public Builder(int width, int height, int depth) {
-		m_height = height;
-		m_width = width;
-		m_depth = depth;
-		blocks = new byte[width][height][depth];
+		m_height  = height;
+		m_width   = width;
+		m_depth   = depth;
+		blocks    = new byte[width][height][depth];
 		m_contour = new int[width][height];
+
 		for(int x = 0;x<m_width;x++)
 			for(int y = 0;y<m_height;y++)
 				m_contour[x][y] = 0;
@@ -100,7 +101,7 @@ public class Builder {
 			}
 		}
 		for(int x = 0; x < m_width; x++) {
-			logger.info("Applying contour: "+(x*m_height)+"/"+(m_height*m_width));
+			//logger.info("Applying contour: "+(x*m_height)+"/"+(m_height*m_width));
 			for(int y = 0; y < m_height; y++) {
 				int h = Math.max(0, Math.min(m_depth-1, (m_depth/2) + m_contour[x][y]));
 				int d = m_random.nextInt(8) - 4;
@@ -180,8 +181,8 @@ public class Builder {
 
 	public void sculptHills(int iterations) {
 		for(int i = 0; i < iterations; i++) {
-			if (i % 1000 == 0)
-				logger.info("Sculpting hills: "+i+"/"+iterations);
+			//if (i % 1000 == 0)
+				//logger.info("Sculpting hills: "+i+"/"+iterations);
 			int x = m_random.nextInt(m_width);
 			int y = m_random.nextInt(m_height);
 			int height = (m_random.nextInt(10)-5)*m_scale;
@@ -192,7 +193,7 @@ public class Builder {
 
 	public void generateCaverns(int count) {
 		for (int i = 0; i < count;i++) {
-			logger.info("Generating underground erosion bubbles: "+i+"/"+count);
+			//logger.info("Generating underground erosion bubbles: "+i+"/"+count);
 			int x = m_random.nextInt(m_width);
 			int y = m_random.nextInt(m_height);
 			int z = m_random.nextInt(m_depth/4);
@@ -236,7 +237,7 @@ public class Builder {
 	public void buildLavaBed(int depth) {
 		for (int z = 0;z < depth; z++) {
 			for(int x = 0;x < m_width; x++) {
-				logger.info("Building lava bed: "+(x*m_height)+"/"+(m_width*m_height));
+				//logger.info("Building lava bed: "+(x*m_height)+"/"+(m_width*m_height));
 				for (int y = 0; y < m_height; y++ ) {
 					blocks[x][y][z] = (byte) BlockConstants.LAVA;
 				}
@@ -301,5 +302,28 @@ public class Builder {
 
 		carveCanyon(nextX, nextY, tx, ty, depth);
 		sculptHill(x, y, -depth, m_scale*7);
+	}
+
+	public void simulateOceanFlood() {
+		for (int x = 0; x < m_width; x++) {
+			for (int y = 0; y < m_height; y++) {
+				if (x - 1 < 0 || x + 1 == m_width ||
+				    blocks[x - 1][y][m_depth / 2] == BlockConstants.WATER ||
+				    blocks[x + 1][y][m_depth / 2] == BlockConstants.WATER ||
+				    y - 1 < 0 || y + 1 == m_height ||
+				    blocks[x][y - 1][m_depth / 2] == BlockConstants.WATER ||
+				    blocks[x][y + 1][m_depth / 2] == BlockConstants.WATER) {
+					for (int z = m_depth / 2 - 1; true; z--) {
+						if (z < 0) { break; }
+						if (blocks[x][y][z] == BlockConstants.AIR) {
+							blocks[x][y][z] = BlockConstants.WATER;
+						} else if (blocks[x][y][z + 1] == BlockConstants.WATER && (blocks[x][y][z] == BlockConstants.DIRT || blocks[x][y][z] == BlockConstants.GRASS)) {
+							blocks[x][y][z] = BlockConstants.SAND;
+							break;
+						}
+					}
+				}
+			}
+		}
 	}
 }

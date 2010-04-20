@@ -50,7 +50,7 @@ import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.persistence.SavedGameManager;
 import org.opencraft.server.persistence.SavePersistenceRequest;
 import org.opencraft.server.util.PlayerList;
-import org.opencraft.server.io.NBTFileHandler;
+import org.opencraft.server.io.LevelManager;
 
 /**
  * Manages the in-game world.
@@ -92,8 +92,8 @@ public final class World {
 	/**
 	 * The level.
 	 */
-	//private Level level = NBTLevelCreator.getNBTLevelCreator().load("data/acmpc.mclevel");
-	private final Level level = new Level();
+	//private Level level = LevelManager.load("monkey_mines.mclevel");
+	private Level level = LevelManager.load("null");
 	
 	/**
 	 * The player list.
@@ -113,7 +113,7 @@ public final class World {
 	 */
 	private World() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		gameMode = (GameMode) Class.forName(Configuration.getConfiguration().getGameMode()).newInstance();
-		logger.info("Active game mode : " + gameMode.getClass().getName() + ".");
+		//logger.info("Active game mode : " + gameMode.getClass().getName() + ".");
 	}
 	
 	/**

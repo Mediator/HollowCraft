@@ -46,7 +46,6 @@ import org.opencraft.server.task.ScheduledTask;
 import org.opencraft.server.task.TaskQueue;
 import org.opencraft.server.task.impl.SaveLevelTask;
 import org.opencraft.server.model.Environment;
-import org.opencraft.server.io.NBTFileHandler;
 
 /**
  * Represents the actual level.
@@ -59,6 +58,8 @@ public final class Level {
 	protected String m_author;
 	protected long m_created;
 	protected Environment m_env;
+
+	protected String m_fileType;
 
 	protected int m_width;
 	protected int m_height;
@@ -76,8 +77,6 @@ public final class Level {
 	/** A queue of positions to update at the next tick. */
 	protected Queue<Position> m_updateQueue = new ArrayDeque<Position>();
 
-	protected SaveLevelTask autosave = new SaveLevelTask(this);
-
 	protected static final Logger m_logger = Logger.getLogger(Level.class.getName());
 	
 	public Level() {
@@ -92,6 +91,7 @@ public final class Level {
 	public void generateLevel(int width, int height, int depth) {
 		m_name = "Generated Level";
 		m_author = "ACM OpenCraft Crew";
+		m_fileType = "mclevel";
 		m_created = (new java.util.Date()).getTime();
 		m_env = new Environment();
 		m_width = width;
@@ -120,22 +120,22 @@ public final class Level {
 		b.applyContour();
 		b.generateCaverns(100);
 		b.buildLavaBed(2);
+		b.simulateOceanFlood();
 		m_blocks = b.getBlocks();
 	
 		for (int x = 0;x < m_width; x++) {
-			m_logger.info("Activating ocean: " + (x * 2) + "/" + (m_width * 2 + m_height * 2));
+			//m_logger.info("Activating ocean: " + (x * 2) + "/" + (m_width * 2 + m_height * 2));
 			queueTileUpdate(x, 0, m_depth/2 - 1);
 			queueTileUpdate(x, m_height - 1, m_depth/2 - 1);
 		}
 
 		for (int y = 0;y < m_height; y++) {
-			m_logger.info("Activating ocean: " + (y * 2 + m_width * 2) + "/" + (m_width * 2 + m_height * 2));
+			//m_logger.info("Activating ocean: " + (y * 2 + m_width * 2) + "/" + (m_width * 2 + m_height * 2));
 			queueTileUpdate(0, y, m_depth/2 - 1);
 			queueTileUpdate(m_width - 1, y, m_depth/2 - 1);
 		}
 
 		recalculateAllLightDepths();
-		NBTFileHandler.save(this, "data/testa.mclevel", true);
 	}
 	
 	/**
@@ -473,6 +473,14 @@ public final class Level {
 	
 	public Position getSpawnPosition() {
 		return m_spawnPosition;
+	}
+
+	public String getFileType() {
+		return m_fileType;
+	}
+
+	public void setFileType(String fileType) {
+		m_fileType = fileType;
 	}
 	
 }
