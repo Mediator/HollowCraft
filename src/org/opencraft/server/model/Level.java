@@ -113,10 +113,11 @@ public final class Level {
 
 
 		Builder b = new Builder(m_width, m_height, m_depth);
-		b.sculptHills(10000, 7);
+		b.sculptHills(10000);
+		b.carveLake();
+		b.applyContour();
 		b.generateCaverns(100);
 		b.buildLavaBed(2);
-		b.carveLake();
 		m_blocks = b.getBlocks();
 	
 		for (int x = 0;x < m_width; x++) {
@@ -193,7 +194,11 @@ public final class Level {
 		for (Position pos : currentQueue) {
 			if (BlockManager.getBlockManager().getBlock(this.getBlock(pos.getX(), pos.getY(), pos.getZ())).hasGravity()) {
 				if (!blockIsStable(pos.getX(), pos.getY(), pos.getZ())) {
+<<<<<<< HEAD
 					setBlock(pos.getX(), pos.getY(), pos.getZ()- 1, getBlock(pos.getX(), pos.getY(), pos.getZ()));
+=======
+					setBlock(pos.getX(), pos.getY(), pos.getZ() - 1, getBlock(pos.getX(), pos.getY(), pos.getZ()));
+>>>>>>> 46d43be30b9c97fe1eef030236e91d73778f93b0
 					setBlock(pos.getX(), pos.getY(), pos.getZ(), BlockConstants.AIR);
 				}
 			}

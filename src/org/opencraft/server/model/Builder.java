@@ -46,6 +46,8 @@ import java.util.logging.Logger;
 public class Builder {
 	private byte[][][] blocks;
 
+	private int[][] m_contour;
+
 	private static final Logger logger = Logger.getLogger(Level.class.getName());
 
 	int m_height;
@@ -63,6 +65,10 @@ public class Builder {
 		m_width = width;
 		m_depth = depth;
 		blocks = new byte[width][height][depth];
+		m_contour = new int[width][height];
+		for(int x = 0;x<m_width;x++)
+			for(int y = 0;y<m_height;y++)
+				m_contour[x][y] = 0;
 		m_random = new Random();
 	}
 
@@ -72,6 +78,9 @@ public class Builder {
 		m_depth = depth;
 		blocks = new byte[width][height][depth];
 		m_random = new Random(seed);
+		for(int x = 0;x<m_width;x++)
+			for(int y = 0;y<m_height;y++)
+				m_contour[x][y] = 0;
 	}
 
 	public void setScale(int scale) {
@@ -82,44 +91,98 @@ public class Builder {
 		return blocks;
 	}
 
-	public void sculptHills(int iterations, int depthAdjust) {
-		int[][] heights = new int[m_width][m_height];
+	public void applyContour() {
+		sculptHill(m_width/2, m_height/2, 20, 50);
 		int maxHeight = 1;
-		for(int i = 0; i < iterations; i++) {
-			if (i % 10000 == 0)
-				logger.info("Raising terrain: "+i+"/"+iterations);
-			int x = m_random.nextInt(m_width);
-			int y = m_random.nextInt(m_height);
-			int ry = m_random.nextInt(10) + 4;
-			int rx = m_random.nextInt(10) + 4;
-			for(int j = 0; j < m_width; j++) {
-				for(int k = 0; k < m_height; k++) {
-					int mod = (rx * ry) - (k - x) * (k - x) - (j - y) * (j - y);
-					if(mod > 0) {
-						heights[j][k] += mod;
-						if(heights[j][k] > maxHeight) {
-							maxHeight = heights[j][k];
-						}
-					}
-				}
+		for (int x = 0;x<m_width;x++) {
+			for (int y = 0;y < m_height;y++) {
+				if (m_contour[x][y] > maxHeight)
+					maxHeight = m_contour[x][y];
 			}
 		}
-
 		for(int x = 0; x < m_width; x++) {
+			logger.info("Applying contour: "+(x*m_height)+"/"+(m_height*m_width));
 			for(int y = 0; y < m_height; y++) {
 				//int h = (depth / 2) + (heights[x][y] * (depth / 2) / maxHeight);
-				int h = (m_depth/2) + (heights[x][y] * (m_depth /2) / maxHeight)/m_scale - depthAdjust;
+				//int h = (m_depth/2) + (m_contour[x][y] * m_depth /2) / m_scale;
+				//int h = Math.max(0, Math.min(m_depth, (m_depth/2) + (m_contour[x][y] * m_depth/2 ) / maxHeight / m_scale));
+				int h = Math.max(0, Math.min(m_depth-1, (m_depth/2) + m_contour[x][y]));
 				int d = m_random.nextInt(8) - 4;
-				for(int z = 0; z < h; z++) {
-					int type = BlockConstants.DIRT;
-					if(z == (h - 1)) {
+				for(int z = 0; z < m_depth; z++) {
+					int type = BlockConstants.AIR;
+					if (z >= h) {
+						type = BlockConstants.AIR;
+					} else if(z == (h - 1)) {
 						type = BlockConstants.GRASS;
-					} else if(z <= (m_depth / 2 + d)) {
+					} else if(z < (h - 1) && z > (h -5 )) {
+						type = BlockConstants.DIRT;
+					} else if(z <= (h - 5 )) {
 						type = BlockConstants.STONE;
 					}
 					blocks[x][y][z] = (byte) type;
 				}
 			}
+		}
+	}
+
+	public void sculptHill(int centerX, int centerY, int height, int radius) {
+		sculptHill(centerX, centerY, height, radius, false);
+	}
+
+	public void sculptHill(int centerX, int centerY, int height, int radius, boolean additive) {
+		int maxHeight = 1;
+		if (additive)
+			m_contour[centerX][centerY] += height;
+		else
+			m_contour[centerY][centerX] = height;
+
+		for(int x = Math.max(0, centerX-radius);x < Math.min(m_width-1, centerX+radius);x++) {
+			for(int y = Math.max(0, centerY-radius);y < Math.min(m_height-1, centerY+radius);y++) {
+				double distance = Math.sqrt(Math.pow(x-centerX,2)+Math.pow(y-centerY,2));
+				if (Math.abs(distance-radius) <= 1)
+					interpolateLine(x, y, centerX, centerY);
+			}
+		}
+	}
+
+	private void interpolateLine(int startX, int startY, int destX, int destY) {
+		if (startX == destX && startY == destY)
+			return;
+
+		int startHeight = m_contour[startX][startY];
+		int endHeight = m_contour[destX][destY];
+		double distance = Math.sqrt(Math.pow(startX-destX,2)+Math.pow(startY-destY,2));
+		int nextX = startX;
+		int nextY = startY;
+		while (nextX != destX && nextY != destY) {
+
+			double value = Math.sqrt(Math.pow(nextX-destX,2)+Math.pow(nextY-destY,2))/distance;
+
+			if (value < 0.5)
+				m_contour[nextX][nextY] = (int)((startHeight-endHeight)/2*Math.pow(value*2,3) + endHeight);
+			else
+				m_contour[nextX][nextY] = (int)((startHeight-endHeight)/2*(Math.pow(value*2-2,3) + 2) + endHeight);
+
+			double direction = Math.atan2(destY-nextY, destX-nextX);
+			double dx = Math.cos(direction);
+			double dy = Math.sin(direction);
+			nextX += (int) (Math.ceil(Math.abs(dx)) * ((dx < 0) ? -1 : 1));
+			nextY += (int) (Math.ceil(Math.abs(dy)) * ((dy < 0) ? -1 : 1));
+			if (nextX < 0 || nextX > m_width || nextY < 0 || nextY > m_height)
+				return;
+			
+		}
+	}
+
+	public void sculptHills(int iterations) {
+		for(int i = 0; i < iterations; i++) {
+			if (i % 1000 == 0)
+				logger.info("Sculpting hills: "+i+"/"+iterations);
+			int x = m_random.nextInt(m_width);
+			int y = m_random.nextInt(m_height);
+			int height = (m_random.nextInt(4)+3)*m_scale;
+			int radius = m_random.nextInt(10) + 4;
+			//sculptHill(x, y, height, radius);
 		}
 	}
 
@@ -180,30 +243,67 @@ public class Builder {
 	public void carveLake() {
 		int x = m_random.nextInt(m_width);
 		int y = m_random.nextInt(m_height);
-		int avgDepth = (m_random.nextInt(3)+1)*m_scale;
-		int radius = (m_random.nextInt(30)+40)*m_scale;
-		carveLake(x, y, new ArrayList<Position>(), radius, avgDepth);
+		int avgDepth = (m_random.nextInt(6)+4)*m_scale;
+		int radius = (m_random.nextInt(8)+6)*m_scale;
+		//carveLake(x, y, new ArrayList<Position>(), radius, avgDepth);
 	}
 
 	private void carveLake(int x, int y, ArrayList<Position> visited, int distance, int depth) {
 		if (distance == 0)
 			return;
+		if (depth <= 0)
+			return;
 		Position cur = new Position(x, y, 0);
 		for(Position p : visited)
 			if (p.equals(cur)) {
-				visited.add(cur);
 				return;
 			}
 		visited.add(cur);
 		if (x < 0 || y < 0 || x >= m_width || y >= m_height)
 			return;
-		for(int z = m_depth/2-depth;z < m_depth;z++)
-			blocks[x][y][z] = (byte) BlockConstants.AIR;
-		for(int z = m_depth/2-depth;z<m_depth/2-depth && z < m_depth;z++)
-			blocks[x][y][z] = (byte) BlockConstants.WATER;
+		//for (int z = Math.max(0, m_depth/2-depth);z < m_depth;z++)
+		//	blocks[x][y][z] = (byte) BlockConstants.AIR;
+		depth += m_random.nextInt(m_scale);
 		carveLake(x+1, y, visited, distance-1, depth);
 		carveLake(x, y+1, visited, distance-1, depth);
 		carveLake(x-1, y, visited, distance-1, depth);
 		carveLake(x, y-1, visited, distance-1, depth);
+		sculptHill(x, y, -depth, m_scale*10);
+		//sculptHill(x, y, m_depth/2-depth, BlockConstants.WATER);
+		/*for (int z = Math.max(0, m_depth/2-depth);z < m_depth/2;z++)
+			blocks[x][y][z] = (byte) BlockConstants.WATER;*/
+	}
+
+	public void carveCanyon() {
+		int startX = m_random.nextInt(m_width);
+		int startY = m_random.nextInt(m_height);
+		int stopX = m_random.nextInt(m_width);
+		int stopY = m_random.nextInt(m_height);
+		int depth = (m_random.nextInt(10)+10)*m_scale;
+
+		//carveCanyon(startX, startY, stopX, stopY, depth);
+	}
+
+	private void carveCanyon(int x, int y, int tx, int ty, int depth) {
+		if (x == tx && y == ty)
+			return;
+		for(int z = Math.max(0, m_depth/2-depth);z < m_depth;z++)
+			blocks[x][y][z] = (byte) BlockConstants.AIR;
+		int nextX, nextY;
+		if (x > tx)
+			nextX = x+3;
+		else
+			nextX = x-3;
+		if (y > ty)
+			nextY = y+3;
+		else
+			nextY = y-3;
+		if (m_random.nextGaussian() < 1) {
+			nextX++;
+			nextY++;
+		}
+
+		carveCanyon(nextX, nextY, tx, ty, depth);
+		sculptHill(x, y, -depth*m_scale, m_scale*5);
 	}
 }
