@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Multi-world support
+desc: Add support for loading/saving multiple worlds
+type: :feature
+component: opencraft-acm
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :in_progress
+disposition: 
+creation_time: 2010-04-22 19:43:17.699437 Z
+references: []
+
+id: beb7bec9cead99b01be52abd8d33738ae0afb07b
+log_events: 
+- - 2010-04-22 19:43:18.530337 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
+- - 2010-04-22 19:43:38.314397 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - changed status from unstarted to in_progress
+  - Started working
