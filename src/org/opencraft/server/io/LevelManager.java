@@ -26,7 +26,7 @@ public final class LevelManager {
 	public static Level load(String filename) {
 		String extension = filename.substring(filename.lastIndexOf(".") + 1);
 
-		if (extension.equalsIgnoreCase("bin")) {
+		if (extension.equalsIgnoreCase("dat") || extension.equalsIgnoreCase("mine")) {
 			try {
 				return BINFileHandler.load("data/maps/" + filename);
 			} catch (IOException e) {

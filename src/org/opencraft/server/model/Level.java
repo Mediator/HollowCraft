@@ -113,7 +113,7 @@ public final class Level {
 
 		Builder b = new Builder(m_width, m_height, m_depth);
 		b.setScale(2);
-		b.sculptHills(10000);
+		b.sculptHills(1000);
 		b.carveLake();
 		b.carveCanyon();
 		b.applyContour();

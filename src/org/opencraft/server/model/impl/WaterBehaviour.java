@@ -104,6 +104,9 @@ public class WaterBehaviour implements BlockBehaviour {
 				// check for lava
 				if (thisOutwardBlock == BlockConstants.LAVA || thisOutwardBlock == BlockConstants.STILL_LAVA) {
 					level.setBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2], BlockConstants.STONE);
+				} else if (level.getBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2] - 1) == BlockConstants.AIR &&
+					   level.getBlock(x, y, z - 1) == BlockConstants.WATER) {
+					break OUTERMOST_OUTWARD;
 				} else if (!BlockManager.getBlockManager().getBlock(thisOutwardBlock).isSolid() && !BlockManager.getBlockManager().getBlock(thisOutwardBlock).isLiquid()) {
 					level.setBlock(x, y, z, BlockConstants.AIR);
 					level.setBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2], BlockConstants.WATER);

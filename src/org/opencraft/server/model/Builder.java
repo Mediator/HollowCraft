@@ -34,7 +34,10 @@ package org.opencraft.server.model;
  */
 
 import java.util.Random;
+import java.util.Queue;
+import java.util.LinkedList;
 import java.util.ArrayList;
+import java.awt.Point;
 import java.lang.Math;
 import java.util.logging.Logger;
 
@@ -181,8 +184,8 @@ public class Builder {
 
 	public void sculptHills(int iterations) {
 		for(int i = 0; i < iterations; i++) {
-			//if (i % 1000 == 0)
-				//logger.info("Sculpting hills: "+i+"/"+iterations);
+			if (i % 1000 == 0)
+				logger.info("Sculpting hills: "+i+"/"+iterations);
 			int x = m_random.nextInt(m_width);
 			int y = m_random.nextInt(m_height);
 			int height = (m_random.nextInt(10)-5)*m_scale;
@@ -309,25 +312,85 @@ public class Builder {
 	}
 
 	public void simulateOceanFlood() {
+		if (m_width < 2 || m_height < 2) { return; }
+
+		LinkedList<Point> toFlood = new LinkedList<Point>();
+		int oceanLevel = m_depth / 2 - 1;
+
 		for (int x = 0; x < m_width; x++) {
-			for (int y = 0; y < m_height; y++) {
-				if (x - 1 < 0 || x + 1 == m_width ||
-				    blocks[x - 1][y][m_depth / 2] == BlockConstants.WATER ||
-				    blocks[x + 1][y][m_depth / 2] == BlockConstants.WATER ||
-				    y - 1 < 0 || y + 1 == m_height ||
-				    blocks[x][y - 1][m_depth / 2] == BlockConstants.WATER ||
-				    blocks[x][y + 1][m_depth / 2] == BlockConstants.WATER) {
-					for (int z = m_depth / 2 - 1; true; z--) {
-						if (z < 0) { break; }
-						if (blocks[x][y][z] == BlockConstants.AIR) {
-							blocks[x][y][z] = BlockConstants.WATER;
-						} else if (blocks[x][y][z + 1] == BlockConstants.WATER && (blocks[x][y][z] == BlockConstants.DIRT || blocks[x][y][z] == BlockConstants.GRASS)) {
-							blocks[x][y][z] = BlockConstants.SAND;
-							break;
-						}
-					}
+			if (blocks[x][0][oceanLevel] == BlockConstants.AIR) {
+				floodBlock(x, 0, oceanLevel);
+				floodBlock(x, m_height - 1, oceanLevel);
+				if (blocks[x][1][oceanLevel] == BlockConstants.AIR) {
+					toFlood.add(new Point(x, 1));
+				} else if (blocks[x][m_height - 1][oceanLevel] == BlockConstants.AIR) {
+					toFlood.add(new Point(x, m_height - 2));
 				}
 			}
 		}
+
+		if (blocks[1][0][oceanLevel] == BlockConstants.AIR) {
+			floodBlock(1, 0, oceanLevel);
+		}
+
+		if (blocks[m_width - 2][0][oceanLevel] == BlockConstants.AIR) {
+			floodBlock(m_width - 2, 0, oceanLevel);
+		}
+
+		if (blocks[1][m_height - 2][oceanLevel] == BlockConstants.AIR) {
+			floodBlock(1, m_height - 2, oceanLevel);
+		}
+
+		if (blocks[m_width - 2][m_height - 2][oceanLevel] == BlockConstants.AIR) {
+			floodBlock(m_width - 2, m_height - 2, oceanLevel);
+		}
+
+		for (int y = 2; y < m_height - 2; y++) {
+			if (blocks[0][y][oceanLevel] == BlockConstants.AIR) {
+				floodBlock(0, y, oceanLevel);
+				floodBlock(m_width - 1, y, oceanLevel);
+				if (blocks[1][y][oceanLevel] == BlockConstants.AIR) {
+					toFlood.add(new Point(1, y));
+				} else if (blocks[m_width - 2][y][oceanLevel] == BlockConstants.AIR) {
+					toFlood.add(new Point(m_width - 2, y));
+				}
+			}
+		}
+
+		while (toFlood.size() > 0) {
+			Point p = toFlood.removeFirst();
+			if (blocks[(int)(p.getX())][(int)(p.getY())][oceanLevel] != BlockConstants.WATER) {
+
+				floodBlock((int)(p.getX()), (int)(p.getY()), oceanLevel);
+
+				if (blocks[(int)(p.getX() - 1)][(int)(p.getY())][oceanLevel] == BlockConstants.AIR) {
+					toFlood.add(new Point((int)(p.getX() - 1), (int)(p.getY())));
+				}
+				
+				if (blocks[(int)(p.getX() + 1)][(int)(p.getY())][oceanLevel] == BlockConstants.AIR) {
+					toFlood.add(new Point((int)(p.getX() + 1), (int)(p.getY())));
+				}
+				
+				if (blocks[(int)(p.getX())][(int)(p.getY() - 1)][oceanLevel] == BlockConstants.AIR) {
+					toFlood.add(new Point((int)(p.getX()), (int)(p.getY() - 1)));
+				}
+				
+				if (blocks[(int)(p.getX())][(int)(p.getY() + 1)][oceanLevel] == BlockConstants.AIR) {
+					toFlood.add(new Point((int)(p.getX()), (int)(p.getY() + 1)));
+				}
+			}
+		}
+	}
+
+	private void floodBlock(int x, int y, int oceanLevel) {
+		for (int z = oceanLevel; true; z--) {
+			if (z < 0) { break; }
+				if (blocks[x][y][z] == BlockConstants.AIR) {
+					blocks[x][y][z] = BlockConstants.WATER;
+				} else if (blocks[x][y][z + 1] == BlockConstants.WATER && (blocks[x][y][z] == BlockConstants.DIRT || blocks[x][y][z] == BlockConstants.GRASS)) {
+					blocks[x][y][z] = BlockConstants.SAND;
+					break;
+				}
+			}
 	}
 }
