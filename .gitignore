@@ -1,3 +1,4 @@
 bin
 data/banned.txt
 data/ops.txt
+.ditz-config
