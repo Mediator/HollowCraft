@@ -3,7 +3,7 @@ package org.opencraft.server.task.impl;
 import org.apache.mina.core.session.IoSession;
 import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.task.ScheduledTask;
-import org.opencraft.server.io.NBTFileHandler;
+import org.opencraft.server.io.LevelManager;
 import org.opencraft.server.model.Level;
 
 /**
@@ -18,6 +18,7 @@ public final class SaveLevelTask extends ScheduledTask {
 	public SaveLevelTask(Level lvl) {
 		super(DELAY);
 		m_lvl = lvl;
+		System.out.println(m_lvl.getName());
 	}
 	
 	@Override
@@ -26,7 +27,7 @@ public final class SaveLevelTask extends ScheduledTask {
 		if (this.getDelay() == 0) {
 			this.setDelay(DELAY);
 		}
-		NBTFileHandler.save(m_lvl, "data/maps/" + m_lvl.getName() + ".mclevel", true);
+		LevelManager.save(m_lvl);
 	}
 	
 }

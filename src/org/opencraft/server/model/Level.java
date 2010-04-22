@@ -44,7 +44,6 @@ import java.lang.Math;
 
 import org.opencraft.server.task.ScheduledTask;
 import org.opencraft.server.task.TaskQueue;
-import org.opencraft.server.task.impl.SaveLevelTask;
 import org.opencraft.server.model.Environment;
 
 /**
@@ -79,9 +78,7 @@ public final class Level {
 
 	protected static final Logger m_logger = Logger.getLogger(Level.class.getName());
 	
-	public Level() {
-		//TaskQueue.getTaskQueue().schedule(autosave);
-	}
+	public Level() { }
 
 	public void generateLevel() {
 		generateLevel(256, 256, 64);
@@ -119,7 +116,7 @@ public final class Level {
 		b.applyContour();
 		b.generateCaverns(100);
 		b.buildLavaBed(2);
-		b.simulateOceanFlood();
+		//b.simulateOceanFlood();
 		m_blocks = b.getBlocks();
 	
 		for (int x = 0;x < m_width; x++) {
