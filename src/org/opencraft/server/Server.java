@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.HashMap;
 
 import org.apache.mina.core.service.IoAcceptor;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
@@ -65,10 +66,24 @@ public final class Server {
 	 */
 	public static void main(String[] args) {
 		try {
-			new Server().start();
+			INSTANCE = new Server();
+			INSTANCE.start();
 		} catch (Throwable t) {
 			logger.log(Level.SEVERE, "An error occurred whilst loading the server.", t);
 		}
+	}
+
+	private HashMap<String,World> m_worlds;
+
+	private static Server INSTANCE;
+
+	public static Server getServer() {
+		return INSTANCE;
+	}
+
+	public World[] getWorlds() {
+		World[] ret = new World[m_worlds.size()];
+		return m_worlds.values().toArray(ret);
 	}
 	
 	/**
@@ -81,16 +96,27 @@ public final class Server {
 	 * @throws IOException if an I/O error occurs.
 	 * @throws FileNotFoundException if the configuration file is not found.
 	 */
-	public Server() throws FileNotFoundException, IOException {
+	public Server() throws IOException { 
 		logger.info("Starting OpenCraft server...");
 		logger.info("Configuring...");
 		Configuration.readConfiguration();
 		SetManager.getSetManager().reloadSets();
 		acceptor.setHandler(new SessionHandler());
+		logger.info("Initializing games...");
+		m_worlds = new HashMap<String,World>();
+		loadLevel("default");
 		TaskQueue.getTaskQueue().schedule(new UpdateTask());
-		logger.info("Initializing game...");
-		World.getWorld();
 		TaskQueue.getTaskQueue().schedule(new HeartbeatTask());
+	}
+
+	public void loadLevel(String name) {
+		logger.info("Loading level \""+name+"\"");
+		try {
+			m_worlds.put("default", new World("default"));
+		} catch (InstantiationException e) {
+		} catch (IllegalAccessException e) {
+		} catch (ClassNotFoundException e) {
+		}
 	}
 	
 	/**

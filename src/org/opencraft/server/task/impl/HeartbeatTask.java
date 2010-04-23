@@ -3,7 +3,7 @@ package org.opencraft.server.task.impl;
 /*
  * OpenCraft License
  * 
- * Copyright (c) 2009 Graham Edgecombe, Søren Enevoldsen and Brett Russell.
+ * Copyright (c) 2009 Graham Edgecombe, Sren Enevoldsen and Brett Russell.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,6 +41,7 @@ import org.opencraft.server.Constants;
 import org.opencraft.server.heartbeat.HeartbeatManager;
 import org.opencraft.server.model.World;
 import org.opencraft.server.task.ScheduledTask;
+import org.opencraft.server.Server;
 
 /**
  * A task which sends a heartbeat periodically to the master server.
@@ -59,7 +60,8 @@ public class HeartbeatTask extends ScheduledTask {
 	public HeartbeatTask() {
 		super(0);
 	}
-	
+
+
 	@Override
 	public void execute() {
 		if (this.getDelay() == 0) {
@@ -67,7 +69,7 @@ public class HeartbeatTask extends ScheduledTask {
 		}
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("name", Configuration.getConfiguration().getName());
-		parameters.put("users", String.valueOf(World.getWorld().getPlayerList().size()));
+		parameters.put("users", String.valueOf(Server.getServer().getWorlds()[0].getPlayerList().size()));
 		parameters.put("max", String.valueOf(Configuration.getConfiguration().getMaximumPlayers()));
 		parameters.put("public", String.valueOf(Configuration.getConfiguration().isPublicServer()));
 		parameters.put("port", String.valueOf(Configuration.getConfiguration().getPort()));

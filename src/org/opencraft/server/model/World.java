@@ -51,6 +51,7 @@ import org.opencraft.server.persistence.SavedGameManager;
 import org.opencraft.server.persistence.SavePersistenceRequest;
 import org.opencraft.server.util.PlayerList;
 import org.opencraft.server.io.LevelManager;
+import org.opencraft.server.Server;
 
 /**
  * Manages the in-game world.
@@ -59,41 +60,16 @@ import org.opencraft.server.io.LevelManager;
 public final class World {
 	
 	/**
-	 * The singleton instance.
-	 */
-	private static final World INSTANCE;
-	
-	/**
 	 * Logger instance.
 	 */
 	private static final Logger logger = Logger.getLogger(World.class.getName());
 	
-	/**
-	 * Static initializer.
-	 */
-	static {
-		World w = null;
-		try {
-			w = new World();
-		} catch (Throwable t) {
-			throw new ExceptionInInitializerError(t);
-		}
-		INSTANCE = w;
-	}
-	
-	/**
-	 * Gets the world instance.
-	 * @return The world instance.
-	 */
-	public static World getWorld() {
-		return INSTANCE;
-	}
 	
 	/**
 	 * The level.
 	 */
 	//private Level level = LevelManager.load("monkey_mines.mclevel");
-	private Level level = LevelManager.load("null");
+	private Level level;
 	
 	/**
 	 * The player list.
@@ -111,8 +87,9 @@ public final class World {
 	 * @throws IllegalAccessException
 	 * @throws InstantiationException
 	 */
-	private World() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+	public World(String name) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		gameMode = (GameMode) Class.forName(Configuration.getConfiguration().getGameMode()).newInstance();
+		level = LevelManager.load(name);
 		//logger.info("Active game mode : " + gameMode.getClass().getName() + ".");
 	}
 	
@@ -122,6 +99,11 @@ public final class World {
 	 */
 	public GameMode getGameMode() {
 		return gameMode;
+	}
+
+	//FIXME
+	public static World getWorld() {
+		return Server.getServer().getWorlds()[0];
 	}
 	
 	/**
@@ -226,7 +208,7 @@ public final class World {
 	public void unregister(MinecraftSession session) {
 		if (session.isAuthenticated()) {
 			playerList.remove(session.getPlayer());
-			World.getWorld().getGameMode().playerDisconnected(session.getPlayer());
+			getGameMode().playerDisconnected(session.getPlayer());
 			SavedGameManager.getSavedGameManager().queuePersistenceRequest(new SavePersistenceRequest(session.getPlayer()));
 			session.setPlayer(null);
 		}
@@ -243,7 +225,7 @@ public final class World {
 		}
 		session.getActionSender().sendChatMessage("Welcome to OpenCraft!");
 		// Notify game mode
-		World.getWorld().getGameMode().playerConnected(session.getPlayer());
+		getGameMode().playerConnected(session.getPlayer());
 	}
 	
 	/**
