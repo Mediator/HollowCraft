@@ -42,6 +42,8 @@ import java.io.File;
 import java.io.IOException;
 
 import org.opencraft.server.Configuration;
+import org.opencraft.server.task.impl.SaveLevelTask;
+import org.opencraft.server.task.TaskQueue;
 import org.opencraft.server.Constants;
 import org.opencraft.server.game.GameMode;
 import org.opencraft.server.heartbeat.HeartbeatManager;
@@ -89,6 +91,7 @@ public final class World {
 		gameMode = (GameMode) Class.forName(Configuration.getConfiguration().getGameMode()).newInstance();
 		level = LevelManager.load(name);
 		level.setWorld(this);
+		TaskQueue.getTaskQueue().schedule(new SaveLevelTask(level));
 		//logger.info("Active game mode : " + gameMode.getClass().getName() + ".");
 	}
 	

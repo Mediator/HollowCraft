@@ -59,8 +59,7 @@ public final class LevelManager {
 			// TODO: Boolean should come from server config file
 			NBTFileHandler.save(lvl, "data/maps/" + lvl.getName(), true);
 			return;
-		} else if (type.equalsIgnoreCase("bin")) {
-			// TODO: Implement bin file saving
+		// Default Case
 		} else {
 			// TODO: Boolean should come from server config file
 			NBTFileHandler.save(lvl, "data/maps/" + lvl.getName(), true);
