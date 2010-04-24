@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Restructure the command API
+desc: Commands shouldn't exist as singletons, and they should keep track of their own /command name, instead of requiring a gamemode to register it
+type: :task
+component: opencraft-acm
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-04-24 20:32:24.325433 Z
+references: []
+
+id: 0f578e1b9c8d32dcd437c9cf14038167ec9f7a78
+log_events: 
+- - 2010-04-24 20:32:25.573331 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

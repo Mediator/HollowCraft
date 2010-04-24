@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Permission lists
+desc: Granular permissions, groups, list inheritance, and others would make servers really easy to administrate.
+type: :feature
+component: opencraft-acm
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-04-24 20:35:33.164411 Z
+references: []
+
+id: 2f0b2d00a6eaddb0a47a53eae72e4030c3f52ca6
+log_events: 
+- - 2010-04-24 20:35:34.093324 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
