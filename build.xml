@@ -24,6 +24,9 @@
 				<pathelement path="${toString:libs}"/>
 				<pathelement path="bin"/>
 		   	</classpath>
+			<assertions>
+				<enable/>
+			</assertions>
 		</java>
 	</target>
 	<target name="release" depends="rebuild">
