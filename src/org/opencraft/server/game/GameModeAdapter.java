@@ -46,6 +46,7 @@ import org.opencraft.server.cmd.impl.TeleportCommand;
 import org.opencraft.server.cmd.impl.SummonCommand;
 import org.opencraft.server.cmd.impl.SpawnCommand;
 import org.opencraft.server.cmd.impl.HelpCommand;
+import org.opencraft.server.cmd.impl.GotoCommand;
 import org.opencraft.server.model.Level;
 import org.opencraft.server.model.Player;
 import org.opencraft.server.model.World;
@@ -76,6 +77,7 @@ public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 		registerCommand("summon", SummonCommand.getCommand());
 		registerCommand("spawn", SpawnCommand.getCommand());
 		registerCommand("help", HelpCommand.getCommand());
+		registerCommand("goto", GotoCommand.getCommand());
 	}
 	
 	/**
