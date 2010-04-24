@@ -78,7 +78,7 @@ public class SayCommand implements Command {
 			for (int i = 0; i < params.getArgumentCount() - 1; i++)
 				message += params.getStringArgument(i - 1) + " ";
 			message += params.getStringArgument(params.getArgumentCount() - 1);
-			World.getWorld().broadcast(message);
+			player.getWorld().broadcast(message);
 		} else
 			player.getActionSender().sendChatMessage("You must be OP to do that");
 	}

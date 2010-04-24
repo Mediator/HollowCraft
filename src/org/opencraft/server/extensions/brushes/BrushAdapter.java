@@ -36,7 +36,6 @@ package org.opencraft.server.extensions.brushes;
 import org.opencraft.server.model.BlockConstants;
 import org.opencraft.server.model.Level;
 import org.opencraft.server.model.Player;
-import org.opencraft.server.model.World;
 
 /**
  * Shortcut for creation of Brushes Only constructor and paintBlocks are
@@ -165,8 +164,8 @@ public abstract class BrushAdapter extends Brush {
 	 * @param z z position
 	 * @return Returns true if block at position is build-able (changeable)
 	 */
-	protected boolean positionIsBuildable(int x, int y, int z) {
-		return typeIsBuildable(World.getWorld().getLevel().getBlock(x, y, z));
+	protected boolean positionIsBuildable(Level level, int x, int y, int z) {
+		return typeIsBuildable(level.getBlock(x, y, z));
 	}
 	
 	@Override
@@ -192,7 +191,7 @@ public abstract class BrushAdapter extends Brush {
 		else if (useForDelete)
 			paintBlocks(player, level, x, y, z, add, BlockConstants.AIR);
 		else
-			World.getWorld().getLevel().setBlock(x, y, z, BlockConstants.AIR);
+			level.setBlock(x, y, z, BlockConstants.AIR);
 	}
 	
 	/**

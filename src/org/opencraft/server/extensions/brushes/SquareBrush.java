@@ -55,7 +55,7 @@ public class SquareBrush extends BrushAdapter {
 		for (int offsetZ = -radius; offsetZ <= radius; offsetZ++)
 			for (int offsetY = -radius; offsetY <= radius; offsetY++)
 				for (int offsetX = -radius; offsetX <= radius; offsetX++)
-					if (positionIsBuildable(offsetX + x, offsetY + y, offsetZ + z) == adding)
+					if (positionIsBuildable(level, offsetX + x, offsetY + y, offsetZ + z) == adding)
 						level.setBlock(offsetX + x, offsetY + y, offsetZ + z, type);
 	}
 	

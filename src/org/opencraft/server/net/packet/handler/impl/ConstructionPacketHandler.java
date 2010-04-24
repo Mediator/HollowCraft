@@ -54,7 +54,7 @@ public class ConstructionPacketHandler implements PacketHandler<MinecraftSession
 		int z = packet.getNumericField("z").intValue();
 		int mode = packet.getNumericField("mode").intValue();
 		int type = packet.getNumericField("type").intValue();
-		World.getWorld().getGameMode().setBlock(session.getPlayer(), World.getWorld().getLevel(), x, y, z, mode, type);
+		session.getPlayer().getWorld().getGameMode().setBlock(session.getPlayer(), session.getPlayer().getWorld().getLevel(), x, y, z, mode, type);
 	}
 	
 }

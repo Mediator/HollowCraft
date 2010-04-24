@@ -81,11 +81,11 @@ public class ExperimentalGameMode extends GameModeAdapter<Player> {
 		String name = player.getName();
 		// New player?
 		if (!visitors.containsKey(name)) {
-			World.getWorld().broadcast("Welcome " + name + ".");
+			player.getWorld().broadcast("Welcome " + name + ".");
 		} else {
 			// Welcome back.
 			String lastConnectDate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(visitors.get(name));
-			World.getWorld().broadcast("Welcome back " + name + ".");
+			player.getWorld().broadcast("Welcome back " + name + ".");
 			player.getSession().getActionSender().sendChatMessage("You last connect was: " + lastConnectDate + ".");
 			
 		}
@@ -112,7 +112,7 @@ public class ExperimentalGameMode extends GameModeAdapter<Player> {
 	public void broadcastChatMessage(Player player, String message) { // TODO:
 		// rank
 		// colors?
-		World.getWorld().broadcast(player, player.getName() + ": " + message);
+		player.getWorld().broadcast(player, player.getName() + ": " + message);
 	}
 	
 }

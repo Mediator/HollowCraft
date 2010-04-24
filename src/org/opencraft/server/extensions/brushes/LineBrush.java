@@ -79,7 +79,7 @@ public class LineBrush extends BrushAdapter {
 			return;
 		
 		for (int nthBlock = 0; nthBlock <= radius; nthBlock++)
-			if (positionIsBuildable(offsetX * nthBlock + x, offsetY * nthBlock + y, offsetZ * nthBlock + z) == adding && Math.abs(offsetX) + Math.abs(offsetY) + Math.abs(offsetZ) <= Math.abs(radius))
+			if (positionIsBuildable(level, offsetX * nthBlock + x, offsetY * nthBlock + y, offsetZ * nthBlock + z) == adding && Math.abs(offsetX) + Math.abs(offsetY) + Math.abs(offsetZ) <= Math.abs(radius))
 				level.setBlock(offsetX * nthBlock + x, offsetY * nthBlock + y, offsetZ * nthBlock + z, type);
 	}
 }

@@ -38,6 +38,7 @@ import java.util.Map;
 
 import org.opencraft.server.net.ActionSender;
 import org.opencraft.server.net.MinecraftSession;
+import org.opencraft.server.io.LevelGzipper;
 
 /**
  * Represents a connected player.
@@ -142,6 +143,25 @@ public class Player extends Entity {
 		setPosition(position);
 		setRotation(rotation);
 		session.getActionSender().sendTeleport(position, rotation);
+	}
+
+	private World m_world;
+
+	public World getWorld() {
+		return m_world;
+	}
+
+	public void setWorld(World world) {
+		m_world = world;
+	}
+
+	public void moveToWorld(World world) {
+		if (m_world != null)
+			m_world.removePlayer(this);
+		assert(world != null);
+		setWorld(world);
+		m_world.addPlayer(this);
+		LevelGzipper.getLevelGzipper().gzipLevel(session);
 	}
 	
 }

@@ -58,7 +58,7 @@ public class BoxBrush extends BrushAdapter {
 		for (int offsetZ = zOffStart; offsetZ <= zOffEnd; offsetZ++)
 			for (int offsetY = yOffStart; offsetY <= yOffEnd; offsetY++)
 				for (int offsetX = xOffStart; offsetX <= xOffEnd; offsetX++)
-					if (positionIsBuildable(offsetX + x, offsetY + y, offsetZ + z) == adding)
+					if (positionIsBuildable(level, offsetX + x, offsetY + y, offsetZ + z) == adding)
 						level.setBlock(offsetX + x, offsetY + y, offsetZ + z, type);
 	}
 	

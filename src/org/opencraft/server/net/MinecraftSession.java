@@ -41,6 +41,7 @@ import org.opencraft.server.model.Player;
 import org.opencraft.server.model.World;
 import org.opencraft.server.net.packet.Packet;
 import org.opencraft.server.net.packet.handler.PacketHandlerManager;
+import org.opencraft.server.Server;
 
 /**
  * Manages a connected Minecraft session.
@@ -105,7 +106,7 @@ public final class MinecraftSession extends OCSession{
 	 */
 	@Override
 	public void destroy() {
-		World.getWorld().unregister(this);
+		Server.getServer().unregister(this);
 	}
 	
 	
@@ -119,5 +120,4 @@ public final class MinecraftSession extends OCSession{
 			return true;
 		}
 	}
-	
 }

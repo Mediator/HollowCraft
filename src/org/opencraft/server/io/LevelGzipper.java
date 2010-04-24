@@ -44,6 +44,8 @@ import org.opencraft.server.model.Level;
 import org.opencraft.server.model.World;
 import org.opencraft.server.net.MinecraftSession;
 
+import java.util.logging.Logger;
+
 /**
  * A utility class for gzipping levels.
  * @author Graham Edgecombe
@@ -74,17 +76,22 @@ public final class LevelGzipper {
 	private LevelGzipper() {
 		/* empty */
 	}
+
+	private static final Logger logger = Logger.getLogger(LevelGzipper.class.getName());
 	
 	/**
 	 * Gzips and sends the level for the specified session.
 	 * @param session The session.
 	 */
 	public void gzipLevel(final MinecraftSession session) {
-		Level level = World.getWorld().getLevel();
+		assert(session!=null);
+		assert(session.getPlayer()!=null);
+		assert(session.getPlayer().getWorld() != null);
+		Level level = session.getPlayer().getWorld().getLevel();
 		final int width = level.getWidth();
 		final int height = level.getHeight();
 		final int depth = level.getDepth();
-		final byte[][][] blockData = World.getWorld().getLevel().getBlocks().clone();
+		final byte[][][] blockData = session.getPlayer().getWorld().getLevel().getBlocks().clone();
 		session.getActionSender().sendLevelInit();
 		service.submit(new Runnable() {
 			public void run() {

@@ -60,7 +60,7 @@ public class MessagePacketHandler implements PacketHandler<MinecraftSession> {
 			// interpret as command
 			String tokens = message.substring(1);
 			String[] parts = tokens.split(" ");
-			final Map<String, Command> commands = World.getWorld().getGameMode().getCommands();
+			final Map<String, Command> commands = session.getPlayer().getWorld().getGameMode().getCommands();
 			Command c = commands.get(parts[0]);
 			if (c != null) {
 				parts[0] = null;
@@ -76,7 +76,7 @@ public class MessagePacketHandler implements PacketHandler<MinecraftSession> {
 				session.getActionSender().sendChatMessage("Invalid command.");
 			}
 		} else {
-			World.getWorld().getGameMode().broadcastChatMessage(session.getPlayer(), message);
+			session.getPlayer().getWorld().getGameMode().broadcastChatMessage(session.getPlayer(), message);
 		}
 	}
 	

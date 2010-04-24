@@ -54,7 +54,7 @@ public class FlatBrush extends BrushAdapter {
 	protected void paintBlocks(Player player, Level level, int x, int y, int z, boolean adding, int type) {
 		for (int offsetY = -radius; offsetY <= radius; offsetY++)
 			for (int offsetX = -radius; offsetX <= radius; offsetX++)
-				if (positionIsBuildable(offsetX + x, offsetY + y, z) == adding)
+				if (positionIsBuildable(level, offsetX + x, offsetY + y, z) == adding)
 					level.setBlock(offsetX + x, offsetY + y, z, type);
 	}
 	

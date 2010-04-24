@@ -124,7 +124,7 @@ public class ActionSender {
 		TaskQueue.getTaskQueue().push(new Task() {
 			public void execute() {
 				// for thread safety
-				final Level level = World.getWorld().getLevel();
+				Level level = session.getPlayer().getWorld().getLevel();
 				PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(4));
 				bldr.putShort("width", level.getWidth());
 				bldr.putShort("height", level.getHeight());
@@ -132,6 +132,8 @@ public class ActionSender {
 				sendTeleport(level.getSpawnPosition(), level.getSpawnRotation());
 				session.send(bldr.toPacket());
 				// now load the player's game (TODO in the future do this in parallel with loading the level)
+				// TODO: We should use this to save what world a player was last
+				// on
 				SavedGameManager.getSavedGameManager().queuePersistenceRequest(new LoadPersistenceRequest(session.getPlayer()));
 			}
 		});

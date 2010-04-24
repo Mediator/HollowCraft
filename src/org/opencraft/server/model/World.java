@@ -47,8 +47,6 @@ import org.opencraft.server.game.GameMode;
 import org.opencraft.server.heartbeat.HeartbeatManager;
 import org.opencraft.server.io.LevelGzipper;
 import org.opencraft.server.net.MinecraftSession;
-import org.opencraft.server.persistence.SavedGameManager;
-import org.opencraft.server.persistence.SavePersistenceRequest;
 import org.opencraft.server.util.PlayerList;
 import org.opencraft.server.io.LevelManager;
 import org.opencraft.server.Server;
@@ -74,7 +72,7 @@ public final class World {
 	/**
 	 * The player list.
 	 */
-	private final PlayerList playerList = new PlayerList();
+	private PlayerList playerList = new PlayerList();
 	
 	/**
 	 * The game mode.
@@ -90,6 +88,7 @@ public final class World {
 	public World(String name) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		gameMode = (GameMode) Class.forName(Configuration.getConfiguration().getGameMode()).newInstance();
 		level = LevelManager.load(name);
+		level.setWorld(this);
 		//logger.info("Active game mode : " + gameMode.getClass().getName() + ".");
 	}
 	
@@ -101,11 +100,6 @@ public final class World {
 		return gameMode;
 	}
 
-	//FIXME
-	public static World getWorld() {
-		return Server.getServer().getWorlds()[0];
-	}
-	
 	/**
 	 * Gets the player list.
 	 * @return The player list.
@@ -121,97 +115,15 @@ public final class World {
 	public Level getLevel() {
 		return level;
 	}
-	
-	/**
-	 * Registers a session.
-	 * @param session The session.
-	 * @param username The username.
-	 * @param verificationKey The verification key.
-	 */
-	public void register(MinecraftSession session, String username, String verificationKey) {
-		// check if the player is banned
-		try {
-			File banned = new File("data/banned.txt");
-			Scanner fread = new Scanner(banned);
-			while (fread.hasNextLine()) {
-				if (username.equalsIgnoreCase(fread.nextLine())) {
-					session.getActionSender().sendLoginFailure("Banned.");
-					break;
-				}
-			}
-			fread.close();
-		} catch (IOException e) { }
 
-		// verify name
-		if (Configuration.getConfiguration().isVerifyingNames()) {
-			long salt = HeartbeatManager.getHeartbeatManager().getSalt();
-			String hash = new StringBuilder().append(String.valueOf(salt)).append(username).toString();
-			MessageDigest digest;
-			try {
-				digest = MessageDigest.getInstance("MD5");
-			} catch (NoSuchAlgorithmException e) {
-				throw new RuntimeException("No MD5 algorithm!");
-			}
-			digest.update(hash.getBytes());
-			if (!verificationKey.equals(new BigInteger(1, digest.digest()).toString(16))) {
-				session.getActionSender().sendLoginFailure("Illegal name.");
-				return;
-			}
-		}
-		// check if name is valid
-		char[] nameChars = username.toCharArray();
-		for (char nameChar : nameChars) {
-			if (nameChar < ' ' || nameChar > '\177') {
-				session.getActionSender().sendLoginFailure("Invalid name!");
-				return;
-			}
-		}
-		// disconnect any existing players with the same name
-		for (Player p : playerList.getPlayers()) {
-			if (p.getName().equalsIgnoreCase(username)) {
-				// Should it not be the person attempting to connect who gets dropped?
-				p.getSession().getActionSender().sendLoginFailure("Logged in from another computer.");
-				break;
-			}
-		}
-		// attempt to add the player
-		final Player player = new Player(session, username);
-		if (!playerList.add(player)) {
-			player.getSession().getActionSender().sendLoginFailure("Too many players online!");
-			return;
-		}
-		// final setup
-
-		// set op rights
-		try {
-			File ops = new File("data/ops.txt");
-			Scanner fread = new Scanner(ops);
-			while (fread.hasNextLine()) {
-				if (username.equalsIgnoreCase(fread.nextLine())) {
-					player.setAttribute("IsOperator","true");
-					break;
-				}
-			}
-			fread.close();
-		} catch (IOException e) { }
-
-		session.setPlayer(player);
-		final Configuration c = Configuration.getConfiguration();
-		session.getActionSender().sendLoginResponse(Constants.PROTOCOL_VERSION, c.getName(), c.getMessage(), false);
-		LevelGzipper.getLevelGzipper().gzipLevel(session);
+	public void removePlayer(Player p) {
+		playerList.remove(p);
+		getGameMode().playerDisconnected(p);
 	}
-	
-	/**
-	 * Unregisters a session.
-	 * @param session The session.
-	 */
-	public void unregister(MinecraftSession session) {
-		if (session.isAuthenticated()) {
-			playerList.remove(session.getPlayer());
-			getGameMode().playerDisconnected(session.getPlayer());
-			SavedGameManager.getSavedGameManager().queuePersistenceRequest(new SavePersistenceRequest(session.getPlayer()));
-			session.setPlayer(null);
-		}
+
+	public void addPlayer(Player p) {
+		playerList.add(p);
+		getGameMode().playerConnected(p);
 	}
 	
 	/**

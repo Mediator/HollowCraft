@@ -39,6 +39,12 @@ import java.net.InetSocketAddress;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.HashMap;
+import java.util.Scanner;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.math.BigInteger;
+
+import java.io.File;
 
 import org.apache.mina.core.service.IoAcceptor;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
@@ -47,7 +53,14 @@ import org.opencraft.server.net.SessionHandler;
 import org.opencraft.server.task.TaskQueue;
 import org.opencraft.server.task.impl.HeartbeatTask;
 import org.opencraft.server.task.impl.UpdateTask;
+import org.opencraft.server.heartbeat.HeartbeatManager;
 import org.opencraft.server.util.SetManager;
+import org.opencraft.server.io.LevelGzipper;
+import org.opencraft.server.net.MinecraftSession;
+import org.opencraft.server.util.PlayerList;
+import org.opencraft.server.model.Player;
+import org.opencraft.server.persistence.SavedGameManager;
+import org.opencraft.server.persistence.SavePersistenceRequest;
 
 /**
  * The core class of the OpenCraft server.
@@ -59,6 +72,8 @@ public final class Server {
 	 * Logger instance.
 	 */
 	private static final Logger logger = Logger.getLogger(Server.class.getName());
+
+	private final PlayerList m_players;
 	
 	/**
 	 * The entry point of the server application.
@@ -101,6 +116,7 @@ public final class Server {
 		logger.info("Configuring...");
 		Configuration.readConfiguration();
 		SetManager.getSetManager().reloadSets();
+		m_players = new PlayerList();
 		acceptor.setHandler(new SessionHandler());
 		logger.info("Initializing games...");
 		m_worlds = new HashMap<String,World>();
@@ -112,11 +128,22 @@ public final class Server {
 	public void loadLevel(String name) {
 		logger.info("Loading level \""+name+"\"");
 		try {
-			m_worlds.put("default", new World("default"));
+			m_worlds.put(name, new World(name));
 		} catch (InstantiationException e) {
+			logger.info("Error loading world.");
 		} catch (IllegalAccessException e) {
+			logger.info("Error loading world.");
 		} catch (ClassNotFoundException e) {
+			logger.info("Error loading world.");
 		}
+	}
+
+	public World getWorld(String name) {
+		if (!m_worlds.containsKey(name)) {
+			loadLevel(name);
+		}
+		assert(m_worlds.get(name) != null);
+		return m_worlds.get(name);
 	}
 	
 	/**
@@ -129,5 +156,104 @@ public final class Server {
 		acceptor.bind(new InetSocketAddress(Configuration.getConfiguration().getPort()));
 		logger.info("Ready for connections.");
 	}
-	
+
+	/**
+	 * Registers a session.
+	 * @param session The session.
+	 * @param username The username.
+	 * @param verificationKey The verification key.
+	 */
+	public void register(MinecraftSession session, String username, String verificationKey) {
+		// check if the player is banned
+		try {
+			File banned = new File("data/banned.txt");
+			Scanner fread = new Scanner(banned);
+			while (fread.hasNextLine()) {
+				if (username.equalsIgnoreCase(fread.nextLine())) {
+					session.getActionSender().sendLoginFailure("Banned.");
+					break;
+				}
+			}
+			fread.close();
+		} catch (IOException e) { }
+
+		// verify name
+		if (Configuration.getConfiguration().isVerifyingNames()) {
+			long salt = HeartbeatManager.getHeartbeatManager().getSalt();
+			String hash = new StringBuilder().append(String.valueOf(salt)).append(username).toString();
+			MessageDigest digest;
+			try {
+				digest = MessageDigest.getInstance("MD5");
+			} catch (NoSuchAlgorithmException e) {
+				throw new RuntimeException("No MD5 algorithm!");
+			}
+			digest.update(hash.getBytes());
+			if (!verificationKey.equals(new BigInteger(1, digest.digest()).toString(16))) {
+				session.getActionSender().sendLoginFailure("Illegal name.");
+				return;
+			}
+		}
+		// check if name is valid
+		char[] nameChars = username.toCharArray();
+		for (char nameChar : nameChars) {
+			if (nameChar < ' ' || nameChar > '\177') {
+				session.getActionSender().sendLoginFailure("Invalid name!");
+				return;
+			}
+		}
+		// disconnect any existing players with the same name
+		for (Player p : m_players.getPlayers()) {
+			if (p.getName().equalsIgnoreCase(username)) {
+				// Should it not be the person attempting to connect who gets dropped?
+				// FIXME
+				p.getSession().getActionSender().sendLoginFailure("Logged in from another computer.");
+				break;
+			}
+		}
+		// attempt to add the player
+		final Player player = new Player(session, username);
+		if (!m_players.add(player)) {
+			player.getSession().getActionSender().sendLoginFailure("Too many players online!");
+			return;
+		}
+		// final setup
+
+		// set op rights
+		try {
+			File ops = new File("data/ops.txt");
+			Scanner fread = new Scanner(ops);
+			while (fread.hasNextLine()) {
+				if (username.equalsIgnoreCase(fread.nextLine())) {
+					player.setAttribute("IsOperator","true");
+					break;
+				}
+			}
+			fread.close();
+		} catch (IOException e) { }
+
+		session.setPlayer(player);
+		final Configuration c = Configuration.getConfiguration();
+		session.getActionSender().sendLoginResponse(Constants.PROTOCOL_VERSION, c.getName(), c.getMessage(), false);
+		//FIXME: Make the default configurable.
+		assert(getWorld("default") != null);
+		assert(session.getPlayer() == player);
+		player.moveToWorld(getWorld("default"));
+	}
+
+	public PlayerList getPlayerList() {
+		return m_players;
+	}
+
+	/**
+	 * Unregisters a session.
+	 * @param session The session.
+	 */
+	public void unregister(MinecraftSession session) {
+		if (session.isAuthenticated()) {
+			m_players.remove(session.getPlayer());
+			World w = session.getPlayer().getWorld();
+			SavedGameManager.getSavedGameManager().queuePersistenceRequest(new SavePersistenceRequest(session.getPlayer()));
+			session.setPlayer(null);
+		}
+	}
 }

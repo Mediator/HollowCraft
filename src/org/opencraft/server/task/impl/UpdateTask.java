@@ -59,7 +59,7 @@ public class UpdateTask extends ScheduledTask {
 	public UpdateTask() {
 		super(DELAY);
 	}
-	
+
 	@Override
 	public void execute() {
 		World[] worlds = Server.getServer().getWorlds();

@@ -53,7 +53,7 @@ public class StandardBrush extends BrushAdapter {
 	
 	@Override
 	protected void paintBlocks(Player player, Level level, int x, int y, int z, boolean add, int type) {
-		if ((positionIsBuildable(x, y, z) == add))
+		if ((positionIsBuildable(level, x, y, z) == add))
 			level.setBlock(x, y, z, type);
 	}
 }

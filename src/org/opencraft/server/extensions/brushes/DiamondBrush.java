@@ -55,7 +55,7 @@ public class DiamondBrush extends BrushAdapter {
 		for (int offsetZ = -height; offsetZ <= radius; offsetZ++)
 			for (int offsetY = -radius; offsetY <= radius; offsetY++)
 				for (int offsetX = -radius; offsetX <= radius; offsetX++)
-					if (positionIsBuildable(offsetX + x, offsetY + y, offsetZ + z) == adding && Math.abs(offsetX) + Math.abs(offsetY) + Math.abs(offsetZ) <= Math.abs(radius))
+					if (positionIsBuildable(level, offsetX + x, offsetY + y, offsetZ + z) == adding && Math.abs(offsetX) + Math.abs(offsetY) + Math.abs(offsetZ) <= Math.abs(radius))
 						level.setBlock(offsetX + x, offsetY + y, offsetZ + z, type);
 	}
 }

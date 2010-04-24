@@ -67,6 +67,6 @@ public class SpawnCommand implements Command {
 	
 	@Override
 	public void execute(Player player, CommandParameters params) {
-		player.teleport(World.getWorld().getLevel().getSpawnPosition(), World.getWorld().getLevel().getSpawnRotation());
+		player.teleport(player.getWorld().getLevel().getSpawnPosition(), player.getWorld().getLevel().getSpawnRotation());
 	}
 }

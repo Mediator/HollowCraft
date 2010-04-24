@@ -76,7 +76,7 @@ public class LoadPersistenceRequest extends PersistenceRequest {
 			}
 		}
 		player.getSession().setReady();
-		World.getWorld().completeRegistration(player.getSession());
+		player.getWorld().completeRegistration(player.getSession());
 	}
 	
 }

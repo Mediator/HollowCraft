@@ -41,6 +41,7 @@ import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.net.OCSession;
 import org.opencraft.server.net.packet.Packet;
 import org.opencraft.server.net.packet.handler.PacketHandler;
+import org.opencraft.server.Server;
 
 /**
  * Handles the incoming authentication packet.
@@ -67,7 +68,7 @@ public final class AuthenticationPacketHandler implements PacketHandler<Minecraf
 		if (protocolVersion != Constants.PROTOCOL_VERSION) {
 			session.getActionSender().sendLoginFailure("Incorrect protocol version.");
 		} else {
-			World.getWorld().register(session, username, verificationKey);
+			Server.getServer().register(session, username, verificationKey);
 		}
 	}
 

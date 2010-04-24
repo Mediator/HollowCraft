@@ -112,7 +112,7 @@ public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 	
 	// Default implementation
 	public void playerConnected(Player player) {
-		World.getWorld().broadcast("Welcome " + player.getName());
+		player.getWorld().broadcast("Welcome " + player.getName());
 	}
 	
 	// Default implementation
@@ -122,12 +122,12 @@ public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 	
 	// Default implementation
 	public void playerDisconnected(Player player) {
-		World.getWorld().broadcast(player.getName() + " disconnected.");
+		player.getWorld().broadcast(player.getName() + " disconnected.");
 	}
 	
 	// Default implementation
 	public void broadcastChatMessage(Player player, String message) {
-		World.getWorld().broadcast(player, player.getName() + ": " + message);
+		player.getWorld().broadcast(player, player.getName() + ": " + message);
 	}
 	
 }

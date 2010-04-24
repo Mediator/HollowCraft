@@ -69,7 +69,7 @@ public class HeartbeatTask extends ScheduledTask {
 		}
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("name", Configuration.getConfiguration().getName());
-		parameters.put("users", String.valueOf(Server.getServer().getWorlds()[0].getPlayerList().size()));
+		parameters.put("users", String.valueOf(Server.getServer().getPlayerList().size()));
 		parameters.put("max", String.valueOf(Configuration.getConfiguration().getMaximumPlayers()));
 		parameters.put("public", String.valueOf(Configuration.getConfiguration().isPublicServer()));
 		parameters.put("port", String.valueOf(Configuration.getConfiguration().getPort()));

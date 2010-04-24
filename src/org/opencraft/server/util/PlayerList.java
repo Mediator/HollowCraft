@@ -50,7 +50,9 @@ public class PlayerList {
 	/**
 	 * The maximum number of players.
 	 */
-	private final int maximumPlayers = Configuration.getConfiguration().getMaximumPlayers();
+	//private final int maximumPlayers = Configuration.getConfiguration().getMaximumPlayers();
+	//FIXME
+	private final int maximumPlayers = 64;
 	
 	/**
 	 * The player array.

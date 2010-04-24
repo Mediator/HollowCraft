@@ -33,11 +33,13 @@
  */
 package org.opencraft.server.net;
 
+
 import java.util.ArrayDeque;
 import java.util.Queue;
 
 import org.apache.mina.core.session.IoSession;
 import org.opencraft.server.net.packet.Packet;
+import org.opencraft.server.model.Player;
 
 /**
  * @author Mark Farrell
@@ -98,8 +100,15 @@ public abstract class OCSession extends Connectable{
 	 */
 	public abstract void destroy();
 	
-	
+	private Player m_player;
 
+	public void setPlayer(Player p) {
+		m_player = p;
+	}
+	
+	public Player getPlayer() {
+		return m_player;
+	}
 
 	
 	/**

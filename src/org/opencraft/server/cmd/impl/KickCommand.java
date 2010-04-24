@@ -70,7 +70,7 @@ public class KickCommand implements Command {
 		// Player using command is OP?
 		if (player.getAttribute("IsOperator") != null && player.getAttribute("IsOperator").equals("true")) {
 			if (params.getArgumentCount() == 1) {
-				for (Player other : World.getWorld().getPlayerList().getPlayers()) {
+				for (Player other : player.getWorld().getPlayerList().getPlayers()) {
 					if (other.getName().toLowerCase().equals(params.getStringArgument(0).toLowerCase())) {
 						other.getSession().close();
 						player.getActionSender().sendChatMessage(other.getName() + " has been kicked");

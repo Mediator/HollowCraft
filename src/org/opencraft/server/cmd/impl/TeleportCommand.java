@@ -70,7 +70,7 @@ public class TeleportCommand implements Command {
 		// Player using command is OP?
 		if (player.getAttribute("IsOperator") != null && player.getAttribute("IsOperator").equals("true")) {
 			if (params.getArgumentCount() == 1) {
-				for (Player other : World.getWorld().getPlayerList().getPlayers()) {
+				for (Player other : player.getWorld().getPlayerList().getPlayers()) {
 					if (other.getName().toLowerCase().equals(params.getStringArgument(0).toLowerCase())) {
 						player.teleport(other.getPosition(), other.getRotation());
 						return;

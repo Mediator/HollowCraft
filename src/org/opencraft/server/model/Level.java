@@ -52,7 +52,7 @@ import org.opencraft.server.model.Environment;
  * @author Graham Edgecombe
  * @author Brett Russell
  */
-public final class Level {
+public class Level {
 	
 	protected String m_name;
 	protected String m_author;
@@ -77,10 +77,26 @@ public final class Level {
 	/** A queue of positions to update at the next tick. */
 	protected Queue<Position> m_updateQueue = new ArrayDeque<Position>();
 
+	private World m_world;
+
 	protected static final Logger m_logger = Logger.getLogger(Level.class.getName());
 	
 	public Level() {
-		//TaskQueue.getTaskQueue().schedule(autosave);
+		for (int i = 0; i < 256; i++) {
+			BlockDefinition b = BlockManager.getBlockManager().getBlock(i);
+			if (b != null && b.doesThink()) {
+				m_activeBlocks.put(i, new ArrayDeque<Position>());
+				m_activeTimers.put(i, System.currentTimeMillis());
+			}
+		}
+	}
+
+	public void setWorld(World w) {
+		m_world = w;
+	}
+
+	public World getWorld() {
+		return m_world;
 	}
 
 	public void generateLevel() {
@@ -101,14 +117,6 @@ public final class Level {
 		m_lightDepths = new short[m_width][m_height];
 		m_spawnPosition = new Position(m_width*16, m_height*16, m_depth*32);
 		m_spawnRotation = new Rotation(0, 0);
-
-		for (int i = 0; i < 256; i++) {
-			BlockDefinition b = BlockManager.getBlockManager().getBlock(i);
-			if (b != null && b.doesThink()) {
-				m_activeBlocks.put(i, new ArrayDeque<Position>());
-				m_activeTimers.put(i, System.currentTimeMillis());
-			}
-		}
 
 
 		Builder b = new Builder(m_width, m_height, m_depth);
@@ -249,7 +257,7 @@ public final class Level {
 		}
 		byte formerBlock = getBlock(x, y, z);
 		m_blocks[x][y][z] = (byte) type;
-		for (Player player : World.getWorld().getPlayerList().getPlayers()) {
+		for (Player player : getWorld().getPlayerList().getPlayers()) {
 			player.getSession().getActionSender().sendBlock(x, y, z, (byte) type);
 		}
 		if (updateSelf) {
@@ -264,6 +272,8 @@ public final class Level {
 			}
 		}
 		if (BlockManager.getBlockManager().getBlock(type).doesThink()) {
+			assert(m_activeBlocks!=null);
+			assert(m_activeBlocks.get(type) != null);
 			m_activeBlocks.get(type).add(new Position(x, y, z));
 		}
 		if (BlockManager.getBlockManager().getBlock(type).doesBlockLight()) {

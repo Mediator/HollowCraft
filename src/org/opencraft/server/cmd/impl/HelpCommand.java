@@ -67,7 +67,7 @@ public class HelpCommand implements Command {
 	
 	@Override
 	public void execute(Player player, CommandParameters params) {
-		String message = World.getWorld().getGameMode().listCommands();
+		String message = player.getWorld().getGameMode().listCommands();
 		while (message.length() > 0) {
 			// this is a short list so send it and leave
 			if (message.length() < 64) {
