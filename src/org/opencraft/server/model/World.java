@@ -85,6 +85,7 @@ public final class World {
 		gameMode = (GameMode) Class.forName(Configuration.getConfiguration().getGameMode()).newInstance();
 		level = LevelManager.load(name);
 		level.setWorld(this);
+		level.setName(name);
 		TaskQueue.getTaskQueue().schedule(new SaveLevelTask(level));
 		//logger.info("Active game mode : " + gameMode.getClass().getName() + ".");
 	}

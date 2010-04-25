@@ -1,22 +1,22 @@
 --- !ditz.rubyforge.org,2008-03-06/issue 
-title: Permission lists
-desc: Granular permissions, groups, list inheritance, and others would make servers really easy to administrate.
-type: :feature
+title: Level type constants instead of strings
+desc: Why are we passing around strings as level 'types'?
+type: :task
 component: opencraft-acm
 release: "0.1"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
 status: :unstarted
 disposition: 
-creation_time: 2010-04-24 20:35:33.164411 Z
+creation_time: 2010-04-25 16:35:38.547431 Z
 references: []
 
-id: 2f0b2d00a6eaddb0a47a53eae72e4030c3f52ca6
+id: fb9eca4a0d914a18d4161c17df596a0d2f81fc90
 log_events: 
-- - 2010-04-24 20:35:34.093324 Z
+- - 2010-04-25 16:35:39.960343 Z
   - Trever Fischer <tdfischer@fedoraproject.org>
   - created
   - ""
-- - 2010-04-25 17:35:47.273400 Z
+- - 2010-04-25 17:35:19.283358 Z
   - Trever Fischer <tdfischer@fedoraproject.org>
   - assigned to release 0.1 from unassigned
   - ""

@@ -5,7 +5,7 @@ desc: |-
   but a lot of the errors that GCJ returns with are things that should probably be fixed.
 type: :bugfix
 component: opencraft-acm
-release: 
+release: "0.1"
 reporter: Adam Liszka <sidein@usiah.com>
 status: :in_progress
 disposition: 
@@ -22,3 +22,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - changed status from unstarted to in_progress
   - Going to compile and address errors as they appear.
+- - 2010-04-25 17:36:09.255363 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - assigned to release 0.1 from unassigned
+  - Need to be compilable by gcj for the rest of the world

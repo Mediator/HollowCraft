@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  */
 public final class LevelManager {
 
-	private static final Logger logger = Logger.getLogger(World.class.getName());
+	private static final Logger logger = Logger.getLogger(LevelManager.class.getName());
 
 	/**
 	 * Default private constructor.

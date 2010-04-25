@@ -66,5 +66,9 @@ public class AirBehaviour implements BlockBehaviour {
 			if (y == level.getHeight()-1)
 				level.setBlock(x, y, z, BlockConstants.WATER);
 		}
+		if (level.getBlock(x, y, z+1) == BlockConstants.WATER) {
+			level.setBlock(x, y, z, BlockConstants.WATER);
+			level.setBlock(x, y, z+1, BlockConstants.AIR);
+		}
 	}
 }

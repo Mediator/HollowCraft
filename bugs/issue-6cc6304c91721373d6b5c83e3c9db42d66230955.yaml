@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Currency
+desc: |-
+  A game mode that uses some kind of in-game currency would be handy, as it would
+  provide some mechanic for limiting the use of /cuboid-style commands
+type: :feature
+component: opencraft-acm
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-04-25 17:39:42.451424 Z
+references: []
+
+id: 6cc6304c91721373d6b5c83e3c9db42d66230955
+log_events: 
+- - 2010-04-25 17:39:44.129338 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

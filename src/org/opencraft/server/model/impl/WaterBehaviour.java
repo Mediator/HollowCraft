@@ -39,6 +39,9 @@ import org.opencraft.server.model.BlockConstants;
 import org.opencraft.server.model.BlockManager;
 import org.opencraft.server.model.Level;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  * A block behaviour that handles water. Takes into account water's preference
  * for downward flow.
@@ -58,7 +61,12 @@ public class WaterBehaviour implements BlockBehaviour {
 		
 		// represents different directions in the Cartesian plane, z axis is
 		// ignored and handled specially
-		int[][] spreadRules = { { 1, 0, 0 }, { -1, 0, 0 }, { 0, 1, 0 }, { 0, -1, 0 } };
+		Integer[][] spreadRules = { { 1, 0, 0 }, { -1, 0, 0 }, { 0, 1, 0 }, { 0, -1, 0 } };
+		ArrayList<Integer[]> shuffledRules = new ArrayList<Integer[]>();
+		for(Integer[] rule : spreadRules)
+			shuffledRules.add(rule);
+		Collections.shuffle(shuffledRules);
+		spreadRules = shuffledRules.toArray(spreadRules);
 		
 		int spongeRadius = Configuration.getConfiguration().getSpongeRadius();
 		
