@@ -7,8 +7,8 @@ type: :bugfix
 component: opencraft-acm
 release: "0.1"
 reporter: Adam Liszka <sidein@usiah.com>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-04-25 17:00:28.541345 Z
 references: []
 
@@ -26,3 +26,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - assigned to release 0.1 from unassigned
   - Need to be compilable by gcj for the rest of the world
+- - 2010-04-25 20:20:38.333258 Z
+  - Adam Liszka <sidein@usiah.com>
+  - closed with disposition fixed
+  - Compiles with gcj. GCJ mostly hated '@Override' but there were some legit problems that needed addressed.

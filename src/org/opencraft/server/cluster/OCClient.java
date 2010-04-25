@@ -1,3 +1,5 @@
+package org.opencraft.server.cluster;
+
 /*
  * OpenCraft License
  * 
@@ -30,7 +32,6 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.opencraft.server.cluster;
 
 import java.net.InetSocketAddress;
 import java.util.logging.Logger;
