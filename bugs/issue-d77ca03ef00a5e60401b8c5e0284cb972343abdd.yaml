@@ -1,0 +1,24 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: GCJ Errors
+desc: |-
+  Fix things up a bit to let GCJ compile opencraft. Seems like it shouls be a task or a feature,
+  but a lot of the errors that GCJ returns with are things that should probably be fixed.
+type: :bugfix
+component: opencraft-acm
+release: 
+reporter: Adam Liszka <sidein@usiah.com>
+status: :in_progress
+disposition: 
+creation_time: 2010-04-25 17:00:28.541345 Z
+references: []
+
+id: d77ca03ef00a5e60401b8c5e0284cb972343abdd
+log_events: 
+- - 2010-04-25 17:01:16.469236 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - I've added a GCJ build entry to build.xml, run `ant gcj`
+- - 2010-04-25 17:02:02.141564 Z
+  - Adam Liszka <sidein@usiah.com>
+  - changed status from unstarted to in_progress
+  - Going to compile and address errors as they appear.

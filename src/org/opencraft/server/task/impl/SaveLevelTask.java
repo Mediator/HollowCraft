@@ -22,7 +22,6 @@ public final class SaveLevelTask extends ScheduledTask {
 		m_lvl = lvl;
 	}
 	
-	@Override
 	public void execute() {
 		logger.info("Saving " + m_lvl.getName());
 		if (this.getDelay() == 0) {
