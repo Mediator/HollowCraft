@@ -1,10 +1,7 @@
 package org.opencraft.server.io;
 
 import java.io.IOException;
-import org.opencraft.server.model.Position;
-import org.opencraft.server.model.Rotation;
 import org.opencraft.server.model.Level;
-import org.opencraft.server.model.World;
 import org.opencraft.server.model.Environment;
 
 /**
@@ -48,6 +45,8 @@ public final class BINFileHandler {
 					}
 				}
 			}
+
+			lvl.setEnvironment(env);
 
 			lvl.setBlocks(blocks, new byte[width][height][depth], width, height, depth);
 

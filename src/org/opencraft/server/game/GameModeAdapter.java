@@ -49,7 +49,6 @@ import org.opencraft.server.cmd.impl.HelpCommand;
 import org.opencraft.server.cmd.impl.GotoCommand;
 import org.opencraft.server.model.Level;
 import org.opencraft.server.model.Player;
-import org.opencraft.server.model.World;
 
 /**
  * An implementation of a game mode that does the majority of the work for the
@@ -102,7 +101,6 @@ public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 		return cmds.substring(0, cmds.length()-2);
 	}
 	
-	@Override
 	public Map<String, Command> getCommands() {
 		return commands;
 	}

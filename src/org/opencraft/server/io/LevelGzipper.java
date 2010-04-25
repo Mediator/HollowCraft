@@ -37,14 +37,10 @@ import java.io.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.zip.GZIPOutputStream;
-import java.util.zip.GZIPInputStream;
 
 import org.apache.mina.core.buffer.IoBuffer;
 import org.opencraft.server.model.Level;
-import org.opencraft.server.model.World;
 import org.opencraft.server.net.MinecraftSession;
-
-import java.util.logging.Logger;
 
 /**
  * A utility class for gzipping levels.
@@ -77,8 +73,6 @@ public final class LevelGzipper {
 		/* empty */
 	}
 
-	private static final Logger logger = Logger.getLogger(LevelGzipper.class.getName());
-	
 	/**
 	 * Gzips and sends the level for the specified session.
 	 * @param session The session.

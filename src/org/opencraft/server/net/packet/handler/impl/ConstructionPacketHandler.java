@@ -33,7 +33,6 @@ package org.opencraft.server.net.packet.handler.impl;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.server.model.World;
 import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.net.packet.Packet;
 import org.opencraft.server.net.packet.handler.PacketHandler;
@@ -44,7 +43,6 @@ import org.opencraft.server.net.packet.handler.PacketHandler;
  */
 public class ConstructionPacketHandler implements PacketHandler<MinecraftSession> {
 	
-	@Override
 	public void handlePacket(MinecraftSession session, Packet packet) {
 		if (!session.isAuthenticated()) {
 			return;

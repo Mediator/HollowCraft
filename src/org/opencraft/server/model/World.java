@@ -37,21 +37,15 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
-import java.util.Scanner;
-import java.io.File;
-import java.io.IOException;
 
 import org.opencraft.server.Configuration;
 import org.opencraft.server.task.impl.SaveLevelTask;
 import org.opencraft.server.task.TaskQueue;
 import org.opencraft.server.Constants;
 import org.opencraft.server.game.GameMode;
-import org.opencraft.server.heartbeat.HeartbeatManager;
-import org.opencraft.server.io.LevelGzipper;
 import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.util.PlayerList;
 import org.opencraft.server.io.LevelManager;
-import org.opencraft.server.Server;
 
 /**
  * Manages the in-game world.

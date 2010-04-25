@@ -46,7 +46,6 @@ import org.opencraft.server.net.packet.handler.PacketHandler;
  */
 public class MovementPacketHandler implements PacketHandler<MinecraftSession> {
 	
-	@Override
 	public void handlePacket(MinecraftSession session, Packet packet) {
 		if (!session.isAuthenticated()) {
 			return;

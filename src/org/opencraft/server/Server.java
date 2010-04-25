@@ -33,7 +33,6 @@ package org.opencraft.server;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.logging.Level;
@@ -55,7 +54,6 @@ import org.opencraft.server.task.impl.HeartbeatTask;
 import org.opencraft.server.task.impl.UpdateTask;
 import org.opencraft.server.heartbeat.HeartbeatManager;
 import org.opencraft.server.util.SetManager;
-import org.opencraft.server.io.LevelGzipper;
 import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.util.PlayerList;
 import org.opencraft.server.model.Player;

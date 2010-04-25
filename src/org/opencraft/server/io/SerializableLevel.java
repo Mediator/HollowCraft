@@ -1,6 +1,5 @@
 package org.opencraft.server.io;
 
-import org.opencraft.server.Configuration;
 import org.opencraft.server.model.Position;
 import org.opencraft.server.model.Rotation;
 

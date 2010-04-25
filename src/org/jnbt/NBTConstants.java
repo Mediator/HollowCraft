@@ -1,7 +1,5 @@
 package org.jnbt;
 
-import java.nio.charset.Charset;
-
 /*
  * JNBT License
  * 
@@ -35,6 +33,8 @@ import java.nio.charset.Charset;
  * POSSIBILITY OF SUCH DAMAGE. 
  */
 
+//import java.nio.charset.Charset;
+
 /**
  * A class which holds constant values.
  * @author Graham Edgecombe
@@ -45,7 +45,8 @@ public final class NBTConstants {
 	/**
 	 * The character set used by NBT (UTF-8).
 	 */
-	public static final Charset CHARSET = Charset.forName("UTF-8");
+	//public static final Charset CHARSET = Charset.forName("UTF-8");
+	public static final String CHARSET = "UTF-8";
 	
 	/**
 	 * Tag type constants.

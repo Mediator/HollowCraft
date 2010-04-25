@@ -36,9 +36,7 @@ package org.opencraft.server.net.packet.handler.impl;
 import java.util.logging.Logger;
 
 import org.opencraft.server.Constants;
-import org.opencraft.server.model.World;
 import org.opencraft.server.net.MinecraftSession;
-import org.opencraft.server.net.OCSession;
 import org.opencraft.server.net.packet.Packet;
 import org.opencraft.server.net.packet.handler.PacketHandler;
 import org.opencraft.server.Server;
@@ -54,7 +52,6 @@ public final class AuthenticationPacketHandler implements PacketHandler<Minecraf
 	 */
 	private static final Logger logger = Logger.getLogger(AuthenticationPacketHandler.class.getName());
 	
-	@Override
 	public void handlePacket(MinecraftSession session, Packet packet) {
 		if (session.isAuthenticated()) {
 			return;

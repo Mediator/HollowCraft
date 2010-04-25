@@ -56,7 +56,6 @@ public class SavePersistenceRequest extends PersistenceRequest {
 		super(player);
 	}
 
-	@Override
 	public void perform() throws IOException {
 		final SavedGameManager mgr = SavedGameManager.getSavedGameManager();
 		final Player player = getPlayer();
@@ -65,7 +64,7 @@ public class SavePersistenceRequest extends PersistenceRequest {
 		try {
 			xs.toXML(player.getAttributes(), new FileOutputStream(file));
 		} catch (RuntimeException ex) {
-			throw new IOException(ex);
+			throw new IOException(ex.getMessage());
 		}
 	}
 	

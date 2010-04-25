@@ -39,7 +39,6 @@ import java.util.Map;
 import org.opencraft.server.Configuration;
 import org.opencraft.server.Constants;
 import org.opencraft.server.heartbeat.HeartbeatManager;
-import org.opencraft.server.model.World;
 import org.opencraft.server.task.ScheduledTask;
 import org.opencraft.server.Server;
 

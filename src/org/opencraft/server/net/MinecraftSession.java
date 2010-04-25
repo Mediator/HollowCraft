@@ -33,14 +33,9 @@ package org.opencraft.server.net;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.util.ArrayDeque;
-import java.util.Queue;
-
 import org.apache.mina.core.session.IoSession;
 import org.opencraft.server.model.Player;
-import org.opencraft.server.model.World;
 import org.opencraft.server.net.packet.Packet;
-import org.opencraft.server.net.packet.handler.PacketHandlerManager;
 import org.opencraft.server.Server;
 
 /**

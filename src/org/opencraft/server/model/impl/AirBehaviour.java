@@ -33,12 +33,9 @@ package org.opencraft.server.model.impl;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.server.Configuration;
 import org.opencraft.server.model.BlockBehaviour;
 import org.opencraft.server.model.BlockConstants;
-import org.opencraft.server.model.BlockManager;
 import org.opencraft.server.model.Level;
-import java.util.Random;
 
 /**
  * A block behaviour that handles water. Takes into account water's preference
@@ -47,17 +44,14 @@ import java.util.Random;
  */
 public class AirBehaviour implements BlockBehaviour {
 	
-	@Override
 	public void handlePassive(Level level, int x, int y, int z, int type) {
 		level.queueActiveBlockUpdate(x, y, z);
 	}
 	
-	@Override
 	public void handleDestroy(Level level, int x, int y, int z, int type) {
 		
 	}
 	
-	@Override
 	public void handleScheduledBehaviour(Level level, int x, int y, int z, int type) {
 		if (level.getBlock(x+1, y, z) == BlockConstants.WATER &&  level.getBlock(x-1, y, z) == BlockConstants.WATER && level.getBlock(x, y+1, z) == BlockConstants.WATER && level.getBlock(x, y-1, z) == BlockConstants.WATER) {
 			level.setBlock(x, y, z, BlockConstants.WATER);

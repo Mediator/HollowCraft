@@ -1,7 +1,5 @@
 package org.opencraft.server.task.impl;
 
-import org.apache.mina.core.session.IoSession;
-import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.task.ScheduledTask;
 import org.opencraft.server.io.LevelManager;
 import org.opencraft.server.model.Level;

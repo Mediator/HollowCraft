@@ -38,7 +38,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.opencraft.server.Configuration;
 import org.opencraft.server.model.Player;
 
 /**

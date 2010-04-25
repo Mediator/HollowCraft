@@ -50,7 +50,6 @@ import org.opencraft.server.net.packet.PacketField;
  */
 public final class MinecraftProtocolEncoder extends ProtocolEncoderAdapter {
 	
-	@Override
 	public void encode(IoSession session, Object message, ProtocolEncoderOutput out) throws Exception {
 		Packet packet = (Packet) message;
 		PacketDefinition def = packet.getDefinition();

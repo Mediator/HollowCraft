@@ -36,7 +36,6 @@ package org.opencraft.server.cmd.impl;
 import org.opencraft.server.cmd.Command;
 import org.opencraft.server.cmd.CommandParameters;
 import org.opencraft.server.model.Player;
-import org.opencraft.server.model.World;
 
 /**
  * Official /summon command
@@ -65,7 +64,6 @@ public class SpawnCommand implements Command {
 		/* empty */
 	}
 	
-	@Override
 	public void execute(Player player, CommandParameters params) {
 		player.teleport(player.getWorld().getLevel().getSpawnPosition(), player.getWorld().getLevel().getSpawnRotation());
 	}

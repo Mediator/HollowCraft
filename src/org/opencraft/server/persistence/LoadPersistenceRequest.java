@@ -39,7 +39,6 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.opencraft.server.model.Player;
-import org.opencraft.server.model.World;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -59,7 +58,6 @@ public class LoadPersistenceRequest extends PersistenceRequest {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public void perform() throws IOException {
 		final SavedGameManager mgr = SavedGameManager.getSavedGameManager();
 		final Player player = getPlayer();
@@ -72,7 +70,7 @@ public class LoadPersistenceRequest extends PersistenceRequest {
 					player.setAttribute(entry.getKey(), entry.getValue());
 				}
 			} catch (RuntimeException ex) {
-				throw new IOException(ex);
+				throw new IOException(ex.getMessage());
 			}
 		}
 		player.getSession().setReady();

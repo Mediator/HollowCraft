@@ -36,7 +36,6 @@ package org.opencraft.server.cmd.impl;
 import org.opencraft.server.cmd.Command;
 import org.opencraft.server.cmd.CommandParameters;
 import org.opencraft.server.model.Player;
-import org.opencraft.server.model.World;
 import org.opencraft.server.Server;
 
 /**
@@ -66,7 +65,6 @@ public class GotoCommand implements Command {
 		/* empty */
 	}
 	
-	@Override
 	public void execute(Player player, CommandParameters params) {
 		player.getActionSender().sendChatMessage("Loading "+params.getStringArgument(0));
 		player.moveToWorld(Server.getServer().getWorld(params.getStringArgument(0)));

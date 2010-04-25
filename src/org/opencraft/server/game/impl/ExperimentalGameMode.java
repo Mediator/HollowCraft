@@ -44,7 +44,6 @@ import org.opencraft.server.extensions.brushes.StandardBrush;
 import org.opencraft.server.game.GameModeAdapter;
 import org.opencraft.server.model.Level;
 import org.opencraft.server.model.Player;
-import org.opencraft.server.model.World;
 
 /**
  * An experimental game mode. Useful for testing things. Currently logs players

@@ -32,9 +32,7 @@
  */
 package org.opencraft.server.cluster;
 
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.mina.core.RuntimeIoException;
@@ -44,10 +42,8 @@ import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.transport.socket.SocketConnector;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 import org.opencraft.server.net.Connectable;
-import org.opencraft.server.net.OCSession;
 import org.opencraft.server.net.State;
 import org.opencraft.server.net.codec.MinecraftCodecFactory;
-import org.opencraft.server.net.packet.Packet;
 
 /**
  * @author Mark Farrell

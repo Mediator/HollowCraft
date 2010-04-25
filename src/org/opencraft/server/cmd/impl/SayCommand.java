@@ -36,7 +36,6 @@ package org.opencraft.server.cmd.impl;
 import org.opencraft.server.cmd.Command;
 import org.opencraft.server.cmd.CommandParameters;
 import org.opencraft.server.model.Player;
-import org.opencraft.server.model.World;
 
 /**
  * Official /say command
@@ -65,7 +64,6 @@ public class SayCommand implements Command {
 		/* empty */
 	}
 	
-	@Override
 	public void execute(Player player, CommandParameters params) {
 		// Player using command is OP?
 		if (player.getAttribute("IsOperator") != null && player.getAttribute("IsOperator").equals("true")) {

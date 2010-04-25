@@ -62,12 +62,10 @@ public final class MinecraftCodecFactory implements ProtocolCodecFactory {
 		encoder = new MinecraftProtocolEncoder();
 	}
 	
-	@Override
 	public ProtocolDecoder getDecoder(IoSession session) throws Exception {
 		return decoder;
 	}
 	
-	@Override
 	public ProtocolEncoder getEncoder(IoSession session) throws Exception {
 		return encoder;
 	}

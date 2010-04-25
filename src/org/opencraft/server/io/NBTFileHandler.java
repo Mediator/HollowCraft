@@ -10,7 +10,6 @@ import java.io.*;
 import org.opencraft.server.model.Position;
 import org.opencraft.server.model.Rotation;
 import org.opencraft.server.model.Level;
-import org.opencraft.server.model.World;
 import org.opencraft.server.model.Environment;
 
 /**
@@ -117,9 +116,9 @@ public final class NBTFileHandler {
 	}
 
 	public static void save(Level lvl, String filename, boolean addNonStandardInfo) {
-		HashMap<String, Tag> rootItems = new HashMap();
+		HashMap<String, Tag> rootItems = new HashMap<String, Tag>();
 
-			HashMap<String, Tag> eItems = new HashMap();
+			HashMap<String, Tag> eItems = new HashMap<String, Tag>();
 			Environment env = lvl.getEnvironment();
 
 			ShortTag sgh = new ShortTag("SurroundingGroundHeight", (short)env.getSurroundingGroundHeight());
@@ -148,7 +147,7 @@ public final class NBTFileHandler {
 			//
 			// Map Items
 			//
-			HashMap<String, Tag> mapItems = new HashMap();
+			HashMap<String, Tag> mapItems = new HashMap<String, Tag>();
  
 			// Map data
 			// The heights here are NOT the same things
@@ -184,7 +183,7 @@ public final class NBTFileHandler {
 			mapItems.put("Data", dataTag);
 
 			// Spawn Items
-			ArrayList<Tag> spawnItems = new ArrayList(addNonStandardInfo ? 5 : 3);
+			ArrayList<Tag> spawnItems = new ArrayList<Tag>(addNonStandardInfo ? 5 : 3);
 
 			Position pos = lvl.getSpawnPosition();
 			ShortTag posx = new ShortTag("X", (short)pos.getX());
@@ -213,7 +212,7 @@ public final class NBTFileHandler {
 			//
 			// About Items
 			//
-			HashMap<String, Tag> aboutItems = new HashMap();
+			HashMap<String, Tag> aboutItems = new HashMap<String, Tag>();
 			StringTag name = new StringTag("Name",    lvl.getName());
 			StringTag auth = new StringTag("Author",  lvl.getAuthor());
 			LongTag   date = new LongTag("CreatedOn", lvl.getCreationDate());

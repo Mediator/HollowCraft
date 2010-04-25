@@ -171,7 +171,6 @@ public final class NBTInputStream implements Closeable {
 		}
 	}
 
-	@Override
 	public void close() throws IOException {
 		is.close();
 	}

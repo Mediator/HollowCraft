@@ -38,7 +38,6 @@ import org.opencraft.server.model.BlockBehaviour;
 import org.opencraft.server.model.BlockConstants;
 import org.opencraft.server.model.BlockManager;
 import org.opencraft.server.model.Level;
-import java.util.Random;
 
 /**
  * A block behaviour that handles water. Takes into account water's preference
@@ -47,17 +46,14 @@ import java.util.Random;
  */
 public class WaterBehaviour implements BlockBehaviour {
 	
-	@Override
 	public void handlePassive(Level level, int x, int y, int z, int type) {
 		level.queueActiveBlockUpdate(x, y, z);
 	}
 	
-	@Override
 	public void handleDestroy(Level level, int x, int y, int z, int type) {
 		
 	}
 	
-	@Override
 	public void handleScheduledBehaviour(Level level, int x, int y, int z, int type) {
 		
 		// represents different directions in the Cartesian plane, z axis is
@@ -88,7 +84,6 @@ public class WaterBehaviour implements BlockBehaviour {
 			level.setBlock(x, y, z, BlockConstants.AIR);
 		// spread outward
 		} else {
-			Random r = new Random();
 			OUTERMOST_OUTWARD: for (int i = 0; i <= spreadRules.length - 1; i++) {
 				byte thisOutwardBlock = level.getBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2]);
 				

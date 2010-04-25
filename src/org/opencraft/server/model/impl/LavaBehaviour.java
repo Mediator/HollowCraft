@@ -44,17 +44,14 @@ import org.opencraft.server.model.Level;
  */
 
 public class LavaBehaviour implements BlockBehaviour {
-	@Override
 	public void handlePassive(Level level, int x, int y, int z, int type) {
 		level.queueActiveBlockUpdate(x, y, z);
 	}
 	
-	@Override
 	public void handleDestroy(Level level, int x, int y, int z, int type) {
 		
 	}
 	
-	@Override
 	public void handleScheduledBehaviour(Level level, int x, int y, int z, int type) {
 		// represents the different directions lava can spread
 		// x, y, z

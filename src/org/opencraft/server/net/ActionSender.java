@@ -38,9 +38,7 @@ import org.opencraft.server.model.Entity;
 import org.opencraft.server.model.Level;
 import org.opencraft.server.model.Position;
 import org.opencraft.server.model.Rotation;
-import org.opencraft.server.model.World;
 import org.opencraft.server.net.packet.PacketBuilder;
-import org.opencraft.server.net.packet.PacketManager;
 
 import org.opencraft.server.persistence.LoadPersistenceRequest;
 import org.opencraft.server.persistence.SavedGameManager;

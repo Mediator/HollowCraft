@@ -44,17 +44,14 @@ import org.opencraft.server.model.Level;
  */
 public class GrassBehaviour implements BlockBehaviour {
 
-	@Override
 	public void handleDestroy(Level level, int x, int y, int z, int type) {
 		
 	}
 	
-	@Override
 	public void handlePassive(Level level, int x, int y, int z, int type) {
 		level.queueActiveBlockUpdate(x, y, z);
 	}
 	
-	@Override
 	public void handleScheduledBehaviour(Level level, int x, int y, int z, int type) {
 		// do we need to die?
 

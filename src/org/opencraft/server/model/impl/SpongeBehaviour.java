@@ -58,7 +58,6 @@ public class SpongeBehaviour implements BlockBehaviour {
 		}
 	}
 	
-	@Override
 	public void handleDestroy(Level level, int x, int y, int z, int type) {
 		for (int spongeX = -1 * (spongeRadius + 1); spongeX <= spongeRadius + 1; spongeX++) {
 			for (int spongeY = -1 * (spongeRadius + 1); spongeY <= spongeRadius + 1; spongeY++) {

@@ -36,7 +36,6 @@ package org.opencraft.server.cmd.impl;
 import org.opencraft.server.cmd.Command;
 import org.opencraft.server.cmd.CommandParameters;
 import org.opencraft.server.model.Player;
-import org.opencraft.server.model.World;
 
 /**
  * Official /help command
@@ -65,7 +64,6 @@ public class HelpCommand implements Command {
 		/* empty */
 	}
 	
-	@Override
 	public void execute(Player player, CommandParameters params) {
 		String message = player.getWorld().getGameMode().listCommands();
 		while (message.length() > 0) {

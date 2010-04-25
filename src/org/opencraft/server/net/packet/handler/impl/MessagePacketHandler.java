@@ -39,7 +39,6 @@ import java.util.Map;
 
 import org.opencraft.server.cmd.Command;
 import org.opencraft.server.cmd.CommandParameters;
-import org.opencraft.server.model.World;
 import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.net.packet.Packet;
 import org.opencraft.server.net.packet.handler.PacketHandler;
@@ -50,7 +49,6 @@ import org.opencraft.server.net.packet.handler.PacketHandler;
  */
 public class MessagePacketHandler implements PacketHandler<MinecraftSession> {
 	
-	@Override
 	public void handlePacket(MinecraftSession session, Packet packet) {
 		if (!session.isAuthenticated()) {
 			return;
