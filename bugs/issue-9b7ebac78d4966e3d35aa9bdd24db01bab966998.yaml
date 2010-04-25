@@ -5,7 +5,7 @@ type: :feature
 component: level-builder
 release: "0.1"
 reporter: Adam Liszka <sidein@usiah.com>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2010-04-25 18:34:12.861322 Z
 references: []
@@ -15,4 +15,8 @@ log_events:
 - - 2010-04-25 18:34:16.702495 Z
   - Adam Liszka <sidein@usiah.com>
   - created
+  - ""
+- - 2010-04-25 20:26:37.893494 Z
+  - Adam Liszka <sidein@usiah.com>
+  - changed status from unstarted to in_progress
   - ""
