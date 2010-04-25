@@ -2,7 +2,6 @@ package org.opencraft.server.io;
 
 import java.io.IOException;
 import org.opencraft.server.model.Level;
-import org.opencraft.server.model.World;
 import java.util.logging.Logger;
 
 /**

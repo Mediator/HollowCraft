@@ -5,8 +5,8 @@ type: :feature
 component: level-builder
 release: "0.1"
 reporter: Adam Liszka <sidein@usiah.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-04-25 18:34:12.861322 Z
 references: []
 
@@ -16,3 +16,11 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - created
   - ""
+- - 2010-04-25 20:26:37.893494 Z
+  - Adam Liszka <sidein@usiah.com>
+  - changed status from unstarted to in_progress
+  - ""
+- - 2010-04-25 21:29:22.661252 Z
+  - Adam Liszka <sidein@usiah.com>
+  - closed with disposition fixed
+  - It generates a level suitable for pixel art creation, but can be flooded by the ocean. Propose a change that has builders return Levels instead of byte[][][]

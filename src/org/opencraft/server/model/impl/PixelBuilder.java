@@ -1,4 +1,4 @@
-package org.opencraft.server.model;
+package org.opencraft.server.model.impl;
 
 /*
  * OpenCraft License
@@ -33,51 +33,39 @@ package org.opencraft.server.model;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.util.logging.Logger;
-import java.util.Random;
+import org.opencraft.server.model.Builder;
+import org.opencraft.server.model.BlockConstants;
 
 /**
- * Level Builder Interface.
+ * Builds a level.
  * @author Adam Liszka
  */
 
-public abstract class Builder {
-	protected byte[][][] m_blocks;
+public class PixelBuilder extends Builder {
 
-	protected static final Logger m_logger = Logger.getLogger(Builder.class.getName());
+	public PixelBuilder(int width, int height, int depth) {
+		super(width, height, depth);
 
-	protected int m_height;
-	
-	protected int m_depth;
-	
-	protected int m_width;
+		for(int x = 0; x < m_width; x++) {
+			for(int z = 0; z < m_depth; z++) {
+				m_blocks[x][0][z] = BlockConstants.CLOTH_WHITE;
+				m_blocks[x][m_height-1][z] = BlockConstants.CLOTH_WHITE;
+			}
+		}
 
-	protected Random m_random;
-
-	/*public Builder(Level level) {
-		m_height = level.getHeight();
-		m_width = level.getWidth();
-		m_depth = level.getDepth();
-		blocks = level.getBlocks();
-		m_contour = new int[m_width][m_height];
-
-		for(int x = 0;x<m_width;x++)
-			for(int y = 0;y<m_height;y++)
-				m_contour[x][y] = 0;
-		m_random = new Random();
-	}*/
-
-	public Builder(int width, int height, int depth) {
-		m_height  = height;
-		m_width   = width;
-		m_depth   = depth;
-		m_blocks  = new byte[width][height][depth];
+		for(int y = 1;y < m_height - 1; y++) {
+			for(int z = 0; z < m_depth; z++) {
+				m_blocks[0][y][z] = BlockConstants.CLOTH_WHITE;
+				m_blocks[m_width-1][y][z] = BlockConstants.CLOTH_WHITE;
+			}
+		}
 	}
 
-	public byte[][][] getBlocks() {
-		return m_blocks;
+	public byte[][][] generate() {
+		return getBlocks();
 	}
 
-	public abstract byte[][][] generate();
-	public abstract byte[][][] generate(long seed);
+        public byte[][][] generate(long seed) {
+		return getBlocks();
+	}
 }
