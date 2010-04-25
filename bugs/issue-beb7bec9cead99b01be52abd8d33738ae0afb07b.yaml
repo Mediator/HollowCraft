@@ -5,8 +5,8 @@ type: :feature
 component: opencraft-acm
 release: 
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-04-22 19:43:17.699437 Z
 references: []
 
@@ -20,3 +20,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - changed status from unstarted to in_progress
   - Started working
+- - 2010-04-25 17:33:57.730358 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition fixed
+  - We now have multiworld support. Its basic and needs more features, but its there.
