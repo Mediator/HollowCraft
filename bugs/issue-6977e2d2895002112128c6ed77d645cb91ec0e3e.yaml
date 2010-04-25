@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Trees
+desc: We need trees.
+type: :task
+component: level-builder
+release: "0.1"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-04-25 17:37:32.227440 Z
+references: []
+
+id: 6977e2d2895002112128c6ed77d645cb91ec0e3e
+log_events: 
+- - 2010-04-25 17:37:33.770336 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

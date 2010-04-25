@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Ore veins
+desc: mining is all about mining, yes?
+type: :task
+component: level-builder
+release: "0.1"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-04-25 17:38:02.227425 Z
+references: []
+
+id: 418096e40952411d01aa688e2a7e4fd8dbbd3ced
+log_events: 
+- - 2010-04-25 17:38:03.572334 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
