@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Lvl file saving
+desc: |-
+  The C# server (mcsharp) uses a format type known as .lvl. It does not follow the NBT format. Currently all the commonly known
+  servers only support loading from and saving to one file type. .lvl saving would complete the .lvl format support.
+type: :feature
+component: opencraft-acm
+release: 
+reporter: Adam Liszka <sidein@usiah.com>
+status: :unstarted
+disposition: 
+creation_time: 2010-04-25 18:52:26.125320 Z
+references: []
+
+id: 963f2fd9c47de719bd9b1b8197d1a2b1537e5070
+log_events: 
+- - 2010-04-25 18:52:29.830244 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - ""

@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Old .mine/.dat file loading
+desc: |-
+  Since the WoM client still dumps .dat files and the official client saves .mine files, we should
+  be able to load up that file type into the server, even if we don't save back to it.
+type: :task
+component: opencraft-acm
+release: 
+reporter: Adam Liszka <sidein@usiah.com>
+status: :unstarted
+disposition: 
+creation_time: 2010-04-25 18:41:38.301412 Z
+references: []
+
+id: 5292c200de3190f4ccaacde75a37cbbf08cee1e4
+log_events: 
+- - 2010-04-25 18:41:39.709525 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - ""

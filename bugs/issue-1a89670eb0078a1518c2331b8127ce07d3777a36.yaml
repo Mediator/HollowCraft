@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Lvl file loading
+desc: |-
+  The C# server (mcsharp) uses a format type known as .lvl. It does not follow the NBT format. It would be nice if people switching
+  from mcsharp could just put their .lvl into data/maps and run.
+type: :feature
+component: opencraft-acm
+release: 
+reporter: Adam Liszka <sidein@usiah.com>
+status: :unstarted
+disposition: 
+creation_time: 2010-04-25 18:44:40.437372 Z
+references: []
+
+id: 1a89670eb0078a1518c2331b8127ce07d3777a36
+log_events: 
+- - 2010-04-25 18:44:41.245280 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - ""

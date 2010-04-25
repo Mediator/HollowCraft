@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Implement Cuboid
+desc: Implement a command that is similar to the /cuboid command found in the C# Minecraft Server (mcsharp).
+type: :feature
+component: opencraft-acm
+release: "0.1"
+reporter: Adam Liszka <sidein@usiah.com>
+status: :unstarted
+disposition: 
+creation_time: 2010-04-25 18:38:02.877306 Z
+references: []
+
+id: 45abad5ba85919caf0de032d28a7eda0c89f2b6a
+log_events: 
+- - 2010-04-25 18:38:51.789242 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - /cuboid is a hassle to type a lot, perhaps rename it or make an alias command?
