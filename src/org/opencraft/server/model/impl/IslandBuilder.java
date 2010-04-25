@@ -59,8 +59,8 @@ public class IslandBuilder extends Builder {
 	Random m_random;
 
 	public IslandBuilder(int width, int height, int depth) {
-		super(height, width, depth);
-
+		super(width, height, depth);
+		m_contour = new int[width][height];
 	}
 
 	public byte[][][] generate() {
