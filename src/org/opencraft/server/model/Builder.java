@@ -59,16 +59,14 @@ public class Builder {
 	
 	int m_width;
 
-	int m_scale = 1;
-
 	Random m_random;
 
-	public Builder(int width, int height, int depth) {
-		m_height  = height;
-		m_width   = width;
-		m_depth   = depth;
-		blocks    = new byte[width][height][depth];
-		m_contour = new int[width][height];
+	public Builder(Level level) {
+		m_height = level.getHeight();
+		m_width = level.getWidth();
+		m_depth = level.getDepth();
+		blocks = level.getBlocks();
+		m_contour = new int[m_width][m_height];
 
 		for(int x = 0;x<m_width;x++)
 			for(int y = 0;y<m_height;y++)
@@ -76,19 +74,119 @@ public class Builder {
 		m_random = new Random();
 	}
 
-	public Builder(int width, int height, int depth, long seed) {
-		m_height = height;
-		m_width = width;
-		m_depth = depth;
-		blocks = new byte[width][height][depth];
+	public void setSeed(long seed) {
 		m_random = new Random(seed);
-		for(int x = 0;x<m_width;x++)
-			for(int y = 0;y<m_height;y++)
-				m_contour[x][y] = 0;
 	}
 
-	public void setScale(int scale) {
-		m_scale = scale;
+	public void build() {
+		//sculptHills(1000);
+		//carveLake(m_width/4, m_height/2);
+		//m_antiAlias = true;
+		//carveLake(m_width/2, m_height/2);
+		//carveCanyon();
+		raiseTerrain();
+		applyContour();
+		//generateCaverns(100);
+		buildLavaBed(2);
+		simulateOceanFlood();
+	}
+
+	public void raiseTerrain() {
+		boolean[][] prevContour = new boolean[m_width][m_height];
+		boolean[][] curContour = new boolean[m_width][m_height];
+		for(int x = 0;x<m_width;x++) {
+			for(int y = 0;y<m_height;y++) {
+				curContour[x][y] = (m_random.nextInt(100) <= 50);
+			}
+		}
+		for(int count = 0;count<4;count++) {
+			System.arraycopy(curContour, 0, prevContour, 0, curContour.length);
+			for(int x = 0;x<m_width;x++) {
+				for(int y = 0;y<m_width;y++) {
+					curContour[x][y] = simulateCell(prevContour, x, y);
+				}
+			}
+		}
+		int x = 0;
+		int y = 0;
+		boolean[][] visited = new boolean[m_width][m_height];
+		while(y < m_height - 1) {
+			LinkedList<Position> path = new LinkedList<Position>();
+			if (curContour[x][y]) {
+				Position pos = new Position(x, y, 0);
+				path.offer(pos);
+			} else {
+				m_contour[x][y] = -3;
+			}
+			int height = m_random.nextInt(6);
+			PATH: while (path.size() > 0) {
+				Position cur = path.remove();
+				if (visited[cur.getX()][cur.getY()])
+					continue PATH;
+				if (!curContour[cur.getX()][cur.getY()])
+					continue PATH;
+				visited[cur.getX()][cur.getY()] = true;
+				m_contour[cur.getX()][cur.getY()] = height;
+				if (cur.getX() > 0 && cur.getX() < m_width-1) {
+					path.offer(new Position(cur.getX()-1, cur.getY(), 0));
+					path.offer(new Position(cur.getX()+1, cur.getY(), 0));
+				}
+				if (cur.getY() > 0 && cur.getY() < m_width-1) {
+					path.offer(new Position(cur.getX(), cur.getY()-1, 0));
+					path.offer(new Position(cur.getX(), cur.getY()+1, 0));
+				}
+			}
+			x++;
+			if (x == m_height) {
+				x = 0;
+				y++;
+			}
+		}
+		for(x =0;x<m_width;x++) {
+			for(y = 0;y<m_height;y++) { 
+				if (curContour[x][y])
+					averageArea(x, y, 2);
+			}
+		}
+	}
+
+	private boolean simulateCell(boolean[][] grid, int x, int y) {
+		int count = 0;
+		boolean isAlive = grid[x][y];
+		if (isAlive)
+			count++;
+		if (x > 0 && x < m_width-1) {
+			if (grid[x-1][y])
+				count++;
+			if (grid[x+1][y])
+				count++;
+		}
+
+		if (y > 0 && y < m_height-1) {
+			if (grid[x][y+1])
+				count++;
+			if (grid[x][y-1])
+				count++;
+		}
+
+		if (y > 0) {
+			if (x > 0)
+				if (grid[x-1][y-1])
+					count++;
+			if (x < m_width-1)
+				if (grid[x+1][y-1])
+					count++;
+		}
+		if (y < m_height-1) {
+			if (x > 0)
+				if (grid[x-1][y+1])
+					count++;
+			if (x < m_width-1)
+				if (grid[x+1][y+1])
+					count++;
+		}
+
+		return count >= 5;
 	}
 
 	public byte[][][] getBlocks() {
@@ -103,8 +201,8 @@ public class Builder {
 					maxHeight = m_contour[x][y];
 			}
 		}
+		logger.info("Applying contour");
 		for(int x = 0; x < m_width; x++) {
-			//logger.info("Applying contour: "+(x*m_height)+"/"+(m_height*m_width));
 			for(int y = 0; y < m_height; y++) {
 				int h = Math.max(0, Math.min(m_depth-1, (m_depth/2) + m_contour[x][y]));
 				int d = m_random.nextInt(8) - 4;
@@ -136,8 +234,8 @@ public class Builder {
 		else
 			m_contour[centerX][centerY] = height;
 
-		for(int x = Math.max(0, centerX-radius);x < Math.min(m_width-1, centerX+radius);x++) {
-			for(int y = Math.max(0, centerY-radius);y < Math.min(m_height-1, centerY+radius);y++) {
+		for(int x = centerX-radius;x < centerX+radius;x++) {
+			for(int y = centerY-radius;y < centerY+radius;y++) {
 				double distance = Math.sqrt(Math.pow(x-centerX,2)+Math.pow(y-centerY,2));
 				if (Math.abs(radius-distance) <= 1)
 					interpolateLine(x, y, centerX, centerY);
@@ -145,40 +243,77 @@ public class Builder {
 		}
 	}
 
+	private boolean m_antiAlias = false;
+
+	private int ceilInt(double val) {
+		return (int)(Math.ceil(Math.abs(val))*((val < 0) ? -1 : 1));
+	}
+
 	private void interpolateLine(int startX, int startY, int destX, int destY) {
+		while (startX < 0 || startY < 0 || startX > m_width-1 || startY > m_height-1) {
+			double direction = Math.atan2(destY-startY, destX-startX);
+			startX += ceilInt(Math.cos(direction));
+			startY += ceilInt(Math.sin(direction));
+		}
 		int startHeight = m_contour[startX][startY];
 		int endHeight = m_contour[destX][destY];
+		if (startHeight == endHeight)
+			return;
 		double distance = Math.sqrt(Math.pow(startX-destX,2)+Math.pow(startY-destY,2));
-		int nextX = startX;
-		int nextY = startY;
-		double value = Math.sqrt(Math.pow(nextX-destX,2)+Math.pow(nextY-destY,2))/distance;
+		double realX = startX;
+		double realY = startY;
+		double value = 1;
 		while (value > 0) {
+			if (Math.abs(destX-realX) < 1.2 && Math.abs(destY-realY) < 1.2)
+				break;
 
-			value = Math.sqrt(Math.pow(nextX-destX,2)+Math.pow(nextY-destY,2))/distance;
+			double direction = Math.atan2(destY-realY, destX-realX);
+			value = Math.sqrt(Math.pow(realX-destX,2)+Math.pow(realY-destY,2))/distance;
+			double height;
 
 			if (value < 0.5)
-				m_contour[nextX][nextY] = (int)((startHeight-endHeight)/2*Math.pow(value*2,3) + endHeight);
+				height = (startHeight-endHeight)/2*Math.pow(value*2,3) + endHeight;
 			else
-				m_contour[nextX][nextY] = (int)((startHeight-endHeight)/2*(Math.pow(value*2-2,3) + 2) + endHeight);
+				height = (startHeight-endHeight)/2*(Math.pow(value*2-2,3) + 2) + endHeight;
 
-			double direction = Math.atan2(destY-nextY, destX-nextX);
+
 			double dx = Math.cos(direction);
 			double dy = Math.sin(direction);
-			if (dx == 1) {
-				dx = 1;
+			if (dx == -1 || dx == 1)
 				dy = 0;
-			} else if (dx == -1) {
-				dx = -1;
-				dy = 0;
-			} else if (dy == 1) {
-				dy = 1;
+			if (dy == -1 || dy == 1)
 				dx = 0;
-			} else if (dy == -1) {
-				dy = -1;
-				dx = 0;
+
+			realX += ceilInt(dx);
+			realY += ceilInt(dy);
+			int centerX  = ceilInt(realX);
+			int centerY = ceilInt(realY);
+
+			double dTopX = Math.cos(direction+Math.PI/2);
+			double dTopY = Math.sin(direction+Math.PI/2);
+			int topX = ceilInt(realX+dTopX);
+			int topY = ceilInt(realY+dTopY);
+
+			double dBottomX = Math.cos(direction-Math.PI/2);
+			double dBottomY = Math.sin(direction-Math.PI/2);
+			int bottomX = ceilInt(realX+dBottomX);
+			int bottomY = ceilInt(realY+dBottomY);
+
+			if (m_antiAlias) {
+				m_contour[centerX][centerY] = (int)(Math.sqrt(Math.pow(centerX-realX,2)+Math.pow(centerY-realY,2))*height);
+				m_contour[topX][topY] = (int)(Math.sqrt(Math.pow(topX-realX,2)+Math.pow(topY-realY,2))*height);
+				m_contour[bottomX][bottomY] = (int)(Math.sqrt(Math.pow(bottomX-realX,2)+Math.pow(bottomY-realY,2))*height);
+			} else {
+				m_contour[centerX][centerY] = (int)height;
 			}
-			nextX += (int) (Math.ceil(Math.abs(dx)) * ((dx < 0) ? -1 : 1));
-			nextY += (int) (Math.ceil(Math.abs(dy)) * ((dy < 0) ? -1 : 1));
+		}
+	}
+
+	private void averageArea(int sx, int sy, int radius) {
+		for(int x = Math.max(0, sx - radius);x< Math.min(m_width, sx+radius);x++) {
+			for(int y = Math.max(0, sy-radius);y<Math.min(m_height, sy+radius);y++) {
+				m_contour[x][y] = (m_contour[sx][sy]+m_contour[x][y])/2;
+			}
 		}
 	}
 
@@ -188,7 +323,7 @@ public class Builder {
 				logger.info("Sculpting hills: "+i+"/"+iterations);
 			int x = m_random.nextInt(m_width);
 			int y = m_random.nextInt(m_height);
-			int height = (m_random.nextInt(10)-5)*m_scale;
+			int height = (m_random.nextInt(10)-5);
 			int radius = m_random.nextInt(20) + 15;
 			sculptHill(x, y, height, radius);
 		}
@@ -196,11 +331,11 @@ public class Builder {
 
 	public void generateCaverns(int count) {
 		for (int i = 0; i < count;i++) {
-			//logger.info("Generating underground erosion bubbles: "+i+"/"+count);
+			logger.info("Generating underground erosion bubbles: "+i+"/"+count);
 			int x = m_random.nextInt(m_width);
 			int y = m_random.nextInt(m_height);
 			int z = m_random.nextInt(m_depth/4);
-			int radius = m_random.nextInt(60)+40*m_scale;
+			int radius = m_random.nextInt(60)+40;
 			radius = 6;
 			int type = m_random.nextInt(100);
 			if (type > 90)
@@ -238,9 +373,9 @@ public class Builder {
 	}
 
 	public void buildLavaBed(int depth) {
+		logger.info("Building lava bed.");
 		for (int z = 0;z < depth; z++) {
 			for(int x = 0;x < m_width; x++) {
-				//logger.info("Building lava bed: "+(x*m_height)+"/"+(m_width*m_height));
 				for (int y = 0; y < m_height; y++ ) {
 					blocks[x][y][z] = (byte) BlockConstants.LAVA;
 				}
@@ -248,13 +383,12 @@ public class Builder {
 		}
 	}
 
-	public void carveLake() {
-		int x = m_random.nextInt(m_width);
-		int y = m_random.nextInt(m_height);
-		int avgDepth = (m_random.nextInt(6)+6)*m_scale;
-		int radius = (m_random.nextInt(10)+10)*m_scale;
+	public void carveLake(int x, int y) {
+		logger.info("Carving a lake at "+x+","+y);
+		int avgDepth = (m_random.nextInt(6)+8);
+		int radius = (m_random.nextInt(30)+30);
 		carveLake(x, y, new ArrayList<Position>(), radius, avgDepth);
-		int edgeHeight = avgDepth/m_scale;
+		int edgeHeight = avgDepth;
 	}
 
 	private void carveLake(int x, int y, ArrayList<Position> visited, int distance, int depth) {
@@ -270,28 +404,32 @@ public class Builder {
 				return;
 		visited.add(cur);
 
-		int delta = depth;
+		int delta = m_random.nextInt(depth);
 
 		carveLake(x+1, y, visited, distance-1, delta);
-		carveLake(x, y+1, visited, distance-1, delta);
 		carveLake(x-1, y, visited, distance-1, delta);
-		carveLake(x, y-1, visited, distance/2, delta);
+		carveLake(x, y+1, visited, distance-1, delta);
+		carveLake(x, y-1, visited, distance-1, delta);
 		sculptHill(x, y, -depth, distance);
 	}
 
 	public void carveCanyon() {
 		int startX = m_random.nextInt(m_width);
 		int startY = m_random.nextInt(m_height);
+		startX = m_width/2;
+		startY = m_height/2;
 		double direction = m_random.nextDouble()*Math.PI*2;
-		int depth = m_random.nextInt(4)+4*m_scale;
+		direction = 0;
+		int depth = m_random.nextInt(4)+4;
+		depth = 5;
 		carveCanyon(startX, startY, direction, depth);
-		carveCanyon(startX, startY, m_random.nextDouble()*Math.PI*2, depth);
+		//carveCanyon(startX, startY, m_random.nextDouble()*Math.PI*2, depth);
 	}
 
 	private void carveCanyon(int x, int y, double direction, int depth) {
 		int nextX = x;
 		int nextY = y;
-		while (nextX > 0 && nextY > 0 && nextY < m_height-1 && nextX < m_width-1) {
+		while (nextX > 0 && nextY > 0 && nextY < m_height-1 && nextX < m_width-1 && depth > 0) {
 			sculptHill(nextX, nextY, -depth, 10, true);
 			/*for(int i = Math.max(0,nextX-6);i<Math.min(m_width-1, nextX+6);i++) {
 				for(int j = Math.max(0,nextY-6);j<Math.min(m_height-1,nextY+6);j++) {
@@ -299,6 +437,7 @@ public class Builder {
 				}
 			}*/
 			double choice = m_random.nextGaussian();
+			choice = 0;
 			if (choice > 0.7)
 				direction+=m_random.nextDouble()*Math.PI*2;
 			if (choice < -0.7)
@@ -306,8 +445,8 @@ public class Builder {
 
 			double dx = Math.cos(direction);
 			double dy = Math.sin(direction);
-			nextX += Math.ceil(Math.abs(dx)) * ((dx < 0) ? -1 : 1) * 4;
-			nextY += Math.ceil(Math.abs(dy)) * ((dy < 0) ? -1 : 1) * 4;
+			nextX += Math.ceil(Math.abs(dx)) * ((dx < 0) ? -1 : 1);
+			nextY += Math.ceil(Math.abs(dy)) * ((dy < 0) ? -1 : 1);
 		}
 	}
 
@@ -363,19 +502,19 @@ public class Builder {
 
 				floodBlock((int)(p.getX()), (int)(p.getY()), oceanLevel);
 
-				if (blocks[(int)(p.getX() - 1)][(int)(p.getY())][oceanLevel] == BlockConstants.AIR) {
+				if (p.getX() > 0 && blocks[(int)(p.getX() - 1)][(int)(p.getY())][oceanLevel] == BlockConstants.AIR) {
 					toFlood.add(new Point((int)(p.getX() - 1), (int)(p.getY())));
 				}
 				
-				if (blocks[(int)(p.getX() + 1)][(int)(p.getY())][oceanLevel] == BlockConstants.AIR) {
+				if (p.getX() < m_width -1 && blocks[(int)(p.getX() + 1)][(int)(p.getY())][oceanLevel] == BlockConstants.AIR) {
 					toFlood.add(new Point((int)(p.getX() + 1), (int)(p.getY())));
 				}
 				
-				if (blocks[(int)(p.getX())][(int)(p.getY() - 1)][oceanLevel] == BlockConstants.AIR) {
+				if (p.getY() > 0 && blocks[(int)(p.getX())][(int)(p.getY() - 1)][oceanLevel] == BlockConstants.AIR) {
 					toFlood.add(new Point((int)(p.getX()), (int)(p.getY() - 1)));
 				}
 				
-				if (blocks[(int)(p.getX())][(int)(p.getY() + 1)][oceanLevel] == BlockConstants.AIR) {
+				if (p.getY() < m_height -1 && blocks[(int)(p.getX())][(int)(p.getY() + 1)][oceanLevel] == BlockConstants.AIR) {
 					toFlood.add(new Point((int)(p.getX()), (int)(p.getY() + 1)));
 				}
 			}

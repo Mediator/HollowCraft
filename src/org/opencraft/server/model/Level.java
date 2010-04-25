@@ -114,25 +114,18 @@ public class Level {
 		m_spawnRotation = new Rotation(0, 0);
 
 
-		Builder b = new Builder(m_width, m_height, m_depth);
-		b.setScale(2);
-		b.sculptHills(1000);
-		b.carveLake();
-		b.carveCanyon();
-		b.applyContour();
-		b.generateCaverns(100);
-		b.buildLavaBed(2);
-		//b.simulateOceanFlood();
+		Builder b = new Builder(this);
+		b.build();
 		m_blocks = b.getBlocks();
 	
 		for (int x = 0;x < m_width; x++) {
-			//m_logger.info("Activating ocean: " + (x * 2) + "/" + (m_width * 2 + m_height * 2));
+			m_logger.fine("Activating ocean: " + (x * 2) + "/" + (m_width * 2 + m_height * 2));
 			queueTileUpdate(x, 0, m_depth/2 - 1);
 			queueTileUpdate(x, m_height - 1, m_depth/2 - 1);
 		}
 
 		for (int y = 0;y < m_height; y++) {
-			//m_logger.info("Activating ocean: " + (y * 2 + m_width * 2) + "/" + (m_width * 2 + m_height * 2));
+			m_logger.fine("Activating ocean: " + (y * 2 + m_width * 2) + "/" + (m_width * 2 + m_height * 2));
 			queueTileUpdate(0, y, m_depth/2 - 1);
 			queueTileUpdate(m_width - 1, y, m_depth/2 - 1);
 		}
