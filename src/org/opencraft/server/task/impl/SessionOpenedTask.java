@@ -56,7 +56,6 @@ public final class SessionOpenedTask implements Task {
 		this.session = session;
 	}
 	
-	@Override
 	public void execute() {
 		session.setAttribute("attachment", new MinecraftSession(session));
 	}

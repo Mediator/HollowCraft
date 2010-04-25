@@ -62,7 +62,6 @@ public class HeartbeatTask extends ScheduledTask {
 	}
 
 
-	@Override
 	public void execute() {
 		if (this.getDelay() == 0) {
 			this.setDelay(DELAY);

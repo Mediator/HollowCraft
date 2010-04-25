@@ -12,6 +12,9 @@
 	<target name="build" depends="init">
 		<javac srcdir="src" classpath="${toString:libs}" destdir="bin" debug="true"/>
 	</target>
+	<target name="gcj" depends="init">
+		<javac srcdir="src" classpath="${toString:libs}" compiler="gcj" destdir="bin" debug="true"/>
+	</target>
 	<target name="clean">
 		<delete dir="bin"/>
 	</target>
