@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Ocean Flooding
+desc: During level generation, simulate the flooding of the ocean to save on cpu cycles after world generation. It's partially implemented atm.
+type: :task
+component: level-builder
+release: "0.1"
+reporter: Adam Liszka <sidein@usiah.com>
+status: :unstarted
+disposition: 
+creation_time: 2010-04-25 20:29:54.669582 Z
+references: []
+
+id: ccb65eefde1e4c17dae35c8a10811e5b18472c56
+log_events: 
+- - 2010-04-25 20:30:19.357238 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - Current implementation crashes the server when used and doesn't work properly.

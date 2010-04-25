@@ -1,1 +1,1 @@
-ant run-server
+ant run

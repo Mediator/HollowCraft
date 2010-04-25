@@ -41,6 +41,8 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import org.opencraft.server.model.Environment;
+import org.opencraft.server.model.impl.PixelBuilder;
+import org.opencraft.server.model.impl.IslandBuilder;
 
 /**
  * Represents the actual level.
@@ -114,16 +116,8 @@ public class Level {
 		m_spawnRotation = new Rotation(0, 0);
 
 
-		Builder b = new Builder(m_width, m_height, m_depth);
-		b.setScale(2);
-		b.sculptHills(1000);
-		b.carveLake();
-		b.carveCanyon();
-		b.applyContour();
-		b.generateCaverns(100);
-		b.buildLavaBed(2);
-		//b.simulateOceanFlood();
-		m_blocks = b.getBlocks();
+		Builder b = new IslandBuilder(m_width, m_height, m_depth);
+		m_blocks = b.generate();
 	
 		for (int x = 0;x < m_width; x++) {
 			//m_logger.info("Activating ocean: " + (x * 2) + "/" + (m_width * 2 + m_height * 2));
