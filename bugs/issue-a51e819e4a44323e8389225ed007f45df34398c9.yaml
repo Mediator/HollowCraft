@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Automatically unload worlds
+desc: After worlds have been unused for a while, we should unload them.
+type: :task
+component: opencraft-acm
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-04-25 16:11:45.188419 Z
+references: []
+
+id: a51e819e4a44323e8389225ed007f45df34398c9
+log_events: 
+- - 2010-04-25 16:11:46.344324 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
