@@ -3,7 +3,7 @@ title: Automatically unload worlds
 desc: After worlds have been unused for a while, we should unload them.
 type: :task
 component: opencraft-acm
-release: 
+release: "0.1"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
 status: :unstarted
 disposition: 
@@ -15,4 +15,8 @@ log_events:
 - - 2010-04-25 16:11:46.344324 Z
   - Trever Fischer <tdfischer@fedoraproject.org>
   - created
+  - ""
+- - 2010-04-25 17:35:37.375360 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - assigned to release 0.1 from unassigned
   - ""
