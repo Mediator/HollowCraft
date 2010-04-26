@@ -11,13 +11,14 @@ import java.util.logging.Logger;
  */
 public final class SaveLevelTask extends ScheduledTask {
 	
-	private static final long DELAY = 600000;
+	private static final long DELAY = 120 * 1000; // Every 2 minutes
 	private Level m_lvl;
 	private Logger logger = Logger.getLogger(SaveLevelTask.class.getName());
 	
 	public SaveLevelTask(Level lvl) {
 		super(DELAY);
 		m_lvl = lvl;
+		execute();
 	}
 	
 	public void execute() {

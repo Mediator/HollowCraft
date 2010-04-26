@@ -248,7 +248,7 @@ public class IslandBuilder extends Builder {
 					maxHeight = m_contour[x][y];
 			}
 		}
-		m_logger.info("Applying contour");
+		//m_logger.info("Applying contour");
 		for(int x = 0; x < m_width; x++) {
 			for(int y = 0; y < m_height; y++) {
 				int h = Math.max(0, Math.min(m_depth-1, (m_depth/2) + m_contour[x][y]));
@@ -422,7 +422,7 @@ public class IslandBuilder extends Builder {
 	}
 
 	public void buildLavaBed(int depth) {
-		m_logger.info("Building lava bed.");
+		//m_logger.info("Building lava bed.");
 		for (int z = 0;z < depth; z++) {
 			for(int x = 0;x < m_width; x++) {
 				for (int y = 0; y < m_height; y++ ) {
