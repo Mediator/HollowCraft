@@ -56,12 +56,12 @@ public final class LevelManager {
 
 		if (type.equalsIgnoreCase("mclevel") || type.equalsIgnoreCase("NBT")) {
 			// TODO: Boolean should come from server config file
-			NBTFileHandler.save(lvl, "data/maps/" + lvl.getName(), true);
+			NBTFileHandler.save(lvl, "data/maps/" + lvl.getName()+"."+type, true);
 			return;
 		// Default Case
 		} else {
 			// TODO: Boolean should come from server config file
-			NBTFileHandler.save(lvl, "data/maps/" + lvl.getName(), true);
+			NBTFileHandler.save(lvl, "data/maps/" + lvl.getName()+".mclevel", true);
 			lvl.setFileType("mclevel");
 			return;
 		}
