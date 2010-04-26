@@ -157,7 +157,7 @@ public class IslandBuilder extends Builder {
 		int x = 0;
 		int y = 0;
 		boolean[][] visited = new boolean[m_width][m_height];
-		while(y < m_height - 1) {
+		while(y < m_height) {
 			LinkedList<Position> path = new LinkedList<Position>();
 			if (curContour[x][y]) {
 				Position pos = new Position(x, y, 0);
