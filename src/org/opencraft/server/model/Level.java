@@ -116,8 +116,8 @@ public class Level {
 		m_spawnRotation = new Rotation(0, 0);
 
 
-		Builder b = new IslandBuilder(m_width, m_height, m_depth);
-		m_blocks = b.generate();
+		Builder b = new IslandBuilder(this);
+		b.generate();
 	
 		for (int x = 0;x < m_width; x++) {
 			m_logger.fine("Activating ocean: " + (x * 2) + "/" + (m_width * 2 + m_height * 2));

@@ -44,6 +44,7 @@ import java.util.logging.Logger;
 import org.opencraft.server.model.Builder;
 import org.opencraft.server.model.BlockConstants;
 import org.opencraft.server.model.Position;
+import org.opencraft.server.model.Level;
 
 /**
  * Builds a level.
@@ -56,28 +57,13 @@ public class IslandBuilder extends Builder {
 
 	int m_scale = 1;
 
-	Random m_random;
 
-	public IslandBuilder(int width, int height, int depth) {
-		super(width, height, depth);
-		m_contour = new int[width][height];
+	public IslandBuilder(Level level) {
+		super(level);
+		m_contour = new int[m_width][m_height];
 	}
 
-	public byte[][][] generate() {
-		return generate(System.currentTimeMillis()); // this is the default Random seed
-	}
-
-	public byte[][][] generate(long seed) {
-		setSeed(seed);
-		build();
-		return getBlocks();
-	}
-
-	public void setSeed(long seed) {
-		m_random = new Random(seed);
-	}
-
-	public void build() {
+	public void generate() {
 		//sculptHills(1000);
 		//carveLake(m_width/4, m_height/2);
 		//m_antiAlias = true;
@@ -85,9 +71,71 @@ public class IslandBuilder extends Builder {
 		//carveCanyon();
 		raiseTerrain();
 		applyContour();
-		//generateCaverns(100);
+		generateCaverns(100);
 		buildLavaBed(2);
 		simulateOceanFlood();
+		plantTrees();
+	}
+
+	public void plantTrees() {
+		ArrayList<Position> treeList = new ArrayList<Position>();
+		for(int x = 0;x<m_width;x++) {
+			for(int y = 0;y<m_height;y++) {
+				boolean tooClose = false;
+				for(Position p : treeList) {
+					double distance = Math.sqrt(Math.pow(p.getX()-x,2)+Math.pow(p.getY()-y,2));
+					if (distance < 30)
+						tooClose = true;
+				}
+				if (!tooClose) {
+					if (m_random.nextInt(100) <= 5) {
+						for(int z = m_depth-1;z>0;z--) {
+							if ((m_blocks[x][y][z] == BlockConstants.DIRT || m_blocks[x][y][z] == BlockConstants.GRASS) && m_blocks[x][y][z+1] == BlockConstants.AIR) {
+								plantTree(x, y, z);
+								treeList.add(new Position(x, y, z));
+								break;
+							} else if (z < m_depth-1 && m_blocks[x][y][z+1] != BlockConstants.AIR) {
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public void plantTree(int rootX, int rootY, int rootZ) {
+		for(int z = rootZ;z < rootZ + 5;z++) {
+			m_blocks[rootX][rootY][z] = BlockConstants.TREE_TRUNK;
+		}
+		for(int width = 4;width>0;width--) {
+			leafLayer(rootX, rootY, rootZ+5+(4-width), width);
+		}
+	}
+
+	public void leafLayer(int cx, int cy, int cz, int width) {
+		for(int x = Math.max(0, cx-width);x<Math.min(m_width, cx+width);x++) {
+			for(int y = Math.max(0, cy-width);y<Math.min(m_height, cy+width);y++) {
+				m_blocks[x][y][cz] = BlockConstants.LEAVES;
+			}
+		}
+	}
+
+	public boolean findWater(int x, int y, int distance) {
+		return true;
+		/*
+		if (!(x > 0 && x < m_width && y > 0 && y < m_height))
+			return false;
+		if (distance == 0)
+			return false;
+		for (int z = m_depth-1;z>0;z--) {
+			if (m_blocks[x][y][z] == BlockConstants.WATER)
+				return true;
+			if (m_blocks[x][y][z] != BlockConstants.AIR && m_blocks[x][y][z+1] == BlockConstants.AIR)
+				return findWater(x+1, y, distance-1) || findWater(x-1, y, distance-1) || findWater(x, y-1, distance-1) || findWater(x, y+1, distance-1);
+		}
+		return false;
+		*/
 	}
 
 	public void raiseTerrain() {
@@ -95,7 +143,7 @@ public class IslandBuilder extends Builder {
 		boolean[][] curContour = new boolean[m_width][m_height];
 		for(int x = 0;x<m_width;x++) {
 			for(int y = 0;y<m_height;y++) {
-				curContour[x][y] = (m_random.nextInt(100) <= 50);
+				curContour[x][y] = (m_random.nextInt(100) <= 48);
 			}
 		}
 		for(int count = 0;count<4;count++) {
@@ -207,7 +255,9 @@ public class IslandBuilder extends Builder {
 				int d = m_random.nextInt(8) - 4;
 				for(int z = 0; z < m_depth; z++) {
 					int type = BlockConstants.AIR;
-					if (z >= h) {
+					if (z >= h && z < m_depth/2-1) {
+						type = BlockConstants.WATER;
+					} else if (z >= h) {
 						type = BlockConstants.AIR;
 					} else if(z == (h - 1)) {
 						type = BlockConstants.GRASS;
