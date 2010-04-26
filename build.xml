@@ -32,6 +32,19 @@
 			</assertions>
 		</java>
 	</target>
+	<target name="run-gcj" depends="gcj">
+		<java classname="org.opencraft.server.Server" fork="true">
+			<arg value="-Xms512m"/>
+			<arg value="-Xmx1024m"/>
+			<classpath>
+				<pathelement path="${toString:libs}"/>
+				<pathelement path="bin"/>
+		   	</classpath>
+			<assertions>
+				<enable/>
+			</assertions>
+		</java>
+	</target>
 	<target name="release" depends="rebuild">
 		<mkdir dir="release"/>
 		<jar destfile="release/opencraft.jar" basedir="bin" includes="**/*.class" update="true"/>

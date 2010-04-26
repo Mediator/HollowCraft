@@ -43,6 +43,11 @@ public final class LevelManager {
 		logger.info("Generating level instead of loading.");
 		Level lvl = new Level();
 		lvl.generateLevel();
+		String name = filename;
+		if (name.lastIndexOf(".") == -1) {
+			name += ".mclevel";
+		}
+		lvl.setName(name);
 		return lvl;
 	}
 
