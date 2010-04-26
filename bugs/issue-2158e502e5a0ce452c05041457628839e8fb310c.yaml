@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Investigate merging Level and World
+desc: There doesn't seem to be a good reason why the two classes are separate.
+type: :task
+component: opencraft-acm
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-04-25 17:47:22.829425 Z
+references: []
+
+id: 2158e502e5a0ce452c05041457628839e8fb310c
+log_events: 
+- - 2010-04-25 17:47:24.153336 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""

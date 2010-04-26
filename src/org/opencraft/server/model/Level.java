@@ -116,17 +116,17 @@ public class Level {
 		m_spawnRotation = new Rotation(0, 0);
 
 
-		Builder b = new IslandBuilder(m_width, m_height, m_depth);
-		m_blocks = b.generate();
+		Builder b = new IslandBuilder(this);
+		b.generate();
 	
 		for (int x = 0;x < m_width; x++) {
-			//m_logger.info("Activating ocean: " + (x * 2) + "/" + (m_width * 2 + m_height * 2));
+			m_logger.fine("Activating ocean: " + (x * 2) + "/" + (m_width * 2 + m_height * 2));
 			queueTileUpdate(x, 0, m_depth/2 - 1);
 			queueTileUpdate(x, m_height - 1, m_depth/2 - 1);
 		}
 
 		for (int y = 0;y < m_height; y++) {
-			//m_logger.info("Activating ocean: " + (y * 2 + m_width * 2) + "/" + (m_width * 2 + m_height * 2));
+			m_logger.fine("Activating ocean: " + (y * 2 + m_width * 2) + "/" + (m_width * 2 + m_height * 2));
 			queueTileUpdate(0, y, m_depth/2 - 1);
 			queueTileUpdate(m_width - 1, y, m_depth/2 - 1);
 		}

@@ -5,3 +5,4 @@ data/maps
 data/savedGames
 .ditz-config
 *.vim
+*.swp

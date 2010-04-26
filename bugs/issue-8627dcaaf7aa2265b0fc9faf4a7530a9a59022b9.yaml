@@ -5,8 +5,8 @@ type: :bugfix
 component: level-builder
 release: "0.1"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :wontfix
 creation_time: 2010-04-25 17:43:45.836428 Z
 references: []
 
@@ -20,3 +20,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - changed status from unstarted to in_progress
   - ""
+- - 2010-04-26 01:06:59.629353 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition wontfix
+  - It isn't antialiasing thats the problem. Its something else...

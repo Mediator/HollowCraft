@@ -35,6 +35,7 @@ package org.opencraft.server.model.impl.builders;
 
 import org.opencraft.server.model.Builder;
 import org.opencraft.server.model.BlockConstants;
+import org.opencraft.server.model.Level;
 
 /**
  * Builds a level.
@@ -43,9 +44,11 @@ import org.opencraft.server.model.BlockConstants;
 
 public class PixelBuilder extends Builder {
 
-	public PixelBuilder(int width, int height, int depth) {
-		super(width, height, depth);
+	public PixelBuilder(Level level) {
+		super(level);
+	}
 
+	public void  generate() {
 		for(int x = 0; x < m_width; x++) {
 			for(int z = 0; z < m_depth; z++) {
 				m_blocks[x][0][z] = BlockConstants.CLOTH_WHITE;
@@ -59,13 +62,5 @@ public class PixelBuilder extends Builder {
 				m_blocks[m_width-1][y][z] = BlockConstants.CLOTH_WHITE;
 			}
 		}
-	}
-
-	public byte[][][] generate() {
-		return getBlocks();
-	}
-
-        public byte[][][] generate(long seed) {
-		return getBlocks();
 	}
 }

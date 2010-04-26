@@ -34,6 +34,8 @@ package org.opencraft.server.model;
  */
 
 import java.util.logging.Logger;
+import java.util.Random;
+import org.opencraft.server.model.Level;
 
 /**
  * Level Builder Interface.
@@ -43,23 +45,27 @@ import java.util.logging.Logger;
 public abstract class Builder {
 	protected byte[][][] m_blocks;
 
-	protected static final Logger m_logger = Logger.getLogger(Level.class.getName());
+	protected static final Logger m_logger = Logger.getLogger(Builder.class.getName());
 
 	protected int m_height;
+	
 	protected int m_depth;
+	
 	protected int m_width;
 
-	public Builder(int width, int height, int depth) {
-		m_height  = height;
-		m_width   = width;
-		m_depth   = depth;
-		m_blocks  = new byte[width][height][depth];
+	protected Random m_random;
+
+	public void setSeed(long seed) {
+		m_random = new Random(seed);
 	}
 
-	public byte[][][] getBlocks() {
-		return m_blocks;
+	public Builder(Level level) {
+		m_height = level.getHeight();
+		m_width = level.getWidth();
+		m_depth = level.getDepth();
+		m_blocks = level.getBlocks();
+		m_random = new Random();
 	}
 
-	public abstract byte[][][] generate();
-	public abstract byte[][][] generate(long seed);
+	public abstract void generate();
 }
