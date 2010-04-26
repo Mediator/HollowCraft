@@ -5,7 +5,7 @@ type: :task
 component: level-builder
 release: "0.1"
 reporter: Adam Liszka <sidein@usiah.com>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2010-04-25 20:29:54.669582 Z
 references: []
@@ -16,3 +16,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - created
   - Current implementation crashes the server when used and doesn't work properly.
+- - 2010-04-25 22:23:08.133320 Z
+  - Adam Liszka <sidein@usiah.com>
+  - changed status from unstarted to in_progress
+  - ""

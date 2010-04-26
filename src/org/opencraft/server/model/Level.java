@@ -41,8 +41,8 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import org.opencraft.server.model.Environment;
-import org.opencraft.server.model.impl.PixelBuilder;
-import org.opencraft.server.model.impl.IslandBuilder;
+import org.opencraft.server.model.impl.builders.PixelBuilder;
+import org.opencraft.server.model.impl.builders.IslandBuilder;
 
 /**
  * Represents the actual level.
