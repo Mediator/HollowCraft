@@ -369,7 +369,7 @@ public class IslandBuilder extends Builder {
 	public void sculptHills(int iterations) {
 		for(int i = 0; i < iterations; i++) {
 			if (i % 1000 == 0)
-				m_logger.info("Sculpting hills: "+i+"/"+iterations);
+				m_logger.fine("Sculpting hills: "+i+"/"+iterations);
 			int x = m_random.nextInt(m_width);
 			int y = m_random.nextInt(m_height);
 			int height = (m_random.nextInt(10)-5);
@@ -380,7 +380,7 @@ public class IslandBuilder extends Builder {
 
 	public void generateCaverns(int count) {
 		for (int i = 0; i < count;i++) {
-			m_logger.info("Generating underground erosion bubbles: "+i+"/"+count);
+			m_logger.fine("Generating underground erosion bubbles: "+i+"/"+count);
 			int x = m_random.nextInt(m_width);
 			int y = m_random.nextInt(m_height);
 			int z = m_random.nextInt(m_depth/4);
@@ -433,7 +433,6 @@ public class IslandBuilder extends Builder {
 	}
 
 	public void carveLake(int x, int y) {
-		m_logger.info("Carving a lake at "+x+","+y);
 		int avgDepth = (m_random.nextInt(6)+8);
 		int radius = (m_random.nextInt(30)+30);
 		carveLake(x, y, new ArrayList<Position>(), radius, avgDepth);
