@@ -36,7 +36,6 @@ package org.opencraft.server.model;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Logger;
 
 import org.opencraft.server.Configuration;
 import org.opencraft.server.task.impl.SaveLevelTask;
@@ -46,6 +45,7 @@ import org.opencraft.server.game.GameMode;
 import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.util.PlayerList;
 import org.opencraft.server.io.LevelManager;
+import org.slf4j.*;
 
 /**
  * Manages the in-game world.
@@ -56,7 +56,7 @@ public final class World {
 	/**
 	 * Logger instance.
 	 */
-	private static final Logger logger = Logger.getLogger(World.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(World.class);
 	
 	
 	/**
@@ -87,7 +87,7 @@ public final class World {
 		level.setWorld(this);
 		//level.setName(name);
 		TaskQueue.getTaskQueue().schedule(new SaveLevelTask(level));
-		//logger.info("Active game mode : " + gameMode.getClass().getName() + ".");
+		logger.info("Active game mode : " + gameMode.getClass().getName() + ".");
 	}
 	
 	/**

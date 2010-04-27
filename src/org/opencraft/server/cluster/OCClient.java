@@ -34,7 +34,6 @@ package org.opencraft.server.cluster;
  */
 
 import java.net.InetSocketAddress;
-import java.util.logging.Logger;
 
 import org.apache.mina.core.RuntimeIoException;
 import org.apache.mina.core.future.ConnectFuture;
@@ -45,6 +44,7 @@ import org.apache.mina.transport.socket.nio.NioSocketConnector;
 import org.opencraft.server.net.Connectable;
 import org.opencraft.server.net.State;
 import org.opencraft.server.net.codec.MinecraftCodecFactory;
+import org.slf4j.*;
 
 /**
  * @author Mark Farrell
@@ -55,7 +55,7 @@ public abstract class OCClient extends Connectable{
 	/**
 	 * The task's logging system.
 	 */
-	private static final Logger logger = Logger.getLogger(OCClient.class.getCanonicalName());
+	private static final Logger logger = LoggerFactory.getLogger(OCClient.class);
 
 	
 	private static final int AWAIT_TIME = 3000;

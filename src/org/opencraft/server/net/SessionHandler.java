@@ -33,9 +33,6 @@ package org.opencraft.server.net;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
@@ -45,6 +42,7 @@ import org.opencraft.server.task.TaskQueue;
 import org.opencraft.server.task.impl.SessionClosedTask;
 import org.opencraft.server.task.impl.SessionMessageTask;
 import org.opencraft.server.task.impl.SessionOpenedTask;
+import org.slf4j.*;
 
 /**
  * An implementation of an <code>IoHandler</code> which manages incoming events
@@ -57,11 +55,11 @@ public final class SessionHandler extends IoHandlerAdapter {
 	/**
 	 * Logger instance.
 	 */
-	private static final Logger logger = Logger.getLogger(SessionHandler.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SessionHandler.class);
 	
 	@Override
 	public void exceptionCaught(IoSession session, Throwable throwable) throws Exception {
-		logger.log(Level.SEVERE, "Exception occurred, closing session.", throwable);
+		logger.error("Exception occurred, closing session.", throwable);
 		session.close(false);
 	}
 	

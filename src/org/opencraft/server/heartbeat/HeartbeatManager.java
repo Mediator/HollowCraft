@@ -46,8 +46,7 @@ import java.security.SecureRandom;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.*;
 
 import org.opencraft.server.Constants;
 
@@ -82,7 +81,7 @@ public class HeartbeatManager {
 	/**
 	 * Logger instance.
 	 */
-	private static final Logger logger = Logger.getLogger(HeartbeatManager.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(HeartbeatManager.class);
 	
 	/**
 	 * Gets the heartbeat manager instance.
@@ -165,7 +164,7 @@ public class HeartbeatManager {
 						conn.disconnect();
 					}
 				} catch (IOException ex) {
-					logger.log(Level.WARNING, "Error sending hearbeat.", ex);
+					logger.warn("Error sending hearbeat.", ex);
 				}
 			}
 		});

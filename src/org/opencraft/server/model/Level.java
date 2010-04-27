@@ -38,7 +38,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 import java.util.ArrayList;
-import java.util.logging.Logger;
+import org.slf4j.*;
 
 import org.opencraft.server.model.Environment;
 import org.opencraft.server.model.impl.builders.PixelBuilder;
@@ -76,7 +76,7 @@ public class Level {
 
 	private World m_world;
 
-	protected static final Logger m_logger = Logger.getLogger(Level.class.getName());
+	protected static final Logger m_logger = LoggerFactory.getLogger(Level.class);
 	
 	public Level() {
 		for (int i = 0; i < 256; i++) {
@@ -120,13 +120,13 @@ public class Level {
 		b.generate();
 	
 		for (int x = 0;x < m_width; x++) {
-			m_logger.fine("Activating ocean: " + (x * 2) + "/" + (m_width * 2 + m_height * 2));
+			m_logger.debug("Activating ocean: " + (x * 2) + "/" + (m_width * 2 + m_height * 2));
 			queueTileUpdate(x, 0, m_depth/2 - 1);
 			queueTileUpdate(x, m_height - 1, m_depth/2 - 1);
 		}
 
 		for (int y = 0;y < m_height; y++) {
-			m_logger.fine("Activating ocean: " + (y * 2 + m_width * 2) + "/" + (m_width * 2 + m_height * 2));
+			m_logger.debug("Activating ocean: " + (y * 2 + m_width * 2) + "/" + (m_width * 2 + m_height * 2));
 			queueTileUpdate(0, y, m_depth/2 - 1);
 			queueTileUpdate(m_width - 1, y, m_depth/2 - 1);
 		}

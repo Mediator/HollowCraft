@@ -39,12 +39,12 @@ import java.util.LinkedList;
 import java.util.ArrayList;
 import java.awt.Point;
 import java.lang.Math;
-import java.util.logging.Logger;
 
 import org.opencraft.server.model.Builder;
 import org.opencraft.server.model.BlockConstants;
 import org.opencraft.server.model.Position;
 import org.opencraft.server.model.Level;
+import org.slf4j.*;
 
 /**
  * Builds a level.
@@ -248,7 +248,7 @@ public class IslandBuilder extends Builder {
 					maxHeight = m_contour[x][y];
 			}
 		}
-		//m_logger.info("Applying contour");
+		m_logger.debug("Applying contour");
 		for(int x = 0; x < m_width; x++) {
 			for(int y = 0; y < m_height; y++) {
 				int h = Math.max(0, Math.min(m_depth-1, (m_depth/2) + m_contour[x][y]));
@@ -369,7 +369,7 @@ public class IslandBuilder extends Builder {
 	public void sculptHills(int iterations) {
 		for(int i = 0; i < iterations; i++) {
 			if (i % 1000 == 0)
-				m_logger.fine("Sculpting hills: "+i+"/"+iterations);
+				m_logger.debug("Sculpting hills: "+i+"/"+iterations);
 			int x = m_random.nextInt(m_width);
 			int y = m_random.nextInt(m_height);
 			int height = (m_random.nextInt(10)-5);
@@ -380,7 +380,7 @@ public class IslandBuilder extends Builder {
 
 	public void generateCaverns(int count) {
 		for (int i = 0; i < count;i++) {
-			m_logger.fine("Generating underground erosion bubbles: "+i+"/"+count);
+			m_logger.debug("Generating underground erosion bubbles: "+i+"/"+count);
 			int x = m_random.nextInt(m_width);
 			int y = m_random.nextInt(m_height);
 			int z = m_random.nextInt(m_depth/4);
@@ -422,7 +422,7 @@ public class IslandBuilder extends Builder {
 	}
 
 	public void buildLavaBed(int depth) {
-		//m_logger.info("Building lava bed.");
+		m_logger.debug("Building lava bed.");
 		for (int z = 0;z < depth; z++) {
 			for(int x = 0;x < m_width; x++) {
 				for (int y = 0; y < m_height; y++ ) {

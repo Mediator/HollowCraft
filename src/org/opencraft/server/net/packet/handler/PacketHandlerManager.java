@@ -34,7 +34,7 @@ package org.opencraft.server.net.packet.handler;
  */
 
 import java.util.Map;
-import java.util.logging.Logger;
+import org.slf4j.*;
 
 import org.opencraft.server.net.OCSession;
 import org.opencraft.server.net.packet.Packet;
@@ -49,7 +49,7 @@ public class PacketHandlerManager<SessionType extends OCSession> {
 	/**
 	 * Logger instance.
 	 */
-	private static final Logger logger = Logger.getLogger(PacketHandlerManager.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(PacketHandlerManager.class);
 	
 	
 	/**
@@ -82,7 +82,7 @@ public class PacketHandlerManager<SessionType extends OCSession> {
 		if (handler != null) {
 			handler.handlePacket(session, packet);
 		} else {
-			logger.info("Unhandled packet : " + packet + ".");
+			logger.warn("Unhandled packet : " + packet + ".");
 		}
 	}
 	

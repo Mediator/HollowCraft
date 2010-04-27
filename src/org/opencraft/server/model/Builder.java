@@ -33,9 +33,9 @@ package org.opencraft.server.model;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.util.logging.Logger;
 import java.util.Random;
 import org.opencraft.server.model.Level;
+import org.slf4j.*;
 
 /**
  * Level Builder Interface.
@@ -45,7 +45,7 @@ import org.opencraft.server.model.Level;
 public abstract class Builder {
 	protected byte[][][] m_blocks;
 
-	protected static final Logger m_logger = Logger.getLogger(Builder.class.getName());
+	protected static final Logger m_logger = LoggerFactory.getLogger(Builder.class);
 
 	protected int m_height;
 	

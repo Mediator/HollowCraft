@@ -36,8 +36,7 @@ package org.opencraft.server.task;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.*;
 
 /**
  * Manages the task queue.
@@ -53,7 +52,7 @@ public final class TaskQueue {
 	/**
 	 * Logger instance.
 	 */
-	private static final Logger logger = Logger.getLogger(TaskQueue.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(TaskQueue.class);
 	
 	/**
 	 * Gets the task queue instance.
@@ -85,7 +84,7 @@ public final class TaskQueue {
 				try {
 					task.execute();
 				} catch (Throwable t) {
-					logger.log(Level.SEVERE, "Error during task execution.", t);
+					logger.error("Error during task execution.", t);
 				}
 			}
 		});
@@ -111,7 +110,7 @@ public final class TaskQueue {
 				try {
 					task.execute();
 				} catch (Throwable t) {
-					logger.log(Level.SEVERE, "Error during task execution.", t);
+					logger.error("Error during task execution.", t);
 				}
 				if (!task.isRunning()) {
 					return;

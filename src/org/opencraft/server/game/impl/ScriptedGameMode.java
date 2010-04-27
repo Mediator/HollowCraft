@@ -36,7 +36,7 @@ package org.opencraft.server.game.impl;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Logger;
+import org.slf4j.*;
 
 import org.opencraft.server.Configuration;
 import org.opencraft.server.game.GameModeAdapter;
@@ -56,7 +56,7 @@ public class ScriptedGameMode extends GameModeAdapter<Player> {
 	/**
 	 * Logger instance.
 	 */
-	private static final Logger logger = Logger.getLogger(ScriptedGameMode.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(ScriptedGameMode.class);
 	
 	/**
 	 * The python interpreter.
@@ -80,7 +80,7 @@ public class ScriptedGameMode extends GameModeAdapter<Player> {
 	private void init() throws IOException {
 		String name = Configuration.getConfiguration().getScriptName();
 		
-		logger.info("Evaluating script...");
+		logger.debug("Evaluating script...");
 		InputStream is = new FileInputStream("./data/scripts/" + name);
 		try {
 			interpreter.execfile(is);
@@ -88,7 +88,7 @@ public class ScriptedGameMode extends GameModeAdapter<Player> {
 			is.close();
 		}
 		
-		logger.info("Initializing script...");
+		logger.debug("Initializing script...");
 		delegate("init", this);
 	}
 	
@@ -103,7 +103,7 @@ public class ScriptedGameMode extends GameModeAdapter<Player> {
 			try {
 				m.__call__(Py.javas2pys(args));
 			} catch (Exception ex) {
-				logger.log(java.util.logging.Level.SEVERE, "Error invoking method.", ex);
+				logger.error("Error invoking method.", ex);
 			}
 		} else {
 			return false;

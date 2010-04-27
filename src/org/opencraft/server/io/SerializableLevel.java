@@ -12,10 +12,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+import org.slf4j.*;
 
 /**
  * Level loading and saving code.
@@ -118,7 +117,7 @@ public class SerializableLevel implements Serializable {
 	/**
 	 * The logger instance.
 	 */
-	private transient Logger logger = Logger.getLogger(SerializableLevel.class.getName());
+	private transient Logger logger = LoggerFactory.getLogger(SerializableLevel.class);
 	
 	/**
 	 * Did load() successfully load a map?
@@ -275,12 +274,12 @@ public class SerializableLevel implements Serializable {
   			GZIPInputStream gzis = new GZIPInputStream(fis);
   			DataInputStream dis = new DataInputStream(gzis);
   			if (dis.readInt() != 656127880) {
-  				logger.log(Level.WARNING, "Map file is invalid or corrupt.");
+  				logger.info("Map file is invalid or corrupt.");
   	  			dis.close();
   	  			return;
   			}
   			if (dis.readByte() != 2) {
-  				logger.log(Level.WARNING, "Map file is not of version 2. Cannot be loaded.");
+  				logger.info("Map file is not of version 2. Cannot be loaded.");
   	  			dis.close();
   	  			return;
   			}
@@ -300,13 +299,13 @@ System.out.println("5");
 System.out.println("6");
   			this.loadSuccess = true;
   		} catch(FileNotFoundException e) {
-  			logger.info("Could not load map file. File not found.");
+  			logger.error("Could not load map file. File not found.");
   			return;
   		} catch (IOException e) {
-  			logger.info("Could not load map file. IO Exception");
+  			logger.error("Could not load map file. IO Exception");
   			return;
 		} catch (ClassNotFoundException e) {
-  			logger.info("Could not load map file.");
+  			logger.error("Could not load map file.");
   			return;
 		}
   	}
@@ -329,7 +328,7 @@ System.out.println("6");
 			out.close();
 			logger.info("Successfully saved " + this.filename + ".");
 		} catch(IOException e) {
-			logger.log(Level.WARNING, "Could not save map.");
+			logger.error("Could not save map.");
 		}
 	}
 }

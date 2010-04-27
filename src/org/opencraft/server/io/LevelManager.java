@@ -2,7 +2,7 @@ package org.opencraft.server.io;
 
 import java.io.IOException;
 import org.opencraft.server.model.Level;
-import java.util.logging.Logger;
+import org.slf4j.*;
 
 /**
  * A Class to handle loading and saving of Levels
@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  */
 public final class LevelManager {
 
-	private static final Logger logger = Logger.getLogger(LevelManager.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(LevelManager.class);
 
 	/**
 	 * Default private constructor.
@@ -29,7 +29,7 @@ public final class LevelManager {
 			try {
 				return BINFileHandler.load("data/maps/" + filename);
 			} catch (IOException e) {
-				logger.info("IOException loading 'data/maps/" + filename + "' : " + e.getMessage());
+				logger.debug("IOException loading 'data/maps/" + filename + "' : " + e.getMessage());
 			}
 		//} else if (extension.equalsIgnoreCase("mclevel")) {
 		}
@@ -37,7 +37,7 @@ public final class LevelManager {
 		try {
 			return NBTFileHandler.load("data/maps/" + filename);
 		} catch (IOException e) {
-			logger.info("IOException loading 'data/maps/" + filename + "' : " + e.getMessage());
+			logger.debug("IOException loading 'data/maps/" + filename + "' : " + e.getMessage());
 		}
 
 		logger.info("Generating level instead of loading.");
