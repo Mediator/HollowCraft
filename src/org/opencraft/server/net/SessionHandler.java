@@ -70,11 +70,13 @@ public final class SessionHandler extends IoHandlerAdapter {
 	
 	@Override
 	public void sessionClosed(IoSession session) throws Exception {
+		logger.trace("Session closed. Queuing for cleanup.");
 		TaskQueue.getTaskQueue().push(new SessionClosedTask(session));
 	}
 	
 	@Override
 	public void sessionOpened(IoSession session) throws Exception {
+		logger.trace("Session opened. Queuing for initialization.");
 		session.getFilterChain().addFirst("protocol", new ProtocolCodecFilter(new MinecraftCodecFactory(PersistingPacketManager.getPacketManager())));
 		TaskQueue.getTaskQueue().push(new SessionOpenedTask(session));
 	}

@@ -39,6 +39,7 @@ import java.util.Map;
 import org.opencraft.server.net.ActionSender;
 import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.io.LevelGzipper;
+import org.slf4j.*;
 
 /**
  * Represents a connected player.
@@ -50,6 +51,8 @@ public class Player extends Entity {
 	 * The player's session.
 	 */
 	private final MinecraftSession session;
+
+	private static final Logger logger = LoggerFactory.getLogger(Player.class);
 	
 	/**
 	 * The player's name.
@@ -156,6 +159,7 @@ public class Player extends Entity {
 	}
 
 	public void moveToWorld(World world) {
+		logger.debug("Moving player {} to world {}", this, world);
 		if (m_world != null)
 			m_world.removePlayer(this);
 		assert(world != null);
@@ -163,5 +167,4 @@ public class Player extends Entity {
 		m_world.addPlayer(this);
 		LevelGzipper.getLevelGzipper().gzipLevel(session);
 	}
-	
 }

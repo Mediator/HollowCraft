@@ -37,6 +37,7 @@ import org.apache.mina.core.session.IoSession;
 import org.opencraft.server.model.Player;
 import org.opencraft.server.net.packet.Packet;
 import org.opencraft.server.Server;
+import org.slf4j.*;
 
 /**
  * Manages a connected Minecraft session.
@@ -50,6 +51,7 @@ public final class MinecraftSession extends OCSession{
 	 */
 	private final ActionSender actionSender = new ActionSender(this);
 	
+	private final static Logger logger = LoggerFactory.getLogger(MinecraftSession.class);
 	
 	/**
 	 * The player associated with this session.
@@ -101,6 +103,7 @@ public final class MinecraftSession extends OCSession{
 	 */
 	@Override
 	public void destroy() {
+		logger.debug("Destroying session.");
 		Server.getServer().unregister(this);
 	}
 	

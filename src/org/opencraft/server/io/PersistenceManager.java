@@ -45,6 +45,7 @@ import org.opencraft.server.net.packet.PacketManager;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import org.slf4j.*;
 
 /**
  * A class which manages XStream persistence.
@@ -56,6 +57,8 @@ public final class PersistenceManager {
 	 * The singleton instance.
 	 */
 	private static final PersistenceManager INSTANCE = new PersistenceManager();
+
+	private static final Logger logger = LoggerFactory.getLogger(PersistenceManager.class);
 	
 	/**
 	 * Gets the persistence manager instance.
@@ -87,11 +90,15 @@ public final class PersistenceManager {
 	 * @return The object.
 	 */
 	public Object load(String file) {
+		logger.trace("Loading from {}", file);
+		Object ret;
 		try {
-			return xstream.fromXML(new FileInputStream(file));
+			ret = xstream.fromXML(new FileInputStream(file));
 		} catch (FileNotFoundException ex) {
 			throw new RuntimeException(ex);
 		}
+		logger.trace("Loaded!");
+		return ret;
 	}
 	
 	/**

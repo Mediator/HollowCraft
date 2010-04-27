@@ -73,11 +73,14 @@ public final class LevelGzipper {
 		/* empty */
 	}
 
+	private static final Logger logger = LoggerFactory.getLogger(LevelGzipper.class);
+
 	/**
 	 * Gzips and sends the level for the specified session.
 	 * @param session The session.
 	 */
 	public void gzipLevel(final MinecraftSession session) {
+		logger.debug("Gzipping world to {}", session);
 		assert(session!=null);
 		assert(session.getPlayer()!=null);
 		assert(session.getPlayer().getWorld() != null);
@@ -90,8 +93,10 @@ public final class LevelGzipper {
 		service.submit(new Runnable() {
 			public void run() {
 				try {
+					//TODO: Parallelize the compression and transmission
 					ByteArrayOutputStream out = new ByteArrayOutputStream();
 					int size = width * height * depth;
+					logger.trace("Gzipping world");
 					DataOutputStream os = new DataOutputStream(new GZIPOutputStream(out));
 					os.writeInt(size);
 					for (int z = 0; z < depth; z++) {
@@ -102,6 +107,7 @@ public final class LevelGzipper {
 						}
 					}
 					os.close();
+					logger.trace("Gzip complete. Transmitting to client");
 					byte[] data = out.toByteArray();
 					IoBuffer buf = IoBuffer.allocate(data.length);
 					buf.put(data);
@@ -117,6 +123,7 @@ public final class LevelGzipper {
 						session.getActionSender().sendLevelBlock(len, chunk, percent);
 					}
 					session.getActionSender().sendLevelFinish();
+					logger.trace("Level sent!");
 				} catch (IOException ex) {
 					session.getActionSender().sendLoginFailure("Failed to gzip level. Please try again.");
 				}

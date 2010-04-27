@@ -89,6 +89,7 @@ public class ActionSender {
 	 * @param message The message to send to the client.
 	 */
 	public void sendLoginFailure(String message) {
+		logger.info("Login failure: {}", message);
 		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(14));
 		bldr.putString("reason", message);
 		session.send(bldr.toPacket());
@@ -146,7 +147,7 @@ public class ActionSender {
 	 * @param rotation The new rotation.
 	 */
 	public void sendTeleport(Position position, Rotation rotation) {
-		logger.debug("Sending position");
+		logger.trace("Sending teleport");
 		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(8));
 		bldr.putByte("id", -1);
 		bldr.putShort("x", position.getX());

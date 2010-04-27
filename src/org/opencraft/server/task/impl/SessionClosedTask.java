@@ -36,6 +36,7 @@ package org.opencraft.server.task.impl;
 import org.apache.mina.core.session.IoSession;
 import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.task.Task;
+import org.slf4j.*;
 
 /**
  * A task which closes a session.
@@ -47,6 +48,8 @@ public final class SessionClosedTask implements Task {
 	 * The session.
 	 */
 	private final IoSession session;
+
+	private final static Logger logger = LoggerFactory.getLogger(SessionClosedTask.class);
 	
 	/**
 	 * Creates the session closed task.
@@ -57,6 +60,7 @@ public final class SessionClosedTask implements Task {
 	}
 	
 	public void execute() {
+		logger.info("Session with {} closed.", session.getRemoteAddress());
 		((MinecraftSession) session.removeAttribute("attachment")).destroy();
 	}
 	

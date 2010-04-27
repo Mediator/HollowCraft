@@ -251,6 +251,7 @@ public final class Server {
 		if (session.isAuthenticated()) {
 			m_players.remove(session.getPlayer());
 			World w = session.getPlayer().getWorld();
+			w.removePlayer(session.getPlayer());
 			SavedGameManager.getSavedGameManager().queuePersistenceRequest(new SavePersistenceRequest(session.getPlayer()));
 			session.setPlayer(null);
 		}
