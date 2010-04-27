@@ -1,0 +1,24 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Players can't reconnect
+desc: |-
+  When you reconnect, your character is 'frozen' somehow by the server. You can't look around, you can't move, and its a flood of
+  position packets from the server.
+type: :bugfix
+component: opencraft-acm
+release: "0.1"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :in_progress
+disposition: 
+creation_time: 2010-04-27 03:55:43.585422 Z
+references: []
+
+id: 406b56e58e306320bbfd16ede38aa35a7aec348e
+log_events: 
+- - 2010-04-27 03:55:44.681336 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
+- - 2010-04-27 03:55:51.065421 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - changed status from unstarted to in_progress
+  - ""
