@@ -7,8 +7,8 @@ type: :bugfix
 component: opencraft-acm
 release: "0.1"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-04-27 03:55:43.585422 Z
 references: []
 
@@ -22,3 +22,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - changed status from unstarted to in_progress
   - ""
+- - 2010-04-27 05:08:18.782466 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition fixed
+  - A one line fix. WHY WAS IT SO HARD TO FIND >:(

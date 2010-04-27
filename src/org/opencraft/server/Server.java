@@ -249,9 +249,10 @@ public final class Server {
 	 */
 	public void unregister(MinecraftSession session) {
 		if (session.isAuthenticated()) {
-			m_players.remove(session.getPlayer());
+			logger.trace("Unregistering session.");
 			World w = session.getPlayer().getWorld();
 			w.removePlayer(session.getPlayer());
+			m_players.remove(session.getPlayer());
 			SavedGameManager.getSavedGameManager().queuePersistenceRequest(new SavePersistenceRequest(session.getPlayer()));
 			session.setPlayer(null);
 		}
