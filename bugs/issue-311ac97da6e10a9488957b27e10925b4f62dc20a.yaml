@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Alternate heartbeat server
+desc: |-
+  There is an alternate heartbeat server, available at http://list.fragmer.net
+  The protocol seems to be similar to the minecraft.net one, available at http://list.fragmer.net/faq/#reference-1
+type: :feature
+component: opencraft-acm
+release: "0.1"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-04-27 03:08:06.167532 Z
+references: []
+
+id: 311ac97da6e10a9488957b27e10925b4f62dc20a
+log_events: 
+- - 2010-04-27 03:08:07.614443 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
