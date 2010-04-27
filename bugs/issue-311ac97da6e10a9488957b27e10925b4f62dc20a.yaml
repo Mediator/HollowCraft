@@ -18,3 +18,9 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - created
   - ""
+- - 2010-04-27 03:58:22.350376 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - commented
+  - |-
+    Apparently, flist uses a registered character called 'fList' to connect, which then generates an isometric map on their server.
+    This account should somehow be whitelisted if using an alternate heartbeat server.
