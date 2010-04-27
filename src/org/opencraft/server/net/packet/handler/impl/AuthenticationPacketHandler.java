@@ -33,7 +33,7 @@ package org.opencraft.server.net.packet.handler.impl;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.util.logging.Logger;
+import org.slf4j.*;
 
 import org.opencraft.server.Constants;
 import org.opencraft.server.net.MinecraftSession;
@@ -50,7 +50,7 @@ public final class AuthenticationPacketHandler implements PacketHandler<Minecraf
 	/**
 	 * Logger instance.
 	 */
-	private static final Logger logger = Logger.getLogger(AuthenticationPacketHandler.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(AuthenticationPacketHandler.class);
 	
 	public void handlePacket(MinecraftSession session, Packet packet) {
 		if (session.isAuthenticated()) {
@@ -68,6 +68,4 @@ public final class AuthenticationPacketHandler implements PacketHandler<Minecraf
 			Server.getServer().register(session, username, verificationKey);
 		}
 	}
-
-	
 }

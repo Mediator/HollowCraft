@@ -35,8 +35,6 @@ package org.opencraft.server;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.security.MessageDigest;
@@ -59,6 +57,8 @@ import org.opencraft.server.util.PlayerList;
 import org.opencraft.server.model.Player;
 import org.opencraft.server.persistence.SavedGameManager;
 import org.opencraft.server.persistence.SavePersistenceRequest;
+import org.slf4j.*;
+
 
 /**
  * The core class of the OpenCraft server.
@@ -69,7 +69,7 @@ public final class Server {
 	/**
 	 * Logger instance.
 	 */
-	private static final Logger logger = Logger.getLogger(Server.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(Server.class);
 
 	private final PlayerList m_players;
 	
@@ -82,7 +82,7 @@ public final class Server {
 			INSTANCE = new Server();
 			INSTANCE.start();
 		} catch (Throwable t) {
-			logger.log(Level.SEVERE, "An error occurred whilst loading the server.", t);
+			logger.error("An error occurred whilst loading the server.", t);
 		}
 	}
 
@@ -128,11 +128,11 @@ public final class Server {
 		try {
 			m_worlds.put(name, new World(name));
 		} catch (InstantiationException e) {
-			logger.info("Error loading world.");
+			logger.error("Error loading world.");
 		} catch (IllegalAccessException e) {
-			logger.info("Error loading world.");
+			logger.error("Error loading world.");
 		} catch (ClassNotFoundException e) {
-			logger.info("Error loading world.");
+			logger.error("Error loading world.");
 		}
 	}
 
@@ -149,6 +149,7 @@ public final class Server {
 	 * @throws IOException if an I/O error occurs.
 	 */
 	public void start() throws IOException {
+		logger.debug("Debug");
 		logger.info("Initializing server...");
 		logger.info("Binding to port " + Configuration.getConfiguration().getPort() + "...");
 		acceptor.bind(new InetSocketAddress(Configuration.getConfiguration().getPort()));

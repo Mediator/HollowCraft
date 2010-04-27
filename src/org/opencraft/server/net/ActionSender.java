@@ -44,6 +44,7 @@ import org.opencraft.server.persistence.LoadPersistenceRequest;
 import org.opencraft.server.persistence.SavedGameManager;
 import org.opencraft.server.task.Task;
 import org.opencraft.server.task.TaskQueue;
+import org.slf4j.*;
 
 
 /**
@@ -56,6 +57,8 @@ public class ActionSender {
 	 * The session.
 	 */
 	private MinecraftSession session;
+
+	private static final Logger logger = LoggerFactory.getLogger(ActionSender.class);
 	
 	/**
 	 * Creates the action sender.
@@ -143,6 +146,7 @@ public class ActionSender {
 	 * @param rotation The new rotation.
 	 */
 	public void sendTeleport(Position position, Rotation rotation) {
+		logger.debug("Sending position");
 		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(8));
 		bldr.putByte("id", -1);
 		bldr.putShort("x", position.getX());
