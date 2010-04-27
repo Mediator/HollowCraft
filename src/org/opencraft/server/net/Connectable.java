@@ -38,6 +38,8 @@ import java.util.Queue;
 import org.apache.mina.core.session.IoSession;
 import org.opencraft.server.net.packet.Packet;
 
+import org.slf4j.*;
+
 /**
  * @author Mark Farrell
  * Represents an object that is bound to either end of a socket.
@@ -48,6 +50,8 @@ public abstract class Connectable {
 	 * Packet queue.
 	 */
 	protected final Queue<Packet> queuedPackets = new ArrayDeque<Packet>();
+
+	private static final Logger logger = LoggerFactory.getLogger(Connectable.class);
 	
 	/**
 	 * State.

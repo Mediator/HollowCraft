@@ -81,6 +81,7 @@ public class ActionSender {
 		bldr.putString("server_name", name);
 		bldr.putString("server_message", message);
 		bldr.putByte("user_type", op ? 100 : 0);
+		logger.trace("Sending login response");
 		session.send(bldr.toPacket());
 	}
 	
@@ -92,6 +93,7 @@ public class ActionSender {
 		logger.info("Login failure: {}", message);
 		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(14));
 		bldr.putString("reason", message);
+		logger.trace("Sending login failure");
 		session.send(bldr.toPacket());
 		session.close();
 	}
@@ -102,6 +104,7 @@ public class ActionSender {
 	public void sendLevelInit() {
 		session.setAuthenticated();
 		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(2));
+		logger.trace("Sending level init");
 		session.send(bldr.toPacket());
 	}
 	
@@ -116,6 +119,7 @@ public class ActionSender {
 		bldr.putShort("chunk_length", len);
 		bldr.putByteArray("chunk_data", chunk);
 		bldr.putByte("percent", percent);
+		logger.trace("Sending block");
 		session.send(bldr.toPacket());
 	}
 	
@@ -132,6 +136,7 @@ public class ActionSender {
 				bldr.putShort("height", level.getHeight());
 				bldr.putShort("depth", level.getDepth());
 				sendTeleport(level.getSpawnPosition(), level.getSpawnRotation());
+				logger.trace("Sending level finish");
 				session.send(bldr.toPacket());
 				// now load the player's game (TODO in the future do this in parallel with loading the level)
 				// TODO: We should use this to save what world a player was last
@@ -147,7 +152,6 @@ public class ActionSender {
 	 * @param rotation The new rotation.
 	 */
 	public void sendTeleport(Position position, Rotation rotation) {
-		logger.trace("Sending teleport");
 		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(8));
 		bldr.putByte("id", -1);
 		bldr.putShort("x", position.getX());
@@ -155,6 +159,7 @@ public class ActionSender {
 		bldr.putShort("z", position.getZ());
 		bldr.putByte("rotation", rotation.getRotation());
 		bldr.putByte("look", rotation.getLook());
+		logger.trace("Sending teleport");
 		session.send(bldr.toPacket());
 	}
 	
@@ -171,6 +176,7 @@ public class ActionSender {
 		bldr.putShort("z", entity.getPosition().getZ());
 		bldr.putByte("rotation", entity.getRotation().getRotation());
 		bldr.putByte("look", entity.getRotation().getLook());
+		logger.trace("Sending add entity");
 		session.send(bldr.toPacket());
 	}
 	
@@ -191,6 +197,7 @@ public class ActionSender {
 		
 		final int deltaRotation = -oldRotation.getRotation() - rotation.getRotation();
 		final int deltaLook = -oldRotation.getLook() - rotation.getLook();
+		logger.trace("Sending update entity");
 		
 		if (deltaX > Byte.MAX_VALUE || deltaX < Byte.MIN_VALUE || deltaY > Byte.MAX_VALUE || deltaY < Byte.MIN_VALUE || deltaZ > Byte.MAX_VALUE || deltaZ < Byte.MIN_VALUE || deltaRotation > Byte.MAX_VALUE || deltaRotation < Byte.MIN_VALUE || deltaLook > Byte.MAX_VALUE || deltaLook < Byte.MIN_VALUE) {
 			// teleport
@@ -222,6 +229,7 @@ public class ActionSender {
 	public void sendRemoveEntity(Entity entity) {
 		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(12));
 		bldr.putByte("id", entity.getOldId());
+		logger.trace("Sending remove entity");
 		session.send(bldr.toPacket());
 	}
 	
@@ -246,6 +254,7 @@ public class ActionSender {
 		bldr.putShort("y", y);
 		bldr.putShort("z", z);
 		bldr.putByte("type", type);
+		logger.trace("Sending block");
 		session.send(bldr.toPacket());
 	}
 	
@@ -258,6 +267,7 @@ public class ActionSender {
 		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(13));
 		bldr.putByte("id", id);
 		bldr.putString("message", message);
+		logger.trace("Sending chat message: {}", message);
 		session.send(bldr.toPacket());
 	}
 	

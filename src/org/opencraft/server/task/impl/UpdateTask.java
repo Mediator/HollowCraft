@@ -41,6 +41,7 @@ import org.opencraft.server.model.Player;
 import org.opencraft.server.model.World;
 import org.opencraft.server.Server;
 import org.opencraft.server.task.ScheduledTask;
+import org.slf4j.*;
 
 /**
  * Updates the players and game world.
@@ -52,6 +53,8 @@ public class UpdateTask extends ScheduledTask {
 	 * The delay.
 	 */
 	private static final long DELAY = 100;
+
+	private static final Logger logger = LoggerFactory.getLogger(UpdateTask.class);
 	
 	/**
 	 * Creates the update task with a delay of 100ms.
@@ -64,6 +67,7 @@ public class UpdateTask extends ScheduledTask {
 		World[] worlds = Server.getServer().getWorlds();
 		for(World world : worlds) {
 			world.getGameMode().tick();
+			logger.trace("Player list length: {}", world.getPlayerList().getPlayers().size());
 			for (Player player : world.getPlayerList().getPlayers()) {
 				Set<Entity> localEntities = player.getLocalEntities();
 				Iterator<Entity> localEntitiesIterator = localEntities.iterator();
@@ -71,14 +75,17 @@ public class UpdateTask extends ScheduledTask {
 					Entity localEntity = localEntitiesIterator.next();
 					if (localEntity.getId() == -1) {
 						localEntitiesIterator.remove();
+						logger.trace("Sending removeEntity to other player");
 						player.getSession().getActionSender().sendRemoveEntity(localEntity);
 					} else {
+						logger.trace("Sending updateEntity to other player");
 						player.getSession().getActionSender().sendUpdateEntity(localEntity);
 					}
 				}
 				for (Player otherEntity : world.getPlayerList().getPlayers()) {
 					if (!localEntities.contains(otherEntity) && otherEntity != player) {
 						localEntities.add(otherEntity);
+						logger.trace("Sending addEntity to other player");
 						player.getSession().getActionSender().sendAddEntity(otherEntity);
 					}
 				}

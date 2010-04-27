@@ -115,13 +115,14 @@ public final class World {
 	}
 
 	public void removePlayer(Player p) {
+		logger.trace("Removing player");
 		playerList.remove(p);
 		getGameMode().playerDisconnected(p);
 	}
 
 	public void addPlayer(Player p) {
 		playerList.add(p);
-		getGameMode().playerConnected(p);
+		//getGameMode().playerConnected(p);
 	}
 	
 	/**
