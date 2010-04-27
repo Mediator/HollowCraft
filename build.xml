@@ -20,9 +20,10 @@
 	</target>
 	<target name="rebuild" depends="clean,build"/>
 	<target name="run" depends="build">
-		<java classname="org.opencraft.server.Server" fork="true">
-			<arg value="-Xms512m"/>
-			<arg value="-Xmx1024m"/>
+		<java classname="org.opencraft.server.Server" fork="true"
+			maxmemory="1024m">
+			<sysproperty key="java.util.logging.config.file"
+				value="data/logging.properties"/>
 			<classpath>
 				<pathelement path="${toString:libs}"/>
 				<pathelement path="bin"/>
