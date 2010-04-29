@@ -5,7 +5,7 @@ type: :task
 component: opencraft-acm
 release: 
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2010-04-24 20:32:24.325433 Z
 references: []
@@ -20,3 +20,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - commented
   - The point of registering a command with a gamemode is to restrict what commands are available to a certain gamemode. If survival doesn't register a cuboid command, cuboid cannot be called at all because it won't exist in that game mode.
+- - 2010-04-29 19:18:29.838392 Z
+  - Adam Liszka <sidein@usiah.com>
+  - changed status from unstarted to in_progress
+  - I am going to make the commands are smarter objects. I don't feel that the commands should exist completely separate from the GameMode because it is a good way to limit the available commands. That should be a separate task.

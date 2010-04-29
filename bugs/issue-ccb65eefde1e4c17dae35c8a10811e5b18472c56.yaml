@@ -5,8 +5,8 @@ type: :task
 component: level-builder
 release: "0.1"
 reporter: Adam Liszka <sidein@usiah.com>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-04-25 20:29:54.669582 Z
 references: []
 
@@ -20,3 +20,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - changed status from unstarted to in_progress
   - ""
+- - 2010-04-29 19:16:21.922910 Z
+  - Adam Liszka <sidein@usiah.com>
+  - closed with disposition fixed
+  - I think that Trever fixed this bug as I have not encountered any problems using it.
