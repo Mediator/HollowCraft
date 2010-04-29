@@ -3,7 +3,7 @@ title: Enforce gravity
 desc: Some clients let you ignore gravity. The server should enforce it if desired.
 type: :feature
 component: physics
-release: "0.1"
+release: 
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
 status: :unstarted
 disposition: 
@@ -22,3 +22,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - assigned to component physics from opencraft-acm
   - Move to new component
+- - 2010-04-29 18:29:09.560379 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - unassigned from release 0.1
+  - Let's be realistic. That'll have to wait for survival MP to come out.
