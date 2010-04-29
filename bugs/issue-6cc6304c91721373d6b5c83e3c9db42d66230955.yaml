@@ -4,7 +4,7 @@ desc: |-
   A game mode that uses some kind of in-game currency would be handy, as it would
   provide some mechanic for limiting the use of /cuboid-style commands
 type: :feature
-component: opencraft-acm
+component: security
 release: 
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
 status: :unstarted
@@ -18,3 +18,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - created
   - ""
+- - 2010-04-29 18:23:05.415383 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - assigned to component security from opencraft-acm
+  - Move to new component

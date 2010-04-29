@@ -2,7 +2,7 @@
 title: Player Logging
 desc: We need some sort of player logging mechanism to track who was on what map of the server. Presently, in the current acmpc server, someone has been going around destroying things randomly and no one knows who it is. It would be really nice if there was a logging mechanism in place to identify the mingebags.
 type: :feature
-component: opencraft-acm
+component: security
 release: 
 reporter: Adam Liszka <sidein@usiah.com>
 status: :unstarted
@@ -16,3 +16,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - created
   - ""
+- - 2010-04-29 18:22:33.570375 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - assigned to component security from opencraft-acm
+  - Move to new component

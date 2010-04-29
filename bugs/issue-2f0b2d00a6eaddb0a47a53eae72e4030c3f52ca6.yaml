@@ -2,7 +2,7 @@
 title: Permission lists
 desc: Granular permissions, groups, list inheritance, and others would make servers really easy to administrate.
 type: :feature
-component: opencraft-acm
+component: security
 release: "0.1"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
 status: :unstarted
@@ -20,3 +20,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - assigned to release 0.1 from unassigned
   - ""
+- - 2010-04-29 18:22:51.479376 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - assigned to component security from opencraft-acm
+  - Move to new component
