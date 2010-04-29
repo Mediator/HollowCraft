@@ -6,6 +6,8 @@ components:
   name: opencraft-acm
 - !ditz.rubyforge.org,2008-03-06/component 
   name: level-builder
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: physics
 releases: 
 - !ditz.rubyforge.org,2008-03-06/release 
   name: "0.1"

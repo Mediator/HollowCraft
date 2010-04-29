@@ -2,7 +2,7 @@
 title: Enforce gravity
 desc: Some clients let you ignore gravity. The server should enforce it if desired.
 type: :feature
-component: opencraft-acm
+component: physics
 release: "0.1"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
 status: :unstarted
@@ -18,3 +18,7 @@ log_events:
   - |-
     It also appears that the multiplayer survival mode of minecraft will have gravity on the server.
     Thats why it is set for the 0.1 release.
+- - 2010-04-29 18:21:00.413363 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - assigned to component physics from opencraft-acm
+  - Move to new component

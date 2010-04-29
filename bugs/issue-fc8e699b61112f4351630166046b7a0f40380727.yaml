@@ -2,7 +2,7 @@
 title: Threaded physics
 desc: Thread physics updates
 type: :task
-component: opencraft-acm
+component: physics
 release: 
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
 status: :unstarted
@@ -16,3 +16,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - created
   - ""
+- - 2010-04-29 18:20:35.799364 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - assigned to component physics from opencraft-acm
+  - Move to new component
