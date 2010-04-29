@@ -16,3 +16,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - created
   - ""
+- - 2010-04-29 17:13:46.072208 Z
+  - Adam Liszka <sidein@usiah.com>
+  - commented
+  - The point of registering a command with a gamemode is to restrict what commands are available to a certain gamemode. If survival doesn't register a cuboid command, cuboid cannot be called at all because it won't exist in that game mode.
