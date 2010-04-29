@@ -376,7 +376,7 @@ public class Level {
 			return true;
 		if (getBlock(x, y, z) == BlockConstants.BEDROCK)
 			return true;
-		if (!BlockManager.getBlockManager().getBlock(getBlock(x, y, z)).isSolid())
+		if (!BlockManager.getBlockManager().getBlock(getBlock(x, y, z)).isSolid() && !BlockManager.getBlockManager().getBlock(getBlock(x, y, z)).isPlant())
 			return false;
 		if (BlockManager.getBlockManager().getBlock(getBlock(x, y, z)).isLiquid())
 			return false;
