@@ -43,6 +43,7 @@ import org.slf4j.*;
 import org.opencraft.server.model.Environment;
 import org.opencraft.server.model.impl.builders.PixelBuilder;
 import org.opencraft.server.model.impl.builders.IslandBuilder;
+import org.opencraft.server.model.impl.builders.LandscapeBuilder;
 
 /**
  * Represents the actual level.
@@ -111,7 +112,7 @@ public class Level {
 		m_spawnRotation = new Rotation(0, 0);
 
 
-		Builder b = new IslandBuilder(this);
+		Builder b = new LandscapeBuilder(this);
 		b.generate();
 	
 		for (int x = 0;x < m_width; x++) {
