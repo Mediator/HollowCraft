@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Only run UpdateTasks as needed
+desc: Currently, opencraft runs an UpdateTask every 100ms. Even if nothing needs updated. Lets not do that.
+type: :task
+component: opencraft-acm
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-05-01 04:47:10.340550 Z
+references: []
+
+id: 240ed3aebd91dd77a05b1c7f80b3e25852a19276
+log_events: 
+- - 2010-05-01 04:47:11.298455 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
