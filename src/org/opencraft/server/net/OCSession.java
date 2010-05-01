@@ -36,6 +36,7 @@ package org.opencraft.server.net;
 import org.apache.mina.core.session.IoSession;
 import org.opencraft.server.net.packet.Packet;
 import org.opencraft.server.model.Player;
+import java.net.SocketAddress;
 
 /**
  * @author Mark Farrell
@@ -59,6 +60,15 @@ public abstract class OCSession extends Connectable{
 		this.session = session;
 	}
 	
+	public String toString() {
+		if (m_player == null)
+			return "<none>@"+session.getRemoteAddress();
+		return m_player.getName()+"@"+session.getRemoteAddress();
+	}
+
+	public SocketAddress getAddress() {
+		return session.getRemoteAddress();
+	}
 
 	
 	/**

@@ -71,6 +71,7 @@ public final class Server {
 	 * Logger instance.
 	 */
 	private static final Logger logger = LoggerFactory.getLogger(Server.class);
+	private static final Logger m_loginLogger = LoggerFactory.getLogger(Server.class.getName()+".Logins");
 
 	private final PlayerList m_players;
 	
@@ -185,6 +186,7 @@ public final class Server {
 			while (fread.hasNextLine()) {
 				if (username.equalsIgnoreCase(fread.nextLine())) {
 					session.getActionSender().sendLoginFailure("Banned.");
+					logger.info("Refused {}: {} is banned.", session, username);
 					break;
 				}
 			}
@@ -212,6 +214,7 @@ public final class Server {
 		for (char nameChar : nameChars) {
 			if (nameChar < ' ' || nameChar > '\177') {
 				session.getActionSender().sendLoginFailure("Invalid name!");
+				logger.info("Refused {}, invalid login name.", username);
 				return;
 			}
 		}
@@ -221,6 +224,7 @@ public final class Server {
 				// Should it not be the person attempting to connect who gets dropped?
 				// FIXME
 				p.getSession().getActionSender().sendLoginFailure("Logged in from another computer.");
+				logger.info("Kicked {}, logged in from another computer.", p);
 				break;
 			}
 		}
@@ -228,9 +232,11 @@ public final class Server {
 		final Player player = new Player(session, username);
 		if (!m_players.add(player)) {
 			player.getSession().getActionSender().sendLoginFailure("Too many players online!");
+			logger.warn("Too many players online!");
 			return;
 		}
 		// final setup
+		m_loginLogger.info("LOGIN "+player.getName()+" "+session.getAddress().toString());
 
 		// set op rights
 		try {
@@ -239,6 +245,8 @@ public final class Server {
 			while (fread.hasNextLine()) {
 				if (username.equalsIgnoreCase(fread.nextLine())) {
 					player.setAttribute("IsOperator","true");
+					logger.info("Player {} flagged as operator.", player);
+					m_loginLogger.info("OP "+player.getName());
 					break;
 				}
 			}
@@ -251,7 +259,9 @@ public final class Server {
 		//FIXME: Make the default configurable.
 		assert(getWorld("default") != null);
 		assert(session.getPlayer() == player);
+		logger.debug("Moving player to default world");
 		player.moveToWorld(getWorld("default"));
+		m_loginLogger.info("JOIN "+player.getName()+" "+player.getWorld().getLevel().getName());
 	}
 
 	public PlayerList getPlayerList() {

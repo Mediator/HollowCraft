@@ -72,6 +72,10 @@ public class Player extends Entity {
 		this.session = session;
 		this.name = name;
 	}
+
+	public String toString() {
+		return getName();
+	}
 	
 	/**
 	 * Sets an attribute of this player.
