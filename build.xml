@@ -10,7 +10,9 @@
 		<mkdir dir="bin"/>
 	</target>
 	<target name="build" depends="init">
-		<javac srcdir="src" classpath="${toString:libs}" destdir="bin" debug="true"/>
+		<javac srcdir="src" classpath="${toString:libs}" destdir="bin" debug="true">
+			<compilerarg value="-Xlint"/>
+		</javac>
 	</target>
 	<target name="gcj" depends="init">
 		<javac srcdir="src" classpath="${toString:libs}" compiler="gcj" destdir="bin" debug="true"/>
