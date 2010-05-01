@@ -55,6 +55,11 @@ public class Level {
 	protected String m_author;
 	protected long m_created;
 	protected Environment m_env;
+	protected OnBlockChangeHandler m_handler;
+
+	public void setOnBlockChangeHandler(OnBlockChangeHandler handler) {
+		m_handler = handler;
+	}
 
 	protected String m_fileType;
 
@@ -74,8 +79,6 @@ public class Level {
 	/** A queue of positions to update at the next tick. */
 	protected Queue<Position> m_updateQueue = new ArrayDeque<Position>();
 
-	private World m_world;
-
 	protected static final Logger m_logger = LoggerFactory.getLogger(Level.class);
 	
 	public Level() {
@@ -86,14 +89,6 @@ public class Level {
 				m_activeTimers.put(i, System.currentTimeMillis());
 			}
 		}
-	}
-
-	public void setWorld(World w) {
-		m_world = w;
-	}
-
-	public World getWorld() {
-		return m_world;
 	}
 
 	public void generateLevel() {
@@ -246,9 +241,8 @@ public class Level {
 		}
 		byte formerBlock = getBlock(x, y, z);
 		m_blocks[x][y][z] = (byte) type;
-		for (Player player : getWorld().getPlayerList().getPlayers()) {
-			player.getSession().getActionSender().sendBlock(x, y, z, (byte) type);
-		}
+		if (m_handler != null)
+			m_handler.onBlockChange(x, y, z);
 		if (updateSelf) {
 			queueTileUpdate(x, y, z);
 		}
