@@ -40,6 +40,7 @@ import java.util.Scanner;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.math.BigInteger;
+import java.lang.ref.SoftReference;
 
 import java.io.File;
 
@@ -86,7 +87,7 @@ public final class Server {
 		}
 	}
 
-	private HashMap<String,World> m_worlds;
+	private HashMap<String,SoftReference<World>> m_worlds;
 
 	private static Server INSTANCE;
 
@@ -96,7 +97,12 @@ public final class Server {
 
 	public World[] getWorlds() {
 		World[] ret = new World[m_worlds.size()];
-		return m_worlds.values().toArray(ret);
+		SoftReference[] refs = new SoftReference[m_worlds.size()];
+		refs = m_worlds.values().toArray(refs);
+		for(int i = 0;i < m_worlds.size();i++) {
+			ret[i] = (World)refs[i].get();
+		}
+		return ret;
 	}
 	
 	/**
@@ -117,7 +123,7 @@ public final class Server {
 		m_players = new PlayerList();
 		acceptor.setHandler(new SessionHandler());
 		logger.info("Initializing games...");
-		m_worlds = new HashMap<String,World>();
+		m_worlds = new HashMap<String,SoftReference<World>>();
 		loadLevel("default");
 		TaskQueue.getTaskQueue().schedule(new UpdateTask());
 		TaskQueue.getTaskQueue().schedule(new HeartbeatTask());
@@ -125,8 +131,19 @@ public final class Server {
 
 	public void loadLevel(String name) {
 		logger.info("Loading level \""+name+"\"");
+		if (m_worlds.containsKey(name)) {
+			logger.trace("World {} was already loaded some time ago.", name);
+			if (m_worlds.get(name).get() == null) {
+				logger.debug("Found expired world {}. Removing.", name);
+				m_worlds.remove(name);
+			} else {
+				logger.trace("Found cached world {}.", name);
+				return;
+			}
+		}
 		try {
-			m_worlds.put(name, new World(name));
+			World w = new World(name);
+			m_worlds.put(name, new SoftReference<World>(w));
 		} catch (InstantiationException e) {
 			logger.error("Error loading world.");
 		} catch (IllegalAccessException e) {
@@ -137,11 +154,9 @@ public final class Server {
 	}
 
 	public World getWorld(String name) {
-		if (!m_worlds.containsKey(name)) {
-			loadLevel(name);
-		}
-		assert(m_worlds.get(name) != null);
-		return m_worlds.get(name);
+		loadLevel(name);
+		assert(m_worlds.get(name).get() != null);
+		return m_worlds.get(name).get();
 	}
 	
 	/**
