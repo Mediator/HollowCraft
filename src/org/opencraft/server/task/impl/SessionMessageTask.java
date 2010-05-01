@@ -65,6 +65,7 @@ public final class SessionMessageTask implements Task {
 	}
 	
 	public void execute() {
+		assert(session.getAttribute("attachment") != null);
 		((MinecraftSession) session.getAttribute("attachment")).handle(packet);
 	}
 	

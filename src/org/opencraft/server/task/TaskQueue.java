@@ -104,6 +104,7 @@ public final class TaskQueue {
 	 * @param delay The remaining delay.
 	 */
 	private void schedule(final ScheduledTask task, final long delay) {
+		logger.trace("Scheduled task {} with delay {}", task, delay);
 		service.schedule(new Runnable() {
 			public void run() {
 				long start = System.currentTimeMillis();
