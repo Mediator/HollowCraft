@@ -1,53 +1,56 @@
 /* Options
-Roles: These set permissions for the encapsulating level only. These do not affect global positions.
-goto by     - determines who can visit the level
-build by    - determines who can use normal build functions
-advbuild by - determines who can use the advanced build functions
-op by       - determines who can admin this level in addition to the global OPs
+Blocks: These form the basic structure of a permission list file
+	WORLD		- Limits scope to a single world
+	MODE		- Limits scope to a single game mode
+	ROLE		- Specifies groups of permissions and roles, later referenced by @rolename
+	GROUP		- Specifies members of a group, who may be other groups or players, later referenced by @groupname
 
-Something: Differentiates between a single user, or an entire group
-person - A single person. A username must follow
-group  - A group of people. A Group Name must follow
+Permissions: Permissions specified refer to actual java.security.Permission classes
+	Examples:
+	org.opencraft.server.DestroyOwn	- Players may destroy blocks that they placed
+	org.opencraft.server.Build	- Players may place blocks
+	org.opencraft.server.Destroy	- Players may remove any blocks
+	org.opencraft.server.Fly	- Players may avoid gravity (i.e. with the world of minecraft client)
 
-Group Names: Categorizes users into like groups to be given permissions
-ALL         - Everyone, including guests
-BUILDERS    - Those added to this group and those given global Builder status
-ADVBUILDERS - Those added to this group and those given global AdvBuilder status
-OPS         - Those added to this group and those given global Op status
-NONE        - Nobody at all
+Builtin Groups:
+	ALL         - Everyone.
+	NONE        - Nobody at all
+
+Builtin Roles:
+	ALL			- Every permission
+	NONE		- No permissions. Its a dummy for completeness.
+
+By default, nobody has any permissions and isn't in any groups.
 */
 
 // Example permissions
 
-DEFAULTS {
-	goto by group ALL
-	build by group BUILDERS
-	advbuild by group ADVBUILDERS
-	op by group OPS
+ROLE Player {
+	org.opencraft.server.command.impl.GotoCommand,
 }
 
-WORLD default {
-	goto by group ALL
-	build by group BUILDERS
-	advbuild by group ADVBUILDERS
+ROLE Builder {
+	@Player,
+	org.opencraft.server.permission.Build,
+	org.opencraft.server.permission.Destroy
 }
+
+ROLE Op {
+	@Builder,
+	org.opencraft.server.command.impl.Kick
+}
+
+ALLOW org.opencraft.server.command.impl.GotoCommand to @ALL
+ALLOW org.opencraft.server.permission.Build to @ALL
+
+GROUP admins {
+	tdfischer,
+	sidein
+}
+
+ALLOW @ALL to @admins
 
 WORLD simcity {
-	goto by group BUILDERS
-	build by group ADVBUILDERS
-	op by person TheInfamousBob // Global OPs and TheInfamousBob can admin this level
-}
-
-WORLD drummond {
-	goto by group ALL
-	build by group NONE // OPs can still build?
-}
-
-WORLD test {
-	goto by group NONE
-	build by group NONE
-	advbuild by group NONE
-	op by group NONE
-
-	op by person tdfischer // op includes goto, builder, and advbuilder
+	DENY @Builder to @ALL
+	ALLOW @Op to TheInfamousBob
 }
