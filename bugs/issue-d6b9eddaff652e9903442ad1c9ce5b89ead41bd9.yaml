@@ -1,0 +1,21 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Better command API
+desc: |-
+  We need a better structured command API:
+  1) Commands shouldn't be singletons.
+  2) Commands should give hints as to their default /name along with any aliases
+type: :task
+component: opencraft-acm
+release: 
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-05-02 06:24:28.893525 Z
+references: []
+
+id: d6b9eddaff652e9903442ad1c9ce5b89ead41bd9
+log_events: 
+- - 2010-05-02 06:25:08.340458 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - Recreated since sidein closed {issue 0f578e1b9c8d32dcd437c9cf14038167ec9f7a78} without actually asking what I planned on doing
