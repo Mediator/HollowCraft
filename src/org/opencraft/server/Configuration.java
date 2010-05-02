@@ -96,11 +96,6 @@ public class Configuration {
 	private String message;
 	
 	/**
-	 * The filename of the map file.
-	 */
-	private static String mapFilename;
-	
-	/**
 	 * The maximum allowed player count.
 	 */
 	private int maximumPlayers;
@@ -141,7 +136,6 @@ public class Configuration {
 		maximumPlayers = Integer.valueOf(props.getProperty("max_players", "16"));
 		publicServer = Boolean.valueOf(props.getProperty("public", "false"));
 		verifyNames = Boolean.valueOf(props.getProperty("verify_names", "false"));
-		mapFilename = props.getProperty("filename", "server_level.dat");
 		spongeRadius = Integer.valueOf(props.getProperty("sponge_radius", "2"));
 		gameMode = props.getProperty("game_mode", CreativeGameMode.class.getName());
 		scriptName = props.getProperty("script_name", null);
@@ -209,13 +203,6 @@ public class Configuration {
 		return verifyNames;
 	}
 	
-	/**
-	 * Gets the map filename.
-	 * @return The map's filename.
-	 */
-	public String getMapFilename() {
-		return mapFilename;
-	}
 	
 	/**
 	 * Gets the range at which a sponge is effective.
