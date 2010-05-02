@@ -125,7 +125,7 @@ public final class Server {
 		acceptor.setHandler(new SessionHandler());
 		logger.info("Initializing games...");
 		m_worlds = new HashMap<String,SoftReference<World>>();
-		loadLevel("default");
+		loadLevel(Configuration.getConfiguration().getDefaultMap());
 		TaskQueue.getTaskQueue().schedule(new UpdateTask());
 		TaskQueue.getTaskQueue().schedule(new HeartbeatTask());
 	}
@@ -256,11 +256,10 @@ public final class Server {
 		session.setPlayer(player);
 		final Configuration c = Configuration.getConfiguration();
 		session.getActionSender().sendLoginResponse(Constants.PROTOCOL_VERSION, c.getName(), c.getMessage(), false);
-		//FIXME: Make the default configurable.
-		assert(getWorld("default") != null);
+		assert(getWorld(c.getDefaultMap()) != null);
 		assert(session.getPlayer() == player);
 		logger.debug("Moving player to default world");
-		player.moveToWorld(getWorld("default"));
+		player.moveToWorld(getWorld(c.getDefaultMap()));
 		m_loginLogger.info("JOIN "+player.getName()+" "+player.getWorld().getLevel().getName());
 	}
 

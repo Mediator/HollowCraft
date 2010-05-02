@@ -145,6 +145,13 @@ public class Configuration {
 		spongeRadius = Integer.valueOf(props.getProperty("sponge_radius", "2"));
 		gameMode = props.getProperty("game_mode", CreativeGameMode.class.getName());
 		scriptName = props.getProperty("script_name", null);
+		defaultMap = props.getProperty("defaultMap", "default");
+	}
+
+	private String defaultMap;
+
+	public String getDefaultMap() {
+		return defaultMap;
 	}
 	
 	/**
