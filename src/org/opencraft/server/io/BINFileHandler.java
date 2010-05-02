@@ -1,11 +1,21 @@
 package org.opencraft.server.io;
 
 import java.io.IOException;
+import java.io.ObjectStreamClass;
+import java.io.ObjectStreamField;
+import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.DataInputStream;
+import java.io.Serializable;
+import java.io.ObjectInputStream;
+import java.util.zip.GZIPInputStream;
 import org.opencraft.server.model.Level;
 import org.opencraft.server.model.Environment;
+import org.opencraft.server.model.Rotation;
+import org.opencraft.server.model.Position;
 
 /**
- * A Wrapper for SerializableLevel
+ * A level loader that loads up serialized levels.
  * @author Adam Liszka
  */
 public final class BINFileHandler {
@@ -16,23 +26,34 @@ public final class BINFileHandler {
 	private BINFileHandler() { /* empty */ }
 	
 	/**
-	 * Provides a convient wrapper around the SerializableLevel class to return an opencraft Level
+	 * Uses the magic of java introspection to load a level
 	 * @param filename The name of the file to unzip
 	 * @return The uncompressed Level
 	 */
 	public static Level load(String filename) throws IOException {
 		Level lvl = new Level();
 
-		SerializableLevel loader = new SerializableLevel(filename);
-		loader.load();
+		FileInputStream in = new FileInputStream(filename);
+		GZIPInputStream decompressor = new GZIPInputStream(in);
+		DataInputStream data = new DataInputStream(decompressor);
+		int magic = data.readInt();
+		byte version = data.readByte();
+		//System.out.println("Magic: "+magic+" Version: "+version);
+		ObjectInputStream stream = new LevelDeserializer(decompressor);
+		DeserializedLevel level;
+		try {
+			level = (DeserializedLevel)stream.readObject();
+		} catch (ClassNotFoundException e) {
+			throw new IOException(e);
+		}
 
-		if (loader.isLoadSuccess()) {
+		if (level != null) {
 			Environment env = new Environment();
 
-			int width  = loader.getWidth();
-			int height = loader.getHeight();
-			int depth  = loader.getDepth();
-			byte[] fblocks = loader.getBlocks();
+			int width  = level.width;
+			int height = level.height;
+			int depth  = level.depth;
+			byte[] fblocks = level.blocks;
 			byte[][][] blocks = new byte[width][height][depth];
 
 			int i = 0;
@@ -40,7 +61,6 @@ public final class BINFileHandler {
 				for (int y = 0; y < height; y++) {
 					for (int x = 0; x < width; x++) {
 						blocks[x][y][z] = fblocks[i];
-						System.out.print(fblocks[i] + "  ");
 						i += 1;
 					}
 				}
@@ -50,14 +70,12 @@ public final class BINFileHandler {
 
 			lvl.setBlocks(blocks, new byte[width][height][depth], width, height, depth);
 
-			lvl.setSpawnPosition(loader.getSpawnPoint());
-			lvl.setSpawnRotation(loader.getSpawnRotation());
+			lvl.setSpawnPosition(new Position(level.xSpawn, level.ySpawn, level.zSpawn));
+			lvl.setSpawnRotation(new Rotation((int)level.rotSpawn, 0));
 
-			lvl.setName(loader.getName());
-			lvl.setAuthor(loader.getCreator());
-			lvl.setCreationDate(loader.getCreateTime());
-
-			lvl.setFileType("bin");
+			lvl.setName(level.name);
+			lvl.setAuthor(level.creator);
+			lvl.setCreationDate(level.createTime);
 		} else {
 			throw new IOException("Failed to load BIN file");
 		}
@@ -67,6 +85,51 @@ public final class BINFileHandler {
 	}
 
 	public static void save(Level lvl, String filename) {
-
+		//We'd need to basically steal code from minecraft to do this, since
+		//there doesn't seem to be a way to make a ObjectStreamClass from
+		//scratch with a custom class name.
+		throw new UnsupportedOperationException();
 	}
 }
+class DeserializedLevel implements Serializable {
+	static final long serialVersionUID = 0L;
+	public int cloudColor;
+	public long createTime;
+	public boolean creativeMode;
+	public int depth;
+	public int fogColor;
+	public boolean growTrees;
+	public int height;
+	public boolean networkMode;
+	public float rotSpawn;
+	public int skyColor;
+	public int tickCount;
+	public int unprocessed;
+	public int waterLevel;
+	public int width;
+	public int xSpawn;
+	public int ySpawn;
+	public int zSpawn;
+	public Object blockMap;
+	public byte[] blocks;
+	public String creator;
+	public String name;
+	public Object player;
+	public DeserializedLevel() {
+	}
+
+}
+class LevelDeserializer extends ObjectInputStream {
+	public LevelDeserializer(InputStream in) throws IOException {
+		super(in);
+	}
+
+	protected ObjectStreamClass readClassDescriptor() throws IOException, ClassNotFoundException {
+		ObjectStreamClass desc = super.readClassDescriptor();
+		if (desc.getName().equals("com.mojang.minecraft.level.Level")) {
+			return ObjectStreamClass.lookup(DeserializedLevel.class);
+		}
+		return desc;
+	}
+}
+

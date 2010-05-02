@@ -7,8 +7,8 @@ type: :task
 component: opencraft-acm
 release: 
 reporter: Adam Liszka <sidein@usiah.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :wontfix
 creation_time: 2010-04-25 18:41:38.301412 Z
 references: []
 
@@ -18,3 +18,11 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - created
   - ""
+- - 2010-05-02 19:03:20.336375 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition wontfix
+  - |-
+    Minecraft's licensing and java's serialization API prevents us from doing this.
+    If java provided a way to create a ObjectStreamClass from scratch, or set a custom name, we'd be set.
+    
+    Unless someone wants to actually write their own implementation of the serialization API *just* for this task.
