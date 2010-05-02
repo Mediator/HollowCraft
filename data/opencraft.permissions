@@ -1,0 +1,53 @@
+/* Options
+Roles: These set permissions for the encapsulating level only. These do not affect global positions.
+goto by     - determines who can visit the level
+build by    - determines who can use normal build functions
+advbuild by - determines who can use the advanced build functions
+op by       - determines who can admin this level in addition to the global OPs
+
+Something: Differentiates between a single user, or an entire group
+person - A single person. A username must follow
+group  - A group of people. A Group Name must follow
+
+Group Names: Categorizes users into like groups to be given permissions
+ALL         - Everyone, including guests
+BUILDERS    - Those added to this group and those given global Builder status
+ADVBUILDERS - Those added to this group and those given global AdvBuilder status
+OPS         - Those added to this group and those given global Op status
+NONE        - Nobody at all
+*/
+
+// Example permissions
+
+DEFAULTS {
+	goto by group ALL
+	build by group BUILDERS
+	advbuild by group ADVBUILDERS
+	op by group OPS
+}
+
+WORLD default {
+	goto by group ALL
+	build by group BUILDERS
+	advbuild by group ADVBUILDERS
+}
+
+WORLD simcity {
+	goto by group BUILDERS
+	build by group ADVBUILDERS
+	op by person TheInfamousBob // Global OPs and TheInfamousBob can admin this level
+}
+
+WORLD drummond {
+	goto by group ALL
+	build by group NONE // OPs can still build?
+}
+
+WORLD test {
+	goto by group NONE
+	build by group NONE
+	advbuild by group NONE
+	op by group NONE
+
+	op by person tdfischer // op includes goto, builder, and advbuilder
+}
