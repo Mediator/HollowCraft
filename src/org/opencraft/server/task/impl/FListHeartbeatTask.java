@@ -38,6 +38,7 @@ import java.util.Map;
 
 import org.opencraft.server.Configuration;
 import org.opencraft.server.Constants;
+import org.opencraft.server.heartbeat.FListHeartbeatManager;
 import org.opencraft.server.heartbeat.HeartbeatManager;
 import org.opencraft.server.task.ScheduledTask;
 import org.opencraft.server.Server;
@@ -46,7 +47,7 @@ import org.opencraft.server.Server;
  * A task which sends a heartbeat periodically to the master server.
  * @author Graham Edgecombe
  */
-public class HeartbeatTask extends ScheduledTask {
+public class FListHeartbeatTask extends ScheduledTask {
 	
 	/**
 	 * The delay.
@@ -56,7 +57,7 @@ public class HeartbeatTask extends ScheduledTask {
 	/**
 	 * Creates the heartbeat task with a 45s delay.
 	 */
-	public HeartbeatTask() {
+	public FListHeartbeatTask() {
 		super(0);
 	}
 
@@ -71,8 +72,9 @@ public class HeartbeatTask extends ScheduledTask {
 		parameters.put("max", String.valueOf(Configuration.getConfiguration().getMaximumPlayers()));
 		parameters.put("public", String.valueOf(Configuration.getConfiguration().isPublicServer()));
 		parameters.put("port", String.valueOf(Configuration.getConfiguration().getPort()));
-		parameters.put("salt", String.valueOf(HeartbeatManager.getHeartbeatManager().getSalt()));
-		parameters.put("version", String.valueOf(Constants.PROTOCOL_VERSION));
-		HeartbeatManager.getHeartbeatManager().sendHeartbeat(parameters);
+		parameters.put("hash", HeartbeatManager.getHeartbeatManager().getConnectHash());
+		parameters.put("motd", Configuration.getConfiguration().getMessage());
+		parameters.put("server", "opencraft-"+Constants.OPENCRAFT_VERSION);
+		FListHeartbeatManager.getHeartbeatManager().sendHeartbeat(parameters);
 	}
 }

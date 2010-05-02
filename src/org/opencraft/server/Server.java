@@ -51,6 +51,7 @@ import org.opencraft.server.net.SessionHandler;
 import org.opencraft.server.task.TaskQueue;
 import org.opencraft.server.task.impl.HeartbeatTask;
 import org.opencraft.server.task.impl.UpdateTask;
+import org.opencraft.server.task.impl.FListHeartbeatTask;
 import org.opencraft.server.heartbeat.HeartbeatManager;
 import org.opencraft.server.util.SetManager;
 import org.opencraft.server.net.MinecraftSession;
@@ -126,8 +127,6 @@ public final class Server {
 		logger.info("Initializing games...");
 		m_worlds = new HashMap<String,SoftReference<World>>();
 		loadLevel(Configuration.getConfiguration().getDefaultMap());
-		TaskQueue.getTaskQueue().schedule(new UpdateTask());
-		TaskQueue.getTaskQueue().schedule(new HeartbeatTask());
 	}
 
 	public void loadLevel(String name) {
@@ -165,8 +164,12 @@ public final class Server {
 	 * @throws IOException if an I/O error occurs.
 	 */
 	public void start() throws IOException {
-		logger.debug("Debug");
 		logger.info("Initializing server...");
+		logger.info("Starting tasks");
+		TaskQueue.getTaskQueue().schedule(new UpdateTask());
+		TaskQueue.getTaskQueue().schedule(new HeartbeatTask());
+		if (Configuration.getConfiguration().getUseFList())
+			TaskQueue.getTaskQueue().schedule(new FListHeartbeatTask());
 		logger.info("Binding to port " + Configuration.getConfiguration().getPort() + "...");
 		acceptor.bind(new InetSocketAddress(Configuration.getConfiguration().getPort()));
 		logger.info("Ready for connections.");

@@ -49,5 +49,7 @@ public final class Constants {
 	 * The heartbeat server.
 	 */
 	public static final String HEARTBEAT_SERVER = "http://www.minecraft.net/";
+
+	public static final String OPENCRAFT_VERSION = "0.1b";
 	
 }

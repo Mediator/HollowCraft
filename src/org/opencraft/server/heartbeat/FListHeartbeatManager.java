@@ -56,12 +56,12 @@ import org.opencraft.server.Constants;
  * A class which manages heartbeats.
  * @author Graham Edgecombe
  */
-public class HeartbeatManager {
+public class FListHeartbeatManager {
 	
 	/**
 	 * The singleton instance.
 	 */
-	private static final HeartbeatManager INSTANCE = new HeartbeatManager();
+	private static final FListHeartbeatManager INSTANCE = new FListHeartbeatManager();
 	
 	/**
 	 * Heartbeat server URL.
@@ -73,7 +73,7 @@ public class HeartbeatManager {
 	 */
 	static {
 		try {
-			URL = new URL(Constants.HEARTBEAT_SERVER + "heartbeat.jsp");
+			URL = new URL("http://list.fragmer.net/announce.php");
 		} catch (MalformedURLException e) {
 			throw new ExceptionInInitializerError(e);
 		}
@@ -82,20 +82,15 @@ public class HeartbeatManager {
 	/**
 	 * Logger instance.
 	 */
-	private static final Logger logger = LoggerFactory.getLogger(HeartbeatManager.class);
+	private static final Logger logger = LoggerFactory.getLogger(FListHeartbeatManager.class);
 	
 	/**
 	 * Gets the heartbeat manager instance.
 	 * @return The heartbeat manager instance.
 	 */
-	public static HeartbeatManager getHeartbeatManager() {
+	public static FListHeartbeatManager getHeartbeatManager() {
 		return INSTANCE;
 	}
-	
-	/**
-	 * The salt.
-	 */
-	private final long salt = new SecureRandom().nextLong();
 	
 	/**
 	 * An executor service which executes HTTP requests.
@@ -105,7 +100,7 @@ public class HeartbeatManager {
 	/**
 	 * Default private constructor.
 	 */
-	private HeartbeatManager() {
+	private FListHeartbeatManager() {
 		/* empty */
 	}
 	
@@ -115,31 +110,31 @@ public class HeartbeatManager {
 	 * @param parameters The parameters.
 	 */
 
-	private String connectHash;
-
-	public String getConnectHash() {
-		return connectHash;
-	}
-
 	public void sendHeartbeat(final Map<String, String> parameters) {
+		logger.debug("Enqueuing heartbeat");
 		
 		service.submit(new Runnable() {
 			public void run() {
+				logger.debug("Sending flist heartbeat");
 				// assemble POST data
 				StringBuilder bldr = new StringBuilder();
 				for (Map.Entry<String, String> entry : parameters.entrySet()) {
+					logger.trace("Handling key {}", entry.getKey());
 					bldr.append(entry.getKey());
 					bldr.append('=');
 					try {
 						bldr.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+						logger.trace("Added {} to parameters", entry.getKey());
 					} catch (UnsupportedEncodingException e) {
-						throw new RuntimeException(e);
+						logger.error("Bad parameters for flist heartbeat", e);
+						return;
 					}
 					bldr.append('&');
 				}
 				if (bldr.length() > 0) {
 					bldr.deleteCharAt(bldr.length() - 1);
 				}
+				logger.trace("Sending {} to flist", bldr);
 				// send it off
 				try {
 					HttpURLConnection conn = (HttpURLConnection) URL.openConnection();
@@ -147,12 +142,10 @@ public class HeartbeatManager {
 					conn.setDoOutput(true);
 					conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 					conn.setRequestProperty("Content-Length", String.valueOf(bytes.length));
-					// this emulates the minecraft server exactly.. idk why
-					// notch added this personally
-					conn.setRequestProperty("Content-Language", "en-US");
 					conn.setUseCaches(false);
 					conn.setDoInput(true);
 					conn.setDoOutput(true);
+					logger.trace("Connecting");
 					conn.connect();
 					try {
 						DataOutputStream os = new DataOutputStream(conn.getOutputStream());
@@ -161,37 +154,15 @@ public class HeartbeatManager {
 						} finally {
 							os.close();
 						}
-						BufferedReader rdr = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-						try {
-							URL connectURL = new URL(rdr.readLine());
-							logger.info("To connect to this server, use : " + connectURL+ ".");
-							String[] params = connectURL.getQuery().split("&");
-							Map<String, String> map = new HashMap<String, String>();
-							for(String param : params) {
-								String name = param.split("=")[0];
-								String value = param.split("=")[1];
-								map.put(name, value);
-							}
-							connectHash=map.get("server");
-						} finally {
-							rdr.close();
-						}
 					} finally {
 						conn.disconnect();
 					}
+					logger.info("Pinged FList");
+					logger.trace("Error code: {}", conn.getResponseCode());
 				} catch (IOException ex) {
 					logger.warn("Error sending hearbeat.", ex);
 				}
 			}
 		});
 	}
-	
-	/**
-	 * Gets the salt.
-	 * @return The salt.
-	 */
-	public long getSalt() {
-		return salt;
-	}
-	
 }

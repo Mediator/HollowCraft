@@ -146,6 +146,13 @@ public class Configuration {
 		gameMode = props.getProperty("game_mode", CreativeGameMode.class.getName());
 		scriptName = props.getProperty("script_name", null);
 		defaultMap = props.getProperty("defaultMap", "default");
+		useFList = Boolean.valueOf(props.getProperty("useFList", "false"));
+	}
+
+	private boolean useFList;
+
+	public boolean getUseFList() {
+		return useFList;
 	}
 
 	private String defaultMap;

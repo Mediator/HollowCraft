@@ -7,8 +7,8 @@ type: :feature
 component: opencraft-acm
 release: "0.1"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-04-27 03:08:06.167532 Z
 references: []
 
@@ -24,3 +24,7 @@ log_events:
   - |-
     Apparently, flist uses a registered character called 'fList' to connect, which then generates an isometric map on their server.
     This account should somehow be whitelisted if using an alternate heartbeat server.
+- - 2010-05-02 21:14:40.464361 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition fixed
+  - ""
