@@ -398,6 +398,16 @@ public class Level {
 		m_name = name;
 	}
 
+	private String m_title;
+
+	public void setTitle(String title) {
+		m_title = title;
+	}
+
+	public String getTitle() {
+		return m_title;
+	}
+
 	public String getAuthor() {
 		return m_author;
 	}
@@ -467,13 +477,4 @@ public class Level {
 	public Position getSpawnPosition() {
 		return m_spawnPosition;
 	}
-
-	public String getFileType() {
-		return m_fileType;
-	}
-
-	public void setFileType(String fileType) {
-		m_fileType = fileType;
-	}
-	
 }

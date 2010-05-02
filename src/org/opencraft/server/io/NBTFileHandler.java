@@ -104,14 +104,13 @@ public final class NBTFileHandler {
 			} else if (key.equalsIgnoreCase("About")) {
 				CompoundTag about = (CompoundTag)(items.get(key));
 				Map<String, Tag> aboutItems = about.getValue();
-				lvl.setName(((StringTag)(aboutItems.get("Name"))).getValue());
+				lvl.setTitle(((StringTag)(aboutItems.get("Name"))).getValue());
 				lvl.setAuthor(((StringTag)(aboutItems.get("Author"))).getValue());
 				lvl.setCreationDate(((LongTag)(aboutItems.get("CreatedOn"))).getValue());
 			}
 		}
 		nbtin.close();
 
-		lvl.setFileType("mclevel");
 		return lvl;
 	}
 
