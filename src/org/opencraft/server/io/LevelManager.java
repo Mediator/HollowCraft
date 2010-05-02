@@ -2,6 +2,7 @@ package org.opencraft.server.io;
 
 import java.io.IOException;
 import org.opencraft.server.model.Level;
+import java.io.File;
 import org.slf4j.*;
 
 /**
@@ -16,38 +17,61 @@ public final class LevelManager {
 	 * Default private constructor.
 	 */
 	private LevelManager() { /* empty */ }
-	
+
+	public static int getLatestVersion(String mapName) {
+		File base = new File("data/maps/"+mapName+"/");
+		int highest = -1;
+		if (base.exists()) {
+			for(File f : base.listFiles()) {
+				String baseName = f.getName().replace(mapName+"-", "");
+				String[] tokens = baseName.split("\\.");
+				try {
+				int value = Integer.parseInt(tokens[0]);
+				if (value > highest)
+					highest = value;
+				} catch (NumberFormatException e) {
+					logger.info("Invalid file name {}.", f);
+				}
+			}
+		}
+		return highest;
+	}
+
+	private static File getLatestFile(String mapName) {
+		return new File("data/maps/"+mapName+"/"+mapName+"-"+getLatestVersion(mapName)+".mclevel");
+	}
+
+	private static File getNextFile(String mapName) {
+		File base = new File("data/maps/"+mapName);
+		if (!base.exists())
+			base.mkdirs();
+		return new File("data/maps/"+mapName+"/"+mapName+"-"+(getLatestVersion(mapName)+1)+".mclevel");
+	}
+
 	/**
 	 * Determines the appropriate file type and loads it.
 	 * @param filename The name of the file to unzip
 	 * @return The Level
 	 */
-	public static Level load(String filename) {
-		String extension = filename.substring(filename.lastIndexOf(".") + 1);
+	public static Level load(String mapName) {
+		File mapFile = getLatestFile(mapName);
 
-		if (extension.equalsIgnoreCase("dat") || extension.equalsIgnoreCase("mine")) {
-			try {
-				return BINFileHandler.load("data/maps/" + filename);
-			} catch (IOException e) {
-				logger.debug("IOException loading 'data/maps/" + filename + "' : " + e.getMessage());
-			}
-		//} else if (extension.equalsIgnoreCase("mclevel")) {
+		try {
+			return NBTFileHandler.load(mapFile.getPath());
+		} catch (IOException e) {
+			logger.debug("IOException loading {}" + mapFile, e);
 		}
 
 		try {
-			return NBTFileHandler.load("data/maps/" + filename);
+			return BINFileHandler.load(mapFile.getPath());
 		} catch (IOException e) {
-			logger.debug("IOException loading 'data/maps/" + filename + "' : " + e.getMessage());
+			logger.debug("IOException loading {}", mapFile, e);
 		}
 
 		logger.info("Generating level instead of loading.");
 		Level lvl = new Level();
 		lvl.generateLevel();
-		String name = filename;
-		if (name.lastIndexOf(".") == -1) {
-			name += ".mclevel";
-		}
-		lvl.setName(name);
+		lvl.setName(mapName);
 		return lvl;
 	}
 
@@ -57,18 +81,7 @@ public final class LevelManager {
 	 * @return The Level
 	 */
 	public static void save(Level lvl) {
-		String type = lvl.getFileType();
-
-		if (type.equalsIgnoreCase("mclevel") || type.equalsIgnoreCase("NBT")) {
-			// TODO: Boolean should come from server config file
-			NBTFileHandler.save(lvl, "data/maps/" + lvl.getName()+"."+type, true);
-			return;
-		// Default Case
-		} else {
-			// TODO: Boolean should come from server config file
-			NBTFileHandler.save(lvl, "data/maps/" + lvl.getName()+".mclevel", true);
-			lvl.setFileType("mclevel");
-			return;
-		}
+		// TODO: Boolean for saving nonstandard info should come from server config file
+		NBTFileHandler.save(lvl, getNextFile(lvl.getName()).getPath(), true);
 	}
 }

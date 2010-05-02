@@ -91,7 +91,7 @@ public final class World {
 				}
 			}
 		});
-		//level.setName(name);
+		level.setName(name);
 		TaskQueue.getTaskQueue().schedule(new SaveLevelTask(level));
 		logger.info("Active game mode : " + gameMode.getClass().getName() + ".");
 	}

@@ -44,6 +44,7 @@ import org.opencraft.server.model.Environment;
 import org.opencraft.server.model.impl.builders.PixelBuilder;
 import org.opencraft.server.model.impl.builders.IslandBuilder;
 import org.opencraft.server.model.impl.builders.InfBuilder;
+import org.opencraft.server.model.impl.builders.LandscapeBuilder;
 
 /**
  * Represents the actual level.
@@ -112,8 +113,8 @@ public class Level {
 		m_spawnRotation = new Rotation(0, 0);
 
 
-		Builder b = new InfBuilder(this);
-		b.setSeed(1000);
+		Builder b = new LandscapeBuilder(this);
+		//b.setSeed(1000);
 		b.generate();
 		m_blocks = b.getBlocks();
 	
@@ -400,6 +401,16 @@ public class Level {
 		m_name = name;
 	}
 
+	private String m_title;
+
+	public void setTitle(String title) {
+		m_title = title;
+	}
+
+	public String getTitle() {
+		return m_title;
+	}
+
 	public String getAuthor() {
 		return m_author;
 	}
@@ -469,13 +480,4 @@ public class Level {
 	public Position getSpawnPosition() {
 		return m_spawnPosition;
 	}
-
-	public String getFileType() {
-		return m_fileType;
-	}
-
-	public void setFileType(String fileType) {
-		m_fileType = fileType;
-	}
-	
 }

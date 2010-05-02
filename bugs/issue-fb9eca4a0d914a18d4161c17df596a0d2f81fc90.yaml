@@ -5,8 +5,8 @@ type: :task
 component: opencraft-acm
 release: "0.1"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :wontfix
 creation_time: 2010-04-25 16:35:38.547431 Z
 references: []
 
@@ -20,3 +20,11 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - assigned to release 0.1 from unassigned
   - ""
+- - 2010-05-02 06:27:25.097545 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - changed status from unstarted to in_progress
+  - ""
+- - 2010-05-02 07:06:37.416342 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition wontfix
+  - Obseleted with current design that doesn't care what type the level is.

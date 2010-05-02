@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Sand and Gravel Physics
+desc: Gravel and Sand should fall if there is nothing underneath them, not if they are not touching anything like dirt, etc.
+type: :bugfix
+component: physics
+release: "0.1"
+reporter: Adam Liszka <sidein@usiah.com>
+status: :unstarted
+disposition: 
+creation_time: 2010-05-02 07:37:15.897891 Z
+references: []
+
+id: fac2380097e3e5e71e2f414498e409d7b7bb1a1e
+log_events: 
+- - 2010-05-02 07:37:23.033842 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - Should be a simple fix
