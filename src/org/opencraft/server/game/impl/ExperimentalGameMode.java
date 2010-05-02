@@ -64,7 +64,7 @@ public class ExperimentalGameMode extends GameModeAdapter<Player> {
 	 * Registers the experimental game mode commands.
 	 */
 	public ExperimentalGameMode() {
-		registerCommand("brush", BrushCommand.getBrushCommand());
+		registerCommand(BrushCommand.getBrushCommand());
 	}
 	
 	/**

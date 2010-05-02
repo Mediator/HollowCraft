@@ -56,6 +56,10 @@ public class KickCommand implements Command {
 	public static KickCommand getCommand() {
 		return INSTANCE;
 	}
+
+	public String name() {
+		return "kick";
+	}
 	
 	/**
 	 * Default private constructor.

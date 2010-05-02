@@ -48,6 +48,10 @@ public class OperatorCommand implements Command {
 	 * The instance of this command.
 	 */
 	private static final OperatorCommand INSTANCE = new OperatorCommand();
+
+	public String name() {
+		return "op";
+	}
 	
 	/**
 	 * Gets the singleton instance of this command.

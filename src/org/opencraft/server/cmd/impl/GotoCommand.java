@@ -57,6 +57,10 @@ public class GotoCommand implements Command {
 	public static GotoCommand getCommand() {
 		return INSTANCE;
 	}
+
+	public String name() {
+		return "goto";
+	}
 	
 	/**
 	 * Default private constructor.

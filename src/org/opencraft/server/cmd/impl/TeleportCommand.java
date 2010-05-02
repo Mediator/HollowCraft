@@ -56,6 +56,10 @@ public class TeleportCommand implements Command {
 	public static TeleportCommand getCommand() {
 		return INSTANCE;
 	}
+
+	public String name() {
+		return "tp";
+	}
 	
 	/**
 	 * Default private constructor.

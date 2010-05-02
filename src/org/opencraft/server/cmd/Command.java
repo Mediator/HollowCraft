@@ -47,5 +47,7 @@ public interface Command {
 	 * @param params The parameters.
 	 */
 	public void execute(Player player, CommandParameters params);
+
+	public String name();
 	
 }

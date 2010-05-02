@@ -48,6 +48,10 @@ public class SayCommand implements Command {
 	 * The instance of this command.
 	 */
 	private static final SayCommand INSTANCE = new SayCommand();
+
+	public String name() {
+		return "say";
+	}
 	
 	/**
 	 * Gets the singleton instance of this command.

@@ -56,6 +56,10 @@ public class HelpCommand implements Command {
 	public static HelpCommand getCommand() {
 		return INSTANCE;
 	}
+
+	public String name() {
+		return "help";
+	}
 	
 	/**
 	 * Default private constructor.

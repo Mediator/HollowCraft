@@ -56,6 +56,10 @@ public final class BrushCommand implements Command {
 	public static BrushCommand getBrushCommand() {
 		return INSTANCE;
 	}
+
+	public String name() {
+		return "brush";
+	}
 	
 	/**
 	 * Default private constructor.

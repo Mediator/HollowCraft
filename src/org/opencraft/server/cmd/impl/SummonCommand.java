@@ -56,6 +56,10 @@ public class SummonCommand implements Command {
 	public static SummonCommand getCommand() {
 		return INSTANCE;
 	}
+
+	public String name() {
+		return "summon";
+	}
 	
 	/**
 	 * Default private constructor.

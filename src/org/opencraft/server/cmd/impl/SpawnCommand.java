@@ -56,7 +56,11 @@ public class SpawnCommand implements Command {
 	public static SpawnCommand getCommand() {
 		return INSTANCE;
 	}
-	
+
+	public String name() {
+		return "spawn";
+	}
+
 	/**
 	 * Default private constructor.
 	 */

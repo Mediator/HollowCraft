@@ -63,6 +63,10 @@ public class DeOperatorCommand implements Command {
 	private DeOperatorCommand() {
 		/* empty */
 	}
+
+	public String name() {
+		return "deop";
+	}
 	
 	public void execute(Player player, CommandParameters params) {
 		// Player using command is OP?

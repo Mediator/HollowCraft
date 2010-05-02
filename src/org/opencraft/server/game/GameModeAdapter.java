@@ -67,16 +67,16 @@ public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 	 */
 	public GameModeAdapter() {
 		// these commands are standard to every game mode
-		registerCommand("op", OperatorCommand.getCommand());
-		registerCommand("deop", DeOperatorCommand.getCommand());
-		registerCommand("say", SayCommand.getCommand());
-		registerCommand("kick", KickCommand.getCommand());
-		registerCommand("tp", TeleportCommand.getCommand());
-		registerCommand("setspawn", SetspawnCommand.getCommand());
-		registerCommand("summon", SummonCommand.getCommand());
-		registerCommand("spawn", SpawnCommand.getCommand());
-		registerCommand("help", HelpCommand.getCommand());
-		registerCommand("goto", GotoCommand.getCommand());
+		registerCommand(OperatorCommand.getCommand());
+		registerCommand(DeOperatorCommand.getCommand());
+		registerCommand(SayCommand.getCommand());
+		registerCommand(KickCommand.getCommand());
+		registerCommand(TeleportCommand.getCommand());
+		registerCommand(SetspawnCommand.getCommand());
+		registerCommand(SummonCommand.getCommand());
+		registerCommand(SpawnCommand.getCommand());
+		registerCommand(HelpCommand.getCommand());
+		registerCommand(GotoCommand.getCommand());
 	}
 	
 	/**
@@ -84,8 +84,12 @@ public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 	 * @param name The command name.
 	 * @param command The command.
 	 */
-	public void registerCommand(String name, Command command) {
+	public void registerCommand(Command command, String name) {
 		commands.put(name, command);
+	}
+
+	public void registerCommand(Command command) {
+		commands.put(command.name(), command);
 	}
 
 	/**

@@ -56,6 +56,10 @@ public class SetspawnCommand implements Command {
 	public static SetspawnCommand getCommand() {
 		return INSTANCE;
 	}
+
+	public String name() {
+		return "setspawn";
+	}
 	
 	/**
 	 * Default private constructor.
