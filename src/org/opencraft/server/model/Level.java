@@ -43,6 +43,7 @@ import org.slf4j.*;
 import org.opencraft.server.model.Environment;
 import org.opencraft.server.model.impl.builders.PixelBuilder;
 import org.opencraft.server.model.impl.builders.IslandBuilder;
+import org.opencraft.server.model.impl.builders.InfBuilder;
 
 /**
  * Represents the actual level.
@@ -111,8 +112,10 @@ public class Level {
 		m_spawnRotation = new Rotation(0, 0);
 
 
-		Builder b = new IslandBuilder(this);
+		Builder b = new InfBuilder(this);
+		b.setSeed(1000);
 		b.generate();
+		m_blocks = b.getBlocks();
 	
 		for (int x = 0;x < m_width; x++) {
 			m_logger.debug("Activating ocean: " + (x * 2) + "/" + (m_width * 2 + m_height * 2));

@@ -55,7 +55,10 @@ public abstract class Builder {
 
 	protected Random m_random;
 
+	protected long m_seed;
+
 	public void setSeed(long seed) {
+		m_seed = seed;
 		m_random = new Random(seed);
 	}
 
@@ -63,9 +66,14 @@ public abstract class Builder {
 		m_height = level.getHeight();
 		m_width = level.getWidth();
 		m_depth = level.getDepth();
-		m_blocks = level.getBlocks();
+		m_blocks = new byte[m_width][m_height][m_depth];
+		m_seed = 0;
 		m_random = new Random();
 	}
 
 	public abstract void generate();
+
+	public byte[][][] getBlocks() {
+		return m_blocks.clone();
+	}
 }

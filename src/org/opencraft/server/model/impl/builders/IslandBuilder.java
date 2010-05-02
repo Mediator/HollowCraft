@@ -236,10 +236,6 @@ public class IslandBuilder extends Builder {
 		return count >= 5;
 	}
 
-	public byte[][][] getBlocks() {
-		return m_blocks;
-	}
-
 	public void applyContour() {
 		int maxHeight = 1;
 		for (int x = 0;x<m_width;x++) {
