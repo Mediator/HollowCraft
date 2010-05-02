@@ -20,3 +20,12 @@ releases:
     - Trever Fischer <tdfischer@fedoraproject.org>
     - created
     - The first OpenCraft Release
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: "0.2"
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2010-05-02 19:05:24.044352 Z
+    - Trever Fischer <tdfischer@fedoraproject.org>
+    - created
+    - ""
