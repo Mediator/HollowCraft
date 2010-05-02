@@ -66,4 +66,4 @@ for stamp,record in log:
 	if (type == "OP"):
 		print "%s: Opped: %s"%(stamp, args[0])
 	if (type == "JOIN"):
-		print "%s: %s went to %s"%(stamp, args[0], args[1])
+		print "%s: %s went to %s"%(stamp, args[0], ' '.join(args[1:]))
