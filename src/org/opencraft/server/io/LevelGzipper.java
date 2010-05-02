@@ -76,6 +76,48 @@ public final class LevelGzipper {
 
 	private static final Logger logger = LoggerFactory.getLogger(LevelGzipper.class);
 
+	private class ChunkOutputStream extends OutputStream {
+		private MinecraftSession m_session;
+		private byte[] m_chunk;
+		private boolean m_closed = false;
+		private int m_blocksSent = 0;
+		private int m_blockCount;
+		public ChunkOutputStream(MinecraftSession session, int blockCount) {
+			m_session = session;
+			m_blockCount = blockCount;
+			m_chunk = new byte[0];
+		}
+
+		public void close() {
+			logger.trace("Closing gzip output");
+			m_closed = true;
+			flush();
+		}
+
+		public void flush() {
+			if (m_chunk.length == 1024 || m_closed) {
+				logger.trace("{} bytes in buffer. Flushing for real.", m_chunk.length);
+				int percent = (int) ((double)m_blocksSent/m_blockCount * 255D);
+				m_blocksSent++;
+				if (percent > 255)
+					percent = 254;
+				if (m_closed)
+					percent = 255;
+				m_session.getActionSender().sendLevelBlock(m_chunk.length, m_chunk, percent);
+				m_chunk = new byte[0];
+				m_session.getActionSender().sendLevelFinish();
+				logger.trace("Chunk {}/{} sent.", m_blocksSent, m_blockCount);
+			}
+		}
+
+		public void write(int b) {
+			byte[] newChunk = new byte[m_chunk.length+1];
+			newChunk[m_chunk.length] = (byte)b;
+			m_chunk = newChunk;
+			flush();
+		}
+	}
+
 	/**
 	 * Gzips and sends the level for the specified session.
 	 * @param session The session.
@@ -91,6 +133,30 @@ public final class LevelGzipper {
 		final int depth = level.getDepth();
 		final byte[][][] blockData = session.getPlayer().getWorld().getLevel().getBlocks().clone();
 		session.getActionSender().sendLevelInit();
+		/*service.submit(new Runnable() {
+			public void run() {
+				try {
+					ChunkOutputStream clientMap = new ChunkOutputStream(session, width*height*depth);
+					logger.trace("Gzipping world");
+					DataOutputStream dataOut = new DataOutputStream(new GZIPOutputStream(clientMap));
+					logger.trace("Writing size");
+					dataOut.writeInt(width*height*depth);
+					logger.trace("Writing blocks");
+					for(int z = 0;z<depth;z++) {
+						for (int y = 0;y<height;y++) {
+							for(int x = 0;x<width;x++) {
+								dataOut.write(blockData[x][y][z]);
+							}
+						}
+					}
+					logger.trace("Closing map output");
+					clientMap.close();
+				} catch (IOException ex) {
+					session.getActionSender().sendLoginFailure("Failed to gzip level. Please try again.");
+					logger.warn("GZip failed.", ex);
+				}
+			}
+		});*/
 		service.submit(new Runnable() {
 			public void run() {
 				try {
