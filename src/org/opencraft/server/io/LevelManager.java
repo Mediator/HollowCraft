@@ -57,7 +57,8 @@ public final class LevelManager {
 
 	private static File getLatestFile(String mapName) {
 		int latestVer = getLatestVersion(mapName);
-		return new File("data/maps/"+mapName+"/"+mapName+"-"+latestVer+"."+getExtension(mapName, latestVer));
+		String filename = "data/maps/"+mapName+"/"+mapName+"-"+latestVer+"."+getExtension(mapName, latestVer);
+		return new File(filename);
 	}
 
 	private static File getNextFile(String mapName) {
@@ -86,6 +87,9 @@ public final class LevelManager {
 		} catch (IOException e) {
 			logger.debug("IOException loading {}", mapFile, e);
 		}
+
+		//DEBUGGING
+		System.exit(1);
 
 		logger.info("Generating level instead of loading.");
 		Level lvl = new Level();
