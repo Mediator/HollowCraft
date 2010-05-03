@@ -110,6 +110,8 @@ public class BlockDefinition {
 	private long thinkTimer;
 
 	private boolean gravity;
+
+	private int strength;
 	
 	/**
 	 * Constructor.
@@ -117,7 +119,7 @@ public class BlockDefinition {
 	 * @throws IllegalAccessException
 	 * @throws InstantiationException
 	 */
-	private BlockDefinition(String name, int bid, boolean solid, boolean liquid, boolean blocksLight, boolean halfBlock, boolean doesThink, boolean isPlant, long thinkTimer, int fullCounterpart, String behaviourName, boolean gravity) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+	private BlockDefinition(String name, int bid, boolean solid, boolean liquid, boolean blocksLight, boolean halfBlock, boolean doesThink, boolean isPlant, long thinkTimer, int fullCounterpart, String behaviourName, boolean gravity, int strength) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		this.name = name;
 		this.bid = bid;
 		this.solid = solid;
@@ -130,6 +132,7 @@ public class BlockDefinition {
 		this.fullCounterpart = fullCounterpart;
 		this.behaviourName = behaviourName.trim();
 		this.gravity = gravity;
+		this.strength = strength;
 		if (behaviourName.length() > 0) {
 			this.behaviour = (BlockBehaviour) Class.forName(this.behaviourName).newInstance();
 		}
@@ -143,7 +146,7 @@ public class BlockDefinition {
 	 * @throws InstantiationException
 	 */
 	private Object readResolve() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-		return new BlockDefinition(name, bid, solid, liquid, blocksLight, halfBlock, doesThink, isPlant, thinkTimer, fullCounterpart, behaviourName, gravity);
+		return new BlockDefinition(name, bid, solid, liquid, blocksLight, halfBlock, doesThink, isPlant, thinkTimer, fullCounterpart, behaviourName, gravity, strength);
 	}
 	
 	/**
@@ -172,6 +175,10 @@ public class BlockDefinition {
 
 	public boolean hasGravity() {
 		return gravity;
+	}
+
+	public int getStrength() {
+		return strength;
 	}
 	
 	/**

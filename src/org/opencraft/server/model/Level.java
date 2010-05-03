@@ -358,7 +358,7 @@ public class Level {
 	 * @return If a block is stable
 	 */
 	public boolean blockIsStable(int x, int y, int z) {
-		return blockIsStable(x, y, z, new ArrayList<Position>(), 0);
+		return blockIsStable(x, y, z, new ArrayList<Position>(), 0); 
 	}
 
 	private boolean blockIsStable(int x, int y, int z, ArrayList<Position> visited, int distance) {
@@ -370,9 +370,10 @@ public class Level {
 			}
 		}
 		visited.add(p);
-		if (distance > 30)
+		int strength = BlockManager.getBlockManager().getBlock(getBlock(x,y,z)).getStrength();
+		if (strength == -1)
 			return true;
-		if (getBlock(x, y, z) == BlockConstants.BEDROCK)
+		if (distance > 40)
 			return true;
 		if (!BlockManager.getBlockManager().getBlock(getBlock(x, y, z)).isSolid() && !BlockManager.getBlockManager().getBlock(getBlock(x, y, z)).isPlant())
 			return false;
@@ -380,6 +381,10 @@ public class Level {
 			return false;
 		if (blockIsStable(x, y, z-1, visited, distance+1))
 			return true;
+		if (strength == 0)
+			return false;
+		if (distance > strength)
+			return false;
 		if (blockIsStable(x+1, y, z, visited, distance+1))
 			return true;
 		if (blockIsStable(x-1, y, z, visited, distance+1))
