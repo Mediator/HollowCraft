@@ -59,6 +59,10 @@ import org.opencraft.server.util.PlayerList;
 import org.opencraft.server.model.Player;
 import org.opencraft.server.persistence.SavedGameManager;
 import org.opencraft.server.persistence.SavePersistenceRequest;
+import org.opencraft.server.security.Group;
+import org.opencraft.server.security.OCPermission;
+import org.opencraft.server.security.Principal;
+import java.util.ArrayList;
 import org.slf4j.*;
 
 
@@ -75,6 +79,12 @@ public final class Server {
 	private static final Logger m_loginLogger = LoggerFactory.getLogger(Server.class.getName()+".Logins");
 
 	private final PlayerList m_players;
+
+	private final HashMap<String, Group> m_groups;
+
+	public Group[] getGroups() {
+		return m_groups.values().toArray(new Group[0]);
+	}
 	
 	/**
 	 * The entry point of the server application.
@@ -123,6 +133,20 @@ public final class Server {
 		Configuration.readConfiguration();
 		SetManager.getSetManager().reloadSets();
 		m_players = new PlayerList();
+		m_groups = new HashMap<String, Group>();
+
+		m_groups.put("ALL", new Group("ALL") {
+			public boolean hasMember(Principal p) {
+				return true;
+			}
+		});
+		m_groups.get("ALL").getPermissions().add(new OCPermission("org.opencraft.server.Login"));
+		m_groups.put("NONE", new Group("NONE") {
+			public boolean hasMember(Principal p) {
+				return false;
+			}
+		});
+		
 		acceptor.setHandler(new SessionHandler());
 		logger.info("Initializing games...");
 		m_worlds = new HashMap<String,SoftReference<World>>();
@@ -233,6 +257,7 @@ public final class Server {
 		}
 		// attempt to add the player
 		final Player player = new Player(session, username);
+		m_groups.get("ALL").addMember(player);
 		if (!m_players.add(player)) {
 			player.getSession().getActionSender().sendLoginFailure("Too many players online!");
 			logger.warn("Too many players online!");
