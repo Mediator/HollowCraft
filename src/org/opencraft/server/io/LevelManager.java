@@ -26,9 +26,9 @@ public final class LevelManager {
 				String baseName = f.getName().replace(mapName+"-", "");
 				String[] tokens = baseName.split("\\.");
 				try {
-				int value = Integer.parseInt(tokens[0]);
-				if (value > highest)
-					highest = value;
+					int value = Integer.parseInt(tokens[0]);
+					if (value > highest)
+						highest = value;
 				} catch (NumberFormatException e) {
 					logger.info("Invalid file name {}.", f);
 				}
@@ -36,9 +36,28 @@ public final class LevelManager {
 		}
 		return highest;
 	}
+	
+	public static String getExtension(String mapName, int ver) {
+		File base = new File("data/maps/"+mapName+"/");
+		if (base.exists()) {
+			for(File f : base.listFiles()) {
+				String baseName = f.getName().replace(mapName+"-", "");
+				String[] tokens = baseName.split("\\.");
+				try {
+					int value = Integer.parseInt(tokens[0]);
+					if (value == ver)
+						return tokens[1];
+				} catch (NumberFormatException e) {
+					logger.info("Invalid file name {}.", f);
+				}
+			}
+		}
+		return "mclevel";
+	}
 
 	private static File getLatestFile(String mapName) {
-		return new File("data/maps/"+mapName+"/"+mapName+"-"+getLatestVersion(mapName)+".mclevel");
+		int latestVer = getLatestVersion(mapName);
+		return new File("data/maps/"+mapName+"/"+mapName+"-"+latestVer+"."+getExtension(mapName, latestVer));
 	}
 
 	private static File getNextFile(String mapName) {

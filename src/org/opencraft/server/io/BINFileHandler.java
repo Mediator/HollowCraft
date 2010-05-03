@@ -32,7 +32,6 @@ public final class BINFileHandler {
 	 */
 	public static Level load(String filename) throws IOException {
 		Level lvl = new Level();
-
 		FileInputStream in = new FileInputStream(filename);
 		GZIPInputStream decompressor = new GZIPInputStream(in);
 		DataInputStream data = new DataInputStream(decompressor);
