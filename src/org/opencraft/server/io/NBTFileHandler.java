@@ -11,6 +11,7 @@ import org.opencraft.server.model.Position;
 import org.opencraft.server.model.Rotation;
 import org.opencraft.server.model.Level;
 import org.opencraft.server.model.Environment;
+import org.slf4j.*;
 
 /**
  * A frontend to the JNBT file reader
@@ -22,6 +23,8 @@ public final class NBTFileHandler {
 	 * Default private constructor.
 	 */
 	private NBTFileHandler() { /* empty */ }
+
+	private static final Logger logger = LoggerFactory.getLogger(NBTFileHandler.class);
 	
 	/**
 	 * Unzips a .mclevel level file, parses it, and returns the contained level
@@ -33,6 +36,7 @@ public final class NBTFileHandler {
 		Level lvl = new Level();
 		NBTInputStream nbtin;
 
+		logger.trace("Loading in {}", filename);
 		nbtin = new NBTInputStream(new FileInputStream(filename));
 		CompoundTag root = (CompoundTag)(nbtin.readTag());
 		Map<String, Tag> items = root.getValue();
@@ -212,8 +216,16 @@ public final class NBTFileHandler {
 			// About Items
 			//
 			HashMap<String, Tag> aboutItems = new HashMap<String, Tag>();
-			StringTag name = new StringTag("Name",    lvl.getName());
-			StringTag auth = new StringTag("Author",  lvl.getAuthor());
+			StringTag name;
+			if (lvl.getName() == null)
+				name = new StringTag("Name",	"");
+			else
+				name = new StringTag("Name",    lvl.getName());
+			StringTag auth;
+			if (lvl.getAuthor() == null)
+				auth = new StringTag("Author",  "");
+			else
+				auth = new StringTag("Author",  lvl.getAuthor());
 			LongTag   date = new LongTag("CreatedOn", lvl.getCreationDate());
 			aboutItems.put("Name", name);
 			aboutItems.put("Author", auth);
@@ -227,11 +239,14 @@ public final class NBTFileHandler {
 
 
 		try {
-			NBTOutputStream nbtout = new NBTOutputStream(new FileOutputStream(filename));
+			FileOutputStream out = new FileOutputStream(filename);
+			NBTOutputStream nbtout = new NBTOutputStream(out);
 			nbtout.writeTag(root);
 			nbtout.close();
+			out.flush();
+			out.close();
 		} catch (Exception e) {
-			//Log this?
+			logger.warn("Error writing save file", e);
 		}
 	}
 }

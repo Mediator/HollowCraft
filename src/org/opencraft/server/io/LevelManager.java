@@ -57,6 +57,7 @@ public final class LevelManager {
 
 	private static File getLatestFile(String mapName) {
 		int latestVer = getLatestVersion(mapName);
+		logger.trace("Latest map version: {}", latestVer);
 		return new File("data/maps/"+mapName+"/"+mapName+"-"+latestVer+"."+getExtension(mapName, latestVer));
 	}
 
@@ -78,13 +79,13 @@ public final class LevelManager {
 		try {
 			return NBTFileHandler.load(mapFile.getPath());
 		} catch (IOException e) {
-			logger.debug("IOException loading {}" + mapFile, e);
+			logger.debug("IOException loading", e);
 		}
 
 		try {
 			return BINFileHandler.load(mapFile.getPath());
 		} catch (IOException e) {
-			logger.debug("IOException loading {}", mapFile, e);
+			logger.debug("IOException loading ", e);
 		}
 
 		logger.info("Generating level instead of loading.");
@@ -102,5 +103,6 @@ public final class LevelManager {
 	public static void save(Level lvl) {
 		// TODO: Boolean for saving nonstandard info should come from server config file
 		NBTFileHandler.save(lvl, getNextFile(lvl.getName()).getPath(), true);
+		logger.trace("Save complete");
 	}
 }
