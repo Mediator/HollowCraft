@@ -39,13 +39,18 @@ import java.util.Map;
 import org.opencraft.server.net.ActionSender;
 import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.io.LevelGzipper;
+import org.opencraft.server.security.Group;
+import org.opencraft.server.security.Principal;
+import java.security.Permissions;
+import java.security.Permission;
+import org.opencraft.server.Server;
 import org.slf4j.*;
 
 /**
  * Represents a connected player.
  * @author Graham Edgecombe
  */
-public class Player extends Entity {
+public class Player extends Entity implements Principal {
 	
 	/**
 	 * The player's session.
@@ -116,10 +121,36 @@ public class Player extends Entity {
 	public Object removeAttribute(String name) {
 		return attributes.remove(name);
 	}
+
+	public boolean equals(Object another) {
+		if (another instanceof Player) {
+			Player p = (Player) another;
+			return getName().equals(p.getName());
+		}
+		return false;
+	}
 	
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	private Permissions m_permissions = new Permissions();
+
+	public Permissions getPermissions() {
+		return m_permissions;
+	}
+
+	public boolean isAuthorized(Permission perm) {
+		if (!m_permissions.implies(perm)) {
+			for(Group group : Server.getServer().getGroups()) {
+				if (group.hasMember(this) && group.isAuthorized(perm))
+					return true;
+			}
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	/**

@@ -5,7 +5,7 @@ type: :feature
 component: security
 release: "0.1"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2010-04-24 20:35:33.164411 Z
 references: []
@@ -24,3 +24,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - assigned to component security from opencraft-acm
   - Move to new component
+- - 2010-05-03 01:04:27.349511 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - changed status from unstarted to in_progress
+  - ""
