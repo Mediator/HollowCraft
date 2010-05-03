@@ -37,7 +37,7 @@ public final class MCSharpFileHandler {
 			throw new IOException("Only version 1 MCSharp levels supported (magic number was "+magic+")");
 
 		int width = convert(data.readShort());
-		int heightheight  = convert(data.readShort());
+		int height = convert(data.readShort());
 		int depth = convert(data.readShort());
 		logger.trace("Width: {}", width);
 		logger.trace("Depth: {}", depth);
