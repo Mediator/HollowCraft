@@ -373,12 +373,12 @@ public class Level {
 		int strength = BlockManager.getBlockManager().getBlock(getBlock(x,y,z)).getStrength();
 		if (strength == -1)
 			return true;
-		if (distance > 40)
-			return true;
 		if (!BlockManager.getBlockManager().getBlock(getBlock(x, y, z)).isSolid() && !BlockManager.getBlockManager().getBlock(getBlock(x, y, z)).isPlant())
 			return false;
 		if (BlockManager.getBlockManager().getBlock(getBlock(x, y, z)).isLiquid())
 			return false;
+		if (distance > 40)
+			return true;
 		if (blockIsStable(x, y, z-1, visited, distance+1))
 			return true;
 		if (strength == 0)
