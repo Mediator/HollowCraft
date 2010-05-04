@@ -79,13 +79,19 @@ public final class LevelManager {
 		try {
 			return NBTFileHandler.load(mapFile.getPath());
 		} catch (IOException e) {
-			logger.debug("IOException loading", e);
+			logger.debug("IOException loading with NBT", e);
 		}
 
 		try {
 			return BINFileHandler.load(mapFile.getPath());
 		} catch (IOException e) {
-			logger.debug("IOException loading ", e);
+			logger.debug("IOException loading with BIN", e);
+		}
+
+		try {
+			return MCSharpFileHandler.load(mapFile.getPath());
+		} catch (IOException e) {
+			logger.debug("IOException loading with MCSharp", e);
 		}
 
 		//DEBUGGING

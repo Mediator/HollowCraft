@@ -177,7 +177,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
-      <gravity>true</gravity>
+      <gravity>false</gravity>
 	  <strength>0</strength>
     </block>
     <block>
@@ -204,6 +204,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+	  <gravity>false</gravity>
 	  <strength>0</strength>
     </block>
     <block>
