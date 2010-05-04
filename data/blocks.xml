@@ -45,6 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>false</gravity>
+	  <strength>-1</strength>
     </block>
     <block>
       <bid>0</bid>
@@ -58,6 +59,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <isPlant>false</isPlant>
       <thinkTimer>100</thinkTimer>
       <gravity>false</gravity>
+	  <strength>0</strength>
     </block>
     <block>
       <bid>1</bid>
@@ -70,6 +72,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>40</strength>
     </block>
     <block>
       <bid>2</bid>
@@ -83,6 +86,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <isPlant>true</isPlant>
       <thinkTimer>10000</thinkTimer>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>3</bid>
@@ -95,6 +99,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>5</strength>
     </block>
     <block>
       <bid>4</bid>
@@ -106,6 +111,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <gravity>true</gravity>
+	  <strength>25</strength>
     </block>
     <block>
       <bid>5</bid>
@@ -118,6 +124,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>20</strength>
     </block>
     <block>
       <bid>6</bid>
@@ -131,6 +138,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <isPlant>true</isPlant>
       <thinkTimer>5000</thinkTimer>
       <gravity>true</gravity>
+	  <strength>0</strength>
     </block>
     <block>
       <bid>7</bid>
@@ -143,6 +151,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>false</gravity>
+	  <strength>-1</strength>
     </block>
     <block>
       <bid>8</bid>
@@ -156,6 +165,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <thinkTimer>100</thinkTimer>
       <isPlant>false</isPlant>
       <gravity>false</gravity>
+	  <strength>0</strength>
     </block>
     <block>
       <bid>9</bid>
@@ -168,6 +178,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>0</strength>
     </block>
     <block>
       <bid>10</bid>
@@ -181,6 +192,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <isPlant>false</isPlant>
       <thinkTimer>2200</thinkTimer>
       <gravity>false</gravity>
+	  <strength>0</strength>
     </block>
     <block>
       <bid>11</bid>
@@ -192,6 +204,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <behaviourName></behaviourName>
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
+	  <strength>0</strength>
     </block>
     <block>
       <bid>12</bid>
@@ -204,6 +217,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>0</strength>
     </block>
     <block>
       <bid>13</bid>
@@ -216,6 +230,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>0</strength>
     </block>
     <block>
       <bid>14</bid>
@@ -228,6 +243,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>30</strength>
     </block>
     <block>
       <bid>15</bid>
@@ -240,6 +256,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>30</strength>
     </block>
     <block>
       <bid>16</bid>
@@ -252,6 +269,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>30</strength>
     </block>
     <block>
       <bid>17</bid>
@@ -264,6 +282,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>25</strength>
     </block>
     <block>
       <bid>18</bid>
@@ -276,6 +295,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>1</strength>
     </block>
     <block>
       <bid>19</bid>
@@ -288,6 +308,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>false</gravity>
+	  <strength>-1</strength>
     </block>
     <block>
       <bid>20</bid>
@@ -300,6 +321,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>5</strength>
     </block>
     <block>
       <bid>21</bid>
@@ -312,6 +334,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>22</bid>
@@ -324,6 +347,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>23</bid>
@@ -336,6 +360,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>24</bid>
@@ -348,6 +373,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>25</bid>
@@ -360,6 +386,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>26</bid>
@@ -372,6 +399,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>27</bid>
@@ -384,6 +412,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>28</bid>
@@ -396,6 +425,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>29</bid>
@@ -408,6 +438,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>30</bid>
@@ -420,6 +451,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>31</bid>
@@ -432,6 +464,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>32</bid>
@@ -444,6 +477,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>33</bid>
@@ -456,6 +490,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>34</bid>
@@ -468,6 +503,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>35</bid>
@@ -480,6 +516,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>36</bid>
@@ -492,6 +529,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>37</bid>
@@ -505,6 +543,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <isPlant>true</isPlant>
       <thinkTimer>5000</thinkTimer>
       <gravity>true</gravity>
+	  <strength>0</strength>
     </block>
     <block>
       <bid>38</bid>
@@ -518,6 +557,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <isPlant>true</isPlant>
       <thinkTimer>5000</thinkTimer>
       <gravity>true</gravity>
+	  <strength>0</strength>
     </block>
     <block>
       <bid>39</bid>
@@ -531,6 +571,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <isPlant>true</isPlant>
       <thinkTimer>5000</thinkTimer>
       <gravity>true</gravity>
+	  <strength>0</strength>
     </block>
     <block>
       <bid>40</bid>
@@ -544,6 +585,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <isPlant>true</isPlant>
       <thinkTimer>5000</thinkTimer>
       <gravity>true</gravity>
+	  <strength>0</strength>
     </block>
     <block>
       <bid>41</bid>
@@ -556,6 +598,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>10</strength>
     </block>
     <block>
       <bid>42</bid>
@@ -568,6 +611,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>50</strength>
     </block>
     <block>
       <bid>43</bid>
@@ -580,6 +624,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>20</strength>
     </block>
     <block>
       <bid>44</bid>
@@ -593,6 +638,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <isPlant>false</isPlant>
       <fullCounterpart>43</fullCounterpart>
       <gravity>true</gravity>
+	  <strength>20</strength>
     </block>
     <block>
       <bid>45</bid>
@@ -605,6 +651,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>50</strength>
     </block>
     <block>
       <bid>46</bid>
@@ -617,6 +664,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>-1</strength>
     </block>
     <block>
       <bid>47</bid>
@@ -629,6 +677,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>0</strength>
     </block>
     <block>
       <bid>48</bid>
@@ -641,6 +690,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>20</strength>
     </block>
     <block>
       <bid>49</bid>
@@ -653,6 +703,7 @@ POSSIBILITY OF SUCH DAMAGE.
       <doesThink>false</doesThink>
       <isPlant>false</isPlant>
       <gravity>true</gravity>
+	  <strength>30</strength>
     </block>
   </blockList>
 </blocks>

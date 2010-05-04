@@ -5,8 +5,8 @@ type: :bugfix
 component: physics
 release: "0.1"
 reporter: Adam Liszka <sidein@usiah.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-05-02 07:37:15.897891 Z
 references: []
 
@@ -16,3 +16,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - created
   - Should be a simple fix
+- - 2010-05-03 02:44:19.877472 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition fixed
+  - ""
