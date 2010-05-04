@@ -75,24 +75,34 @@ public final class LevelManager {
 	 */
 	public static Level load(String mapName) {
 		File mapFile = getLatestFile(mapName);
+		String ext = mapFile.getName().substring(mapFile.getName().lastIndexOf(".") + 1);
 
 		try {
+			if (ext.equalsIgnoreCase("mclevel")) {
+				return NBTFileHandler.load(mapFile.getPath());
+			} else if (ext.equalsIgnoreCase("dat") || ext.equalsIgnoreCase("mine")) {
+				return BINFileHandler.load(mapFile.getPath());
+			} else if (ext.equalsIgnoreCase("lvl")) {
+				return MCSharpFileHandler.load(mapFile.getPath());
+			}
+		} catch (IOException e) {
+			logger.info("File is of different type than expected. Trying all known formats.");
+		}
+
+		try {
+			logger.info("Trying NBT .mclevel");
 			return NBTFileHandler.load(mapFile.getPath());
-		} catch (IOException e) {
-			logger.debug("IOException loading with NBT", e);
-		}
+		} catch (IOException e) { }
 
 		try {
+			logger.info("Trying old .mine/.dat");
 			return BINFileHandler.load(mapFile.getPath());
-		} catch (IOException e) {
-			logger.debug("IOException loading with BIN", e);
-		}
+		} catch (IOException e) { }
 
 		try {
+			logger.info("Trying MCSharp .lvl");
 			return MCSharpFileHandler.load(mapFile.getPath());
-		} catch (IOException e) {
-			logger.debug("IOException loading with MCSharp", e);
-		}
+		} catch (IOException e) { }
 
 		//DEBUGGING
 		//System.exit(1);
