@@ -49,6 +49,7 @@ import org.opencraft.server.cmd.impl.HelpCommand;
 import org.opencraft.server.cmd.impl.GotoCommand;
 import org.opencraft.server.model.Level;
 import org.opencraft.server.model.Player;
+import org.opencraft.server.security.OCPermission;
 
 /**
  * An implementation of a game mode that does the majority of the work for the
@@ -121,7 +122,13 @@ public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 	
 	// Default implementation
 	public void setBlock(Player player, Level level, int x, int y, int z, int mode, int type) {
-		level.setBlock(x, y, z, (byte) (mode == 1 ? type : 0));
+		if (mode == 1 && !player.isAuthorized(OCPermission.BUILD)) {
+			level.setBlock(x, y, z, level.getBlock(x, y, z));
+		} else if (mode == 0 && !player.isAuthorized(OCPermission.DESTROY)) {
+			level.setBlock(x, y, z, level.getBlock(x, y, z));
+		} else if (player.isAuthorized(OCPermission.BUILD)) {
+			level.setBlock(x, y, z, (byte) (mode == 1 ? type : 0));
+		}
 	}
 	
 	// Default implementation
