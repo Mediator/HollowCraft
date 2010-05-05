@@ -8,37 +8,28 @@
 	</path>
 	<target name="init">
 		<mkdir dir="bin"/>
+		<mkdir dir="data"/>
+		<mkdir dir="data/maps"/>
+		<mkdir dir="data/savedGames"/>
 	</target>
-	<target name="build" depends="init">
+	<target name="javac" depends="init">
 		<javac srcdir="src" classpath="${toString:libs}" destdir="bin" debug="true">
 			<compilerarg value="-Xlint"/>
 		</javac>
 	</target>
 	<target name="gcj" depends="init">
-		<javac srcdir="src" classpath="${toString:libs}" compiler="gcj" destdir="bin" debug="true"/>
+		<javac srcdir="src" classpath="${toString:libs}" compiler="gcj" destdir="bin" debug="true">
+					<compilerarg value="-Xlint"/>
+		</javac>
 	</target>
 	<target name="clean">
 		<delete dir="bin"/>
 	</target>
+	<target name="build" depends="javac"/>
 	<target name="rebuild" depends="clean,build"/>
 	<target name="run" depends="build">
-		<java classname="org.opencraft.server.Server" fork="true"
-			maxmemory="1024m">
-			<sysproperty key="java.util.logging.config.file"
-				value="data/logging.properties"/>
-			<classpath>
-				<pathelement path="${toString:libs}"/>
-				<pathelement path="bin"/>
-		   	</classpath>
-			<assertions>
-				<enable/>
-			</assertions>
-		</java>
-	</target>
-	<target name="run-gcj" depends="gcj">
-		<java classname="org.opencraft.server.Server" fork="true">
-			<arg value="-Xms512m"/>
-			<arg value="-Xmx1024m"/>
+		<java classname="org.opencraft.server.Server" fork="true" maxmemory="1024m">
+			<sysproperty key="java.util.logging.config.file" value="data/logging.properties"/>
 			<classpath>
 				<pathelement path="${toString:libs}"/>
 				<pathelement path="bin"/>
