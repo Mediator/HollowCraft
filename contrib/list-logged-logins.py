@@ -56,7 +56,10 @@ def addLog(stamp, message):
 parser = xml.sax.make_parser()
 parser.setContentHandler(LogRecordHandler())
 parser.setFeature(xml.sax.handler.feature_external_ges, 0)
-parser.parse(open(sys.argv[1]))
+try:
+	parser.parse(open(sys.argv[1]))
+except xml.sax._exceptions.SAXParseException, e:
+	pass
 
 for stamp,record in log:
 	(type, args) = record.split(" ", 1)

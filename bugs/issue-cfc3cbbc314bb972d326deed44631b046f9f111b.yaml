@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Limit number of backups saved
+desc: There needs to be a way to limit the number of revisions saved, or a way to only save a backup every so often.
+type: :task
+component: opencraft-acm
+release: "0.1"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-05-05 06:12:50.118432 Z
+references: []
+
+id: cfc3cbbc314bb972d326deed44631b046f9f111b
+log_events: 
+- - 2010-05-05 06:12:51.280339 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
