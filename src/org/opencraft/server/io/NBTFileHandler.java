@@ -105,7 +105,7 @@ public final class NBTFileHandler {
 				for (int z = 0; z < depth; z++) {
 					for (int y = 0; y < height; y++) {
 						for (int x = 0; x < width; x++) {
-							if (fblocks[i] < 49) {
+							if (fblocks[i] <= 49) {
 								blocks[x][y][z] = fblocks[i];
 							} else {
 								blocks[x][y][z] = 0;
