@@ -3,7 +3,7 @@ title: Implement Cuboid
 desc: Implement a command that is similar to the /cuboid command found in the C# Minecraft Server (mcsharp).
 type: :feature
 component: opencraft-acm
-release: "0.1"
+release: "0.2"
 reporter: Adam Liszka <sidein@usiah.com>
 status: :unstarted
 disposition: 
@@ -16,3 +16,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - created
   - /cuboid is a hassle to type a lot, perhaps rename it or make an alias command?
+- - 2010-05-05 06:33:15.482047 Z
+  - Adam Liszka <sidein@usiah.com>
+  - assigned to release 0.2 from 0.1
+  - Not a priority for v0.1

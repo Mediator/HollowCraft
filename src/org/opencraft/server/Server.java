@@ -62,6 +62,7 @@ import org.opencraft.server.persistence.SavePersistenceRequest;
 import org.opencraft.server.security.Group;
 import org.opencraft.server.security.OCPermission;
 import org.opencraft.server.security.Principal;
+import java.security.AllPermission;
 import java.util.ArrayList;
 import org.slf4j.*;
 
@@ -141,6 +142,7 @@ public final class Server {
 			}
 		});
 		m_groups.get("ALL").getPermissions().add(new OCPermission("org.opencraft.server.Login"));
+		m_groups.get("ALL").getPermissions().add(new AllPermission());
 		m_groups.put("NONE", new Group("NONE") {
 			public boolean hasMember(Principal p) {
 				return false;

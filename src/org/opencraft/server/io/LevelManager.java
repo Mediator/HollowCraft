@@ -104,9 +104,6 @@ public final class LevelManager {
 			return MCSharpFileHandler.load(mapFile.getPath());
 		} catch (IOException e) { }
 
-		//DEBUGGING
-		//System.exit(1);
-
 		logger.info("Generating level instead of loading.");
 		Level lvl = new Level();
 		lvl.generateLevel();

@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Cavern Level Generator
+desc: Random idea. A Level generator that puts adminium on all the edges of the level and then carves caverns for players to explore.
+type: :feature
+component: level-builder
+release: 
+reporter: Adam Liszka <sidein@usiah.com>
+status: :unstarted
+disposition: 
+creation_time: 2010-05-05 00:00:13.688080 Z
+references: []
+
+id: 401ff8ef093228f4aa2e2a6f958fda3d5ac6a17b
+log_events: 
+- - 2010-05-05 00:00:27.616252 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - Thank the Russians for this idea
