@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Winter Level Generator
+desc: Same as the regular world generator, but replace GRASS and LEAVES with CLOTH_WHITE, and the top layer of water with GLASS
+type: :feature
+component: level-builder
+release: 
+reporter: Adam Liszka <sidein@usiah.com>
+status: :unstarted
+disposition: 
+creation_time: 2010-05-05 00:03:19.256069 Z
+references: []
+
+id: 91a992a63dee837f0fabf3f20985d7025aeb1f36
+log_events: 
+- - 2010-05-05 00:03:26.576241 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - Again, thank the Russians
