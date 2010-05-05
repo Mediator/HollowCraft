@@ -42,6 +42,7 @@ import org.opencraft.server.cmd.CommandParameters;
 import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.net.packet.Packet;
 import org.opencraft.server.net.packet.handler.PacketHandler;
+import org.opencraft.server.security.OCPermission;
 
 /**
  * A class which handles message and comamnd packets.
@@ -59,19 +60,23 @@ public class MessagePacketHandler implements PacketHandler<MinecraftSession> {
 			String tokens = message.substring(1);
 			String[] parts = tokens.split(" ");
 			final Map<String, Command> commands = session.getPlayer().getWorld().getGameMode().getCommands();
-			Command c = commands.get(parts[0]);
-			if (c != null) {
-				parts[0] = null;
-				List<String> partsList = new ArrayList<String>();
-				for (String s : parts) {
-					if (s != null) {
-						partsList.add(s);
+			if (session.getPlayer().isAuthorized(new OCPermission("org.opencraft.server.Commands."+parts[0]+".execute"))) {
+				Command c = commands.get(parts[0]);
+				if (c != null) {
+					parts[0] = null;
+					List<String> partsList = new ArrayList<String>();
+					for (String s : parts) {
+						if (s != null) {
+							partsList.add(s);
+						}
 					}
+					parts = partsList.toArray(new String[0]);
+					c.execute(session.getPlayer(), new CommandParameters(parts));
+				} else {
+					session.getActionSender().sendChatMessage("Invalid command.");
 				}
-				parts = partsList.toArray(new String[0]);
-				c.execute(session.getPlayer(), new CommandParameters(parts));
 			} else {
-				session.getActionSender().sendChatMessage("Invalid command.");
+				session.getActionSender().sendChatMessage("You are not permitted to execute the "+parts[0]+" command.");
 			}
 		} else {
 			session.getPlayer().getWorld().getGameMode().broadcastChatMessage(session.getPlayer(), message);

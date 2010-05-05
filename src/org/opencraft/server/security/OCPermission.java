@@ -36,6 +36,10 @@ package org.opencraft.server.security;
 import java.security.BasicPermission;
 
 public class OCPermission extends BasicPermission {
+	public static final OCPermission BUILD = new OCPermission("org.opencraft.server.Build");
+	public static final OCPermission DESTROY = new OCPermission("org.opencraft.server.Destroy");
+	public static final OCPermission DESTROY_OWN = new OCPermission("org.opencraft.server.DestroyOwn");
+
 	public OCPermission(String name) {
 		super(name);
 	}
