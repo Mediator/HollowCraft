@@ -39,6 +39,17 @@
 			</assertions>
 		</java>
 	</target>
+	<target name="run-nbtedit" depends="build">
+		<java classname="org.opencraft.nbtedit.Main" fork="true" maxmemory="1024m">
+			<classpath>
+				<pathelement path="${toString:libs}"/>
+				<pathelement path="bin"/>
+		   	</classpath>
+			<assertions>
+				<enable/>
+			</assertions>
+		</java>
+	</target>
 	<target name="release" depends="rebuild">
 		<mkdir dir="release"/>
 		<jar destfile="release/opencraft.jar" basedir="bin" includes="**/*.class" update="true"/>
