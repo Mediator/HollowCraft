@@ -16,3 +16,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - created
   - ""
+- - 2010-05-05 06:32:08.986336 Z
+  - Adam Liszka <sidein@usiah.com>
+  - commented
+  - How about keeping one save file that gets saved to every two or so minutes, and back up to a seperate file every hour or two?
