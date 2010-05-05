@@ -62,10 +62,10 @@ public class LandscapeBuilder extends Builder {
 	public void generate() {
 		m_seed = m_random.nextInt();
 		generateTerrain();
-		//raiseTerrain();
+		generateCaverns((m_width+m_height)/2);
 		buildLavaBed(2);
 		simulateOceanFlood();
-		//plantTrees();
+		plantTrees();
 	}
 
 	public void generateTerrain() {
@@ -507,7 +507,6 @@ public class LandscapeBuilder extends Builder {
   };
 
 
-
 	public void plantTrees() {
 		ArrayList<Position> treeList = new ArrayList<Position>();
 		for(int x = 0;x<m_width;x++) {
@@ -539,7 +538,7 @@ public class LandscapeBuilder extends Builder {
 		for(int z = rootZ;z < rootZ + 5;z++) {
 			m_blocks[rootX][rootY][z] = BlockConstants.TREE_TRUNK;
 		}
-		for(int width = 4;width>0;width--) {
+		for(int width = 3;width>0;width--) {
 			leafLayer(rootX, rootY, rootZ+5+(4-width), width);
 		}
 	}
@@ -548,6 +547,48 @@ public class LandscapeBuilder extends Builder {
 		for(int x = Math.max(0, cx-width);x<Math.min(m_width, cx+width);x++) {
 			for(int y = Math.max(0, cy-width);y<Math.min(m_height, cy+width);y++) {
 				m_blocks[x][y][cz] = BlockConstants.LEAVES;
+			}
+		}
+	}
+
+	public void generateCaverns(int count) {
+		for (int i = 0; i < count;i++) {
+			int x = m_random.nextInt(m_width);
+			int y = m_random.nextInt(m_height);
+			int z = m_random.nextInt(m_depth/4);
+			int radius = m_random.nextInt(60)+40;
+			radius = 6;
+			int type = m_random.nextInt(100);
+			if (type > 90)
+				type = BlockConstants.LAVA;
+			else if (type > 45)
+				type = BlockConstants.AIR;
+			else
+				type = BlockConstants.WATER;
+			for (int m = 0;m < 2; m++) {
+				BUBBLE_GEN: for(int j = x-radius;j<x+radius*2;j++) {
+					if (j < 0)
+						j = 0;
+					if (j >= m_width)
+						break BUBBLE_GEN;
+					for(int k = y-radius;k<y+radius*2;k++) {
+						if (k < 0)
+							k = 0;
+						if (k >= m_height)
+							break BUBBLE_GEN;
+						for (int l = z-radius;l<z+radius;l++) {
+							if (l < 0)
+								l = 0;
+							if (l >= m_depth)
+								break BUBBLE_GEN;
+							double distance = Math.sqrt(Math.pow(j-x, 2)+Math.pow(k-y, 2)+Math.pow(l-z, 2));
+							if (Math.abs(distance/radius) <= Math.abs(m_random.nextGaussian())) {
+								m_blocks[j][k][l] = (byte) type;
+							}
+						}
+					}
+				}
+				x++;
 			}
 		}
 	}
