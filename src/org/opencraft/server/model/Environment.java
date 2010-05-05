@@ -7,6 +7,7 @@ public  class Environment {
 	protected byte  SurroundingGroundType = BlockConstants.ADMINIUM;// Block ID of surrounding ground
 	protected short SurroundingWaterHeight = 1;			// Height of surrounding water (in blocks)
 	protected byte  SurroundingWaterType = BlockConstants.WATER;	// Block ID of surrounding water
+	protected short TimeOfDay = 0;					// ?? Found inspecting an official NBT file ??
 	protected short CloudHeight = 50;				// Height of the cloud layer (in blocks)
 	protected int   CloudColor = 0xFFFFFF;				// Hexadecimal value for the color of the clouds
 	protected int   SkyColor = 0x0040FF;				// Hexadecimal value for the color of the sky
@@ -94,5 +95,14 @@ public  class Environment {
 
 	public void setSkyBrightness(byte value) {
 		SkyBrightness = value;
+	}
+	
+	// Mutators for TimeofDat
+	public short getTimeofDay() {
+		return TimeOfDay;
+	}
+
+	public void setTimeOfDay(short value) {
+		TimeOfDay = value;
 	}
 }

@@ -47,18 +47,45 @@ public final class NBTFileHandler {
 				Map<String, Tag> eItems = etag.getValue();
 
 				Environment env = new Environment();
-				env.setSurroundingGroundHeight(((ShortTag)(eItems.get("SurroundingGroundHeight"))).getValue());
-				env.setSurroundingGroundType(((ByteTag)(eItems.get("SurroundingGroundType"))).getValue());
-				env.setSurroundingWaterHeight(((ShortTag)(eItems.get("SurroundingWaterHeight"))).getValue());
-				env.setSurroundingWaterType(((ByteTag)(eItems.get("SurroundingWaterType"))).getValue());
-				env.setCloudHeight(((ShortTag)(eItems.get("CloudHeight"))).getValue());
-				env.setCloudColor(((IntTag)(eItems.get("CloudColor"))).getValue());
-				env.setSkyColor(((IntTag)(eItems.get("SkyColor"))).getValue());
-				env.setFogColor(((IntTag)(eItems.get("FogColor"))).getValue());
-				env.setSkyBrightness(((ByteTag)(eItems.get("SkyBrightness"))).getValue());
+
+				// A single missing property should not stop any other property from being loaded.
+				// All vars already have a default variable
+				try {
+					env.setSurroundingGroundHeight(((ShortTag)(eItems.get("SurroundingGroundHeight"))).getValue());
+				} catch (NullPointerException e) { }
+				try {
+					env.setSurroundingGroundType(((ByteTag)(eItems.get("SurroundingGroundType"))).getValue());
+				} catch (NullPointerException e) { }
+				try {
+					env.setSurroundingWaterHeight(((ShortTag)(eItems.get("SurroundingWaterHeight"))).getValue());
+				} catch (NullPointerException e) { }
+				try {
+					env.setSurroundingWaterType(((ByteTag)(eItems.get("SurroundingWaterType"))).getValue());
+				} catch (NullPointerException e) { }
+				try {
+					env.setTimeOfDay(((ShortTag)(eItems.get("TimeOfDay"))).getValue());
+				} catch (NullPointerException e) { }
+				try {
+					env.setCloudHeight(((ShortTag)(eItems.get("CloudHeight"))).getValue());
+				} catch (NullPointerException e) { }
+				try {
+					env.setCloudColor(((IntTag)(eItems.get("CloudColor"))).getValue());
+				} catch (NullPointerException e) { }
+				try {
+					env.setSkyColor(((IntTag)(eItems.get("SkyColor"))).getValue());
+				} catch (NullPointerException e) { }
+				try {
+					env.setFogColor(((IntTag)(eItems.get("FogColor"))).getValue());
+				} catch (NullPointerException e) { }
+				try {
+					env.setSkyBrightness(((ByteTag)(eItems.get("SkyBrightness"))).getValue());
+				} catch (NullPointerException e) { }
+
 				lvl.setEnvironment(env);
 
 			} else if (key.equalsIgnoreCase("Entities")) {
+				//TODO
+			} else if (key.equalsIgnoreCase("TileEntities")) {
 				//TODO
 			} else if (key.equalsIgnoreCase("Map")) {
 				CompoundTag map = (CompoundTag)(items.get(key));
@@ -78,7 +105,11 @@ public final class NBTFileHandler {
 				for (int z = 0; z < depth; z++) {
 					for (int y = 0; y < height; y++) {
 						for (int x = 0; x < width; x++) {
-							blocks[x][y][z] = fblocks[i];
+							if (fblocks[i] < 49) {
+								blocks[x][y][z] = fblocks[i];
+							} else {
+								blocks[x][y][z] = 0;
+							}
 							data[x][y][z] = fdata[i];
 							i += 1;
 						}
