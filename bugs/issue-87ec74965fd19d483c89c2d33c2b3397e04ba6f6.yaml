@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Save entities to NBT files
+desc: Add entity saving support to the NBTFileManager
+type: :feature
+component: opencraft-acm
+release: "0.2"
+reporter: Adam Liszka <sidein@usiah.com>
+status: :unstarted
+disposition: 
+creation_time: 2010-05-06 01:45:38.826404 Z
+references: []
+
+id: 87ec74965fd19d483c89c2d33c2b3397e04ba6f6
+log_events: 
+- - 2010-05-06 01:46:00.570248 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - Some useful info can be found in atlantis.analysis

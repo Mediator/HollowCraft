@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Read in Entities from NBT files
+desc: Finish out the NBTFileManager load() method
+type: :feature
+component: opencraft-acm
+release: "0.2"
+reporter: Adam Liszka <sidein@usiah.com>
+status: :unstarted
+disposition: 
+creation_time: 2010-05-06 01:43:01.034061 Z
+references: []
+
+id: 46c02697d1cbb85637691ad20c59164aebe26c8e
+log_events: 
+- - 2010-05-06 01:43:13.578330 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - Some useful info can be found in atlantis.analysis

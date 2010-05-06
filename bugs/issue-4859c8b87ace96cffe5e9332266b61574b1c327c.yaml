@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Entity Structure
+desc: Bring some sort of sanity to Notch's mess
+type: :feature
+component: opencraft-acm
+release: "0.2"
+reporter: Adam Liszka <sidein@usiah.com>
+status: :in_progress
+disposition: 
+creation_time: 2010-05-06 01:41:16.682135 Z
+references: []
+
+id: 4859c8b87ace96cffe5e9332266b61574b1c327c
+log_events: 
+- - 2010-05-06 01:41:36.314255 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - Some useful info can be found in entityStructure
+- - 2010-05-06 01:47:03.395028 Z
+  - Adam Liszka <sidein@usiah.com>
+  - changed status from unstarted to in_progress
+  - It may not be pretty the first time through, though it will be prettier than what Notch has done.

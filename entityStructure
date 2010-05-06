@@ -1,0 +1,111 @@
+==========
+== Base ==
+==========
+
+Compound MCObject
+  - String "id"
+
+
+==============
+== Entities ==
+==============
+
+Compound Entity -- MCObject
+  - List "Pos"
+    - Float -- X
+    - Float -- Y
+    - Float -- Z
+  - List "Motion"
+    - Float
+    - Float
+    - Float
+  - Short "Fire" = -1
+  - Float "FallDistance" = 0.0
+  - Short "Air" = 300
+  - List "Rotation"
+    - Float
+    - Float
+
+Compound LivingEntity -- Entity
+  - Short "Health"
+
+Compound Mover -- Alive
+  - Short "AttackTime" = 0
+  - Short "HurtTime" = 0
+  - Short "DeathTime" = 0
+
+Compound Zombie -- Mover
+  id = "Zombie"
+  Health = 20
+
+Compound Skeleton -- Mover
+  id = "Skeleton"
+  Health = 20
+
+Compound Creeper -- Mover
+  id = "Creeper"
+  Health = 15
+
+Compound Spider -- Mover
+  id = "Spider"
+  Health = 20
+
+Compound Pig -- Mover
+  id = "Pig"
+  Health = 10
+
+Compound Sheep -- Mover
+  id = "Sheep"
+  Health = 10
+  - Byte "Sheared" = 1 (or 1? !0?)
+
+Compound Item -- LivingEntity
+  Health = 5
+  - Short "Age"
+  - Compound "Item"
+    - Short "id"
+    - Short "Damage"
+    - Byte "Count"
+
+Compound Painting -- Entity
+  id = "Painting"
+  Fire = 0
+  - Byte "Dir"
+  - Int "TileX"
+  - Int "TileY"
+  - Int "TileZ"
+  - String "Motive" = {"Sea", ... }
+
+Compound Player -- Mover
+  id = "LocalPlayer"
+  Fire = -20
+  - List "Inventory"
+    + Compound
+      - Short "id"
+      - Short "Damage"
+      - Byte "Count"
+      - Byte "Slot"
+  - Int "Score"
+
+
+===================
+== Tile Entities ==
+===================
+
+Compound Container -- MCObject
+  - String "id"
+  - List "Items"
+    + Compound
+      - Short "id"
+      - Short "Damage"
+      - Byte "Count"
+      - Byte "Slot"
+  - Int "Pos"
+
+Compound Chest -- Container
+  id = "Chest"
+
+Compound Furnace -- Container
+  id = "Furnace"
+  - Short "BurnTime"
+  - Short "CookTime"

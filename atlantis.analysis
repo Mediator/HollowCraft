@@ -1,0 +1,225 @@
+ =List Entities=
+
+Compound -- Player?
+ - List "Motion"
+    - Float
+    - Float
+    - Float
+  - Short "HurtTime" = 0
+  - Short "Health" = 20
+  - Short "Air" = 300
+  - List "Inventory"
+    + Compound -- Inventory Item?
+      - Short "id"
+      - Short "Damage"
+      - Byte "Count"
+      - Byte "Slot"
+  - String "id" = "LocalPlayer"
+  - List "Pos"
+    - Float -- X
+    - Float -- Y
+    - Float -- Z
+  - Short "AttackTime" = 0
+  - Short "Fire" = -20
+  - Float "FallDistance" = 0.0
+  - List "Rotation"
+    - Float
+    - Float
+  - Int "Score"
+  - Short "DeathTime" = 0
+
+Compound -- Painting
+  - String "id" = "Painting"
+  - List "Pos"
+    - Float -- X
+    - Float -- Y
+    - Float -- Z
+  - Byte "Dir" = 0 -- 0, 1, 2, 3?
+  - List "Motion"
+    - Float -- X?
+    - Float -- Y?
+    - Float -- Z?
+  - Short "Fire" = 0
+  - Float "FallDistance" = 0.0
+  - Int "TileX"
+  - Int "TileY"
+  - Int "TileZ"
+  - Short "Air" = 300
+  - List "Rotation"
+    - Float
+    - Float
+  - String "Motive" = "Sea" -- motif?
+
+Compound -- Item
+  - String "id" = "Item"
+  - List "Pos"
+    - Float -- X
+    - Float -- Y
+    - Float -- Z
+  - Short "Age"
+  - List "Motion"
+    - Float -- X?
+    - Float -- Y?
+    - Float -- Z?
+  - Compound "Item"
+    - Short "id"
+    - Short "Damage"
+    - Byte "Count"
+  - Short "Fire" = -1
+  - Float "FallDistance" = 0.0
+  - Short "Health" = 5
+  - Short "Air" = 300
+  - List "Rotation"
+    - Float
+    - Float
+
+Compound -- Sheep
+  - String "id" = "Sheep"
+  - List "Pos"
+   - Float -- X
+   - Float -- Y
+   - Float -- Z
+  - Short "AttackTime" = 0
+  - List "Motion"
+    - Float
+    - Float
+    - Float
+  - Short "HurtTime" = 0
+  - Short "Fire" = -1
+  - Byte "Sheared" = 0 -- or 1? or !0?
+  - Float "FallDistance" = 0.0
+  - Short "Health" = 10
+  - Short "Air" = 300
+  - List "Rotation"
+    - Float
+    - Float
+  - Short "DeathTime" = 0
+
+Compound -- Zombie
+  - String "id" = "Zombie"
+  - List "Pos"
+   - Float -- X
+   - Float -- Y
+   - Float -- Z
+  - Short "AttackTime" = 0
+  - List "Motion"
+    - Float
+    - Float
+    - Float
+  - Short "HurtTime" = 0
+  - Short "Fire" = -1
+  - Float "FallDistance" = 0.0
+  - Short "Health" = 20
+  - Short "Air" = 300
+  - List "Rotation"
+    - Float
+    - Float
+  - Short "DeathTime" = 0
+
+Compound -- Skeleton
+  - String "id" = "Skeleton"
+  - List "Pos"
+   - Float -- X
+   - Float -- Y
+   - Float -- Z
+  - Short "AttackTime" = 0
+  - List "Motion"
+    - Float
+    - Float
+    - Float
+  - Short "HurtTime" = 0
+  - Short "Fire" = -1
+  - Float "FallDistance" = 0.0
+  - Short "Health" = 20
+  - Short "Air" = 300
+  - List "Rotation"
+    - Float
+    - Float
+  - Short "DeathTime" = 0
+
+Compound -- Creeper
+  - String "id" = "Creeper"
+  - List "Pos"
+   - Float -- X
+   - Float -- Y
+   - Float -- Z
+  - Short "AttackTime" = 0
+  - List "Motion"
+    - Float
+    - Float
+    - Float
+  - Short "HurtTime" = 0
+  - Short "Fire" = -1
+  - Float "FallDistance" = 0.2384
+  - Short "Health" = 15
+  - Short "Air" = 300
+  - List "Rotation"
+    - Float
+    - Float
+  - Short "DeathTime" = 0
+
+Compound -- Spider
+  - String "id" = "Spider"
+  - List "Pos"
+   - Float -- X
+   - Float -- Y
+   - Float -- Z
+  - Short "AttackTime" = 0
+  - List "Motion"
+    - Float
+    - Float
+    - Float
+  - Short "HurtTime" = 0
+  - Short "Fire" = -1
+  - Float "FallDistance" = 0.0
+  - Short "Health" = 20
+  - Short "Air" = 300
+  - List "Rotation"
+    - Float
+    - Float
+  - Short "DeathTime" = 0
+
+Compound -- Pig
+  - String "id" = "Pig"
+  - List "Pos"
+   - Float -- X
+   - Float -- Y
+   - Float -- Z
+  - Short "AttackTime" = 0
+  - List "Motion"
+    - Float
+    - Float
+    - Float
+  - Short "HurtTime" = 0
+  - Short "Fire" = -1
+  - Float "FallDistance" = 0.0
+  - Short "Health" = 10
+  - Short "Air" = 300
+  - List "Rotation"
+    - Float
+    - Float
+  - Short "DeathTime" = 0
+
+ =List TileEntities=
+
+Compound -- Chest
+  - String "id" = "Chest"
+  - List "Items"
+    + Compound -- Inventory Item?
+      - Short "id"
+      - Short "Damage"
+      - Byte "Count"
+      - Byte "Slot"
+  - Int "Pos" = 240147639 -- wth Notch, wth
+
+Compound -- Furnace
+  - String "id" = "Furnace"
+  - List "Items"
+    + Compound -- Inventory Item?
+      - Short "id"
+      - Short "Damage"
+      - Byte "Count"
+      - Byte "Slot"
+  - Int "Pos" = 241196216 -- again, wth Notch
+  - Short "BurnTime"
+  - Short "CookTime"
