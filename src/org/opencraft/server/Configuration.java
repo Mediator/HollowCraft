@@ -141,6 +141,20 @@ public class Configuration {
 		scriptName = props.getProperty("script_name", null);
 		defaultMap = props.getProperty("defaultMap", "default");
 		useFList = Boolean.valueOf(props.getProperty("useFList", "false"));
+		backupCount = Integer.valueOf(props.getProperty("backupCount", -1));
+		backupPeriod = Integer.valueOf(props.getProperty("backupPeriod", 30));
+	}
+
+	private int backupPeriod;
+
+	public int getBackupPeriod() {
+		return backupPeriod;
+	}
+
+	private int backupCount;
+
+	public int getBackupCount() {
+		return backupCount;
 	}
 
 	private boolean useFList;
