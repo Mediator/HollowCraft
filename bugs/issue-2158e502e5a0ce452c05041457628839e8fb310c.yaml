@@ -3,7 +3,7 @@ title: Investigate merging Level and World
 desc: There doesn't seem to be a good reason why the two classes are separate.
 type: :task
 component: opencraft-acm
-release: 
+release: "0.4"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
 status: :unstarted
 disposition: 
@@ -15,4 +15,8 @@ log_events:
 - - 2010-04-25 17:47:24.153336 Z
   - Trever Fischer <tdfischer@fedoraproject.org>
   - created
+  - ""
+- - 2010-05-06 18:28:24.015390 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - assigned to release 0.4 from unassigned
   - ""
