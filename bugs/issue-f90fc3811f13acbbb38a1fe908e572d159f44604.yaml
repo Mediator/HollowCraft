@@ -5,7 +5,7 @@ type: :bugfix
 component: physics
 release: "0.3"
 reporter: Adam Liszka <sidein@usiah.com>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2010-04-29 20:02:01.810374 Z
 references: []
@@ -20,3 +20,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - assigned to release 0.3 from 0.1
   - Move to the proper release
+- - 2010-05-06 23:38:14.330036 Z
+  - Adam Liszka <sidein@usiah.com>
+  - changed status from unstarted to in_progress
+  - ""
