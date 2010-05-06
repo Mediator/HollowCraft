@@ -3,7 +3,7 @@ title: Limit number of backups saved
 desc: There needs to be a way to limit the number of revisions saved, or a way to only save a backup every so often.
 type: :task
 component: opencraft-acm
-release: "0.1"
+release: "0.3"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
 status: :unstarted
 disposition: 
@@ -20,3 +20,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - commented
   - How about keeping one save file that gets saved to every two or so minutes, and back up to a seperate file every hour or two?
+- - 2010-05-06 06:54:06.927396 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - assigned to release 0.3 from 0.1
+  - Move to the proper release

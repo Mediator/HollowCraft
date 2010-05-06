@@ -3,7 +3,7 @@ title: Save entities to NBT files
 desc: Add entity saving support to the NBTFileManager
 type: :feature
 component: opencraft-acm
-release: "0.2"
+release: "0.4"
 reporter: Adam Liszka <sidein@usiah.com>
 status: :unstarted
 disposition: 
@@ -16,3 +16,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - created
   - Some useful info can be found in atlantis.analysis
+- - 2010-05-06 06:56:02.675381 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - assigned to release 0.4 from 0.2
+  - Move to the proper release

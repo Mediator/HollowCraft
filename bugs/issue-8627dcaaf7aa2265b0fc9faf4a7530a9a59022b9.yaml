@@ -3,7 +3,7 @@ title: Anti-aliasing
 desc: It appears that the level builder has checkerboxes everywhere because of the lack of anti-aliasing.
 type: :bugfix
 component: level-builder
-release: "0.1"
+release: "0.3"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
 status: :closed
 disposition: :wontfix

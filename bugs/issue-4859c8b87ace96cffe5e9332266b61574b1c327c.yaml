@@ -3,7 +3,7 @@ title: Entity Structure
 desc: Bring some sort of sanity to Notch's mess
 type: :feature
 component: opencraft-acm
-release: "0.2"
+release: "0.4"
 reporter: Adam Liszka <sidein@usiah.com>
 status: :in_progress
 disposition: 
@@ -20,3 +20,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - changed status from unstarted to in_progress
   - It may not be pretty the first time through, though it will be prettier than what Notch has done.
+- - 2010-05-06 06:55:03.615394 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - assigned to release 0.4 from 0.2
+  - Move to the proper release

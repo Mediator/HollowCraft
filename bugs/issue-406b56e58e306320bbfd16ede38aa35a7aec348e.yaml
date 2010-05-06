@@ -5,7 +5,7 @@ desc: |-
   position packets from the server.
 type: :bugfix
 component: opencraft-acm
-release: "0.1"
+release: "0.3"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
 status: :closed
 disposition: :fixed

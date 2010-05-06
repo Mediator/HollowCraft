@@ -3,7 +3,7 @@ title: Permission lists
 desc: Granular permissions, groups, list inheritance, and others would make servers really easy to administrate.
 type: :feature
 component: security
-release: "0.1"
+release: "0.3"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
 status: :closed
 disposition: :fixed

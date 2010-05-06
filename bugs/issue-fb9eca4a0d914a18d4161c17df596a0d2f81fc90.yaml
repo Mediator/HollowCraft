@@ -3,7 +3,7 @@ title: Level type constants instead of strings
 desc: Why are we passing around strings as level 'types'?
 type: :task
 component: opencraft-acm
-release: "0.1"
+release: "0.3"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
 status: :closed
 disposition: :wontfix

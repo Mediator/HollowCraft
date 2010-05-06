@@ -3,7 +3,7 @@ title: Pixel Art Level
 desc: Add a level generator that makes a level specifically for pixel art.
 type: :feature
 component: level-builder
-release: "0.1"
+release: "0.3"
 reporter: Adam Liszka <sidein@usiah.com>
 status: :closed
 disposition: :fixed

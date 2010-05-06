@@ -3,7 +3,7 @@ title: Automatic level backups
 desc: Levels should be saved along with a number of previous revisions to allow instant restores
 type: :feature
 component: opencraft-acm
-release: "0.1"
+release: "0.3"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
 status: :closed
 disposition: :fixed

@@ -3,7 +3,7 @@ title: Ocean Flooding
 desc: During level generation, simulate the flooding of the ocean to save on cpu cycles after world generation. It's partially implemented atm.
 type: :task
 component: level-builder
-release: "0.1"
+release: "0.3"
 reporter: Adam Liszka <sidein@usiah.com>
 status: :closed
 disposition: :fixed

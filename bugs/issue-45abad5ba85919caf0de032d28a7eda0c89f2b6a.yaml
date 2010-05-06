@@ -3,7 +3,7 @@ title: Implement Cuboid
 desc: Implement a command that is similar to the /cuboid command found in the C# Minecraft Server (mcsharp).
 type: :feature
 component: opencraft-acm
-release: "0.2"
+release: "0.4"
 reporter: Adam Liszka <sidein@usiah.com>
 status: :unstarted
 disposition: 
@@ -20,3 +20,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - assigned to release 0.2 from 0.1
   - Not a priority for v0.1
+- - 2010-05-06 06:55:31.624388 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - assigned to release 0.4 from 0.2
+  - Move to the proper release

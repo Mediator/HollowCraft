@@ -3,7 +3,7 @@ title: Ore veins
 desc: mining is all about mining, yes?
 type: :task
 component: level-builder
-release: "0.1"
+release: "0.3"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
 status: :unstarted
 disposition: 
@@ -16,3 +16,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - created
   - ""
+- - 2010-05-06 06:53:34.028512 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - assigned to release 0.3 from 0.1
+  - Move to the proper release

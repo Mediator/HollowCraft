@@ -3,7 +3,7 @@ title: Sand and Gravel Physics
 desc: Gravel and Sand should fall if there is nothing underneath them, not if they are not touching anything like dirt, etc.
 type: :bugfix
 component: physics
-release: "0.1"
+release: "0.3"
 reporter: Adam Liszka <sidein@usiah.com>
 status: :closed
 disposition: :fixed

@@ -12,7 +12,7 @@ components:
   name: security
 releases: 
 - !ditz.rubyforge.org,2008-03-06/release 
-  name: "0.1"
+  name: "0.3"
   status: :unreleased
   release_time: 
   log_events: 
@@ -21,7 +21,7 @@ releases:
     - created
     - The first OpenCraft Release
 - !ditz.rubyforge.org,2008-03-06/release 
-  name: "0.2"
+  name: "0.4"
   status: :unreleased
   release_time: 
   log_events: 

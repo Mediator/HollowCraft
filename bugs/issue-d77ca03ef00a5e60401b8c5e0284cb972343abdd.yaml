@@ -5,7 +5,7 @@ desc: |-
   but a lot of the errors that GCJ returns with are things that should probably be fixed.
 type: :bugfix
 component: opencraft-acm
-release: "0.1"
+release: "0.3"
 reporter: Adam Liszka <sidein@usiah.com>
 status: :closed
 disposition: :fixed

@@ -3,7 +3,7 @@ title: Run dos2unix
 desc: Run dos2unix on all files
 type: :task
 component: opencraft-acm
-release: "0.1"
+release: "0.3"
 reporter: Adam Liszka <sidein@usiah.com>
 status: :closed
 disposition: :fixed
