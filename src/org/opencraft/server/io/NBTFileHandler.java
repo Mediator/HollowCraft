@@ -270,12 +270,14 @@ public final class NBTFileHandler {
 
 
 		try {
+			logger.debug("Writing NBT to {}", filename);
 			FileOutputStream out = new FileOutputStream(filename);
 			NBTOutputStream nbtout = new NBTOutputStream(out);
 			nbtout.writeTag(root);
 			nbtout.close();
 			out.flush();
 			out.close();
+			logger.debug("Successfully wrote to {}", filename);
 		} catch (Exception e) {
 			logger.warn("Error writing save file", e);
 		}
