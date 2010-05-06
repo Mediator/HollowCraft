@@ -5,7 +5,7 @@ type: :feature
 component: opencraft-acm
 release: "0.2"
 reporter: Adam Liszka <sidein@usiah.com>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2010-05-06 01:41:16.682135 Z
 references: []
@@ -16,3 +16,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - created
   - Some useful info can be found in entityStructure
+- - 2010-05-06 01:47:03.395028 Z
+  - Adam Liszka <sidein@usiah.com>
+  - changed status from unstarted to in_progress
+  - It may not be pretty the first time through, though it will be prettier than what Notch has done.
