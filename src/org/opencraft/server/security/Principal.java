@@ -39,5 +39,6 @@ public interface Principal {
 	public boolean isAuthorized(Permission permission);
 	public Permission[] getPermissions();
 	public void addPermission(Permission p);
+	public void clearPolicy();
 	public String getName();
 }

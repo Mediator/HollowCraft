@@ -34,9 +34,12 @@ package org.opencraft.server.security;
  */
 
 import java.util.ArrayList;
+import org.slf4j.*;
 
 public class Group implements Principal {
 	private String m_name;
+
+	private final static Logger logger = LoggerFactory.getLogger(Group.class);
 	
 	private ArrayList<Principal> m_members;
 
@@ -67,6 +70,7 @@ public class Group implements Principal {
 
 	public boolean isAuthorized(Permission perm) {
 		for(Permission p : m_permissions) {
+			logger.trace("Testing permission {} on {}", perm, p);
 			if (p.implies(perm))
 				return true;
 		}
@@ -89,6 +93,15 @@ public class Group implements Principal {
 
 	public void addMember(Principal p) {
 		m_members.add(p);
+	}
+
+	public void clearPolicy() {
+		m_members = new ArrayList<Principal>();
+		m_permissions = new ArrayList<Permission>();
+	}
+
+	public void removeMember(Principal p) {
+		m_members.remove(p);
 	}
 
 	public Principal[] getMembers() {

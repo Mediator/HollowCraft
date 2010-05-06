@@ -61,7 +61,7 @@ public class MessagePacketHandler implements PacketHandler<MinecraftSession> {
 			String[] parts = tokens.split(" ");
 			final Map<String, Command> commands = session.getPlayer().getWorld().getGameMode().getCommands();
 			Command c = commands.get(parts[0]);
-			if (session.getPlayer().isAuthorized(new Permission(c.class.getName()+".execute"))) {
+			if (session.getPlayer().isAuthorized(new Permission(c.getClass().getName()+".execute"))) {
 				if (c != null) {
 					parts[0] = null;
 					List<String> partsList = new ArrayList<String>();

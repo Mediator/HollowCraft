@@ -145,12 +145,18 @@ public class Player extends Entity implements Principal {
 		m_permissions.add(p);
 	}
 
+	public void clearPolicy() {
+		m_permissions = new ArrayList<Permission>();
+	}
+
 	public boolean isAuthorized(Permission perm) {
 		for(Permission p : m_permissions) {
+			logger.trace("Testing {} against {}", perm, p);
 			if (p.implies(perm))
 				return true;
 		}
-		for(Group group : Server.getServer().getGroups()) {
+		for(Group group : getWorld().getPolicy().getGroups()) {
+			logger.trace("Testing {} against {}", group, perm);
 			if (group.hasMember(this) && group.isAuthorized(perm))
 				return true;
 		}
@@ -204,6 +210,7 @@ public class Player extends Entity implements Principal {
 		assert(world != null);
 		setWorld(world);
 		m_world.addPlayer(this);
+		m_world.getPolicy().apply(this);
 		LevelGzipper.getLevelGzipper().gzipLevel(session);
 	}
 }

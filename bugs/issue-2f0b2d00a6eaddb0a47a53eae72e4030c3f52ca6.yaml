@@ -5,8 +5,8 @@ type: :feature
 component: security
 release: "0.1"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-04-24 20:35:33.164411 Z
 references: []
 
@@ -28,3 +28,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - changed status from unstarted to in_progress
   - ""
+- - 2010-05-06 06:43:45.438359 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition fixed
+  - Huzzah!

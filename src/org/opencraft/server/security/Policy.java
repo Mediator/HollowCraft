@@ -1,5 +1,6 @@
 package org.opencraft.server.security;
 
+import org.opencraft.server.model.World;
 import java.text.ParseException;
 import java.io.Reader;
 import java.io.StreamTokenizer;
@@ -12,34 +13,42 @@ public class Policy {
 
 	private static final Logger logger = LoggerFactory.getLogger(Policy.class);
 
-	public Policy(Reader r) throws ParseException, IOException {
-		readFrom(r);
-		for(Group group : m_groups.values()) {
-			System.out.println("Found group "+group);
-			for(Principal p : group.getMembers()) {
-				if (p instanceof Group)
-					System.out.println("\t@"+p);
-				else
-					System.out.println("\t"+p);
-			}
-		}
-		for(String role : m_roles.keySet()) {
-			System.out.println("Found role "+role);
-			for(Permission permission : m_roles.get(role).getPermissions()) {
-				if (permission instanceof Role)
-					System.out.println("\t@"+permission);
-				else
-					System.out.println("\t"+permission);
-			}
-		}
+	public Policy() {
+
 	}
 
-	public void applyPermissions(Principal p) {
-		for(Group group : m_userGroups.get(p.getName())) {
-			group.addMember(p);
+	public Policy(String world, Reader r) throws ParseException, IOException {
+		m_world = world;
+		readFrom(r);
+	}
+
+	private String m_world = "";
+
+	public Group getGroup(String group) {
+		return m_groups.get(group);
+	}
+
+	public Group[] getGroups() {
+		return m_groups.values().toArray(new Group[m_groups.size()]);
+	}
+
+	public void apply(Principal p) {
+		logger.trace("Clearing policy on {}", p);
+		p.clearPolicy();
+		for(Group group : m_groups.values()) {
+			group.removeMember(p);
 		}
-		for(Permission permission : m_userPermissions.get(p.getName())) {
-			p.addPermission(permission);
+		if (m_userGroups.get(p.getName()) != null) {
+			for(Group group : m_userGroups.get(p.getName())) {
+				logger.trace("Adding {} to {}", p, group);
+				group.addMember(p);
+			}
+		}
+		if (m_userPermissions.get(p.getName()) != null) {
+			for(Permission permission : m_userPermissions.get(p.getName())) {
+				logger.trace("Granting {} to {}", permission, p);
+				p.addPermission(permission);
+			}
 		}
 	}
 
@@ -71,6 +80,7 @@ public class Policy {
 		tokens.ordinaryChar('{');
 		tokens.ordinaryChar('}');
 		tokens.wordChars('@', '@');
+		tokens.wordChars('*', '*');
 		HashMap<String, ArrayList<BlockList>> lists = new HashMap<String, ArrayList<BlockList>>();
 		lists.put("ROLE", new ArrayList<BlockList>());
 		lists.put("GROUP", new ArrayList<BlockList>());
@@ -93,7 +103,12 @@ public class Policy {
 			} else if (block.equals("DENY")) {
 				permissions.add(new DenyBlock(tokens));
 			} else if (block.equals("WORLD")) {
-				worlds.add(new WorldBlock(tokens));
+				WorldBlock world = new WorldBlock(tokens);
+				if (world.getName().equals(m_world)) {
+					for(PermissionBlock pblock : world.getPermissions()) {
+						permissions.add(pblock);
+					}
+				}
 			} else {
 				throw new ParseException("Unhandled block: "+tokens.sval, tokens.lineno());
 			}
@@ -131,25 +146,48 @@ public class Policy {
 				}
 			}
 		}
+
+		for(PermissionBlock p : permissions) {
+			String target = p.getTarget();
+			String permission = p.getPermission();
+			Permission perm;
+			if (permission.charAt(0) == '@')
+				perm = m_roles.get(permission.substring(1));
+			else
+				perm = new Permission(permission);
+			if (target.charAt(0) == '@') {
+				m_groups.get(target.substring(1)).addPermission(perm);
+			} else {
+				m_userPermissions.get(target).add(perm);
+			}
+		}
 	}
 
 
 	private class WorldBlock {
+		public String getName() {
+			return m_name;
+		}
 		private String m_name;
+
+		public PermissionBlock[] getPermissions() {
+			return m_permissions.toArray(new PermissionBlock[m_permissions.size()]);
+		}
+
+		ArrayList<PermissionBlock> m_permissions = new ArrayList<PermissionBlock>();
+
 		public WorldBlock(StreamTokenizer tokens) throws ParseException, IOException {
 			if (tokens.nextToken() != StreamTokenizer.TT_WORD)
 				throw new ParseException("Expected world name", tokens.lineno());
 			m_name = tokens.sval;
-			logger.trace("Found world {}", m_name);
 			if (tokens.nextToken() != '{')
 				throw new ParseException("Expected token {", tokens.lineno());
-			ArrayList<PermissionBlock> permissions = new ArrayList<PermissionBlock>();
 			while(tokens.nextToken() != '}') {
 				String block = tokens.sval.toUpperCase();
 				if (block.equals("ALLOW")) {
-					permissions.add(new AllowBlock(tokens));
+					m_permissions.add(new AllowBlock(tokens));
 				} else if (block.equals("DENY")) {
-					permissions.add(new DenyBlock(tokens));
+					m_permissions.add(new DenyBlock(tokens));
 				} else {
 					throw new ParseException("Unhandled grant in world: "+block, tokens.lineno());
 				}
@@ -162,19 +200,24 @@ public class Policy {
 		private String m_target;
 		private String m_permission;
 
+		public String getTarget() {
+			return m_target;
+		}
+
+		public String getPermission() {
+			return m_permission;
+		}
+
 		public PermissionBlock(StreamTokenizer tokens) throws ParseException, IOException {
-			logger.debug("Reading in permission block of {}", tokens.sval);
 			if (tokens.nextToken() != StreamTokenizer.TT_WORD)
 				throw new ParseException("Expected a permission.", tokens.lineno());
 			m_permission = tokens.sval;
-			logger.debug("Permission: {}", tokens.sval);
 			/*if (tokens.nextToken() != StreamTokenizer.TT_WORD || tokens.sval.toLowerCase().equals("to"))
 				throw new ParseException("Expected token 'to', got '"+tokens.sval+"'", tokens.lineno());*/
 			tokens.nextToken();
 			if (tokens.nextToken() != StreamTokenizer.TT_WORD)
 				throw new ParseException("Expected role or player name, got "+tokens.sval, tokens.lineno());
 			m_target = tokens.sval;
-			logger.debug("Target: {}", tokens.sval);
 		}
 	}
 
@@ -207,7 +250,6 @@ public class Policy {
 			if (tokens.nextToken() != StreamTokenizer.TT_WORD)
 				throw new ParseException("Expected block name", tokens.lineno());
 			m_name = tokens.sval;
-			logger.trace("Block name: {}", m_name);
 			if (tokens.nextToken() != '{')
 				throw new ParseException("Expected {, got "+tokens.sval, tokens.lineno());
 			while(tokens.nextToken() != '}') {

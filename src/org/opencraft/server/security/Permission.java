@@ -1,4 +1,5 @@
 package org.opencraft.server.security;
+import org.slf4j.*;
 
 public class Permission {
 	public static final Permission BUILD = new Permission("org.opencraft.server.Build");
@@ -10,11 +11,14 @@ public class Permission {
 		m_name = name;
 	}
 
+	private static final Logger logger = LoggerFactory.getLogger(Permission.class);
+
 	public boolean implies(Permission permission) {
 		String[] otherName = permission.m_name.split(" ");
 		String[] name = m_name.split(" ");
 		int segment = 0;
 		while(segment < otherName.length && segment < name.length) {
+			logger.trace("Testing {} against {}", name[segment], otherName[segment]);
 			if (name[segment].equals('*'))
 				return true;
 			if (!name[segment].equals(otherName[segment]))

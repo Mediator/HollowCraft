@@ -45,6 +45,7 @@ import org.opencraft.server.game.GameMode;
 import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.util.PlayerList;
 import org.opencraft.server.io.LevelManager;
+import org.opencraft.server.security.Policy;
 import org.slf4j.*;
 
 /**
@@ -57,6 +58,16 @@ public final class World {
 	 * Logger instance.
 	 */
 	private static final Logger logger = LoggerFactory.getLogger(World.class);
+
+	private Policy m_policy;
+
+	public Policy getPolicy() {
+		return m_policy;
+	}
+
+	public void setPolicy(Policy p) {
+		m_policy = p;
+	}
 	
 	
 	/**
@@ -74,6 +85,10 @@ public final class World {
 	 * The game mode.
 	 */
 	private GameMode gameMode;
+
+	public String getName() {
+		return level.getName();
+	}
 	
 	/**
 	 * Default private constructor.
@@ -82,6 +97,7 @@ public final class World {
 	 * @throws InstantiationException
 	 */
 	public World(String name) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+		m_policy = new Policy();
 		gameMode = (GameMode) Class.forName(Configuration.getConfiguration().getGameMode()).newInstance();
 		level = LevelManager.load(name);
 		level.setOnBlockChangeHandler(new OnBlockChangeHandler() {

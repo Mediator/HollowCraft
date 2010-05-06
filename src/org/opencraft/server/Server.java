@@ -84,11 +84,6 @@ public final class Server {
 
 	private final PlayerList m_players;
 
-	private final HashMap<String, Group> m_groups;
-
-	public Group[] getGroups() {
-		return m_groups.values().toArray(new Group[0]);
-	}
 	
 	/**
 	 * The entry point of the server application.
@@ -137,19 +132,6 @@ public final class Server {
 		Configuration.readConfiguration();
 		SetManager.getSetManager().reloadSets();
 		m_players = new PlayerList();
-		m_groups = new HashMap<String, Group>();
-
-/*		m_groups.put("ALL", new Group("ALL") {
-			public boolean hasMember(Principal p) {
-				return true;
-			}
-		});
-		m_groups.get("ALL").getPermissions().add(new Permission("org.opencraft.server.Login"));
-		m_groups.put("NONE", new Group("NONE") {
-			public boolean hasMember(Principal p) {
-				return false;
-			}
-		});*/
 		
 		acceptor.setHandler(new SessionHandler());
 		logger.info("Initializing games...");
@@ -183,24 +165,24 @@ public final class Server {
 
 	public World getWorld(String name) {
 		loadLevel(name);
-		assert(m_worlds.get(name).get() != null);
-		return m_worlds.get(name).get();
-	}
-	
-	/**
-	 * Starts the server.
-	 * @throws IOException if an I/O error occurs.
-	 */
-	public void start() throws IOException {
-		logger.info("Initializing server...");
-		logger.info("Loading policy...");
+		World w = m_worlds.get(name).get();
+		logger.info("Loading policy for {}...", w);
 		try {
-		Policy p = new Policy(new BufferedReader(new FileReader("data/opencraft.permissions")));
+			w.setPolicy(new Policy(w.getName(), new BufferedReader(new FileReader("data/opencraft.permissions"))));
 		} catch (ParseException e) {
 			logger.warn("Error parsing policy, line "+e.getErrorOffset(), e);
 		} catch (IOException e) {
 			logger.warn("Error reading policy", e);
 		}
+		return w;
+	}
+
+	/**
+	 * Starts the server.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public void start() throws IOException {
+		logger.info("Initializing server...");	
 		logger.info("Starting tasks");
 		TaskQueue.getTaskQueue().schedule(new UpdateTask());
 		TaskQueue.getTaskQueue().schedule(new HeartbeatTask());
@@ -269,7 +251,6 @@ public final class Server {
 		}
 		// attempt to add the player
 		final Player player = new Player(session, username);
-		m_groups.get("ALL").addMember(player);
 		if (!m_players.add(player)) {
 			player.getSession().getActionSender().sendLoginFailure("Too many players online!");
 			logger.warn("Too many players online!");
