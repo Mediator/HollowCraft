@@ -33,9 +33,11 @@ package org.opencraft.server.security;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.security.Permission;
+import java.util.ArrayList;
 
 public interface Principal {
 	public boolean isAuthorized(Permission permission);
+	public Permission[] getPermissions();
+	public void addPermission(Permission p);
 	public String getName();
 }

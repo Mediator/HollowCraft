@@ -37,7 +37,7 @@ import org.opencraft.server.cmd.Command;
 import org.opencraft.server.cmd.CommandParameters;
 import org.opencraft.server.model.Player;
 import org.opencraft.server.Server;
-import org.opencraft.server.security.OCPermission;
+import org.opencraft.server.security.Permission;
 
 /**
  * A command to send a player to a new world
@@ -71,7 +71,7 @@ public class GotoCommand implements Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
-		if (player.isAuthorized(new OCPermission("org.opencraft.server.Worlds."+params.getStringArgument(0)+".goto"))) {
+		if (player.isAuthorized(new Permission("org.opencraft.server.Worlds."+params.getStringArgument(0)+".goto"))) {
 			player.getActionSender().sendChatMessage("Loading "+params.getStringArgument(0));
 			player.moveToWorld(Server.getServer().getWorld(params.getStringArgument(0)));
 		} else {

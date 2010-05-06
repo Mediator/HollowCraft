@@ -60,10 +60,13 @@ import org.opencraft.server.model.Player;
 import org.opencraft.server.persistence.SavedGameManager;
 import org.opencraft.server.persistence.SavePersistenceRequest;
 import org.opencraft.server.security.Group;
-import org.opencraft.server.security.OCPermission;
+import org.opencraft.server.security.Permission;
 import org.opencraft.server.security.Principal;
-import java.security.AllPermission;
+import org.opencraft.server.security.Policy;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.text.ParseException;
 import org.slf4j.*;
 
 
@@ -136,18 +139,17 @@ public final class Server {
 		m_players = new PlayerList();
 		m_groups = new HashMap<String, Group>();
 
-		m_groups.put("ALL", new Group("ALL") {
+/*		m_groups.put("ALL", new Group("ALL") {
 			public boolean hasMember(Principal p) {
 				return true;
 			}
 		});
-		m_groups.get("ALL").getPermissions().add(new OCPermission("org.opencraft.server.Login"));
-		m_groups.get("ALL").getPermissions().add(new AllPermission());
+		m_groups.get("ALL").getPermissions().add(new Permission("org.opencraft.server.Login"));
 		m_groups.put("NONE", new Group("NONE") {
 			public boolean hasMember(Principal p) {
 				return false;
 			}
-		});
+		});*/
 		
 		acceptor.setHandler(new SessionHandler());
 		logger.info("Initializing games...");
@@ -191,6 +193,14 @@ public final class Server {
 	 */
 	public void start() throws IOException {
 		logger.info("Initializing server...");
+		logger.info("Loading policy...");
+		try {
+		Policy p = new Policy(new BufferedReader(new FileReader("data/opencraft.permissions")));
+		} catch (ParseException e) {
+			logger.warn("Error parsing policy, line "+e.getErrorOffset(), e);
+		} catch (IOException e) {
+			logger.warn("Error reading policy", e);
+		}
 		logger.info("Starting tasks");
 		TaskQueue.getTaskQueue().schedule(new UpdateTask());
 		TaskQueue.getTaskQueue().schedule(new HeartbeatTask());

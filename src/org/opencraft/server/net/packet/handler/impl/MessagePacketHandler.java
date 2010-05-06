@@ -42,7 +42,7 @@ import org.opencraft.server.cmd.CommandParameters;
 import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.net.packet.Packet;
 import org.opencraft.server.net.packet.handler.PacketHandler;
-import org.opencraft.server.security.OCPermission;
+import org.opencraft.server.security.Permission;
 
 /**
  * A class which handles message and comamnd packets.
@@ -60,8 +60,8 @@ public class MessagePacketHandler implements PacketHandler<MinecraftSession> {
 			String tokens = message.substring(1);
 			String[] parts = tokens.split(" ");
 			final Map<String, Command> commands = session.getPlayer().getWorld().getGameMode().getCommands();
-			if (session.getPlayer().isAuthorized(new OCPermission("org.opencraft.server.Commands."+parts[0]+".execute"))) {
-				Command c = commands.get(parts[0]);
+			Command c = commands.get(parts[0]);
+			if (session.getPlayer().isAuthorized(new Permission(c.class.getName()+".execute"))) {
 				if (c != null) {
 					parts[0] = null;
 					List<String> partsList = new ArrayList<String>();

@@ -34,8 +34,6 @@ package org.opencraft.server.security;
  */
 
 import java.util.ArrayList;
-import java.security.Permission;
-import java.security.Permissions;
 
 public class Group implements Principal {
 	private String m_name;
@@ -68,13 +66,21 @@ public class Group implements Principal {
 	}
 
 	public boolean isAuthorized(Permission perm) {
-		return m_permissions.implies(perm);
+		for(Permission p : m_permissions) {
+			if (p.implies(perm))
+				return true;
+		}
+		return false;
 	}
 
-	private Permissions m_permissions = new Permissions();
+	private ArrayList<Permission> m_permissions = new ArrayList<Permission>();
 
-	public Permissions getPermissions() {
-		return m_permissions;
+	public Permission[] getPermissions() {
+		return m_permissions.toArray(new Permission[m_permissions.size()]);
+	}
+
+	public void addPermission(Permission p) {
+		m_permissions.add(p);
 	}
 
 	public boolean hasMember(Principal p) {
@@ -83,5 +89,9 @@ public class Group implements Principal {
 
 	public void addMember(Principal p) {
 		m_members.add(p);
+	}
+
+	public Principal[] getMembers() {
+		return m_members.toArray(new Principal[m_members.size()]);
 	}
 }

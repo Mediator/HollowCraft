@@ -1,3 +1,4 @@
+VERSION 1
 /* Options
 Blocks: These form the basic structure of a permission list file
 	WORLD		- Limits scope to a single world
@@ -16,39 +17,30 @@ Builtin Groups:
 	ALL         - Everyone.
 	NONE        - Nobody at all
 
-Builtin Roles:
-	ALL			- Every permission
-	NONE		- No permissions. Its a dummy for completeness.
-
-By default, nobody has any permissions and isn't in any groups.
+By default, nobody has any permissions and isn't in any groups except for ALL.
 */
 
 // Example permissions
 
 ROLE Player {
-	org.opencraft.server.command.impl.GotoCommand,
+	org.opencraft.server.command.impl.GotoCommand
 }
 
 ROLE Builder {
-	@Player,
-	org.opencraft.server.permission.Build,
+	@Player
+	org.opencraft.server.permission.Build
 	org.opencraft.server.permission.Destroy
 }
 
-ROLE Op {
-	@Builder,
-	org.opencraft.server.command.impl.Kick
-}
-
-ALLOW org.opencraft.server.command.impl.GotoCommand to @ALL
+ALLOW org.opencraft.server.command.impl.GotoCommand.execute to @ALL
 ALLOW org.opencraft.server.permission.Build to @ALL
 
 GROUP admins {
-	tdfischer,
+	tdfischer
 	sidein
 }
 
-ALLOW @ALL to @admins
+ALLOW * to @admins
 
 WORLD simcity {
 	DENY @Builder to @ALL

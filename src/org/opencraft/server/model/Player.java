@@ -41,9 +41,9 @@ import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.io.LevelGzipper;
 import org.opencraft.server.security.Group;
 import org.opencraft.server.security.Principal;
-import java.security.Permissions;
-import java.security.Permission;
+import org.opencraft.server.security.Permission;
 import org.opencraft.server.Server;
+import java.util.ArrayList;
 import org.slf4j.*;
 
 /**
@@ -135,22 +135,26 @@ public class Player extends Entity implements Principal {
 		return name;
 	}
 
-	private Permissions m_permissions = new Permissions();
+	private ArrayList<Permission> m_permissions = new ArrayList<Permission>();
 
-	public Permissions getPermissions() {
-		return m_permissions;
+	public Permission[] getPermissions() {
+		return m_permissions.toArray(new Permission[m_permissions.size()]);
+	}
+
+	public void addPermission(Permission p) {
+		m_permissions.add(p);
 	}
 
 	public boolean isAuthorized(Permission perm) {
-		if (!m_permissions.implies(perm)) {
-			for(Group group : Server.getServer().getGroups()) {
-				if (group.hasMember(this) && group.isAuthorized(perm))
-					return true;
-			}
-			return false;
-		} else {
-			return true;
+		for(Permission p : m_permissions) {
+			if (p.implies(perm))
+				return true;
 		}
+		for(Group group : Server.getServer().getGroups()) {
+			if (group.hasMember(this) && group.isAuthorized(perm))
+				return true;
+		}
+		return false;
 	}
 	
 	/**
