@@ -77,14 +77,15 @@ public class ExperimentalGameMode extends GameModeAdapter<Player> {
 	
 	@Override
 	public void playerConnected(Player player) {
+		super(player);
 		String name = player.getName();
 		// New player?
 		if (!visitors.containsKey(name)) {
-			player.getWorld().broadcast("Welcome " + name + ".");
+			player.getSession().getActionSender().sendChatMessage("Welcome " + name + ".");
 		} else {
 			// Welcome back.
 			String lastConnectDate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(visitors.get(name));
-			player.getWorld().broadcast("Welcome back " + name + ".");
+			player.getSession().getActionSender().sendChatMessage("Welcome back " + name + ".");
 			player.getSession().getActionSender().sendChatMessage("You last connect was: " + lastConnectDate + ".");
 			
 		}

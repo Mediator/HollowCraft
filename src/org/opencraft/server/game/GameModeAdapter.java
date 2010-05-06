@@ -117,7 +117,7 @@ public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 	
 	// Default implementation
 	public void playerConnected(Player player) {
-		player.getWorld().broadcast("Welcome " + player.getName());
+		player.getWorld().broadcast(player.getName()+" joined");
 	}
 	
 	// Default implementation
