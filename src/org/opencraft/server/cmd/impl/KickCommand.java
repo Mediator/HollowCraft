@@ -70,21 +70,19 @@ public class KickCommand implements Command {
 	
 	public void execute(Player player, CommandParameters params) {
 		// Player using command is OP?
-		if (player.getAttribute("IsOperator") != null && player.getAttribute("IsOperator").equals("true")) {
-			if (params.getArgumentCount() == 1) {
-				for (Player other : player.getWorld().getPlayerList().getPlayers()) {
-					if (other.getName().toLowerCase().equals(params.getStringArgument(0).toLowerCase())) {
-						other.getSession().close();
-						player.getActionSender().sendChatMessage(other.getName() + " has been kicked");
-						return;
-					}
+		if (params.getArgumentCount() == 1) {
+			for (Player other : player.getWorld().getPlayerList().getPlayers()) {
+				if (other.getName().toLowerCase().equals(params.getStringArgument(0).toLowerCase())) {
+					other.getSession().close();
+					player.getActionSender().sendChatMessage(other.getName() + " has been kicked");
+					return;
 				}
-				// Player not found
-				player.getActionSender().sendChatMessage(params.getStringArgument(0) + " was not found");
-			} else
-				player.getActionSender().sendChatMessage("Wrong number of arguments");
+			}
+			// Player not found
+			player.getActionSender().sendChatMessage(params.getStringArgument(0) + " was not found");
+		} else {
+			player.getActionSender().sendChatMessage("Wrong number of arguments");
 			player.getActionSender().sendChatMessage("/kick <name>");
-		} else
-			player.getActionSender().sendChatMessage("You must be OP to do that");
+		}
 	}
 }

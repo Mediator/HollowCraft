@@ -37,9 +37,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.opencraft.server.cmd.Command;
-import org.opencraft.server.cmd.impl.DeOperatorCommand;
 import org.opencraft.server.cmd.impl.KickCommand;
-import org.opencraft.server.cmd.impl.OperatorCommand;
 import org.opencraft.server.cmd.impl.SayCommand;
 import org.opencraft.server.cmd.impl.SetspawnCommand;
 import org.opencraft.server.cmd.impl.TeleportCommand;
@@ -68,8 +66,6 @@ public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 	 */
 	public GameModeAdapter() {
 		// these commands are standard to every game mode
-		registerCommand(OperatorCommand.getCommand());
-		registerCommand(DeOperatorCommand.getCommand());
 		registerCommand(SayCommand.getCommand());
 		registerCommand(KickCommand.getCommand());
 		registerCommand(TeleportCommand.getCommand());

@@ -69,23 +69,19 @@ public class TeleportCommand implements Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
-		// Player using command is OP?
-		if (player.getAttribute("IsOperator") != null && player.getAttribute("IsOperator").equals("true")) {
-			if (params.getArgumentCount() == 1) {
-				for (Player other : player.getWorld().getPlayerList().getPlayers()) {
-					if (other.getName().toLowerCase().equals(params.getStringArgument(0).toLowerCase())) {
-						player.teleport(other.getPosition(), other.getRotation());
-						return;
-					}
+		if (params.getArgumentCount() == 1) {
+			for (Player other : player.getWorld().getPlayerList().getPlayers()) {
+				if (other.getName().toLowerCase().equals(params.getStringArgument(0).toLowerCase())) {
+					player.teleport(other.getPosition(), other.getRotation());
+					return;
 				}
-				// Player not found
-				player.getActionSender().sendChatMessage(params.getStringArgument(0) + " was not found");
-				return;
-			} else {
-				player.getActionSender().sendChatMessage("Wrong number of arguments");
 			}
-			player.getActionSender().sendChatMessage("/tp <name>");
-		} else
-			player.getActionSender().sendChatMessage("You must be OP to do that");
+			// Player not found
+			player.getActionSender().sendChatMessage(params.getStringArgument(0) + " was not found");
+			return;
+		} else {
+			player.getActionSender().sendChatMessage("Wrong number of arguments");
+		}
+		player.getActionSender().sendChatMessage("/tp <name>");
 	}
 }

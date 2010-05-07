@@ -259,21 +259,6 @@ public final class Server {
 		// final setup
 		m_loginLogger.info("LOGIN "+player.getName()+" "+session.getAddress().toString());
 
-		// set op rights
-		try {
-			File ops = new File("data/ops.txt");
-			Scanner fread = new Scanner(ops);
-			while (fread.hasNextLine()) {
-				if (username.equalsIgnoreCase(fread.nextLine())) {
-					player.setAttribute("IsOperator","true");
-					logger.info("Player {} flagged as operator.", player);
-					m_loginLogger.info("OP "+player.getName());
-					break;
-				}
-			}
-			fread.close();
-		} catch (IOException e) { }
-
 		session.setPlayer(player);
 		final Configuration c = Configuration.getConfiguration();
 		session.getActionSender().sendLoginResponse(Constants.PROTOCOL_VERSION, c.getName(), c.getMessage(), false);

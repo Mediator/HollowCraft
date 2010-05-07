@@ -69,19 +69,15 @@ public class SayCommand implements Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
-		// Player using command is OP?
-		if (player.getAttribute("IsOperator") != null && player.getAttribute("IsOperator").equals("true")) {
-			if (params.getArgumentCount() == 0) {
-				player.getActionSender().sendChatMessage("No message to send");
-				player.getActionSender().sendChatMessage("/say <message>");
-				return;
-			}
-			String message = "";
-			for (int i = 0; i < params.getArgumentCount() - 1; i++)
-				message += params.getStringArgument(i - 1) + " ";
-			message += params.getStringArgument(params.getArgumentCount() - 1);
-			player.getWorld().broadcast(message);
-		} else
-			player.getActionSender().sendChatMessage("You must be OP to do that");
+		if (params.getArgumentCount() == 0) {
+			player.getActionSender().sendChatMessage("No message to send");
+			player.getActionSender().sendChatMessage("/say <message>");
+			return;
+		}
+		String message = "";
+		for (int i = 0; i < params.getArgumentCount() - 1; i++)
+			message += params.getStringArgument(i - 1) + " ";
+		message += params.getStringArgument(params.getArgumentCount() - 1);
+		player.getWorld().broadcast(message);
 	}
 }
