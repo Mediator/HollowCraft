@@ -538,8 +538,8 @@ public class LandscapeBuilder extends Builder {
 		for(int z = rootZ;z < rootZ + 5;z++) {
 			m_blocks[rootX][rootY][z] = BlockConstants.TREE_TRUNK;
 		}
-		for(int width = 3;width>0;width--) {
-			leafLayer(rootX, rootY, rootZ+5+(4-width), width);
+		for(int width = 2;width>0;width--) {
+			leafLayer(rootX, rootY, rootZ+4+(3-width), width);
 		}
 	}
 
@@ -758,7 +758,7 @@ public class LandscapeBuilder extends Builder {
 				floodBlock(x, m_height - 1, oceanLevel);
 				if (m_blocks[x][1][oceanLevel] == BlockConstants.AIR) {
 					toFlood.add(new Point(x, 1));
-				} else if (m_blocks[x][m_height - 1][oceanLevel] == BlockConstants.AIR) {
+				} else if (m_blocks[x][m_height - 2][oceanLevel] == BlockConstants.AIR) {
 					toFlood.add(new Point(x, m_height - 2));
 				}
 			}
@@ -817,13 +817,32 @@ public class LandscapeBuilder extends Builder {
 		}
 	}
 
+	private void createBeach(int x, int y, int z) {
+		if (x >= m_width || x < 0 || y >= m_height || y < 0)
+			return;
+		if (m_blocks[x][y][z] == BlockConstants.GRASS) {
+			m_blocks[x][y][z] = BlockConstants.SAND;
+			createBeach(x+1, y, z);
+			createBeach(x-1, y, z);
+			createBeach(x, y+1, z);
+			createBeach(x, y-1, z);
+		}
+	}
+
 	private void floodBlock(int x, int y, int oceanLevel) {
+		createBeach(x+1, y, oceanLevel);
+		createBeach(x-1, y, oceanLevel);
+		createBeach(x, y+1, oceanLevel);
+		createBeach(x, y-1, oceanLevel);
 		for (int z = oceanLevel; true; z--) {
 			if (z < 0) { break; }
 				if (m_blocks[x][y][z] == BlockConstants.AIR) {
 					m_blocks[x][y][z] = BlockConstants.WATER;
 				} else if (m_blocks[x][y][z + 1] == BlockConstants.WATER && (m_blocks[x][y][z] == BlockConstants.DIRT || m_blocks[x][y][z] == BlockConstants.GRASS)) {
-					m_blocks[x][y][z] = BlockConstants.SAND;
+					int sandDepth = m_random.nextInt(2)+3;
+					for(int depth = z;depth>0 && depth > z-sandDepth;depth--) {
+						m_blocks[x][y][depth] = BlockConstants.SAND;
+					}
 					break;
 				}
 			}
