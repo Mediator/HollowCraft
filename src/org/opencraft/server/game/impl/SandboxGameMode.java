@@ -61,7 +61,7 @@ public class SandboxGameMode extends GameModeAdapter<Player> {
 	}
 	
 	public void playerConnected(Player player) {
-		super(player);
+		super.playerConnected(player);
 		String name = player.getName();
 		// New player?
 		if (!visitors.containsKey(name)) {
