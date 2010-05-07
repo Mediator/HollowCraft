@@ -23,7 +23,10 @@ By default, nobody has any permissions and isn't in any groups except for ALL.
 // Example permissions
 
 ROLE Player {
-	org.opencraft.server.command.impl.GotoCommand
+	org.opencraft.server.command.impl.TeleportCommand.execute
+	org.opencraft.server.command.impl.GotoCommand.execute
+	org.opencraft.server.command.impl.HelpCommand.execute
+	org.opencraft.server.command.impl.SpawnCommand.execute
 }
 
 ROLE Builder {
@@ -32,8 +35,14 @@ ROLE Builder {
 	org.opencraft.server.permission.Destroy
 }
 
-ALLOW org.opencraft.server.command.impl.GotoCommand.execute to @ALL
-ALLOW org.opencraft.server.permission.Build to @ALL
+ROLE Op {
+	@Builder
+	org.opencraft.server.command.impl.KickCommand.execute
+	org.opencraft.server.command.impl.SummonCommand.execute
+	org.opencraft.server.command.impl.SayCommand.execute
+}
+
+ALLOW @Player to @ALL
 
 GROUP admins {
 	tdfischer
@@ -42,7 +51,9 @@ GROUP admins {
 
 ALLOW * to @admins
 
-WORLD simcity {
-	DENY @Builder to @ALL
-	ALLOW @Op to TheInfamousBob
+ALLOW @Player to @ALL
+
+WORLD default {
+	ALLOW @Builder to @ALL
 }
+
