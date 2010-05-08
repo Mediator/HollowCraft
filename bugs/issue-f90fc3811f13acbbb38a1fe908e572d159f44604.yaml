@@ -5,8 +5,8 @@ type: :bugfix
 component: physics
 release: "0.3"
 reporter: Adam Liszka <sidein@usiah.com>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-04-29 20:02:01.810374 Z
 references: []
 
@@ -24,3 +24,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - changed status from unstarted to in_progress
   - ""
+- - 2010-05-08 16:30:51.717864 Z
+  - Adam Liszka <sidein@usiah.com>
+  - closed with disposition fixed
+  - Temporarily fixed. Water duplicated into spaces next to it instead of 'moving'

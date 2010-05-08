@@ -509,8 +509,8 @@ public class LandscapeBuilder extends Builder {
 
 	public void plantTrees() {
 		ArrayList<Position> treeList = new ArrayList<Position>();
-		for(int x = 0;x<m_width;x++) {
-			for(int y = 0;y<m_height;y++) {
+		for(int x = 2; x < m_width - 3; x++) {
+			for(int y = 2; y < m_height - 3; y++) {
 				boolean tooClose = false;
 				for(Position p : treeList) {
 					double distance = Math.sqrt(Math.pow(p.getX()-x,2)+Math.pow(p.getY()-y,2));
@@ -519,7 +519,7 @@ public class LandscapeBuilder extends Builder {
 				}
 				if (!tooClose) {
 					if (m_random.nextInt(100) <= 5) {
-						for(int z = m_depth-1;z>0;z--) {
+						for(int z = m_depth-8; z > 0; z--) {
 							if ((m_blocks[x][y][z] == BlockConstants.DIRT || m_blocks[x][y][z] == BlockConstants.GRASS) && m_blocks[x][y][z+1] == BlockConstants.AIR) {
 								plantTree(x, y, z);
 								treeList.add(new Position(x, y, z));
@@ -535,19 +535,37 @@ public class LandscapeBuilder extends Builder {
 	}
 
 	public void plantTree(int rootX, int rootY, int rootZ) {
+		// Place Leaves
+		int top = rootZ + 4;
+		// Top Layer
+		m_blocks[rootX][rootY][top+2] = BlockConstants.LEAVES;
+		m_blocks[rootX-1][rootY][top+2] = BlockConstants.LEAVES;
+		m_blocks[rootX+1][rootY][top+2] = BlockConstants.LEAVES;
+		m_blocks[rootX][rootY-1][top+2] = BlockConstants.LEAVES;
+		m_blocks[rootX][rootY+1][top+2] = BlockConstants.LEAVES;
+		// Mid Top Layer
+		for (int x = rootX - 1; x < rootX + 2; x++) {
+			for (int y = rootY - 1; y < rootY + 2; y++) {
+				m_blocks[x][y][top+1] = BlockConstants.LEAVES;
+			}
+		}
+		// Bottom layers
+		for (int x = rootX - 2; x < rootX + 3; x++) {
+			for (int y = rootY - 2; y < rootY + 3; y++) {
+				m_blocks[x][y][top] = BlockConstants.LEAVES;
+				m_blocks[x][y][top-1] = BlockConstants.LEAVES;
+			}
+		}
+		// Mid Bottom Layer - Leaf Removal
+		m_blocks[rootX-2][rootY-2][top] = BlockConstants.AIR;
+		m_blocks[rootX-2][rootY+2][top] = BlockConstants.AIR;
+		m_blocks[rootX+2][rootY-2][top] = BlockConstants.AIR;
+		m_blocks[rootX+2][rootY+2][top] = BlockConstants.AIR;
+
+		// This is last because the leaves are placed over top areas where there should be a trunk
+		// Make the trunk
 		for(int z = rootZ;z < rootZ + 5;z++) {
 			m_blocks[rootX][rootY][z] = BlockConstants.TREE_TRUNK;
-		}
-		for(int width = 2;width>0;width--) {
-			leafLayer(rootX, rootY, rootZ+4+(3-width), width);
-		}
-	}
-
-	public void leafLayer(int cx, int cy, int cz, int width) {
-		for(int x = Math.max(0, cx-width);x<Math.min(m_width, cx+width);x++) {
-			for(int y = Math.max(0, cy-width);y<Math.min(m_height, cy+width);y++) {
-				m_blocks[x][y][cz] = BlockConstants.LEAVES;
-			}
 		}
 	}
 
@@ -696,10 +714,6 @@ public class LandscapeBuilder extends Builder {
 			}
 		}
 		return count >= 5.7;
-	}
-
-	public byte[][][] getBlocks() {
-		return m_blocks;
 	}
 
 	/*public void applyContour() {

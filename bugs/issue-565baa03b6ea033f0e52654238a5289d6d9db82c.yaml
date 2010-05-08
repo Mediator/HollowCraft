@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: More realistic water
+desc: Water just kinda spreads infinitely. Needs to be fixed.
+type: :feature
+component: physics
+release: "0.4"
+reporter: Adam Liszka <sidein@usiah.com>
+status: :unstarted
+disposition: 
+creation_time: 2010-05-08 16:33:11.929902 Z
+references: []
+
+id: 565baa03b6ea033f0e52654238a5289d6d9db82c
+log_events: 
+- - 2010-05-08 16:33:15.530150 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - ""
