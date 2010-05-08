@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Nave Verification
+desc: Nave verification code doesn't work properly atm. Needs fixed.
+type: :bugfix
+component: opencraft-acm
+release: "0.3"
+reporter: Adam Liszka <sidein@usiah.com>
+status: :unstarted
+disposition: 
+creation_time: 2010-05-08 22:50:14.489923 Z
+references: []
+
+id: fcdd6f24279f3496c8894e7406b5cdade3c90b02
+log_events: 
+- - 2010-05-08 22:50:16.337714 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - ""
