@@ -42,6 +42,7 @@ import org.slf4j.*;
 
 import org.opencraft.server.model.Environment;
 import org.opencraft.server.model.impl.builders.PixelBuilder;
+import org.opencraft.server.model.impl.builders.FlatGrassBuilder;
 import org.opencraft.server.model.impl.builders.IslandBuilder;
 import org.opencraft.server.model.impl.builders.InfBuilder;
 import org.opencraft.server.model.impl.builders.LandscapeBuilder;
