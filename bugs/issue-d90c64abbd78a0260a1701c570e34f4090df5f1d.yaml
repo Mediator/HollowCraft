@@ -1,0 +1,25 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Portals
+desc: Some vague idea that MCSharp users want. Portals that automatically move people between worlds like goto.
+type: :feature
+component: opencraft-acm
+release: 
+reporter: Adam Liszka <sidein@usiah.com>
+status: :unstarted
+disposition: 
+creation_time: 2010-05-09 04:26:38.193769 Z
+references: []
+
+id: d90c64abbd78a0260a1701c570e34f4090df5f1d
+log_events: 
+- - 2010-05-09 04:29:09.633711 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - ""
+- - 2010-05-09 04:52:56.353752 Z
+  - Adam Liszka <sidein@usiah.com>
+  - commented
+  - |-
+    Portals go between LevelA -> LevelA and LevelA -> LevelB.
+    Existing servers have portal blocks that have a Pos+Rotation destination.
+    Portals will be spammed, no doubt.

@@ -5,7 +5,7 @@ type: :bugfix
 component: opencraft-acm
 release: "0.3"
 reporter: Adam Liszka <sidein@usiah.com>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2010-05-08 22:50:14.489923 Z
 references: []
@@ -20,3 +20,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - edited title, description
   - ""
+- - 2010-05-09 03:58:52.617750 Z
+  - Adam Liszka <sidein@usiah.com>
+  - changed status from unstarted to in_progress
+  - I'll poke around a little and see what I can do.

@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Generate command
+desc: A command to utilize the various Builders we've created
+type: :feature
+component: opencraft-acm
+release: "0.4"
+reporter: Adam Liszka <sidein@usiah.com>
+status: :unstarted
+disposition: 
+creation_time: 2010-05-09 04:17:10.097940 Z
+references: []
+
+id: 5212d5a8ee6cd3d696c4ca64b1ce1bea256f6702
+log_events: 
+- - 2010-05-09 04:17:11.153711 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - ""

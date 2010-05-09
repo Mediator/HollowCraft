@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Restricted Areas
+desc: Nothing past that. http://minecraft.wordpress.com/dadido3s-server/
+type: :feature
+component: opencraft-acm
+release: 
+reporter: Adam Liszka <sidein@usiah.com>
+status: :unstarted
+disposition: 
+creation_time: 2010-05-09 04:30:09.505896 Z
+references: []
+
+id: f35e3780a1be38645a2f4970ce4daac7512a49ab
+log_events: 
+- - 2010-05-09 04:30:22.041713 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - Minecraft datamining idea

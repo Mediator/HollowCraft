@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Me Command
+desc: IRC like action text
+type: :feature
+component: Commands
+release: 
+reporter: Adam Liszka <sidein@usiah.com>
+status: :unstarted
+disposition: 
+creation_time: 2010-05-09 04:13:46.649898 Z
+references: []
+
+id: 2678da3766c29c8d7dcf49b78424d197f20cc1e8
+log_events: 
+- - 2010-05-09 04:13:49.377711 Z
+  - Adam Liszka <sidein@usiah.com>
+  - created
+  - ""
+- - 2010-05-09 04:46:49.657730 Z
+  - Adam Liszka <sidein@usiah.com>
+  - assigned to component Commands from opencraft-acm
+  - ""

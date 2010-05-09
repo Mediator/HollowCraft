@@ -10,6 +10,8 @@ components:
   name: physics
 - !ditz.rubyforge.org,2008-03-06/component 
   name: security
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: Commands
 releases: 
 - !ditz.rubyforge.org,2008-03-06/release 
   name: "0.3"
