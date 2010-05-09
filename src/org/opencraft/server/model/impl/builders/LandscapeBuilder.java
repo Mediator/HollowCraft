@@ -55,13 +55,13 @@ public class LandscapeBuilder extends Builder {
 
 	protected byte m_grassBlock;
 	protected byte m_leavesBlock;
-	protected byte m_topWaterBlock;
-	protected String m_season;
+	protected String m_theme;
 
 	public LandscapeBuilder(Level level) {
 		super(level);
 		setSummer();
 		//setWinter();
+		//setOasis();
 	}
 
 	private static final Logger logger = LoggerFactory.getLogger(LandscapeBuilder.class);
@@ -72,8 +72,10 @@ public class LandscapeBuilder extends Builder {
 		generateCaverns((m_width+m_height)/2);
 		buildLavaBed(2);
 		simulateOceanFlood();
-		if (m_season.equalsIgnoreCase("winter")) {
+		if (m_theme.equalsIgnoreCase("winter")) {
 			makeSnow();
+		} else if (m_theme.equalsIgnoreCase("oasis")) {
+			makeSand();
 		}
 		plantTrees();
 	}
@@ -81,15 +83,23 @@ public class LandscapeBuilder extends Builder {
 	public void setSummer() {
 		m_grassBlock = BlockConstants.GRASS;
 		m_leavesBlock = BlockConstants.LEAVES;
-		m_topWaterBlock = BlockConstants.WATER;
-		m_season = "Summer";
+		m_theme = "Summer";
 	}
 
 	public void setWinter() {
 		m_grassBlock = BlockConstants.CLOTH_WHITE;
 		m_leavesBlock = BlockConstants.CLOTH_WHITE;
-		m_topWaterBlock = BlockConstants.GLASS;
-		m_season = "Winter";
+		m_theme = "Winter";
+	}
+
+	public void setOasis() {
+		m_grassBlock = BlockConstants.SAND;
+		m_leavesBlock = BlockConstants.LEAVES;
+		m_theme = "Oasis";
+	}
+
+	public String getTheme() {
+		return m_theme;
 	}
 
 	public void generateTerrain() {
@@ -814,7 +824,7 @@ public class LandscapeBuilder extends Builder {
 					toFlood.add(new Point(1, y));
 				}
 			}
-			if (m_blocks[0][y][oceanLevel] == BlockConstants.AIR) {
+			if (m_blocks[m_width - 1][y][oceanLevel] == BlockConstants.AIR) {
 				floodBlock(m_width - 1, y, oceanLevel);
 				if (m_blocks[m_width - 2][y][oceanLevel] == BlockConstants.AIR) {
 					toFlood.add(new Point(m_width - 2, y));
@@ -894,13 +904,31 @@ public class LandscapeBuilder extends Builder {
 			for(int y = 0;y<m_height;y++) {
 				for(int z = 0;z<m_depth;z++) {
 					if (m_blocks[x][y][z] == BlockConstants.GRASS) {
-						m_blocks[x][y][z] = m_grassBlock;
+						m_blocks[x][y][z] = BlockConstants.CLOTH_WHITE;
+						if (m_blocks[x][y][z - 1] == BlockConstants.DIRT) {
+							m_blocks[x][y][z - 1] = BlockConstants.CLOTH_WHITE;
+						}
 					}
 					if (z == m_depth/2 - 1 && m_blocks[x][y][z] == BlockConstants.SAND) {
-						m_blocks[x][y][z] = m_grassBlock;
+						m_blocks[x][y][z] = BlockConstants.CLOTH_WHITE;
 					}
 					if (z < m_depth/2 - 1 && m_blocks[x][y][z] == BlockConstants.SAND) {
 						m_blocks[x][y][z] = BlockConstants.DIRT;
+					}
+				}
+			}
+		}
+	}
+
+	protected void makeSand() {
+		for(int x = 0;x<m_width;x++) {
+			for(int y = 0;y<m_height;y++) {
+				for(int z = 0;z<m_depth;z++) {
+					if (m_blocks[x][y][z] == BlockConstants.GRASS) {
+						m_blocks[x][y][z] = BlockConstants.SAND;
+						if (m_blocks[x][y][z - 1] == BlockConstants.DIRT) {
+							m_blocks[x][y][z - 1] = BlockConstants.SAND;
+						}
 					}
 				}
 			}
