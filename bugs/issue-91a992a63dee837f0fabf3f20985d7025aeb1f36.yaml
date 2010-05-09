@@ -5,8 +5,8 @@ type: :feature
 component: level-builder
 release: 
 reporter: Adam Liszka <sidein@usiah.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-05-05 00:03:19.256069 Z
 references: []
 
@@ -16,3 +16,11 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - created
   - Again, thank the Russians
+- - 2010-05-09 02:55:54.817884 Z
+  - Adam Liszka <sidein@usiah.com>
+  - changed status from unstarted to in_progress
+  - ""
+- - 2010-05-09 02:56:42.633756 Z
+  - Adam Liszka <sidein@usiah.com>
+  - closed with disposition fixed
+  - Can't have ice cover water right noe because physics will tear it down

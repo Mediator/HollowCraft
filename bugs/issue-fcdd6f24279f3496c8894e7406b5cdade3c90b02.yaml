@@ -1,6 +1,6 @@
 --- !ditz.rubyforge.org,2008-03-06/issue 
-title: Nave Verification
-desc: Nave verification code doesn't work properly atm. Needs fixed.
+title: Name Verification
+desc: Name verification code doesn't work properly atm. Needs fixed.
 type: :bugfix
 component: opencraft-acm
 release: "0.3"
@@ -15,4 +15,8 @@ log_events:
 - - 2010-05-08 22:50:16.337714 Z
   - Adam Liszka <sidein@usiah.com>
   - created
+  - ""
+- - 2010-05-08 23:18:23.169922 Z
+  - Adam Liszka <sidein@usiah.com>
+  - edited title, description
   - ""
