@@ -42,7 +42,7 @@ import org.opencraft.server.model.Player;
  * @author Adam Liszka
  */
 
-public class HelpCommand implements Command {
+public class HelpCommand extends Command {
 	
 	/**
 	 * The instance of this command.
@@ -91,4 +91,5 @@ public class HelpCommand implements Command {
 			}
 		}
 	}
+
 }

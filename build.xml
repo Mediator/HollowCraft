@@ -18,9 +18,7 @@
 		</javac>
 	</target>
 	<target name="gcj" depends="init">
-		<javac srcdir="src" classpath="${toString:libs}" compiler="gcj" destdir="bin" debug="true">
-					<compilerarg value="-Xlint"/>
-		</javac>
+		<javac srcdir="src" classpath="${toString:libs}" compiler="gcj" destdir="bin" debug="true" />
 	</target>
 	<target name="clean">
 		<delete dir="bin"/>

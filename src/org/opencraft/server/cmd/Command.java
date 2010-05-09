@@ -39,15 +39,24 @@ import org.opencraft.server.model.Player;
  * Represents a specific command.
  * @author Graham Edgecombe
  */
-public interface Command {
+public abstract class Command {
 	
+	/**
+	 * The cost of the command.
+	 */
+	protected short m_cost = 0;
+
 	/**
 	 * Executes this command for the specified player.
 	 * @param player The player.
 	 * @param params The parameters.
 	 */
-	public void execute(Player player, CommandParameters params);
+	public abstract void execute(Player player, CommandParameters params);
 
-	public String name();
+	public abstract String name();
+
+	public short getCost() {
+		return m_cost;
+	}
 	
 }

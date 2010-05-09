@@ -42,7 +42,7 @@ import org.opencraft.server.model.Player;
  * @author Søren Enevoldsen
  */
 
-public class KickCommand implements Command {
+public class KickCommand extends Command {
 	
 	/**
 	 * The instance of this command.
@@ -85,4 +85,5 @@ public class KickCommand implements Command {
 			player.getActionSender().sendChatMessage("/kick <name>");
 		}
 	}
+
 }

@@ -42,7 +42,7 @@ import org.opencraft.server.model.Player;
  * @author Søren Enevoldsen
  */
 
-public class SayCommand implements Command {
+public class SayCommand extends Command {
 	
 	/**
 	 * The instance of this command.
@@ -80,4 +80,5 @@ public class SayCommand implements Command {
 		message += params.getStringArgument(params.getArgumentCount() - 1);
 		player.getWorld().broadcast(message);
 	}
+	
 }

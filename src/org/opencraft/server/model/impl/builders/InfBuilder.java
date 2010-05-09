@@ -68,7 +68,7 @@ public class InfBuilder extends Builder {
 	}
 
 	private int calcPoint(double x, double y, long seed) {
-		int k = m_scale;
+		//int k = m_scale;
 		x = x * Math.PI / 12;
 		y = y * Math.PI / 12;
 

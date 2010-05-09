@@ -42,7 +42,6 @@ import org.opencraft.server.io.LevelGzipper;
 import org.opencraft.server.security.Group;
 import org.opencraft.server.security.Principal;
 import org.opencraft.server.security.Permission;
-import org.opencraft.server.Server;
 import java.util.ArrayList;
 import org.slf4j.*;
 

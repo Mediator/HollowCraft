@@ -42,7 +42,7 @@ import org.opencraft.server.model.Player;
  * @author Graham Edgecombe
  */
 
-public final class BrushCommand implements Command {
+public final class BrushCommand extends Command {
 	
 	/**
 	 * The instance of this command.

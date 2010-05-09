@@ -42,7 +42,7 @@ import org.opencraft.server.model.Player;
  * @author Søren Enevoldsen
  */
 
-public class SetspawnCommand implements Command {
+public class SetspawnCommand extends Command {
 	
 	/**
 	 * The instance of this command.
@@ -72,4 +72,5 @@ public class SetspawnCommand implements Command {
 		player.getWorld().getLevel().setSpawnPosition(player.getPosition());
 		player.getWorld().getLevel().setSpawnRotation(player.getRotation());
 	}
+
 }

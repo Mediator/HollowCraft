@@ -42,7 +42,7 @@ import org.opencraft.server.model.Player;
  * @author Søren Enevoldsen
  */
 
-public class TeleportCommand implements Command {
+public class TeleportCommand extends Command {
 	
 	/**
 	 * The instance of this command.

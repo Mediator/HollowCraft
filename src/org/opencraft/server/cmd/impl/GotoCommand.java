@@ -44,7 +44,7 @@ import org.opencraft.server.security.Permission;
  * @author Trever Fischer
  */
 
-public class GotoCommand implements Command {
+public class GotoCommand extends Command {
 	
 	/**
 	 * The instance of this command.
@@ -78,4 +78,5 @@ public class GotoCommand implements Command {
 			player.getActionSender().sendChatMessage("You are not permitted to go to "+params.getStringArgument(0));
 		}
 	}
+
 }

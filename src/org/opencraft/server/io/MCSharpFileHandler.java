@@ -9,7 +9,6 @@ import org.opencraft.server.model.Level;
 import org.opencraft.server.model.Environment;
 import org.opencraft.server.model.Position;
 import org.opencraft.server.model.Rotation;
-import org.opencraft.server.model.BlockManager;
 import org.opencraft.server.model.BlockConstants;
 
 import org.slf4j.*;
@@ -50,12 +49,10 @@ public final class MCSharpFileHandler {
 		int spawnRotation = data.readUnsignedByte();
 		int spawnPitch = data.readUnsignedByte();
 
-		int visitRanks = data.readUnsignedByte();
-		int buildRanks = data.readUnsignedByte();
+		/*int visitRanks =*/ data.readUnsignedByte();
+		/*int buildRanks =*/ data.readUnsignedByte();
 
 		byte[][][] blocks = new byte[width][height][depth];
-		int i = 0;
-		BlockManager manager = BlockManager.getBlockManager();
 		for(int z = 0;z<depth;z++) {
 			for(int y = 0;y<height;y++) {
 				byte[] row = new byte[height];

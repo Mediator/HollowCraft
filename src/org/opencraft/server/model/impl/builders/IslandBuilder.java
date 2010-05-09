@@ -33,8 +33,6 @@ package org.opencraft.server.model.impl.builders;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.util.Random;
-import java.util.Queue;
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.awt.Point;
@@ -44,7 +42,6 @@ import org.opencraft.server.model.Builder;
 import org.opencraft.server.model.BlockConstants;
 import org.opencraft.server.model.Position;
 import org.opencraft.server.model.Level;
-import org.slf4j.*;
 
 /**
  * Builds a level.
@@ -248,7 +245,7 @@ public class IslandBuilder extends Builder {
 		for(int x = 0; x < m_width; x++) {
 			for(int y = 0; y < m_height; y++) {
 				int h = Math.max(0, Math.min(m_depth-1, (m_depth/2) + m_contour[x][y]));
-				int d = m_random.nextInt(8) - 4;
+				//int d = m_random.nextInt(8) - 4;
 				for(int z = 0; z < m_depth; z++) {
 					int type = BlockConstants.AIR;
 					if (z >= h && z < m_depth/2-1) {
@@ -273,7 +270,7 @@ public class IslandBuilder extends Builder {
 	}
 
 	public void sculptHill(int centerX, int centerY, int height, int radius, boolean additive) {
-		int maxHeight = 1;
+		//int maxHeight = 1;
 		if (additive)
 			m_contour[centerX][centerY] += height;
 		else
@@ -432,7 +429,7 @@ public class IslandBuilder extends Builder {
 		int avgDepth = (m_random.nextInt(6)+8);
 		int radius = (m_random.nextInt(30)+30);
 		carveLake(x, y, new ArrayList<Position>(), radius, avgDepth);
-		int edgeHeight = avgDepth;
+		//int edgeHeight = avgDepth;
 	}
 
 	private void carveLake(int x, int y, ArrayList<Position> visited, int distance, int depth) {

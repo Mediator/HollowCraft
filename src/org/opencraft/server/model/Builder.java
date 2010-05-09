@@ -74,6 +74,6 @@ public abstract class Builder {
 	public abstract void generate();
 
 	public byte[][][] getBlocks() {
-		return m_blocks.clone();
+		return (byte[][][])(m_blocks.clone());
 	}
 }

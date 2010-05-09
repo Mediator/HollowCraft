@@ -42,7 +42,7 @@ import org.opencraft.server.model.Player;
  * @author Adam Liszka
  */
 
-public class SummonCommand implements Command {
+public class SummonCommand extends Command {
 	
 	/**
 	 * The instance of this command.

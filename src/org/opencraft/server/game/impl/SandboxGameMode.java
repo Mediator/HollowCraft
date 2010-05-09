@@ -39,7 +39,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.opencraft.server.game.GameModeAdapter;
-import org.opencraft.server.model.Level;
 import org.opencraft.server.model.Player;
 
 /**

@@ -50,7 +50,7 @@ public class CommandParameters {
 	 * @param args The arguments of the command.
 	 */
 	public CommandParameters(String[] args) {
-		this.args = args.clone();
+		this.args = (String[])(args.clone());
 	}
 	
 	/**

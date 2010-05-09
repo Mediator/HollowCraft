@@ -2,7 +2,6 @@ package org.opencraft.server.io;
 
 import java.io.IOException;
 import java.io.ObjectStreamClass;
-import java.io.ObjectStreamField;
 import java.io.InputStream;
 import java.io.FileInputStream;
 import java.io.DataInputStream;
@@ -37,13 +36,13 @@ public final class BINFileHandler {
 		DataInputStream data = new DataInputStream(decompressor);
 		int magic = data.readInt();
 		byte version = data.readByte();
-		//System.out.println("Magic: "+magic+" Version: "+version);
+		System.out.println("Magic: "+magic+" Version: "+version);
 		ObjectInputStream stream = new LevelDeserializer(decompressor);
 		DeserializedLevel level;
 		try {
 			level = (DeserializedLevel)stream.readObject();
 		} catch (ClassNotFoundException e) {
-			throw new IOException(e);
+			throw new IOException(e.getMessage());
 		}
 
 		if (level != null) {

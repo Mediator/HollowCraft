@@ -33,8 +33,6 @@ package org.opencraft.server.model.impl.builders;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.util.Random;
-import java.util.Queue;
 import java.awt.Point;
 import java.util.LinkedList;
 import java.util.ArrayList;

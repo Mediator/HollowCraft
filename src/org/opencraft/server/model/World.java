@@ -33,14 +33,9 @@ package org.opencraft.server.model;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import org.opencraft.server.Configuration;
 import org.opencraft.server.task.impl.SaveLevelTask;
 import org.opencraft.server.task.TaskQueue;
-import org.opencraft.server.Constants;
 import org.opencraft.server.game.GameMode;
 import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.util.PlayerList;
@@ -84,7 +79,7 @@ public final class World {
 	/**
 	 * The game mode.
 	 */
-	private GameMode gameMode;
+	private GameMode<Player> gameMode;
 
 	public String getName() {
 		return level.getName();
@@ -121,7 +116,7 @@ public final class World {
 	 * Gets the current game mode.
 	 * @return The current game mode.
 	 */
-	public GameMode getGameMode() {
+	public GameMode<Player> getGameMode() {
 		return gameMode;
 	}
 
