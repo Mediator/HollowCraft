@@ -111,7 +111,7 @@ public final class LevelManager {
 				if (ext.equalsIgnoreCase("mclevel")) {
 					return NBTFileHandler.load(mapFile.getPath());
 				} else if (ext.equalsIgnoreCase("dat") || ext.equalsIgnoreCase("mine")) {
-					return BINFileHandler.load(mapFile.getPath());
+					return MineFileHandler.load(mapFile.getPath());
 				} else if (ext.equalsIgnoreCase("lvl")) {
 					return MCSharpFileHandler.load(mapFile.getPath());
 				}
@@ -127,7 +127,7 @@ public final class LevelManager {
 
 			try {
 				logger.info("Trying old .mine/.dat");
-				return BINFileHandler.load(mapFile.getPath());
+				return MineFileHandler.load(mapFile.getPath());
 			} catch (IOException e) { }
 
 			try {

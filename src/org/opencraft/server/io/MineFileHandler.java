@@ -17,12 +17,12 @@ import org.opencraft.server.model.Position;
  * A level loader that loads up serialized levels.
  * @author Adam Liszka
  */
-public final class BINFileHandler {
+public final class MineFileHandler {
 
 	/**
 	 * Default private constructor.
 	 */
-	private BINFileHandler() { /* empty */ }
+	private MineFileHandler() { /* empty */ }
 	
 	/**
 	 * Uses the magic of java introspection to load a level
@@ -75,7 +75,7 @@ public final class BINFileHandler {
 			lvl.setAuthor(level.creator);
 			lvl.setCreationDate(level.createTime);
 		} else {
-			throw new IOException("Failed to load BIN file");
+			throw new IOException("Failed to load mine file");
 		}
 		
 
