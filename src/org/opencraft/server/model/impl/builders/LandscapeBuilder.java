@@ -58,8 +58,6 @@ public class LandscapeBuilder extends Builder {
 	public LandscapeBuilder(Level level) {
 		super(level);
 		setSummer();
-		//setWinter();
-		//setOasis();
 	}
 
 	private static final Logger logger = LoggerFactory.getLogger(LandscapeBuilder.class);

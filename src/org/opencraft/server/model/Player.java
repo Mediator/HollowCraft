@@ -58,6 +58,8 @@ public class Player extends Entity implements Principal {
 
 	private static final Logger logger = LoggerFactory.getLogger(Player.class);
 	
+	private ArrayList<Permission> m_permissions = new ArrayList<Permission>();
+
 	/**
 	 * The player's name.
 	 */
@@ -133,8 +135,6 @@ public class Player extends Entity implements Principal {
 	public String getName() {
 		return name;
 	}
-
-	private ArrayList<Permission> m_permissions = new ArrayList<Permission>();
 
 	public Permission[] getPermissions() {
 		return m_permissions.toArray(new Permission[m_permissions.size()]);

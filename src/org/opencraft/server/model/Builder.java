@@ -63,12 +63,16 @@ public abstract class Builder {
 	}
 
 	public Builder(Level level) {
+		setLevel(level);
+		m_seed = 0;
+		m_random = new Random();
+	}
+
+	public void setLevel(Level level) {
 		m_height = level.getHeight();
 		m_width = level.getWidth();
 		m_depth = level.getDepth();
 		m_blocks = new byte[m_width][m_height][m_depth];
-		m_seed = 0;
-		m_random = new Random();
 	}
 
 	public abstract void generate();

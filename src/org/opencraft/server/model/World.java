@@ -107,6 +107,21 @@ public final class World {
 		logger.info("Active game mode : " + gameMode.getClass().getName() + ".");
 	}
 
+	public World(Level lvl) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+		m_policy = new Policy();
+		gameMode = (GameMode) Class.forName(Configuration.getConfiguration().getGameMode()).newInstance();
+		level = lvl;
+		level.setOnBlockChangeHandler(new OnBlockChangeHandler() {
+			public void onBlockChange(int x, int y, int z) {
+				for (Player player : getPlayerList().getPlayers()) {
+					player.getSession().getActionSender().sendBlock(x, y, z, level.getBlock(x, y, z));
+				}
+			}
+		});
+		TaskQueue.getTaskQueue().schedule(new SaveLevelTask(level));
+		logger.info("Active game mode : " + gameMode.getClass().getName() + ".");
+	}
+
 	public void finalize() {
 		logger.info("Finalizing world, saving level.");
 		LevelManager.save(level);

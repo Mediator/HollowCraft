@@ -5,8 +5,8 @@ type: :feature
 component: opencraft-acm
 release: "0.4"
 reporter: Adam Liszka <sidein@usiah.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-05-09 04:17:10.097940 Z
 references: []
 
@@ -16,3 +16,11 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - created
   - ""
+- - 2010-05-10 18:29:52.961042 Z
+  - Adam Liszka <sidein@usiah.com>
+  - changed status from unstarted to in_progress
+  - ""
+- - 2010-05-10 23:38:59.825270 Z
+  - Adam Liszka <sidein@usiah.com>
+  - closed with disposition fixed
+  - Someone take a look over the changes I made to GenerateCommand, Server, Level, and World. It works, but I coded it sleep deprived.

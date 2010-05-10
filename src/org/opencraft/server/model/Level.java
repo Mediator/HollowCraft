@@ -95,11 +95,15 @@ public class Level {
 	}
 
 	public void generateLevel(int width, int height, int depth) {
-		m_name = "Generated Level";
-		m_author = "ACM OpenCraft Crew";
+		generateLevel(new LandscapeBuilder(this), width, height, depth, new Environment(), "Generated Level", "ACM OpenCraft Crew");
+	}
+
+	public void generateLevel(Builder b, int width, int height, int depth, Environment env, String name, String author) {
+		m_name = name;
+		m_author = author;
 		m_fileType = "mclevel";
 		m_created = (new java.util.Date()).getTime();
-		m_env = new Environment();
+		m_env = env;
 		m_width = width;
 		m_height = height;
 		m_depth = depth;
@@ -109,12 +113,13 @@ public class Level {
 		m_spawnPosition = new Position(m_width*16, m_height*16, m_depth*32);
 		m_spawnRotation = new Rotation(0, 0);
 
-
-		Builder b = new LandscapeBuilder(this);
-		//b.setSeed(1000);
+		b.setLevel(this);
 		b.generate();
 		m_blocks = b.getBlocks();
-	
+		activateOcean();
+	}
+
+	public void activateOcean() {
 		for (int x = 0;x < m_width; x++) {
 			m_logger.debug("Activating ocean: " + (x * 2) + "/" + (m_width * 2 + m_height * 2));
 			queueTileUpdate(x, 0, m_depth/2 - 1);

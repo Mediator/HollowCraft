@@ -39,7 +39,7 @@ import org.opencraft.server.model.Player;
 import java.util.Random;
 
 /**
- * Official /me command
+ * A command to simulate dice rolls
  * @author Adam Liszka
  */
 

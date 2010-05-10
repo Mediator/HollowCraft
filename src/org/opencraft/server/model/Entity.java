@@ -46,35 +46,11 @@ public abstract class Entity {
 	 * A collection of local entities.
 	 */
 	private final Set<Entity> localEntities = new HashSet<Entity>();
-	
-	/**
-	 * The old position.
-	 */
 	private Position oldPosition;
-	
-	/**
-	 * The current position.
-	 */
 	private Position position;
-	
-	/**
-	 * The old rotation.
-	 */
 	private Rotation oldRotation;
-	
-	/**
-	 * The current rotation.
-	 */
 	private Rotation rotation;
-	
-	/**
-	 * The current id.
-	 */
 	private int id = -1;
-	
-	/**
-	 * The old id.
-	 */
 	private int oldId = -1;
 	
 	/**
