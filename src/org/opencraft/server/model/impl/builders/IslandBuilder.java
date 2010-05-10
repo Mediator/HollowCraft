@@ -257,7 +257,7 @@ public class IslandBuilder extends Builder {
 					} else if(z < (h - 1) && z > (h -5 )) {
 						type = BlockConstants.DIRT;
 					} else if(z <= (h - 5 )) {
-						type = BlockConstants.STONE;
+						type = BlockConstants.ROCK;
 					}
 					m_blocks[x][y][z] = (byte) type;
 				}

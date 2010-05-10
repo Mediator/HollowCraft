@@ -47,11 +47,11 @@ public class BlockConstants {
 		/* empty */
 	}
 
-	public static final int BEDROCK = 100;
+	public static final int BEDROCK = 100; // Nonstandard
 	
 	public static final int AIR = 0;
 	
-	public static final int STONE = 1;
+	public static final int ROCK = 1;
 	
 	public static final int GRASS = 2;
 	
@@ -59,11 +59,9 @@ public class BlockConstants {
 	
 	public static final int COBBLESTONE = 4;
 	
-	public static final int PLANKS = 5;
+	public static final int WOOD = 5;
 	
-	public static final int PLANKS_BOOKSHELF = 47;
-	
-	public static final int SHRUB = 6;
+	public static final int SAPLING = 6;
 	
 	public static final int ADMINIUM = 7;
 	
@@ -79,11 +77,11 @@ public class BlockConstants {
 	
 	public static final int GRAVEL = 13;
 	
-	public static final int ORE_GOLD = 14;
+	public static final int GOLD_ORE = 14;
 	
-	public static final int ORE_IRON = 15;
+	public static final int IRON_ORE = 15;
 	
-	public static final int COAL = 16;
+	public static final int COAL_ORE = 16;
 	
 	public static final int TREE_TRUNK = 17;
 	
@@ -125,28 +123,58 @@ public class BlockConstants {
 	
 	public static final int CLOTH_WHITE = 36;
 	
-	public static final int FLOWER_YELLOW = 37;
+	public static final int FLOWER = 37;
 	
-	public static final int FLOWER_RED = 38;
-	
-	public static final int MUSHROOM_RED = 40;
+	public static final int ROSE = 38;
 	
 	public static final int MUSHROOM_BROWN = 39;
 	
-	public static final int BAR_GOLD = 41;
+	public static final int MUSHROOM_RED = 40;
 	
-	public static final int BAR_IRON = 42;
+	public static final int GOLD = 41;
 	
-	public static final int BRICK_RED = 45;
+	public static final int IRON = 42;
 	
-	public static final int OBSIDIAN = 49;
+	public static final int STAIR_DOUBLE = 43;
 	
 	public static final int STAIR = 44;
 	
+	public static final int BRICK_RED = 45;
+	
 	public static final int TNT = 46;
+	
+	public static final int BOOKSHELF = 47;
 	
 	public static final int COBBLESTONE_MOSSY = 48;
 	
-	public static final int STAIR_DOUBLE = 43;
+	public static final int OBSIDIAN = 49;
+	
+	public static final int TORCH = 50;
+	
+	public static final int FIRE = 51;
+	
+	public static final int INF_WATER = 52;
+	
+	/* indev blocks */
+
+	public static final int INF_LAVA = 53;
+
+	public static final int CHEST = 54;
+
+	public static final int UNKNOWN_GEAR = 55; // pic looks like a gear
+
+	public static final int DIAMOND_ORE = 56;
+
+	public static final int DIAMOND = 57;
+
+	public static final int WORKBENCH = 58;
+
+	public static final int WHEAT = 59;
+
+	public static final int FIELD_BLOCK = 60;
+
+	public static final int FURNACE = 61;
+
+	public static final int FURNACE_LIT = 62;
 	
 }

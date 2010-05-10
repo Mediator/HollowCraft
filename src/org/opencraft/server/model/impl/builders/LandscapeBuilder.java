@@ -107,7 +107,7 @@ public class LandscapeBuilder extends Builder {
 				value = getValue(x/200.0, y/200.0, m_depth/2/200.0);
 				int height = (int)(Math.max(-1,Math.min(1, value))*m_depth/4);
 				for(int z = 0;z<m_depth/2+height-5;z++) {
-					m_blocks[x][y][z] = BlockConstants.STONE;
+					m_blocks[x][y][z] = BlockConstants.ROCK;
 				}
 				for(int z = m_depth/2+height-5;z<m_depth/2+height;z++) {
 					m_blocks[x][y][z] = BlockConstants.DIRT;
@@ -772,7 +772,7 @@ public class LandscapeBuilder extends Builder {
 					} else if(z < (h - 1) && z > (h -5 )) {
 						type = BlockConstants.DIRT;
 					} else if(z <= (h - 5 )) {
-						type = BlockConstants.STONE;
+						type = BlockConstants.ROCK;
 					}
 					m_blocks[x][y][z] = (byte) type;
 				}

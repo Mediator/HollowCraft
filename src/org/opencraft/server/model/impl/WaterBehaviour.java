@@ -85,7 +85,7 @@ public class WaterBehaviour implements BlockBehaviour {
 		// there is lava under me
 		if (underBlock == BlockConstants.LAVA || underBlock == BlockConstants.STILL_LAVA) {
 			level.setBlock(x, y, z, BlockConstants.AIR);
-			level.setBlock(x, y, z - 1, BlockConstants.STONE);
+			level.setBlock(x, y, z - 1, BlockConstants.ROCK);
 		// move me down
 		} else if (!BlockManager.getBlockManager().getBlock(underBlock).isSolid() && !BlockManager.getBlockManager().getBlock(underBlock).isLiquid()) {
 			level.setBlock(x, y, z - 1, BlockConstants.WATER);
@@ -107,7 +107,7 @@ public class WaterBehaviour implements BlockBehaviour {
 				// check for lava
 				if (thisOutwardBlock == BlockConstants.LAVA || thisOutwardBlock == BlockConstants.STILL_LAVA) {
 					level.setBlock(x, y, z, BlockConstants.AIR);
-					level.setBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2], BlockConstants.STONE);
+					level.setBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2], BlockConstants.ROCK);
 				} else if (level.getBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2] - 1) == BlockConstants.AIR &&
 					   level.getBlock(x, y, z - 1) == BlockConstants.WATER) {
 					break OUTERMOST_OUTWARD;
