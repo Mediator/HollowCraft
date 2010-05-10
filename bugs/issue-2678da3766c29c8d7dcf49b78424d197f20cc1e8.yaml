@@ -5,8 +5,8 @@ type: :feature
 component: Commands
 release: 
 reporter: Adam Liszka <sidein@usiah.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-05-09 04:13:46.649898 Z
 references: []
 
@@ -20,3 +20,11 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - assigned to component Commands from opencraft-acm
   - ""
+- - 2010-05-10 14:41:21.553936 Z
+  - Adam Liszka <sidein@usiah.com>
+  - changed status from unstarted to in_progress
+  - ""
+- - 2010-05-10 15:10:19.193930 Z
+  - Adam Liszka <sidein@usiah.com>
+  - closed with disposition fixed
+  - Also fixed a bug in the Say command

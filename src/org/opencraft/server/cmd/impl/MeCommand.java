@@ -38,43 +38,43 @@ import org.opencraft.server.cmd.CommandParameters;
 import org.opencraft.server.model.Player;
 
 /**
- * Official /say command
- * @author Søren Enevoldsen
+ * Official /me command
+ * @author Adam Liszka
  */
 
-public class SayCommand extends Command {
+public class MeCommand extends Command {
 	
 	/**
 	 * The instance of this command.
 	 */
-	private static final SayCommand INSTANCE = new SayCommand();
+	private static final MeCommand INSTANCE = new MeCommand();
 
 	public String name() {
-		return "say";
+		return "me";
 	}
 	
 	/**
 	 * Gets the singleton instance of this command.
 	 * @return The singleton instance of this command.
 	 */
-	public static SayCommand getCommand() {
+	public static MeCommand getCommand() {
 		return INSTANCE;
 	}
 	
 	/**
 	 * Default private constructor.
 	 */
-	private SayCommand() {
+	private MeCommand() {
 		/* empty */
 	}
 	
 	public void execute(Player player, CommandParameters params) {
 		if (params.getArgumentCount() == 0) {
 			player.getActionSender().sendChatMessage("No message to send");
-			player.getActionSender().sendChatMessage("/say <message>");
+			player.getActionSender().sendChatMessage("/me <message>");
 			return;
 		}
-		String message = "";
+		String message = "* " + player.getName() + " ";
 		for (int i = 0; i < params.getArgumentCount() - 1; i++)
 			message += params.getStringArgument(i) + " ";
 		message += params.getStringArgument(params.getArgumentCount() - 1);
