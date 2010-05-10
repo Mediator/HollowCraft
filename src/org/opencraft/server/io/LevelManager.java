@@ -151,8 +151,7 @@ public final class LevelManager {
 	public static void save(Level lvl) {
 		File nextFile = getNextFile(lvl.getName());
 		File temp = new File("data/maps/"+lvl.getName()+"/"+lvl.getName()+".tmp");
-		// TODO: Boolean for saving nonstandard info should come from server config file
-		NBTFileHandler.save(lvl, temp.getPath(), true);
+		NBTFileHandler.save(lvl, temp.getPath());
 		assert(temp.exists());
 		logger.trace("Renaming {} to {}", temp, nextFile);
 		if (temp.renameTo(nextFile))

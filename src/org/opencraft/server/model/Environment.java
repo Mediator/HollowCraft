@@ -97,8 +97,8 @@ public  class Environment {
 		SkyBrightness = value;
 	}
 	
-	// Mutators for TimeofDat
-	public short getTimeofDay() {
+	// Mutators for TimeofDay
+	public short getTimeOfDay() {
 		return TimeOfDay;
 	}
 

@@ -29,8 +29,8 @@ public final class NBTFileHandler {
 	/**
 	 * Unzips a .mclevel level file, parses it, and returns the contained level
 	 * http://www.minecraft.net/docs/levelformat.jsp
-	 * @param filename The name of the file to unzip
-	 * @return The uncompressed Level
+	 * @param filename The name of the file to Load
+	 * @return The loaded Level
 	 */
 	public static Level load(String filename) throws IOException {
 		Level lvl = new Level();
@@ -41,233 +41,132 @@ public final class NBTFileHandler {
 		CompoundTag root = (CompoundTag)(nbtin.readTag());
 		Map<String, Tag> items = root.getValue();
 
-		for (String key : items.keySet()) {
-			if (key.equalsIgnoreCase("Environment")) {
-				CompoundTag etag = (CompoundTag)(items.get(key));
-				Map<String, Tag> eItems = etag.getValue();
+		unpackEnvironment(lvl, items);
+		unpackMap(lvl, items);
+		unpackEntities(lvl, items);
+		unpackTileEntities(lvl, items);
+		unpackAbout(lvl, items);
 
-				Environment env = new Environment();
-
-				// A single missing property should not stop any other property from being loaded.
-				// All vars already have a default variable
-				try {
-					env.setSurroundingGroundHeight(((ShortTag)(eItems.get("SurroundingGroundHeight"))).getValue());
-				} catch (NullPointerException e) { }
-				try {
-					env.setSurroundingGroundType(((ByteTag)(eItems.get("SurroundingGroundType"))).getValue());
-				} catch (NullPointerException e) { }
-				try {
-					env.setSurroundingWaterHeight(((ShortTag)(eItems.get("SurroundingWaterHeight"))).getValue());
-				} catch (NullPointerException e) { }
-				try {
-					env.setSurroundingWaterType(((ByteTag)(eItems.get("SurroundingWaterType"))).getValue());
-				} catch (NullPointerException e) { }
-				try {
-					env.setTimeOfDay(((ShortTag)(eItems.get("TimeOfDay"))).getValue());
-				} catch (NullPointerException e) { }
-				try {
-					env.setCloudHeight(((ShortTag)(eItems.get("CloudHeight"))).getValue());
-				} catch (NullPointerException e) { }
-				try {
-					env.setCloudColor(((IntTag)(eItems.get("CloudColor"))).getValue());
-				} catch (NullPointerException e) { }
-				try {
-					env.setSkyColor(((IntTag)(eItems.get("SkyColor"))).getValue());
-				} catch (NullPointerException e) { }
-				try {
-					env.setFogColor(((IntTag)(eItems.get("FogColor"))).getValue());
-				} catch (NullPointerException e) { }
-				try {
-					env.setSkyBrightness(((ByteTag)(eItems.get("SkyBrightness"))).getValue());
-				} catch (NullPointerException e) { }
-
-				lvl.setEnvironment(env);
-
-			} else if (key.equalsIgnoreCase("Entities")) {
-				//TODO
-			} else if (key.equalsIgnoreCase("TileEntities")) {
-				//TODO
-			} else if (key.equalsIgnoreCase("Map")) {
-				CompoundTag map = (CompoundTag)(items.get(key));
-				Map<String, Tag> mapItems = map.getValue();
-
-				// Don't mess with this. It just works somehow
-				int depth = ((ShortTag)(mapItems.get("Height"))).getValue();
-				int height = ((ShortTag)(mapItems.get("Length"))).getValue();
-				int width  = ((ShortTag)(mapItems.get("Width"))).getValue();
-
-				byte[] fblocks = ((ByteArrayTag)(mapItems.get("Blocks"))).getValue();
-				byte[] fdata = ((ByteArrayTag)(mapItems.get("Data"))).getValue();
-				byte[][][]blocks = new byte[width][height][depth];
-				byte[][][]data = new byte[width][height][depth];
-
-				int i = 0;
-				for (int z = 0; z < depth; z++) {
-					for (int y = 0; y < height; y++) {
-						for (int x = 0; x < width; x++) {
-							if (fblocks[i] <= 49) {
-								blocks[x][y][z] = fblocks[i];
-							} else {
-								blocks[x][y][z] = 0;
-							}
-							data[x][y][z] = fdata[i];
-							i += 1;
-						}
-					}
-				}
-
-				lvl.setBlocks(blocks, data, width, height, depth);
-
-				ListTag spawn = (ListTag)(mapItems.get("Spawn"));
-				List<Tag> spawnCoords = spawn.getValue();
-				lvl.setSpawnPosition(new Position(
-							((ShortTag)(spawnCoords.get(0))).getValue(),
-							((ShortTag)(spawnCoords.get(1))).getValue(),
-							((ShortTag)(spawnCoords.get(2))).getValue()
-						    ));
-
-				//This is not in the mclevel specifications
-				if (spawnCoords.size() > 4) {
-					lvl.setSpawnRotation(new Rotation(
-							((ShortTag)(spawnCoords.get(3))).getValue(),
-							((ShortTag)(spawnCoords.get(4))).getValue()
-						    ));
-				} else {
-					lvl.setSpawnRotation(new Rotation(0, 0));
-				}
-
-			} else if (key.equalsIgnoreCase("About")) {
-				CompoundTag about = (CompoundTag)(items.get(key));
-				Map<String, Tag> aboutItems = about.getValue();
-				lvl.setTitle(((StringTag)(aboutItems.get("Name"))).getValue());
-				lvl.setAuthor(((StringTag)(aboutItems.get("Author"))).getValue());
-				lvl.setCreationDate(((LongTag)(aboutItems.get("CreatedOn"))).getValue());
-			}
-		}
 		nbtin.close();
 
 		return lvl;
 	}
 
-	public static void save(Level lvl, String filename, boolean addNonStandardInfo) {
-		HashMap<String, Tag> rootItems = new HashMap<String, Tag>();
+	private static void unpackEnvironment(Level lvl, Map<String, Tag> items) {
+		CompoundTag etag = (CompoundTag)(items.get("Environment"));
+		Map<String, Tag> eItems = etag.getValue();
+		Environment env = new Environment();
 
-			HashMap<String, Tag> eItems = new HashMap<String, Tag>();
-			Environment env = lvl.getEnvironment();
+		// A single missing property should not stop any other property from being loaded. All vars already have a default variable
+		try { env.setSurroundingGroundHeight(((ShortTag)(eItems.get("SurroundingGroundHeight"))).getValue());	} catch (NullPointerException e) { }
+		try { env.setSurroundingGroundType(((ByteTag)(eItems.get("SurroundingGroundType"))).getValue());	} catch (NullPointerException e) { }
+		try { env.setSurroundingWaterHeight(((ShortTag)(eItems.get("SurroundingWaterHeight"))).getValue());	} catch (NullPointerException e) { }
+		try { env.setSurroundingWaterType(((ByteTag)(eItems.get("SurroundingWaterType"))).getValue());		} catch (NullPointerException e) { }
+		try { env.setTimeOfDay(((ShortTag)(eItems.get("TimeOfDay"))).getValue());				} catch (NullPointerException e) { }
+		try { env.setCloudHeight(((ShortTag)(eItems.get("CloudHeight"))).getValue());				} catch (NullPointerException e) { }
+		try { env.setCloudColor(((IntTag)(eItems.get("CloudColor"))).getValue());				} catch (NullPointerException e) { }
+		try { env.setSkyColor(((IntTag)(eItems.get("SkyColor"))).getValue());					} catch (NullPointerException e) { }
+		try { env.setFogColor(((IntTag)(eItems.get("FogColor"))).getValue());					} catch (NullPointerException e) { }
+		try { env.setSkyBrightness(((ByteTag)(eItems.get("SkyBrightness"))).getValue());			} catch (NullPointerException e) { }
 
-			ShortTag sgh = new ShortTag("SurroundingGroundHeight", (short)env.getSurroundingGroundHeight());
-			ByteTag  sgt = new ByteTag("SurroundingGroundType", env.getSurroundingGroundType());
-			ShortTag swh = new ShortTag("SurroundingWaterHeight", (short)env.getSurroundingWaterHeight());
-			ByteTag  swt = new ByteTag("SurroundingWaterType", env.getSurroundingWaterType());
-			ShortTag clh = new ShortTag("CloudHeight", (short)env.getCloudHeight());
-			IntTag   clc = new IntTag("CloudColor", env.getCloudColor());
-			IntTag   skc = new IntTag("SkyColor", env.getSkyColor());
-			IntTag   fgc = new IntTag("FogColor", env.getFogColor());
-			ByteTag  skb = new ByteTag("SkyBrightness", env.getSkyBrightness());
-			eItems.put("SurroundingGroundHeight", sgh);
-			eItems.put("SurroundingGroundType", sgt);
-			eItems.put("SurroundingWaterHeight", swh);
-			eItems.put("SurroundingWaterType", swt);
-			eItems.put("CloudHeight", clh);
-			eItems.put("CloudColor", clc);
-			eItems.put("SkyColor", skc);
-			eItems.put("FogColor", fgc);
-			eItems.put("SkyBrightness", skb);
+		lvl.setEnvironment(env);
+	}
 
-			CompoundTag etag = new CompoundTag("Environment", eItems);
+	private static void unpackMap(Level lvl, Map<String, Tag> items) {
+		CompoundTag map = (CompoundTag)(items.get("Map"));
+		Map<String, Tag> mapItems = map.getValue();
 
-		rootItems.put("Environment",etag);
+		//
+		// Blocks and Data
+		//
 
-			//
-			// Map Items
-			//
-			HashMap<String, Tag> mapItems = new HashMap<String, Tag>();
- 
-			// Map data
-			// The heights here are NOT the same things
-			int depth  = lvl.getDepth();
-			int height = lvl.getHeight();
-			int width  = lvl.getWidth();
-			ShortTag depthTag = new ShortTag("Height", (short)depth);
-			ShortTag heightTag = new ShortTag("Length", (short)height);
-			ShortTag widthTag = new ShortTag("Width", (short)width);
-			mapItems.put("Height", depthTag);
-			mapItems.put("Length", heightTag);
-			mapItems.put("Width", widthTag);
+		// Don't mess with this. It just works somehow
+		int depth  = ((ShortTag)(mapItems.get("Height"))).getValue();
+		int height = ((ShortTag)(mapItems.get("Length"))).getValue();
+		int width  = ((ShortTag)(mapItems.get("Width"))).getValue();
 
-			byte[] fdata = new byte[lvl.getDepth() * lvl.getHeight() * lvl.getWidth()];
-			byte[] fblocks = new byte[fdata.length];
-			byte[][][]blocks = lvl.getBlocks();
-			byte[][][]data = lvl.getData();
+		byte[] fblocks   = ((ByteArrayTag)(mapItems.get("Blocks"))).getValue();
+		byte[] fdata     = ((ByteArrayTag)(mapItems.get("Data"))).getValue();
+		byte[][][]blocks = new byte[width][height][depth];
+		byte[][][]data   = new byte[width][height][depth];
 
-			int i = 0;
-			for (int z = 0; z < depth; z++) {
-				for (int y = 0; y < height; y++) {
-					for (int x = 0; x < width; x++) {
-						fblocks[i] = blocks[x][y][z];
-						fdata[i] = data[x][y][z];
-						i += 1;
+		int i = 0;
+		for (int z = 0; z < depth; z++) {
+			for (int y = 0; y < height; y++) {
+				for (int x = 0; x < width; x++) {
+					if (fblocks[i] <= 49) {
+						blocks[x][y][z] = fblocks[i];
+					} else {
+						blocks[x][y][z] = 0;
 					}
+					data[x][y][z] = fdata[i];
+					i += 1;
 				}
 			}
+		}
 
-			ByteArrayTag blockTag = new ByteArrayTag("Blocks", fblocks);
-			ByteArrayTag dataTag = new ByteArrayTag("Data", fblocks);
-			mapItems.put("Blocks", blockTag);
-			mapItems.put("Data", dataTag);
+		lvl.setBlocks(blocks, data, width, height, depth);
 
-			// Spawn Items
-			ArrayList<Tag> spawnItems = new ArrayList<Tag>(addNonStandardInfo ? 5 : 3);
+		//
+		// Spawn Pos and Rotation
+		//
+		ListTag spawn = (ListTag)(mapItems.get("Spawn"));
+		List<Tag> spawnCoords = spawn.getValue();
+		lvl.setSpawnPosition(new Position(
+					((ShortTag)(spawnCoords.get(0))).getValue(),
+					((ShortTag)(spawnCoords.get(1))).getValue(),
+					((ShortTag)(spawnCoords.get(2))).getValue()
+				    ));
 
-			Position pos = lvl.getSpawnPosition();
-			ShortTag posx = new ShortTag("X", (short)pos.getX());
-			ShortTag posy = new ShortTag("Y", (short)pos.getY());
-			ShortTag posz = new ShortTag("Z", (short)pos.getZ());
-			spawnItems.add(posx);
-			spawnItems.add(posy);
-			spawnItems.add(posz);
+		//This is not in the mclevel specifications
+		try {
+			ListTag rot = (ListTag)(mapItems.get("Rotation"));
+			List<Tag> rotCoords = rot.getValue();
+			lvl.setSpawnRotation(new Rotation(
+					((ShortTag)(rotCoords.get(0))).getValue(),
+					((ShortTag)(rotCoords.get(1))).getValue()
+				    ));
+		} catch (Exception e) {
+			lvl.setSpawnRotation(new Rotation(0, 0));
+		}
+	}
 
-			//This is not in the mclevel specifications
-			if (addNonStandardInfo) {
-				Rotation r = lvl.getSpawnRotation();
-				ShortTag rotation = new ShortTag("Rotation", (short)r.getRotation());
-				ShortTag look = new ShortTag("Look", (short)r.getLook());
-				spawnItems.add(rotation);
-				spawnItems.add(look);
-			}
+	private static void unpackEntities(Level lvl, Map<String, Tag> items) {
+		//TODO
+	}
 
-			ListTag spawn = new ListTag("Spawn", ShortTag.class, spawnItems);
-			mapItems.put("Spawn", spawn);
+	private static void unpackTileEntities(Level lvl, Map<String, Tag> items) {
+		//TODO
+	}
 
-			CompoundTag map = new CompoundTag("Map", mapItems);
+	private static void unpackAbout(Level lvl, Map<String, Tag> items) {
+		CompoundTag about = (CompoundTag)(items.get("About"));
+		Map<String, Tag> aboutItems = about.getValue();
+		lvl.setTitle(((StringTag)(aboutItems.get("Name"))).getValue());
+		lvl.setAuthor(((StringTag)(aboutItems.get("Author"))).getValue());
+		lvl.setCreationDate(((LongTag)(aboutItems.get("CreatedOn"))).getValue());
+	}
 
-		rootItems.put("Map", map);
+	//
+	//
+	//
+	// Saving a Level
+	//
+	//
+	//
 
-			//
-			// About Items
-			//
-			HashMap<String, Tag> aboutItems = new HashMap<String, Tag>();
-			StringTag name;
-			if (lvl.getName() == null)
-				name = new StringTag("Name",	"");
-			else
-				name = new StringTag("Name",    lvl.getName());
-			StringTag auth;
-			if (lvl.getAuthor() == null)
-				auth = new StringTag("Author",  "");
-			else
-				auth = new StringTag("Author",  lvl.getAuthor());
-			LongTag   date = new LongTag("CreatedOn", lvl.getCreationDate());
-			aboutItems.put("Name", name);
-			aboutItems.put("Author", auth);
-			aboutItems.put("CreatedOn", date);
+	public static void save(Level lvl, String filename) {
+		HashMap<String, Tag> rootItems = new HashMap<String, Tag>();
 
-			CompoundTag aboutTag = new CompoundTag("About", aboutItems);
+			
+		rootItems.put("Environment",packEnvironment(lvl));
 
-		rootItems.put("About", aboutTag);
 
+		rootItems.put("Map", packMap(lvl));
+			
+		rootItems.put("Entities", packEntities(lvl));
+		rootItems.put("About", packAbout(lvl));
 		CompoundTag root = new CompoundTag("MinecraftLevel", rootItems);
-
 
 		try {
 			logger.debug("Writing NBT to {}", filename);
@@ -281,5 +180,167 @@ public final class NBTFileHandler {
 		} catch (Exception e) {
 			logger.warn("Error writing save file", e);
 		}
+	}
+
+	private static CompoundTag packEnvironment(Level lvl) {
+		HashMap<String, Tag> eItems = new HashMap<String, Tag>();
+		Environment env = lvl.getEnvironment();
+
+		ShortTag sgh = new ShortTag("SurroundingGroundHeight", (short)env.getSurroundingGroundHeight());
+		ByteTag  sgt = new ByteTag("SurroundingGroundType", env.getSurroundingGroundType());
+		ShortTag swh = new ShortTag("SurroundingWaterHeight", (short)env.getSurroundingWaterHeight());
+		ByteTag  swt = new ByteTag("SurroundingWaterType", env.getSurroundingWaterType());
+		ShortTag clh = new ShortTag("CloudHeight", (short)env.getCloudHeight());
+		ShortTag tod = new ShortTag("TimeOfDay", env.getTimeOfDay());
+		IntTag   clc = new IntTag("CloudColor", env.getCloudColor());
+		IntTag   skc = new IntTag("SkyColor", env.getSkyColor());
+		IntTag   fgc = new IntTag("FogColor", env.getFogColor());
+		ByteTag  skb = new ByteTag("SkyBrightness", env.getSkyBrightness());
+		eItems.put("SurroundingGroundHeight", sgh);
+		eItems.put("SurroundingGroundType", sgt);
+		eItems.put("SurroundingWaterHeight", swh);
+		eItems.put("SurroundingWaterType", swt);
+		eItems.put("CloudHeight", clh);
+		eItems.put("TimeOfDay", tod);
+		eItems.put("CloudColor", clc);
+		eItems.put("SkyColor", skc);
+		eItems.put("FogColor", fgc);
+		eItems.put("SkyBrightness", skb);
+
+		return new CompoundTag("Environment", eItems);
+	}
+
+	private static CompoundTag packMap(Level lvl) {
+		HashMap<String, Tag> mapItems = new HashMap<String, Tag>();
+ 
+		// Map data
+		// The heights here are NOT the same things
+		int depth  = lvl.getDepth();
+		int height = lvl.getHeight();
+		int width  = lvl.getWidth();
+		ShortTag depthTag = new ShortTag("Height", (short)depth);
+		ShortTag heightTag = new ShortTag("Length", (short)height);
+		ShortTag widthTag = new ShortTag("Width", (short)width);
+		mapItems.put("Height", depthTag);
+		mapItems.put("Length", heightTag);
+		mapItems.put("Width", widthTag);
+
+		byte[] fdata = new byte[lvl.getDepth() * lvl.getHeight() * lvl.getWidth()];
+		byte[] fblocks = new byte[fdata.length];
+		byte[][][]blocks = lvl.getBlocks();
+		byte[][][]data = lvl.getData();
+
+		int i = 0;
+		for (int z = 0; z < depth; z++) {
+			for (int y = 0; y < height; y++) {
+				for (int x = 0; x < width; x++) {
+					fblocks[i] = blocks[x][y][z];
+					fdata[i] = data[x][y][z];
+					i += 1;
+				}
+			}
+		}
+
+		ByteArrayTag blockTag = new ByteArrayTag("Blocks", fblocks);
+		ByteArrayTag dataTag = new ByteArrayTag("Data", fblocks);
+		mapItems.put("Blocks", blockTag);
+		mapItems.put("Data", dataTag);
+
+		// Spawn Position
+		ArrayList<Tag> sposItems = new ArrayList<Tag>(3);
+
+		Position spos = lvl.getSpawnPosition();
+		ShortTag sposx = new ShortTag("X", (short)spos.getX());
+		ShortTag sposy = new ShortTag("Y", (short)spos.getY());
+		ShortTag sposz = new ShortTag("Z", (short)spos.getZ());
+		sposItems.add(sposx);
+		sposItems.add(sposy);
+		sposItems.add(sposz);
+
+		ListTag spawnPos = new ListTag("Spawn", ShortTag.class, sposItems);
+		mapItems.put("Spawn", spawnPos);
+		// Not in the Specification, but would be consistant with the indev conventions for Entities
+		spawnPos = new ListTag("Pos", ShortTag.class, sposItems);
+		mapItems.put("Pos", spawnPos);
+
+		// Spawn Rotation
+		// This is not in the mclevel specifications, but probably will be sometime soon because it fits with the above comment
+		ArrayList<Tag> srotItems = new ArrayList<Tag>(2);
+		Rotation srot = lvl.getSpawnRotation();
+		ShortTag srotation = new ShortTag("Rotation", (short)srot.getRotation());
+		ShortTag slook = new ShortTag("Look", (short)srot.getLook());
+		srotItems.add(srotation);
+		srotItems.add(slook);
+
+		ListTag spawnRotation = new ListTag("Rotation", ShortTag.class, srotItems);
+		mapItems.put("Rotation", spawnRotation);
+
+		return new CompoundTag("Map", mapItems);
+
+	}
+
+	private static CompoundTag packEntities(Level lvl) {
+		HashMap<String, Tag> entities = new HashMap<String, Tag>();
+
+		//
+		// LocalPlayer
+		//
+		HashMap<String, Tag> localPlayer = new HashMap<String, Tag>();
+
+		// id
+		StringTag id = new StringTag("id", "LocalPlayer");
+		localPlayer.put("id", id);
+
+		// Position
+		Position pos = lvl.getSpawnPosition();
+		ArrayList<Tag> posItems = new ArrayList<Tag>(3);
+		FloatTag posx = new FloatTag("X", (float)pos.getX());
+		FloatTag posy = new FloatTag("Y", (float)pos.getY());
+		FloatTag posz = new FloatTag("Z", (float)pos.getZ());
+		posItems.add(posx);
+		posItems.add(posy);
+		posItems.add(posz);
+		ListTag spawnPos = new ListTag("Spawn", FloatTag.class, posItems);
+		localPlayer.put("Pos", spawnPos);
+
+		// Rotation
+		ArrayList<Tag> rotItems = new ArrayList<Tag>(2);
+		Rotation rot = lvl.getSpawnRotation();
+		FloatTag rotation = new FloatTag("Rotation", (float)rot.getRotation());
+		FloatTag look = new FloatTag("Look", (float)rot.getLook());
+		rotItems.add(rotation);
+		rotItems.add(look);
+		ListTag spawnRotation = new ListTag("Rotation", FloatTag.class, rotItems);
+		localPlayer.put("Rotation", spawnRotation);
+
+		entities.put("LocalPlayer", new CompoundTag("LocalPlayer", localPlayer));
+
+		return new CompoundTag("Entities", entities);
+	}
+
+	private static CompoundTag packAbout(Level lvl) {
+		HashMap<String, Tag> aboutItems = new HashMap<String, Tag>();
+
+		StringTag name;
+		if (lvl.getName() == null) {
+			name = new StringTag("Name", "");
+		} else {
+			name = new StringTag("Name", lvl.getName());
+		}
+
+		StringTag auth;
+		if (lvl.getAuthor() == null) {
+			auth = new StringTag("Author", "");
+		} else {
+			auth = new StringTag("Author", lvl.getAuthor());
+		}
+
+		LongTag date = new LongTag("CreatedOn", lvl.getCreationDate());
+
+		aboutItems.put("Name", name);
+		aboutItems.put("Author", auth);
+		aboutItems.put("CreatedOn", date);
+
+		return new CompoundTag("About", aboutItems);
 	}
 }
