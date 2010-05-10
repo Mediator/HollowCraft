@@ -109,12 +109,9 @@ public final class MinecraftSession extends OCSession{
 	
 	
 	public boolean isAuthenticated() {
-		if(player == null)
-		{
+		if (player == null) {
 			return false;
-		}
-		else
-		{
+		} else {
 			return true;
 		}
 	}

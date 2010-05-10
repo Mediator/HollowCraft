@@ -24,3 +24,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - changed status from unstarted to in_progress
   - I'll poke around a little and see what I can do.
+- - 2010-05-10 17:28:50.498554 Z
+  - Adam Liszka <sidein@usiah.com>
+  - commented
+  - the authkey is empty for some reason
