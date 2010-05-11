@@ -57,12 +57,18 @@ public abstract class Builder {
 
 	protected long m_seed;
 
+	// for use in theming
+	protected String m_theme;
+	protected byte m_grassBlock;
+	protected byte m_leavesBlock;
+
 	public void setSeed(long seed) {
 		m_seed = seed;
 		m_random = new Random(seed);
 	}
 
 	public Builder(Level level) {
+		setSummer();
 		setLevel(level);
 		m_seed = 0;
 		m_random = new Random();
@@ -79,5 +85,23 @@ public abstract class Builder {
 
 	public byte[][][] getBlocks() {
 		return (byte[][][])(m_blocks.clone());
+	}
+
+	public void setSummer() {
+		m_grassBlock = BlockConstants.GRASS;
+		m_leavesBlock = BlockConstants.LEAVES;
+		m_theme = "Summer";
+	}
+
+	public void setWinter() {
+		m_grassBlock = BlockConstants.CLOTH_WHITE;
+		m_leavesBlock = BlockConstants.CLOTH_WHITE;
+		m_theme = "Winter";
+	}
+
+	public void setOasis() {
+		m_grassBlock = BlockConstants.SAND;
+		m_leavesBlock = BlockConstants.LEAVES;
+		m_theme = "Oasis";
 	}
 }

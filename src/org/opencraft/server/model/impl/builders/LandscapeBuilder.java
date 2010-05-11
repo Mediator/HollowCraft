@@ -51,13 +51,9 @@ import org.slf4j.*;
 
 public class LandscapeBuilder extends Builder {
 
-	protected byte m_grassBlock;
-	protected byte m_leavesBlock;
-	protected String m_theme;
 
 	public LandscapeBuilder(Level level) {
 		super(level);
-		setSummer();
 	}
 
 	private static final Logger logger = LoggerFactory.getLogger(LandscapeBuilder.class);
@@ -74,24 +70,6 @@ public class LandscapeBuilder extends Builder {
 			makeSand();
 		}
 		plantTrees();
-	}
-
-	public void setSummer() {
-		m_grassBlock = BlockConstants.GRASS;
-		m_leavesBlock = BlockConstants.LEAVES;
-		m_theme = "Summer";
-	}
-
-	public void setWinter() {
-		m_grassBlock = BlockConstants.CLOTH_WHITE;
-		m_leavesBlock = BlockConstants.CLOTH_WHITE;
-		m_theme = "Winter";
-	}
-
-	public void setOasis() {
-		m_grassBlock = BlockConstants.SAND;
-		m_leavesBlock = BlockConstants.LEAVES;
-		m_theme = "Oasis";
 	}
 
 	public String getTheme() {

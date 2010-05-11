@@ -55,7 +55,7 @@ public class FlatGrassBuilder extends Builder {
 					if (z < m_depth / 2) {
 						m_blocks[x][y][z] = BlockConstants.DIRT;
 					} else {
-						m_blocks[x][y][z] = BlockConstants.GRASS;
+						m_blocks[x][y][z] = m_grassBlock;
 					}
 				}
 			}

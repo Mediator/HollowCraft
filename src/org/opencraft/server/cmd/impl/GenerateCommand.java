@@ -41,7 +41,7 @@ import org.opencraft.server.model.Environment;
 import org.opencraft.server.model.Builder;
 import org.opencraft.server.Server;
 import org.opencraft.server.security.Permission;
-import org.opencraft.server.model.impl.builders.LandscapeBuilder;
+import org.opencraft.server.model.impl.builders.*;
 
 /**
  * A command that generates a new world
@@ -76,11 +76,14 @@ public class GenerateCommand extends Command {
 	
 	public void execute(Player player, CommandParameters params) {
 		//if (player.isAuthorized(new Permission("org.opencraft.server.Worlds."+params.getStringArgument(0)+".goto"))) {
-			if (params.getArgumentCount() != 6) {
+
+			if (params.getArgumentCount() == 5 && params.getStringArgument(4).equalsIgnoreCase("Pixel")) {
+				//continue
+			} else if (params.getArgumentCount() != 6) {
 				player.getActionSender().sendChatMessage("<name> - The name of the map");
 				player.getActionSender().sendChatMessage("<x> <y> <z> - The width, height, and depth of the level");
 				player.getActionSender().sendChatMessage("<type> - The type of level to generate");
-				player.getActionSender().sendChatMessage("Valid types are 'Hilly'");
+				player.getActionSender().sendChatMessage("Valid types are 'Hills' 'Flat' 'Pixel'");
 				player.getActionSender().sendChatMessage("<theme> - The tile set to use");
 				player.getActionSender().sendChatMessage("Valid themes are 'Summer' 'Winter' 'Oasis'");
 				player.getActionSender().sendChatMessage("/generate <name> <x> <y> <z> <type> <theme>");
@@ -90,15 +93,43 @@ public class GenerateCommand extends Command {
 
 			try {
 				String name = params.getStringArgument(0);
+				if (Server.getServer().hasWorld(name)) {
+					player.getActionSender().sendChatMessage("World is loaded. Stopping");
+					return;
+				}
 				int x = Integer.parseInt(params.getStringArgument(1));
 				int y = Integer.parseInt(params.getStringArgument(2));
 				int z = Integer.parseInt(params.getStringArgument(3));
+
+				if (x < 16 || y < 16 || z < 16) {
+					player.getActionSender().sendChatMessage("16x16x16 is the smallest level supported");
+					return;
+				}
+
+				if (!(2*x == (x ^ x-1) + 1) && !(2*y == (y ^ y-1) + 1) && !(2*z == (z ^ z-1) + 1)) {
+					player.getActionSender().sendChatMessage("sizes must be powers of 2");
+					return;
+				}
 				String type = params.getStringArgument(4);
-				String theme = params.getStringArgument(5);
+
+				if (!type.equalsIgnoreCase("Pixel")) {
+					String theme = params.getStringArgument(5);
+				}
 
 				Level newlvl = new Level();
-				if (type.equalsIgnoreCase("Hilly")) {
-					LandscapeBuilder b = new LandscapeBuilder(newlvl);
+				Builder b;
+				if (type.equalsIgnoreCase("Hills")) {
+					b = new LandscapeBuilder(newlvl);
+				} else if (type.equalsIgnoreCase("Flat")) {
+					b = new FlatGrassBuilder(newlvl);
+				} else if (type.equalsIgnoreCase("Pixel")) {
+					b = new PixelBuilder(newlvl);
+				} else {
+					player.getActionSender().sendChatMessage("Valid types are 'Hills' 'Flat' 'Pixel'");
+					return;
+				}
+
+				if (!type.equalsIgnoreCase("Pixel")) {
 					if (theme.equalsIgnoreCase("Summer")) {
 						b.setSummer();
 					} else if (theme.equalsIgnoreCase("Winter")) {
@@ -109,14 +140,13 @@ public class GenerateCommand extends Command {
 						player.getActionSender().sendChatMessage("Valid themes are 'Summer' 'Winter' 'Oasis'");
 						return;
 					}
-					newlvl.generateLevel(b, x, y, z, new Environment(), name, player.getName());
-					Server.getServer().addLevel(newlvl);
-					player.getActionSender().sendChatMessage("World " + name + " created");
-				} else {
-					player.getActionSender().sendChatMessage("Valid types are 'Hilly'");
-					return;
 				}
+				newlvl.generateLevel(b, x, y, z, new Environment(), name, player.getName());
+				Server.getServer().addLevel(newlvl);
+				player.getActionSender().sendChatMessage("World " + name + " created");
 			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				e.printStackTrace();
 				player.getActionSender().sendChatMessage("/generate <name> <x> <y> <z> <type> <theme>");
 			}
 		//}

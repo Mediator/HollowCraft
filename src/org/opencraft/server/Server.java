@@ -191,6 +191,15 @@ public final class Server {
 		return w;
 	}
 
+	public boolean hasWorld(String name) {
+		try {
+			if (m_worlds.get(name).get() != null) {
+				return true;
+			}
+		} catch (Exception e) { }
+		return false;
+	}
+
 	/**
 	 * Starts the server.
 	 * @throws IOException if an I/O error occurs.
