@@ -77,16 +77,15 @@ public class GenerateCommand extends Command {
 	public void execute(Player player, CommandParameters params) {
 		//if (player.isAuthorized(new Permission("org.opencraft.server.Worlds."+params.getStringArgument(0)+".goto"))) {
 
-			if (params.getArgumentCount() == 5 && params.getStringArgument(4).equalsIgnoreCase("Pixel")) {
-				//continue
-			} else if (params.getArgumentCount() != 6) {
+			String theme = "Summer";
+			if (params.getArgumentCount() > 6 || params.getArgumentCount() < 5) {
 				player.getActionSender().sendChatMessage("<name> - The name of the map");
 				player.getActionSender().sendChatMessage("<x> <y> <z> - The width, height, and depth of the level");
 				player.getActionSender().sendChatMessage("<type> - The type of level to generate");
 				player.getActionSender().sendChatMessage("Valid types are 'Hills' 'Flat' 'Pixel'");
 				player.getActionSender().sendChatMessage("<theme> - The tile set to use");
 				player.getActionSender().sendChatMessage("Valid themes are 'Summer' 'Winter' 'Oasis'");
-				player.getActionSender().sendChatMessage("/generate <name> <x> <y> <z> <type> <theme>");
+				player.getActionSender().sendChatMessage("/generate <name> <x> <y> <z> <type> [<theme>]");
 				return;
 			}
 
@@ -112,10 +111,6 @@ public class GenerateCommand extends Command {
 				}
 				String type = params.getStringArgument(4);
 
-				if (!type.equalsIgnoreCase("Pixel")) {
-					String theme = params.getStringArgument(5);
-				}
-
 				Level newlvl = new Level();
 				Builder b;
 				if (type.equalsIgnoreCase("Hills")) {
@@ -129,25 +124,28 @@ public class GenerateCommand extends Command {
 					return;
 				}
 
-				if (!type.equalsIgnoreCase("Pixel")) {
-					if (theme.equalsIgnoreCase("Summer")) {
-						b.setSummer();
-					} else if (theme.equalsIgnoreCase("Winter")) {
-						b.setWinter();
-					} else if (theme.equalsIgnoreCase("Oasis")) {
-						b.setOasis();
-					} else {
-						player.getActionSender().sendChatMessage("Valid themes are 'Summer' 'Winter' 'Oasis'");
-						return;
-					}
+				if (params.getArgumentCount() == 6) {
+					theme = params.getStringArgument(5);
 				}
+
+				if (theme.equalsIgnoreCase("Summer")) {
+					b.setSummer();
+				} else if (theme.equalsIgnoreCase("Winter")) {
+					b.setWinter();
+				} else if (theme.equalsIgnoreCase("Oasis")) {
+					b.setOasis();
+				} else {
+					player.getActionSender().sendChatMessage("Valid themes are 'Summer' 'Winter' 'Oasis'");
+					return;
+				}
+
 				newlvl.generateLevel(b, x, y, z, new Environment(), name, player.getName());
 				Server.getServer().addLevel(newlvl);
 				player.getActionSender().sendChatMessage("World " + name + " created");
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				e.printStackTrace();
-				player.getActionSender().sendChatMessage("/generate <name> <x> <y> <z> <type> <theme>");
+				player.getActionSender().sendChatMessage("/generate <name> <x> <y> <z> <type> [<theme>]");
 			}
 		//}
 	}
