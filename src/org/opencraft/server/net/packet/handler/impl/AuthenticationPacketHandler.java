@@ -60,7 +60,6 @@ public final class AuthenticationPacketHandler implements PacketHandler<Minecraf
 		String username = packet.getStringField("username");
 		String verificationKey = packet.getStringField("verification_key");
 		int protocolVersion = packet.getNumericField("protocol_version").intValue();
-		packet.printFields();
 		logger.info("Received authentication packet : username=" + username + ", verificationKey=" + verificationKey + ", protocolVersion=" + protocolVersion + ".");
 		
 		if (protocolVersion != Constants.PROTOCOL_VERSION) {

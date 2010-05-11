@@ -97,11 +97,4 @@ public final class Packet {
 	public byte[] getByteArrayField(String fieldName) {
 		return (byte[]) fields.get(fieldName);
 	}
-
-	public void printFields() {
-		for (Map.Entry<String, Object> entry : fields.entrySet()) {
-			System.out.println(entry.getKey() + "  " + entry.getValue());
-		}
-	}
-	
 }

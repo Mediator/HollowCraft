@@ -5,7 +5,7 @@ type: :bugfix
 component: opencraft-acm
 release: "0.3"
 reporter: Adam Liszka <sidein@usiah.com>
-status: :in_progress
+status: :paused
 disposition: 
 creation_time: 2010-05-08 22:50:14.489923 Z
 references: []
@@ -28,3 +28,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - commented
   - the authkey is empty for some reason
+- - 2010-05-11 00:02:59.025505 Z
+  - Adam Liszka <sidein@usiah.com>
+  - changed status from in_progress to paused
+  - Not sure what's going on all that well. I just know that the verificationKey is equal to "--"
