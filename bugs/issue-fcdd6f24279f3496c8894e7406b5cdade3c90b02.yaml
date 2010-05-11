@@ -5,8 +5,8 @@ type: :bugfix
 component: opencraft-acm
 release: "0.3"
 reporter: Adam Liszka <sidein@usiah.com>
-status: :paused
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-05-08 22:50:14.489923 Z
 references: []
 
@@ -32,3 +32,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - changed status from in_progress to paused
   - Not sure what's going on all that well. I just know that the verificationKey is equal to "--"
+- - 2010-05-11 02:46:57.644127 Z
+  - Adam Liszka <sidein@usiah.com>
+  - closed with disposition fixed
+  - Small bug on our part, but mostly Notch poorly designing how the client connects to servers. URL's that are of the format ip=x.x.x.x&port=yyyyy do not provide a validation key, instead they provide "--". Url's that are of the format server=asdf89h324kljsdfaasd8 provide a working validation key.

@@ -111,6 +111,7 @@ public class GenerateCommand extends Command {
 					}
 					newlvl.generateLevel(b, x, y, z, new Environment(), name, player.getName());
 					Server.getServer().addLevel(newlvl);
+					player.getActionSender().sendChatMessage("World " + name + " created");
 				} else {
 					player.getActionSender().sendChatMessage("Valid types are 'Hilly'");
 					return;

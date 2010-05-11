@@ -230,6 +230,9 @@ public final class Server {
 
 		// verify name
 		if (Configuration.getConfiguration().isVerifyingNames()) {
+			if (verificationKey.equals("--")) {
+				session.getActionSender().sendLoginFailure("Cannot verify names with ip= based URLs");
+			}
 			long salt = HeartbeatManager.getHeartbeatManager().getSalt();
 			String hash = new StringBuilder().append(String.valueOf(salt)).append(username).toString();
 			MessageDigest digest;
@@ -239,7 +242,8 @@ public final class Server {
 				throw new RuntimeException("No MD5 algorithm!");
 			}
 			digest.update(hash.getBytes());
-			if (!verificationKey.equals(new BigInteger(1, digest.digest()).toString(16))) {
+			String test = new BigInteger(1, digest.digest()).toString(16);
+			if (!verificationKey.equals(test)) {
 				session.getActionSender().sendLoginFailure("Illegal name.");
 				return;
 			}
