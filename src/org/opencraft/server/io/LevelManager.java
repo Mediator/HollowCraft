@@ -134,7 +134,7 @@ public final class LevelManager {
 	 * @param filename The name of the file to unzip
 	 * @return The Level
 	 */
-	public static Level load(String mapName) {
+	public static Level load(String mapName) throws IOException {
 		Version latest = getLatestVersion(mapName);
 		if (latest != null) {
 			File mapFile = getLatestVersion(mapName).file;
@@ -169,11 +169,14 @@ public final class LevelManager {
 			} catch (IOException e) { }
 		}
 
+		/*
 		logger.info("Generating level instead of loading.");
 		Level lvl = new Level();
 		lvl.generateLevel();
 		lvl.setName(mapName);
 		return lvl;
+		*/
+		throw new IOException("Cannot load level");
 	}
 
 	/**

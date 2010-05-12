@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Collection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.math.BigInteger;
@@ -117,6 +118,16 @@ public final class Server {
 		return ret;
 	}
 
+	public String[] getLoadedWorldNames() {
+		String[] ret = new String[m_worlds.size()];
+		SoftReference[] refs = new SoftReference[m_worlds.size()];
+		refs = m_worlds.values().toArray(refs);
+		for(int i = 0;i < m_worlds.size();i++) {
+			ret[i] = ((World)refs[i].get()).getName();
+		}
+		return ret;
+	}
+
 	/**
 	 * The socket acceptor.
 	 */
@@ -140,7 +151,7 @@ public final class Server {
 		loadLevel(Configuration.getConfiguration().getDefaultMap());
 	}
 
-	public void loadLevel(String name) {
+	public boolean loadLevel(String name) {
 		logger.info("Loading level \""+name+"\"");
 		if (m_worlds.containsKey(name)) {
 			logger.trace("World {} was already loaded some time ago.", name);
@@ -149,18 +160,37 @@ public final class Server {
 				m_worlds.remove(name);
 			} else {
 				logger.trace("Found cached world {}.", name);
-				return;
+				return true;
 			}
 		}
 		try {
 			World w = new World(name);
 			m_worlds.put(name, new SoftReference<World>(w));
+			return true;
 		} catch (InstantiationException e) {
 			logger.error("Error loading world.");
 		} catch (IllegalAccessException e) {
 			logger.error("Error loading world.");
 		} catch (ClassNotFoundException e) {
 			logger.error("Error loading world.");
+		} catch (IOException e) {
+			logger.error("Error loading world.");
+		}
+		return false;
+	}
+
+	public void unloadLevel(String name) {
+		logger.info("Unloading level \""+name+"\"");
+		final Configuration c = Configuration.getConfiguration();
+		if (m_worlds.containsKey(name) && !name.equalsIgnoreCase(c.getDefaultMap())) {
+			World w = m_worlds.get(name).get();
+			w.finalize();
+
+			Collection<Player> players = w.getPlayerList().getPlayers();
+
+			m_worlds.remove(name);
+		} else {
+			logger.trace("World {} is not loaded.", name);
 		}
 	}
 

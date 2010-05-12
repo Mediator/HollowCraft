@@ -41,6 +41,7 @@ import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.util.PlayerList;
 import org.opencraft.server.io.LevelManager;
 import org.opencraft.server.security.Policy;
+import java.io.IOException;
 import org.slf4j.*;
 
 /**
@@ -91,7 +92,7 @@ public final class World {
 	 * @throws IllegalAccessException
 	 * @throws InstantiationException
 	 */
-	public World(String name) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+	public World(String name) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException {
 		m_policy = new Policy();
 		gameMode = (GameMode) Class.forName(Configuration.getConfiguration().getGameMode()).newInstance();
 		level = LevelManager.load(name);

@@ -44,43 +44,51 @@ import org.opencraft.server.security.Permission;
  * @author Trever Fischer
  */
 
-public class GotoCommand extends Command {
+public class UnloadCommand extends Command {
 	
 	/**
 	 * The instance of this command.
 	 */
-	private static final GotoCommand INSTANCE = new GotoCommand ();
+	private static final UnloadCommand INSTANCE = new UnloadCommand ();
 	
 	/**
 	 * Gets the singleton instance of this command.
 	 * @return The singleton instance of this command.
 	 */
-	public static GotoCommand getCommand() {
+	public static UnloadCommand getCommand() {
 		return INSTANCE;
 	}
 
 	public String name() {
-		return "goto";
+		return "unload";
 	}
 	
 	/**
 	 * Default private constructor.
 	 */
-	private GotoCommand () {
+	private UnloadCommand () {
 		/* empty */
 	}
 	
 	public void execute(Player player, CommandParameters params) {
-		if (player.isAuthorized(new Permission("org.opencraft.server.Worlds."+params.getStringArgument(0)+".goto"))) {
+		//if (player.isAuthorized(new Permission("org.opencraft.server.Worlds."+params.getStringArgument(0)+".goto"))) {
+			if (params.getArgumentCount() != 1) {
+				player.getActionSender().sendChatMessage("Usage:");
+				player.getActionSender().sendChatMessage("/unload <name>");
+				return;
+			}
 			if (Server.getServer().hasWorld(params.getStringArgument(0))) {
-				player.getActionSender().sendChatMessage("Loading "+params.getStringArgument(0));
-				player.moveToWorld(Server.getServer().getWorld(params.getStringArgument(0)));
+				if (Server.getServer().unloadLevel(params.getStringArgument(0))) {
+					player.getActionSender().sendChatMessage("Unloaded "+params.getStringArgument(0));
+				} else {
+					player.getActionSender().sendChatMessage(params.getStringArgument(0) + " is still loaded");
+				}
 			} else {
 				player.getActionSender().sendChatMessage("World "+params.getStringArgument(0) + " is not loaded.");
 			}
-		} else {
+		/*} else {
 			player.getActionSender().sendChatMessage("You are not permitted to go to "+params.getStringArgument(0));
-		}
+		}*/
 	}
 
 }

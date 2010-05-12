@@ -44,43 +44,48 @@ import org.opencraft.server.security.Permission;
  * @author Trever Fischer
  */
 
-public class GotoCommand extends Command {
+public class LoadCommand extends Command {
 	
 	/**
 	 * The instance of this command.
 	 */
-	private static final GotoCommand INSTANCE = new GotoCommand ();
+	private static final LoadCommand INSTANCE = new LoadCommand ();
 	
 	/**
 	 * Gets the singleton instance of this command.
 	 * @return The singleton instance of this command.
 	 */
-	public static GotoCommand getCommand() {
+	public static LoadCommand getCommand() {
 		return INSTANCE;
 	}
 
 	public String name() {
-		return "goto";
+		return "load";
 	}
 	
 	/**
 	 * Default private constructor.
 	 */
-	private GotoCommand () {
+	private LoadCommand () {
 		/* empty */
 	}
 	
 	public void execute(Player player, CommandParameters params) {
-		if (player.isAuthorized(new Permission("org.opencraft.server.Worlds."+params.getStringArgument(0)+".goto"))) {
-			if (Server.getServer().hasWorld(params.getStringArgument(0))) {
-				player.getActionSender().sendChatMessage("Loading "+params.getStringArgument(0));
-				player.moveToWorld(Server.getServer().getWorld(params.getStringArgument(0)));
-			} else {
-				player.getActionSender().sendChatMessage("World "+params.getStringArgument(0) + " is not loaded.");
+		//if (player.isAuthorized(new Permission("org.opencraft.server.Worlds."+params.getStringArgument(0)+".goto"))) {
+			if (params.getArgumentCount() != 1) {
+				player.getActionSender().sendChatMessage("Usage:");
+				player.getActionSender().sendChatMessage("/load <name>");
+				return;
 			}
-		} else {
+			if (!Server.getServer().hasWorld(params.getStringArgument(0))) {
+				player.getActionSender().sendChatMessage("Loading "+params.getStringArgument(0));
+				Server.getServer().loadLevel(params.getStringArgument(0));
+			} else {
+				player.getActionSender().sendChatMessage("World "+params.getStringArgument(0) + " is already loaded.");
+			}
+		/*} else {
 			player.getActionSender().sendChatMessage("You are not permitted to go to "+params.getStringArgument(0));
-		}
+		}*/
 	}
 
 }

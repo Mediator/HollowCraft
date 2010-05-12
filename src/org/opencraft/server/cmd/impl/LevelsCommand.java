@@ -36,51 +36,69 @@ package org.opencraft.server.cmd.impl;
 import org.opencraft.server.cmd.Command;
 import org.opencraft.server.cmd.CommandParameters;
 import org.opencraft.server.model.Player;
+import org.opencraft.server.model.Level;
+import org.opencraft.server.model.Environment;
+import org.opencraft.server.model.Builder;
 import org.opencraft.server.Server;
 import org.opencraft.server.security.Permission;
+import org.opencraft.server.model.impl.builders.*;
 
 /**
- * A command to send a player to a new world
- * @author Trever Fischer
+ * A command that generates a new world
+ * @author Adam Liszka
  */
 
-public class GotoCommand extends Command {
+public class LevelsCommand extends Command {
 	
 	/**
 	 * The instance of this command.
 	 */
-	private static final GotoCommand INSTANCE = new GotoCommand ();
+	private static final LevelsCommand INSTANCE = new LevelsCommand();
 	
 	/**
 	 * Gets the singleton instance of this command.
 	 * @return The singleton instance of this command.
 	 */
-	public static GotoCommand getCommand() {
+	public static LevelsCommand getCommand() {
 		return INSTANCE;
 	}
 
 	public String name() {
-		return "goto";
+		return "levels";
 	}
 	
 	/**
 	 * Default private constructor.
 	 */
-	private GotoCommand () {
+	private LevelsCommand () {
 		/* empty */
 	}
 	
 	public void execute(Player player, CommandParameters params) {
-		if (player.isAuthorized(new Permission("org.opencraft.server.Worlds."+params.getStringArgument(0)+".goto"))) {
-			if (Server.getServer().hasWorld(params.getStringArgument(0))) {
-				player.getActionSender().sendChatMessage("Loading "+params.getStringArgument(0));
-				player.moveToWorld(Server.getServer().getWorld(params.getStringArgument(0)));
+		String[] names = Server.getServer().getLoadedWorldNames();
+		player.getActionSender().sendChatMessage("Loaded Worlds:");
+		String message = "" + (char)(0xf);
+		for (int i = 0; i < names.length; i++) {
+			if (message.length() == 1) {
+				message += "&a" + names[i];
 			} else {
-				player.getActionSender().sendChatMessage("World "+params.getStringArgument(0) + " is not loaded.");
+				// 6 is the magic number for "&e, &a"
+				if (message.length() + 6 + names[i].length() < 64) {
+					message += "&e, &a" + names[i];
+				} else {
+					player.getActionSender().sendChatMessage(message);
+					message = " ";
+					i -= 1;
+				}
 			}
-		} else {
-			player.getActionSender().sendChatMessage("You are not permitted to go to "+params.getStringArgument(0));
 		}
+
+		if (message.length() > 0) {
+			player.getActionSender().sendChatMessage(message);
+		}
+
+		player.getActionSender().sendChatMessage("Unloaded Worlds:");
+		player.getActionSender().sendChatMessage("-Not implemented yet-");
 	}
 
 }

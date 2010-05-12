@@ -234,14 +234,6 @@ public class ActionSender {
 	}
 	
 	/**
-	 * Sends a chat message.
-	 * @param message The message.
-	 */
-	public void sendChatMessage(String message) {
-			sendChatMessage(-1, message);
-	}
-	
-	/**
 	 * Sends a block.
 	 * @param x X coordinate.
 	 * @param y Y coordinate.
@@ -258,6 +250,14 @@ public class ActionSender {
 		session.send(bldr.toPacket());
 	}
 	
+	/**
+	 * Sends a chat message.
+	 * @param message The message.
+	 */
+	public void sendChatMessage(String message) {
+			sendChatMessage(-1, message);
+	}
+
 	/**
 	 * Sends a chat message.
 	 * @param id The source player id.

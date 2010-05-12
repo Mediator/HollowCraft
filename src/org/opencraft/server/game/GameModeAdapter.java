@@ -70,6 +70,9 @@ public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 		registerCommand(MeCommand.getCommand());
 		registerCommand(RollCommand.getCommand());
 		registerCommand(GenerateCommand.getCommand());
+		registerCommand(LevelsCommand.getCommand());
+		registerCommand(LoadCommand.getCommand());
+		registerCommand(UnloadCommand.getCommand());
 	}
 	
 	/**
