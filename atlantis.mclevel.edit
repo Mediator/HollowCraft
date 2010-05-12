@@ -1,0 +1,3819 @@
+     [java] INFO: Loading level "atlantis"
+     [java] TAG_Compound("MinecraftLevel"): 5 entries
+     [java] {
+     [java]    TAG_List("Entities"): 112 entries of type TAG_Compound
+     [java]    {
+     [java]       TAG_Compound: 13 entries
+     [java]       {
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 1.246532E-10
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -5.6975585E-10
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Inventory"): 32 entries of type TAG_Compound
+     [java]          {
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 267
+     [java]                TAG_Short("Damage"): 85
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 0
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 274
+     [java]                TAG_Short("Damage"): 8
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 1
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 5
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 54
+     [java]                TAG_Byte("Slot"): 2
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 4
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 61
+     [java]                TAG_Byte("Slot"): 3
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 296
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 4
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 6
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 10
+     [java]                TAG_Byte("Slot"): 5
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 3
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 29
+     [java]                TAG_Byte("Slot"): 6
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 295
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 58
+     [java]                TAG_Byte("Slot"): 7
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 320
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 8
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 262
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 9
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 288
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 4
+     [java]                TAG_Byte("Slot"): 10
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 4
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 20
+     [java]                TAG_Byte("Slot"): 11
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 299
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 12
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 318
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 5
+     [java]                TAG_Byte("Slot"): 16
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 20
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 2
+     [java]                TAG_Byte("Slot"): 17
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 3
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 64
+     [java]                TAG_Byte("Slot"): 18
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 4
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 64
+     [java]                TAG_Byte("Slot"): 19
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 3
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 64
+     [java]                TAG_Byte("Slot"): 20
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 274
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 21
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 263
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 5
+     [java]                TAG_Byte("Slot"): 22
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 3
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 64
+     [java]                TAG_Byte("Slot"): 23
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 3
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 64
+     [java]                TAG_Byte("Slot"): 24
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 12
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 40
+     [java]                TAG_Byte("Slot"): 25
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 13
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 2
+     [java]                TAG_Byte("Slot"): 29
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 292
+     [java]                TAG_Short("Damage"): 75
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 30
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 274
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 31
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 3
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 64
+     [java]                TAG_Byte("Slot"): 33
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 35
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 21
+     [java]                TAG_Byte("Slot"): 34
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 301
+     [java]                TAG_Short("Damage"): 27
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 100
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 308
+     [java]                TAG_Short("Damage"): 114
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 101
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 307
+     [java]                TAG_Short("Damage"): 114
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 102
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 306
+     [java]                TAG_Short("Damage"): 114
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 103
+     [java]             }
+     [java]          }
+     [java]          TAG_String("id"): LocalPlayer
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 154.98811
+     [java]             TAG_Float: 27.62
+     [java]             TAG_Float: 231.36081
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_Short("Fire"): -20
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -110507.695
+     [java]             TAG_Float: 3.6001291
+     [java]          }
+     [java]          TAG_Int("Score"): 0
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 12 entries
+     [java]       {
+     [java]          TAG_String("id"): Painting
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 183.0
+     [java]             TAG_Float: 28.5
+     [java]             TAG_Float: 232.9375
+     [java]          }
+     [java]          TAG_Byte("Dir"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("Fire"): 0
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Int("TileY"): 28
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_Int("TileX"): 183
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_String("Motive"): Sea
+     [java]          TAG_Int("TileZ"): 233
+     [java]       }
+     [java]       TAG_Compound: 10 entries
+     [java]       {
+     [java]          TAG_String("id"): Item
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 95.293144
+     [java]             TAG_Float: 34.125
+     [java]             TAG_Float: 177.875
+     [java]          }
+     [java]          TAG_Short("Age"): 3820
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 1.4E-45
+     [java]             TAG_Float: -0.0
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Compound("Item"): 3 entries
+     [java]          {
+     [java]             TAG_Short("id"): 288
+     [java]             TAG_Short("Damage"): 0
+     [java]             TAG_Byte("Count"): 1
+     [java]          }
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 5
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 132.18576
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]       }
+     [java]       TAG_Compound: 10 entries
+     [java]       {
+     [java]          TAG_String("id"): Item
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 94.04919
+     [java]             TAG_Float: 33.125
+     [java]             TAG_Float: 177.55327
+     [java]          }
+     [java]          TAG_Short("Age"): 3820
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -1.4E-45
+     [java]             TAG_Float: -0.0
+     [java]             TAG_Float: 1.4E-45
+     [java]          }
+     [java]          TAG_Compound("Item"): 3 entries
+     [java]          {
+     [java]             TAG_Short("id"): 288
+     [java]             TAG_Short("Damage"): 0
+     [java]             TAG_Byte("Count"): 1
+     [java]          }
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 5
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 164.46268
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]       }
+     [java]       TAG_Compound: 10 entries
+     [java]       {
+     [java]          TAG_String("id"): Item
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 112.012665
+     [java]             TAG_Float: 41.125
+     [java]             TAG_Float: 81.30253
+     [java]          }
+     [java]          TAG_Short("Age"): 3815
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -1.4E-45
+     [java]             TAG_Float: -0.0
+     [java]             TAG_Float: -1.4E-45
+     [java]          }
+     [java]          TAG_Compound("Item"): 3 entries
+     [java]          {
+     [java]             TAG_Short("id"): 262
+     [java]             TAG_Short("Damage"): 0
+     [java]             TAG_Byte("Count"): 1
+     [java]          }
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 5
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 48.942635
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]       }
+     [java]       TAG_Compound: 10 entries
+     [java]       {
+     [java]          TAG_String("id"): Item
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 144.33862
+     [java]             TAG_Float: 35.125
+     [java]             TAG_Float: 138.48132
+     [java]          }
+     [java]          TAG_Short("Age"): 3789
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 1.4E-45
+     [java]             TAG_Float: -0.0
+     [java]             TAG_Float: 1.4E-45
+     [java]          }
+     [java]          TAG_Compound("Item"): 3 entries
+     [java]          {
+     [java]             TAG_Short("id"): 288
+     [java]             TAG_Short("Damage"): 0
+     [java]             TAG_Byte("Count"): 1
+     [java]          }
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 5
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 207.5132
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]       }
+     [java]       TAG_Compound: 10 entries
+     [java]       {
+     [java]          TAG_String("id"): Item
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 110.256424
+     [java]             TAG_Float: 31.125
+     [java]             TAG_Float: 82.15173
+     [java]          }
+     [java]          TAG_Short("Age"): 3693
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -1.4E-45
+     [java]             TAG_Float: -0.0
+     [java]             TAG_Float: -1.4E-45
+     [java]          }
+     [java]          TAG_Compound("Item"): 3 entries
+     [java]          {
+     [java]             TAG_Short("id"): 262
+     [java]             TAG_Short("Damage"): 0
+     [java]             TAG_Byte("Count"): 1
+     [java]          }
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 5
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 116.18101
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]       }
+     [java]       TAG_Compound: 10 entries
+     [java]       {
+     [java]          TAG_String("id"): Item
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 110.662224
+     [java]             TAG_Float: 31.125
+     [java]             TAG_Float: 82.875
+     [java]          }
+     [java]          TAG_Short("Age"): 3693
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 1.4E-45
+     [java]             TAG_Float: -0.0
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Compound("Item"): 3 entries
+     [java]          {
+     [java]             TAG_Short("id"): 262
+     [java]             TAG_Short("Damage"): 0
+     [java]             TAG_Byte("Count"): 1
+     [java]          }
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 5
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 137.67787
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]       }
+     [java]       TAG_Compound: 12 entries
+     [java]       {
+     [java]          TAG_String("id"): Sheep
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 116.53117
+     [java]             TAG_Float: 32.0
+     [java]             TAG_Float: 25.818539
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.059715375
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.055372994
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Byte("Sheared"): 0
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 10
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -124.343376
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 161.7
+     [java]             TAG_Float: 11.0
+     [java]             TAG_Float: 20.700123
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.0075695827
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -96.7796
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 138.97409
+     [java]             TAG_Float: 14.0
+     [java]             TAG_Float: 89.13388
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.06779059
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.028355233
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -112.56909
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 166.5355
+     [java]             TAG_Float: 19.0
+     [java]             TAG_Float: 123.330696
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.044891395
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.06321495
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -132.12108
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 79.62103
+     [java]             TAG_Float: 10.031523
+     [java]             TAG_Float: 186.3
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.039259005
+     [java]             TAG_Float: -0.45663053
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 1.1684761
+     [java]          TAG_Short("Health"): 14
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -130.94417
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 94.574875
+     [java]             TAG_Float: 11.7616005
+     [java]             TAG_Float: 27.635202
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.10793881
+     [java]             TAG_Float: -0.235232
+     [java]             TAG_Float: -0.01749735
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.2384
+     [java]          TAG_Short("Health"): 15
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -98.41635
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 140.36719
+     [java]             TAG_Float: 11.038372
+     [java]             TAG_Float: 93.3
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.051863227
+     [java]             TAG_Float: -0.46076748
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 1.1951324
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -229.11934
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 86.752396
+     [java]             TAG_Float: 5.0
+     [java]             TAG_Float: 170.69481
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.012329209
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.057614036
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 19
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -191.94038
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 183.202
+     [java]             TAG_Float: 14.199978
+     [java]             TAG_Float: 154.66635
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.060311705
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.11973609
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -20.677147
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 139.49918
+     [java]             TAG_Float: 10.0
+     [java]             TAG_Float: 75.29999
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 1.023334E-5
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -179.93988
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Spider
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 123.70004
+     [java]             TAG_Float: 10.0
+     [java]             TAG_Float: 13.941485
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.0016965687
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 89.04587
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 10 entries
+     [java]       {
+     [java]          TAG_String("id"): Item
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 173.6973
+     [java]             TAG_Float: 33.125
+     [java]             TAG_Float: 117.85546
+     [java]          }
+     [java]          TAG_Short("Age"): 2165
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 1.4E-45
+     [java]             TAG_Float: -0.0
+     [java]             TAG_Float: 1.4E-45
+     [java]          }
+     [java]          TAG_Compound("Item"): 3 entries
+     [java]          {
+     [java]             TAG_Short("id"): 288
+     [java]             TAG_Short("Damage"): 0
+     [java]             TAG_Byte("Count"): 1
+     [java]          }
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 5
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 94.33067
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]       }
+     [java]       TAG_Compound: 10 entries
+     [java]       {
+     [java]          TAG_String("id"): Item
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 172.73488
+     [java]             TAG_Float: 33.125
+     [java]             TAG_Float: 117.875
+     [java]          }
+     [java]          TAG_Short("Age"): 2165
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -1.4E-45
+     [java]             TAG_Float: -0.0
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Compound("Item"): 3 entries
+     [java]          {
+     [java]             TAG_Short("id"): 288
+     [java]             TAG_Short("Damage"): 0
+     [java]             TAG_Byte("Count"): 1
+     [java]          }
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 5
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 253.71463
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 106.7
+     [java]             TAG_Float: 24.0
+     [java]             TAG_Float: 51.616222
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.053231537
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -39.18944
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 176.50005
+     [java]             TAG_Float: 21.2
+     [java]             TAG_Float: 37.3
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -1.6890447E-17
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -180.00327
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 153.76175
+     [java]             TAG_Float: 18.119986
+     [java]             TAG_Float: 39.522003
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.024784343
+     [java]             TAG_Float: -0.1584
+     [java]             TAG_Float: 0.026741792
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.08
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -37.230324
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Spider
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 122.3
+     [java]             TAG_Float: 24.233505
+     [java]             TAG_Float: 37.08831
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: -0.004670078
+     [java]             TAG_Float: 0.005745929
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -92.76144
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 243.53577
+     [java]             TAG_Float: 6.0
+     [java]             TAG_Float: 14.653119
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.0021685734
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.08246836
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 1.1393204
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 143.3
+     [java]             TAG_Float: 9.526368
+     [java]             TAG_Float: 17.51966
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: -0.31052735
+     [java]             TAG_Float: 0.009828608
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.47363198
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 42.02333
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 166.15654
+     [java]             TAG_Float: 20.0
+     [java]             TAG_Float: 52.3
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.05780549
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -82.14305
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 154.49878
+     [java]             TAG_Float: 20.0
+     [java]             TAG_Float: 25.67136
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 8.552785E-5
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.058803294
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.08403778
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 129.35526
+     [java]             TAG_Float: 30.0
+     [java]             TAG_Float: 142.73555
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.038507532
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.031218892
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -55.938023
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 72.050705
+     [java]             TAG_Float: 8.0
+     [java]             TAG_Float: 171.5002
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.058929738
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -5.841118E-6
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -90.00786
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 130.55634
+     [java]             TAG_Float: 9.0
+     [java]             TAG_Float: 32.156895
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.055990014
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.018290998
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 71.9971
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 104.79131
+     [java]             TAG_Float: 24.0
+     [java]             TAG_Float: 79.92791
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.053204283
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.024854435
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 66.02408
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 148.9721
+     [java]             TAG_Float: 22.0
+     [java]             TAG_Float: 145.71808
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.028843006
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.049856346
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -156.0825
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Spider
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 156.3
+     [java]             TAG_Float: 23.0
+     [java]             TAG_Float: 149.7
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -157.6199
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 28.498547
+     [java]             TAG_Float: 12.0
+     [java]             TAG_Float: 230.67264
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 3.8664406E-5
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.058755938
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.04512787
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 17.506779
+     [java]             TAG_Float: 16.199997
+     [java]             TAG_Float: 215.72852
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.0038501946
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.017031675
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.3523407
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 151.81357
+     [java]             TAG_Float: 3.0
+     [java]             TAG_Float: 16.468708
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.08038725
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.014932203
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 18
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 87.70126
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Pig
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 210.69803
+     [java]             TAG_Float: 34.0
+     [java]             TAG_Float: 139.3316
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.048343915
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.0664196
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 10
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -34.617447
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 160.7
+     [java]             TAG_Float: 14.0
+     [java]             TAG_Float: 154.49985
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 9.33104E-20
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -89.99514
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 137.81575
+     [java]             TAG_Float: 6.0
+     [java]             TAG_Float: 155.49445
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.002830693
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 3.330005E-4
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 17
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -89.78964
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Spider
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 108.90361
+     [java]             TAG_Float: 13.038372
+     [java]             TAG_Float: 100.224434
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.037909437
+     [java]             TAG_Float: -0.46076748
+     [java]             TAG_Float: -0.024911217
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 1.1951324
+     [java]          TAG_Short("Health"): 19
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -246.97336
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 120.3
+     [java]             TAG_Float: 35.0
+     [java]             TAG_Float: 93.86569
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.020978233
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -257.3465
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 116.03893
+     [java]             TAG_Float: 37.0
+     [java]             TAG_Float: 83.597404
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.04855187
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.01020738
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -265.92065
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 12 entries
+     [java]       {
+     [java]          TAG_String("id"): Sheep
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 156.7078
+     [java]             TAG_Float: 34.0
+     [java]             TAG_Float: 185.15451
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.07734626
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.028370144
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Byte("Sheared"): 0
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 10
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -110.06789
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 12 entries
+     [java]       {
+     [java]          TAG_String("id"): Sheep
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 133.45
+     [java]             TAG_Float: 35.761597
+     [java]             TAG_Float: 193.46025
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: -0.235232
+     [java]             TAG_Float: 0.0037792048
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Byte("Sheared"): 0
+     [java]          TAG_Float("FallDistance"): 0.2384
+     [java]          TAG_Short("Health"): 10
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 88.71034
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Spider
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 82.05051
+     [java]             TAG_Float: 9.233504
+     [java]             TAG_Float: 189.9795
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.146938
+     [java]             TAG_Float: -0.004670078
+     [java]             TAG_Float: -9.5295E-4
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -228.15933
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 35.699997
+     [java]             TAG_Float: 12.7616005
+     [java]             TAG_Float: 232.41888
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: -0.235232
+     [java]             TAG_Float: -0.11433859
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.2384
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -142.55145
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 99.311386
+     [java]             TAG_Float: 9.0
+     [java]             TAG_Float: 190.72601
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.04804365
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.014204812
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -57.926064
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 92.5008
+     [java]             TAG_Float: 4.1566367
+     [java]             TAG_Float: 148.20798
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -6.200806E-5
+     [java]             TAG_Float: 0.07686727
+     [java]             TAG_Float: -0.098431006
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -180.02744
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 121.531715
+     [java]             TAG_Float: 5.0
+     [java]             TAG_Float: 203.01047
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.003104889
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.048004497
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -181.34036
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 78.27209
+     [java]             TAG_Float: 6.0
+     [java]             TAG_Float: 174.43724
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.079933956
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.008290562
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -86.75404
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 99.87288
+     [java]             TAG_Float: 9.0
+     [java]             TAG_Float: 202.95743
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.025559848
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.05225174
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -22.360725
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 35.49916
+     [java]             TAG_Float: 19.2
+     [java]             TAG_Float: 237.7
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 3.0911164E-5
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.027809143
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 38.69212
+     [java]             TAG_Float: 23.0
+     [java]             TAG_Float: 91.11463
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.072475895
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.03726967
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -109.38664
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 31.743065
+     [java]             TAG_Float: 15.0
+     [java]             TAG_Float: 236.79915
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.05329622
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.021472175
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -255.83102
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 191.35918
+     [java]             TAG_Float: 8.0
+     [java]             TAG_Float: 181.86888
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.067044765
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.04094078
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -60.803726
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 209.46864
+     [java]             TAG_Float: 9.0
+     [java]             TAG_Float: 205.30724
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.053060334
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.044223223
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -230.19313
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 159.61473
+     [java]             TAG_Float: 14.0
+     [java]             TAG_Float: 153.3
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.004371329
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -183.90094
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 174.62303
+     [java]             TAG_Float: 13.120003
+     [java]             TAG_Float: 149.3
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.15320876
+     [java]             TAG_Float: -0.1584
+     [java]             TAG_Float: -0.048506536
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.08
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -128.67783
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 81.4627
+     [java]             TAG_Float: 5.0
+     [java]             TAG_Float: 176.53574
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.0824186
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.002385182
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -268.91312
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 53.49985
+     [java]             TAG_Float: 10.200001
+     [java]             TAG_Float: 229.3
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 6.8922145E-6
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -179.9888
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 168.49393
+     [java]             TAG_Float: 9.0
+     [java]             TAG_Float: 106.132195
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 3.7903475E-4
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.08250035
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -179.7828
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 103.6999
+     [java]             TAG_Float: 9.0
+     [java]             TAG_Float: 187.32333
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.054751568
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.05437814
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -35.202408
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 37.764153
+     [java]             TAG_Float: 16.0
+     [java]             TAG_Float: 135.49533
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.029675405
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 3.4733137E-4
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -89.83005
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 30.499939
+     [java]             TAG_Float: 13.0
+     [java]             TAG_Float: 205.7
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 1.7863558E-9
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.004371643
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 38.49997
+     [java]             TAG_Float: 14.0
+     [java]             TAG_Float: 194.7
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -2.3812235E-11
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -9.765625E-4
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 33.7
+     [java]             TAG_Float: 13.0
+     [java]             TAG_Float: 204.50223
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -5.79054E-5
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -90.07431
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 157.70866
+     [java]             TAG_Float: 18.0
+     [java]             TAG_Float: 43.421494
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.004729517
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.03344137
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -140.85263
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 65.069
+     [java]             TAG_Float: 12.233504
+     [java]             TAG_Float: 223.70612
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.08117274
+     [java]             TAG_Float: -0.004670078
+     [java]             TAG_Float: -0.07477028
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -260.1375
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 114.11461
+     [java]             TAG_Float: 4.0
+     [java]             TAG_Float: 24.502188
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.033901542
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.045622885
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -53.23762
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 83.12558
+     [java]             TAG_Float: 6.0
+     [java]             TAG_Float: 174.42972
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.08201743
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.0043883645
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 87.47453
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 91.697716
+     [java]             TAG_Float: 8.0
+     [java]             TAG_Float: 189.55267
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.08259325
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.002375328
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -267.94836
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 160.58546
+     [java]             TAG_Float: 10.7616005
+     [java]             TAG_Float: 19.432964
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.073829606
+     [java]             TAG_Float: -0.235232
+     [java]             TAG_Float: 0.058698315
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.2384
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -41.345287
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Pig
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 122.65169
+     [java]             TAG_Float: 34.0
+     [java]             TAG_Float: 117.359276
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.046070263
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.06722317
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 10
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 28.634773
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 12 entries
+     [java]       {
+     [java]          TAG_String("id"): Sheep
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 144.20457
+     [java]             TAG_Float: 34.0
+     [java]             TAG_Float: 185.32533
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.06311127
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.050569616
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Byte("Sheared"): 0
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 10
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 55.15239
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 12 entries
+     [java]       {
+     [java]          TAG_String("id"): Sheep
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 138.68785
+     [java]             TAG_Float: 34.741745
+     [java]             TAG_Float: 192.36859
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.14991438
+     [java]             TAG_Float: -0.3148349
+     [java]             TAG_Float: -0.012299373
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Byte("Sheared"): 0
+     [java]          TAG_Float("FallDistance"): 0.4917593
+     [java]          TAG_Short("Health"): 10
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 87.13127
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 12 entries
+     [java]       {
+     [java]          TAG_String("id"): Sheep
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 162.43001
+     [java]             TAG_Float: 35.144257
+     [java]             TAG_Float: 193.45
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0060500256
+     [java]             TAG_Float: -0.16288514
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Byte("Sheared"): 0
+     [java]          TAG_Float("FallDistance"): 0.08924675
+     [java]          TAG_Short("Health"): 10
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -175.38742
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 12 entries
+     [java]       {
+     [java]          TAG_String("id"): Sheep
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 144.59096
+     [java]             TAG_Float: 34.0
+     [java]             TAG_Float: 201.07742
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.02426535
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.07602878
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Byte("Sheared"): 0
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 10
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -213.48059
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 12 entries
+     [java]       {
+     [java]          TAG_String("id"): Sheep
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 152.43993
+     [java]             TAG_Float: 35.0
+     [java]             TAG_Float: 183.37251
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.018778374
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.020508248
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Byte("Sheared"): 0
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 10
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -179.2297
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 12 entries
+     [java]       {
+     [java]          TAG_String("id"): Sheep
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 141.3768
+     [java]             TAG_Float: 34.0
+     [java]             TAG_Float: 192.76707
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.050173443
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.06405213
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Byte("Sheared"): 0
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 10
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -138.72626
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 94.47715
+     [java]             TAG_Float: 27.0
+     [java]             TAG_Float: 126.89485
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.001910275
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.08224903
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -179.02316
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 115.5
+     [java]             TAG_Float: 18.7516
+     [java]             TAG_Float: 217.7
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 3.364056E-6
+     [java]             TAG_Float: 0.24496798
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 114.568565
+     [java]             TAG_Float: 21.0
+     [java]             TAG_Float: 101.43059
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.003456587
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.058624234
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 3.6417542
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 124.10956
+     [java]             TAG_Float: 22.0
+     [java]             TAG_Float: 112.74056
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.057981554
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.010067928
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -99.81817
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 172.74939
+     [java]             TAG_Float: 7.2288337
+     [java]             TAG_Float: 152.9361
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.022416305
+     [java]             TAG_Float: -0.084576674
+     [java]             TAG_Float: -0.032707307
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.004670078
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -73.43758
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 106.54815
+     [java]             TAG_Float: 12.0
+     [java]             TAG_Float: 54.798172
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.06902359
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.032913666
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -54.747803
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 184.00706
+     [java]             TAG_Float: 12.156637
+     [java]             TAG_Float: 133.29198
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.047650073
+     [java]             TAG_Float: 0.07686727
+     [java]             TAG_Float: -0.007308553
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -214.96466
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 107.49941
+     [java]             TAG_Float: 22.0
+     [java]             TAG_Float: 153.7
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 4.3664157E-5
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.047538757
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 93.7
+     [java]             TAG_Float: 11.0
+     [java]             TAG_Float: 26.500145
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -1.0351119E-13
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -90.004616
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 12 entries
+     [java]       {
+     [java]          TAG_String("id"): Sheep
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 149.5899
+     [java]             TAG_Float: 38.0
+     [java]             TAG_Float: 172.63379
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.07264372
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.037767548
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Byte("Sheared"): 0
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 10
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -65.40097
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 12 entries
+     [java]       {
+     [java]          TAG_String("id"): Sheep
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 138.49544
+     [java]             TAG_Float: 42.0
+     [java]             TAG_Float: 167.81934
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.08073511
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.016822789
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Byte("Sheared"): 0
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 10
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -99.23955
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 12 entries
+     [java]       {
+     [java]          TAG_String("id"): Sheep
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 135.98015
+     [java]             TAG_Float: 38.0
+     [java]             TAG_Float: 175.1668
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.07779938
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.02563618
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Byte("Sheared"): 0
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 10
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -254.77577
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 153.31668
+     [java]             TAG_Float: 23.0
+     [java]             TAG_Float: 62.48483
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.07748805
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 8.271836E-4
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -89.278656
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Spider
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 173.57495
+     [java]             TAG_Float: 13.7516
+     [java]             TAG_Float: 150.48708
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.07191505
+     [java]             TAG_Float: 0.24496798
+     [java]             TAG_Float: 0.032834962
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -121.94251
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 32.719006
+     [java]             TAG_Float: 14.0
+     [java]             TAG_Float: 236.5026
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.04803039
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.0064557204
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -269.3679
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 21.41525
+     [java]             TAG_Float: 18.0
+     [java]             TAG_Float: 220.50032
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.058928277
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -2.2684973E-5
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -269.9795
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 86.232544
+     [java]             TAG_Float: 14.0
+     [java]             TAG_Float: 50.407154
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.08201812
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.0058960686
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 18
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 86.84906
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 10 entries
+     [java]       {
+     [java]          TAG_String("id"): Item
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 191.39404
+     [java]             TAG_Float: 11.125
+     [java]             TAG_Float: 38.32294
+     [java]          }
+     [java]          TAG_Short("Age"): 263
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -1.06E-43
+     [java]             TAG_Float: -0.0
+     [java]             TAG_Float: 7.1E-44
+     [java]          }
+     [java]          TAG_Compound("Item"): 3 entries
+     [java]          {
+     [java]             TAG_Short("id"): 262
+     [java]             TAG_Short("Damage"): 0
+     [java]             TAG_Byte("Count"): 1
+     [java]          }
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 5
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 204.38484
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]       }
+     [java]       TAG_Compound: 10 entries
+     [java]       {
+     [java]          TAG_String("id"): Item
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 192.81523
+     [java]             TAG_Float: 11.125
+     [java]             TAG_Float: 37.665413
+     [java]          }
+     [java]          TAG_Short("Age"): 263
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 5.7E-44
+     [java]             TAG_Float: -0.0
+     [java]             TAG_Float: -4.2E-45
+     [java]          }
+     [java]          TAG_Compound("Item"): 3 entries
+     [java]          {
+     [java]             TAG_Short("id"): 262
+     [java]             TAG_Short("Damage"): 0
+     [java]             TAG_Byte("Count"): 1
+     [java]          }
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 5
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 353.85413
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 136.917
+     [java]             TAG_Float: 31.0
+     [java]             TAG_Float: 148.53815
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.08217329
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.0053941095
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -93.745636
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 146.88435
+     [java]             TAG_Float: 10.0
+     [java]             TAG_Float: 112.0905
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.07440059
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.029924111
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -247.00488
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 36.769012
+     [java]             TAG_Float: 14.119998
+     [java]             TAG_Float: 202.7718
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.056141738
+     [java]             TAG_Float: -0.1584
+     [java]             TAG_Float: 0.032394934
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.08
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 10.61953
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 12 entries
+     [java]       {
+     [java]          TAG_String("id"): Sheep
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 170.55
+     [java]             TAG_Float: 42.0
+     [java]             TAG_Float: 142.60333
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.04813112
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Byte("Sheared"): 0
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 10
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -121.42567
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 12 entries
+     [java]       {
+     [java]          TAG_String("id"): Sheep
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 179.38156
+     [java]             TAG_Float: 36.0
+     [java]             TAG_Float: 171.04082
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.055805843
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.008844214
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Byte("Sheared"): 0
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 10
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -254.31577
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 73.3944
+     [java]             TAG_Float: 8.0
+     [java]             TAG_Float: 172.17928
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.03486276
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.023968333
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -232.95882
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Zombie
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 109.956154
+     [java]             TAG_Float: 13.0
+     [java]             TAG_Float: 25.130562
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0570284
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.0145098325
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -76.490364
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 149.60219
+     [java]             TAG_Float: 23.0
+     [java]             TAG_Float: 142.58151
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.07652868
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.016157176
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -264.88983
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 148.65727
+     [java]             TAG_Float: 23.0
+     [java]             TAG_Float: 142.3
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.063110285
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -131.91678
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Creeper
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 157.52211
+     [java]             TAG_Float: 16.0
+     [java]             TAG_Float: 25.469439
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -0.0014348156
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.08000264
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -180.66972
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Skeleton
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 119.3
+     [java]             TAG_Float: 10.156637
+     [java]             TAG_Float: 58.994358
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.0
+     [java]             TAG_Float: 0.07686727
+     [java]             TAG_Float: -0.039820183
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -253.3558
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]       TAG_Compound: 11 entries
+     [java]       {
+     [java]          TAG_String("id"): Spider
+     [java]          TAG_List("Pos"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 118.35564
+     [java]             TAG_Float: 28.0
+     [java]             TAG_Float: 138.21811
+     [java]          }
+     [java]          TAG_Short("AttackTime"): 0
+     [java]          TAG_List("Motion"): 3 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: 0.041649565
+     [java]             TAG_Float: -0.08
+     [java]             TAG_Float: -0.03953842
+     [java]          }
+     [java]          TAG_Short("HurtTime"): 0
+     [java]          TAG_Short("Fire"): -1
+     [java]          TAG_Float("FallDistance"): 0.0
+     [java]          TAG_Short("Health"): 20
+     [java]          TAG_Short("Air"): 300
+     [java]          TAG_List("Rotation"): 2 entries of type TAG_Float
+     [java]          {
+     [java]             TAG_Float: -115.37717
+     [java]             TAG_Float: 0.0
+     [java]          }
+     [java]          TAG_Short("DeathTime"): 0
+     [java]       }
+     [java]    }
+     [java]    TAG_List("TileEntities"): 3 entries of type TAG_Compound
+     [java]    {
+     [java]       TAG_Compound: 3 entries
+     [java]       {
+     [java]          TAG_String("id"): Chest
+     [java]          TAG_List("Items"): 25 entries of type TAG_Compound
+     [java]          {
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 297
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 0
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 297
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 1
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 297
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 2
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 3
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 4
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 5
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 6
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 3
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 64
+     [java]                TAG_Byte("Slot"): 8
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 297
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 9
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 297
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 10
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 297
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 11
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 12
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 13
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 14
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 15
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 37
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 8
+     [java]                TAG_Byte("Slot"): 17
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 297
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 18
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 297
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 19
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 297
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 20
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 21
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 22
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 23
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 24
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 25
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 38
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 5
+     [java]                TAG_Byte("Slot"): 26
+     [java]             }
+     [java]          }
+     [java]          TAG_Int("Pos"): 240147639
+     [java]       }
+     [java]       TAG_Compound: 3 entries
+     [java]       {
+     [java]          TAG_String("id"): Chest
+     [java]          TAG_List("Items"): 26 entries of type TAG_Compound
+     [java]          {
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 297
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 0
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 297
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 1
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 296
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 58
+     [java]                TAG_Byte("Slot"): 2
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 320
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 8
+     [java]                TAG_Byte("Slot"): 3
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 4
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 5
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 6
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 64
+     [java]                TAG_Byte("Slot"): 6
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 3
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 64
+     [java]                TAG_Byte("Slot"): 7
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 3
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 64
+     [java]                TAG_Byte("Slot"): 8
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 297
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 9
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 297
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 10
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 12
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 13
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 14
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 40
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 15
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 3
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 64
+     [java]                TAG_Byte("Slot"): 16
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 3
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 64
+     [java]                TAG_Byte("Slot"): 17
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 297
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 18
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 297
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 19
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 297
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 20
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 21
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 22
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 23
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 319
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 24
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 3
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 64
+     [java]                TAG_Byte("Slot"): 25
+     [java]             }
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 3
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 64
+     [java]                TAG_Byte("Slot"): 26
+     [java]             }
+     [java]          }
+     [java]          TAG_Int("Pos"): 240147638
+     [java]       }
+     [java]       TAG_Compound: 5 entries
+     [java]       {
+     [java]          TAG_String("id"): Furnace
+     [java]          TAG_List("Items"): 1 entries of type TAG_Compound
+     [java]          {
+     [java]             TAG_Compound: 4 entries
+     [java]             {
+     [java]                TAG_Short("id"): 265
+     [java]                TAG_Short("Damage"): 0
+     [java]                TAG_Byte("Count"): 1
+     [java]                TAG_Byte("Slot"): 2
+     [java]             }
+     [java]          }
+     [java]          TAG_Int("Pos"): 241196216
+     [java]          TAG_Short("BurnTime"): 0
+     [java]          TAG_Short("CookTime"): 0
+     [java]       }
+     [java]    }
+     [java] }

@@ -8,6 +8,7 @@
 	</path>
 	<target name="init">
 		<mkdir dir="bin"/>
+		<mkdir dir="log"/>
 		<mkdir dir="data"/>
 		<mkdir dir="data/maps"/>
 		<mkdir dir="data/savedGames"/>
