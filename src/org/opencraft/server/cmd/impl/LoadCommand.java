@@ -71,7 +71,7 @@ public class LoadCommand extends Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
-		//if (player.isAuthorized(new Permission("org.opencraft.server.Worlds."+params.getStringArgument(0)+".goto"))) {
+		if (player.isAuthorized(new Permission("org.opencraft.server." + name()))) {
 			if (params.getArgumentCount() != 1) {
 				player.getActionSender().sendChatMessage("Usage:");
 				player.getActionSender().sendChatMessage("/load <name>");
@@ -79,13 +79,17 @@ public class LoadCommand extends Command {
 			}
 			if (!Server.getServer().hasWorld(params.getStringArgument(0))) {
 				player.getActionSender().sendChatMessage("Loading "+params.getStringArgument(0));
-				Server.getServer().loadLevel(params.getStringArgument(0));
+				if (Server.getServer().loadLevel(params.getStringArgument(0))) {
+					player.getActionSender().sendChatMessage(params.getStringArgument(0) + " loaded");
+				} else {
+					player.getActionSender().sendChatMessage("No such level: " + params.getStringArgument(0));
+				}
 			} else {
 				player.getActionSender().sendChatMessage("World "+params.getStringArgument(0) + " is already loaded.");
 			}
-		/*} else {
+		} else {
 			player.getActionSender().sendChatMessage("You are not permitted to go to "+params.getStringArgument(0));
-		}*/
+		}
 	}
 
 }

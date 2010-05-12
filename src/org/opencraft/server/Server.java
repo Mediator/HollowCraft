@@ -179,7 +179,7 @@ public final class Server {
 		return false;
 	}
 
-	public void unloadLevel(String name) {
+	public boolean unloadLevel(String name) {
 		logger.info("Unloading level \""+name+"\"");
 		final Configuration c = Configuration.getConfiguration();
 		if (m_worlds.containsKey(name) && !name.equalsIgnoreCase(c.getDefaultMap())) {
@@ -187,11 +187,16 @@ public final class Server {
 			w.finalize();
 
 			Collection<Player> players = w.getPlayerList().getPlayers();
+			for (Player p : players) {
+				p.moveToWorld(getWorld(c.getDefaultMap()));
+			}
 
 			m_worlds.remove(name);
+			return true;
 		} else {
 			logger.trace("World {} is not loaded.", name);
 		}
+		return false;
 	}
 
 	public void addLevel(Level lvl) {
