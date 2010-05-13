@@ -14,7 +14,7 @@ Compound -- Player?
       - Short "Damage"
       - Byte "Count"
       - Byte "Slot"
-  - String "id" = "LocalPlayer"
+  - String "id" = "LocalPlsyer"
   - List "Pos"
     - Float -- X
     - Float -- Y
@@ -48,7 +48,7 @@ Compound -- Painting
   - List "Rotation"
     - Float
     - Float
-  - String "Motive" = "Sea" -- motif?
+  - String "Motive" = "Sea" -- wtf? displayed artwork?
 
 Compound -- Item
   - String "id" = "Item"
