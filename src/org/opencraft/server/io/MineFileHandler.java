@@ -69,7 +69,6 @@ public final class MineFileHandler {
 		DataInputStream data = new DataInputStream(decompressor);
 		int magic = data.readInt();
 		byte version = data.readByte();
-		System.out.println("Magic: "+magic+" Version: "+version);
 		ObjectInputStream stream = new LevelDeserializer(decompressor);
 		DeserializedLevel level;
 		try {

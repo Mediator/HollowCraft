@@ -75,8 +75,6 @@ public class GenerateCommand extends Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
-		//if (player.isAuthorized(new Permission("org.opencraft.server.Worlds."+params.getStringArgument(0)+".goto"))) {
-
 			String theme = "Summer";
 			if (params.getArgumentCount() > 6 || params.getArgumentCount() < 5) {
 				player.getActionSender().sendChatMessage("<name> - The name of the map");
@@ -143,11 +141,8 @@ public class GenerateCommand extends Command {
 				Server.getServer().addLevel(newlvl);
 				player.getActionSender().sendChatMessage("World " + name + " created");
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				e.printStackTrace();
 				player.getActionSender().sendChatMessage("/generate <name> <x> <y> <z> <type> [<theme>]");
 			}
-		//}
 	}
 
 }
