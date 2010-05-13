@@ -176,7 +176,8 @@ public final class LevelManager {
 		lvl.setName(mapName);
 		return lvl;
 		*/
-		throw new IOException("Cannot load level");
+		logger.warn("Cannot load level. No handlers found.");
+		return null;
 	}
 
 	/**

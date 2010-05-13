@@ -65,6 +65,7 @@ import org.opencraft.server.security.Group;
 import org.opencraft.server.security.Permission;
 import org.opencraft.server.security.Principal;
 import org.opencraft.server.security.Policy;
+import org.opencraft.server.io.LevelManager;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -148,10 +149,18 @@ public final class Server {
 		acceptor.setHandler(new SessionHandler());
 		logger.info("Initializing games...");
 		m_worlds = new HashMap<String,SoftReference<World>>();
-		loadLevel(Configuration.getConfiguration().getDefaultMap());
+		if (!loadWorld(Configuration.getConfiguration().getDefaultMap())) {
+			logger.info("Generating default 256x256x64 world.");
+			Level lvl = new Level();
+			lvl.generateLevel();
+			lvl.setName(Configuration.getConfiguration().getDefaultMap());
+			LevelManager.save(lvl);
+			boolean loaded = loadWorld(Configuration.getConfiguration().getDefaultMap());
+			assert(loaded);
+		}
 	}
 
-	public boolean loadLevel(String name) {
+	public boolean loadWorld(String name) {
 		logger.info("Loading level \""+name+"\"");
 		if (m_worlds.containsKey(name)) {
 			logger.trace("World {} was already loaded some time ago.", name);
@@ -164,17 +173,28 @@ public final class Server {
 			}
 		}
 		try {
-			World w = new World(name);
+			Level lvl = LevelManager.load(name);
+			if (lvl == null)
+				return false;
+			World w = new World(lvl);
+			logger.info("Loading policy for {}...", w);
+			try {
+				w.setPolicy(new Policy(w.getName(), new BufferedReader(new FileReader("data/opencraft.permissions"))));
+			} catch (ParseException e) {
+				logger.warn("Error parsing policy, line "+e.getErrorOffset(), e);
+			} catch (IOException e) {
+				logger.warn("Error reading policy", e);
+			}
 			m_worlds.put(name, new SoftReference<World>(w));
 			return true;
 		} catch (InstantiationException e) {
-			logger.error("Error loading world.");
+			logger.error("Error loading world.", e);
 		} catch (IllegalAccessException e) {
-			logger.error("Error loading world.");
+			logger.error("Error loading world.", e);
 		} catch (ClassNotFoundException e) {
-			logger.error("Error loading world.");
+			logger.error("Error loading world.", e);
 		} catch (IOException e) {
-			logger.error("Error loading world.");
+			logger.error("Error loading world.", e);
 		}
 		return false;
 	}
@@ -199,30 +219,9 @@ public final class Server {
 		return false;
 	}
 
-	public void addLevel(Level lvl) {
-		try {
-			World w = new World(lvl);
-			m_worlds.put(lvl.getName(), new SoftReference<World>(w));
-		} catch (InstantiationException e) {
-			logger.error("Error loading world.");
-		} catch (IllegalAccessException e) {
-			logger.error("Error loading world.");
-		} catch (ClassNotFoundException e) {
-			logger.error("Error loading world.");
-		}
-	}
-
 	public World getWorld(String name) {
-		loadLevel(name);
+		loadWorld(name);
 		World w = m_worlds.get(name).get();
-		logger.info("Loading policy for {}...", w);
-		try {
-			w.setPolicy(new Policy(w.getName(), new BufferedReader(new FileReader("data/opencraft.permissions"))));
-		} catch (ParseException e) {
-			logger.warn("Error parsing policy, line "+e.getErrorOffset(), e);
-		} catch (IOException e) {
-			logger.warn("Error reading policy", e);
-		}
 		return w;
 	}
 

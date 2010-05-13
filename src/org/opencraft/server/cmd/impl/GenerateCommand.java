@@ -42,6 +42,7 @@ import org.opencraft.server.model.Builder;
 import org.opencraft.server.Server;
 import org.opencraft.server.security.Permission;
 import org.opencraft.server.model.impl.builders.*;
+import org.opencraft.server.io.LevelManager;
 
 /**
  * A command that generates a new world
@@ -140,7 +141,7 @@ public class GenerateCommand extends Command {
 				}
 
 				newlvl.generateLevel(b, x, y, z, new Environment(), name, player.getName());
-				Server.getServer().addLevel(newlvl);
+				LevelManager.save(newlvl);
 				player.getActionSender().sendChatMessage("World " + name + " created");
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
