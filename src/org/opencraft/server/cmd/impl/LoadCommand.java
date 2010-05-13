@@ -71,6 +71,7 @@ public class LoadCommand extends Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
+		if (player.isAuthorized(new Permission("org.opencraft.server.command.impl.LoadCommand.execute"))) {
 			if (params.getArgumentCount() != 1) {
 				player.getActionSender().sendChatMessage("Usage:");
 				player.getActionSender().sendChatMessage("/load <name>");
@@ -86,6 +87,9 @@ public class LoadCommand extends Command {
 			} else {
 				player.getActionSender().sendChatMessage("World "+params.getStringArgument(0) + " is already loaded.");
 			}
+		} else {
+			player.getActionSender().sendChatMessage("You are not permitted to use /load");
+		}
 	}
 
 }
