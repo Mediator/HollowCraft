@@ -14,16 +14,31 @@ public class Permission {
 	private static final Logger logger = LoggerFactory.getLogger(Permission.class);
 
 	public boolean implies(Permission permission) {
-		String[] otherName = permission.m_name.split(" ");
-		String[] name = m_name.split(" ");
+		logger.trace("Testing {} against {}", this, permission);
+		if (permission.m_name.equals(m_name)) {
+			logger.trace("Exact match.");
+			return true;
+		}
+		String[] otherName = permission.m_name.split("\\.");
+		String[] name = m_name.split("\\.");
 		int segment = 0;
 		while(segment < otherName.length && segment < name.length) {
-			logger.trace("Testing {} against {}", name[segment], otherName[segment]);
-			if (name[segment].equals('*'))
+			logger.trace("Checking section {} against {}", name[segment], otherName[segment]);
+			if (name[segment].equals('*')) {
+				logger.trace("Found wildcard.");
 				return true;
-			if (!name[segment].equals(otherName[segment]))
+			}
+			if (!name[segment].equals(otherName[segment])) {
+				logger.trace("Found discrepency.");
 				return false;
+			}
+			segment++;
 		}
+		if (name.length != otherName.length) {
+			logger.trace("Ran out of tokens.");
+			return false;
+		}
+		logger.trace("Found a match.");
 		return true;
 	}
 
