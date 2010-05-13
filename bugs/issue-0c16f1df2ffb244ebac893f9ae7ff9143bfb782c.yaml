@@ -5,8 +5,8 @@ type: :bugfix
 component: security
 release: "0.3"
 reporter: Adam Liszka <sidein@usiah.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-05-10 23:42:13.025141 Z
 references: []
 
@@ -16,3 +16,7 @@ log_events:
   - Adam Liszka <sidein@usiah.com>
   - created
   - ""
+- - 2010-05-13 19:15:25.321361 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition fixed
+  - Found it.
