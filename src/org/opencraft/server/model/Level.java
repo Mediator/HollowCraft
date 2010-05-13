@@ -188,8 +188,11 @@ public class Level {
 	 * Performs physics updates on queued blocks.
 	 */
 	public void applyBlockBehaviour() {
-		Queue<Position> currentQueue = new ArrayDeque<Position>(m_updateQueue);
-		m_updateQueue.clear();
+		Queue<Position> currentQueue;
+		synchronized (m_updateQueue) {
+			currentQueue = new ArrayDeque<Position>(m_updateQueue);
+			m_updateQueue.clear();
+		}
 		for (Position pos : currentQueue) {
 			if (BlockManager.getBlockManager().getBlock(this.getBlock(pos.getX(), pos.getY(), pos.getZ())).hasGravity()) {
 				if (!blockIsStable(pos.getX(), pos.getY(), pos.getZ())) {

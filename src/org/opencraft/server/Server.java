@@ -161,7 +161,6 @@ public final class Server {
 	}
 
 	public boolean loadWorld(String name) {
-		logger.info("Loading level \""+name+"\"");
 		if (m_worlds.containsKey(name)) {
 			logger.trace("World {} was already loaded some time ago.", name);
 			if (m_worlds.get(name).get() == null) {
@@ -173,6 +172,7 @@ public final class Server {
 			}
 		}
 		try {
+			logger.info("Loading level \""+name+"\"");
 			Level lvl = LevelManager.load(name);
 			if (lvl == null)
 				return false;

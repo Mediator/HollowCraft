@@ -105,6 +105,7 @@ public class ExperimentalGameMode extends GameModeAdapter<Player> {
 	
 	@Override
 	public void setBlock(Player player, Level level, int x, int y, int z, int mode, int type) {
+		super.setBlock(player, level, x, y, z, mode, type);
 		((Brush) player.getAttribute("brush")).paint(player, level, x, y, z, mode, type);
 	}
 	

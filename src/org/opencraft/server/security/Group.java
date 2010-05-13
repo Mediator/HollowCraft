@@ -71,9 +71,12 @@ public class Group implements Principal {
 	public boolean isAuthorized(Permission perm) {
 		for(Permission p : m_permissions) {
 			logger.trace("Testing permission {} on {}", perm, p);
-			if (p.implies(perm))
+			if (p.implies(perm)) {
+				logger.trace("Group {} can perform {}", this, perm);
 				return true;
+			}
 		}
+		logger.trace("Group {} can not perform {}", this, perm);
 		return false;
 	}
 

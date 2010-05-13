@@ -20,6 +20,32 @@ public class Policy {
 	public Policy(String world, Reader r) throws ParseException, IOException {
 		m_world = world;
 		readFrom(r);
+		if (logger.isTraceEnabled()) {
+			logger.trace("Groups: ");
+			for(Group g : m_groups.values()) {
+				logger.trace("\t{}", g);
+				for(Permission p : g.getPermissions()) {
+					if (p instanceof Role)
+						logger.trace("\t\t@{}", p);
+					else
+						logger.trace("\t\t{}", p);
+				}
+			}
+			logger.trace("Roles: ");
+			for(Role role : m_roles.values()) {
+				logger.trace("\t{}", role);
+				for(Permission p : role.getPermissions()) {
+					logger.trace("\t\t{}", p);
+				}
+			}
+			logger.trace("Players: ");
+			for(String player : m_userPermissions.keySet()) {
+				logger.trace("\t{}", player);
+				for(Group group : m_userGroups.get(player)) {
+					logger.trace("\tMember of {}", group);
+				}
+			}
+		}
 	}
 
 	private String m_world = "";
@@ -37,8 +63,7 @@ public class Policy {
 		p.clearPolicy();
 		for(Group group : m_groups.values()) {
 			group.removeMember(p);
-		}
-		if (m_userGroups.get(p.getName()) != null) {
+		} if (m_userGroups.get(p.getName()) != null) {
 			for(Group group : m_userGroups.get(p.getName())) {
 				logger.trace("Adding {} to {}", p, group);
 				group.addMember(p);

@@ -150,15 +150,22 @@ public class Player extends Entity implements Principal {
 
 	public boolean isAuthorized(Permission perm) {
 		for(Permission p : m_permissions) {
-			logger.trace("Testing {} against {}", perm, p);
-			if (p.implies(perm))
+			logger.trace("Testing {} against user permission {}", perm, p);
+			if (p.implies(perm)) {
+				logger.trace("{} granted to player directly.", perm);
 				return true;
+			}
 		}
 		for(Group group : getWorld().getPolicy().getGroups()) {
-			logger.trace("Testing {} against {}", group, perm);
-			if (group.hasMember(this) && group.isAuthorized(perm))
-				return true;
+			if (group.hasMember(this)) {
+				logger.trace("Testing group {} for {}", group, perm);
+				if (group.isAuthorized(perm)) {
+					logger.trace("Authorized by {}", group);
+					return true;
+				}
+			}
 		}
+		logger.trace("Not authorized for {}", perm);
 		return false;
 	}
 	
