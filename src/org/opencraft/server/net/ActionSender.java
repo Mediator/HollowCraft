@@ -135,9 +135,10 @@ public class ActionSender {
 				bldr.putShort("width", level.getWidth());
 				bldr.putShort("height", level.getHeight());
 				bldr.putShort("depth", level.getDepth());
-				sendTeleport(level.getSpawnPosition(), level.getSpawnRotation());
 				logger.trace("Sending level finish");
 				session.send(bldr.toPacket());
+				sendAddEntity(session.getPlayer());
+				sendTeleport(level.getSpawnPosition(), level.getSpawnRotation());
 				// now load the player's game (TODO in the future do this in parallel with loading the level)
 				// TODO: We should use this to save what world a player was last
 				// on
