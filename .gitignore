@@ -6,3 +6,4 @@ data/savedGames
 .ditz-config
 *.vim
 *.swp
+log/
