@@ -69,7 +69,6 @@ public final class World {
 	/**
 	 * The level.
 	 */
-	//private Level level = LevelManager.load("monkey_mines.mclevel");
 	private Level level;
 	
 	/**

@@ -50,7 +50,7 @@ import org.opencraft.server.model.impl.builders.LandscapeBuilder;
  */
 public class Level {
 	
-	protected String m_name;
+	private String m_title;
 	protected String m_author;
 	protected long m_created;
 	protected Environment m_env;
@@ -98,8 +98,8 @@ public class Level {
 		generateLevel(new LandscapeBuilder(this), width, height, depth, new Environment(), "Generated Level", "ACM OpenCraft Crew");
 	}
 
-	public void generateLevel(Builder b, int width, int height, int depth, Environment env, String name, String author) {
-		m_name = name;
+	public void generateLevel(Builder b, int width, int height, int depth, Environment env, String title, String author) {
+		m_title = title;
 		m_author = author;
 		m_fileType = "mclevel";
 		m_created = (new java.util.Date()).getTime();
@@ -403,15 +403,15 @@ public class Level {
 		return false;
 	}
 
+	// TODO: Delete these and use title
 	public String getName() {
-		return m_name;
+		return m_title;
 	}
 
+	// TODO: Delete these and use title
 	public void setName(String name) {
-		m_name = name;
+		m_title = name;
 	}
-
-	private String m_title;
 
 	public void setTitle(String title) {
 		m_title = title;
