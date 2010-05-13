@@ -41,6 +41,7 @@ import org.opencraft.server.cmd.impl.*;
 import org.opencraft.server.model.Level;
 import org.opencraft.server.model.Player;
 import org.opencraft.server.security.Permission;
+import org.slf4j.*;
 
 /**
  * An implementation of a game mode that does the majority of the work for the
@@ -75,6 +76,8 @@ public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 		registerCommand(UnloadCommand.getCommand());
 		registerCommand(PingCommand.getCommand());
 	}
+
+	private static final Logger logger = LoggerFactory.getLogger(GameModeAdapter.class);
 	
 	/**
 	 * Adds a command
@@ -118,11 +121,15 @@ public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 	
 	// Default implementation
 	public void setBlock(Player player, Level level, int x, int y, int z, int mode, int type) {
+		logger.trace("Setting block mode {} type {}", mode, type);
 		if (mode == 1 && !player.isAuthorized(Permission.BUILD)) {
-			level.setBlock(x, y, z, level.getBlock(x, y, z));
+			logger.trace("Not permitted to build.");
+			player.getSession().getActionSender().sendBlock(x, y, z, level.getBlock(x, y, z));
 		} else if (mode == 0 && !player.isAuthorized(Permission.DESTROY)) {
-			level.setBlock(x, y, z, level.getBlock(x, y, z));
-		} else if (player.isAuthorized(Permission.BUILD)) {
+			logger.trace("Not permitted to destroy.");
+			player.getSession().getActionSender().sendBlock(x, y, z, level.getBlock(x, y, z));
+		} else {
+			logger.trace("Building is OK!");
 			level.setBlock(x, y, z, (byte) (mode == 1 ? type : 0));
 		}
 	}
