@@ -5,8 +5,8 @@ type: :bugfix
 component: Commands
 release: "0.3"
 reporter: Adam Liszka <sidein@usiah.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-05-12 23:08:12.442278 Z
 references: []
 
@@ -15,4 +15,8 @@ log_events:
 - - 2010-05-12 23:08:13.146209 Z
   - Adam Liszka <sidein@usiah.com>
   - created
+  - ""
+- - 2010-05-13 04:21:39.688007 Z
+  - Adam Liszka <sidein@usiah.com>
+  - closed with disposition fixed
   - ""
