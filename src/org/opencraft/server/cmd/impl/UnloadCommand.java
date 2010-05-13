@@ -71,7 +71,7 @@ public class UnloadCommand extends Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
-		//if (player.isAuthorized(new Permission("org.opencraft.server.Worlds."+params.getStringArgument(0)+".goto"))) {
+		if (player.isAuthorized(new Permission("org.opencraft.server.command.impl.UnloadCommand.execute"))) {
 			if (params.getArgumentCount() != 1) {
 				player.getActionSender().sendChatMessage("Usage:");
 				player.getActionSender().sendChatMessage("/unload <name>");
@@ -86,9 +86,9 @@ public class UnloadCommand extends Command {
 			} else {
 				player.getActionSender().sendChatMessage("World "+params.getStringArgument(0) + " is not loaded.");
 			}
-		/*} else {
-			player.getActionSender().sendChatMessage("You are not permitted to go to "+params.getStringArgument(0));
-		}*/
+		} else {
+			player.getActionSender().sendChatMessage("You are not permitted to use /unload");
+		}
 	}
 
 }

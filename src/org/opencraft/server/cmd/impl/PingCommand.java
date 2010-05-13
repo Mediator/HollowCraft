@@ -44,52 +44,34 @@ import org.opencraft.server.security.Permission;
  * @author Trever Fischer
  */
 
-public class LoadCommand extends Command {
+public class PingCommand extends Command {
 	
 	/**
 	 * The instance of this command.
 	 */
-	private static final LoadCommand INSTANCE = new LoadCommand ();
+	private static final PingCommand INSTANCE = new PingCommand ();
 	
 	/**
 	 * Gets the singleton instance of this command.
 	 * @return The singleton instance of this command.
 	 */
-	public static LoadCommand getCommand() {
+	public static PingCommand getCommand() {
 		return INSTANCE;
 	}
 
 	public String name() {
-		return "load";
+		return "ping";
 	}
 	
 	/**
 	 * Default private constructor.
 	 */
-	private LoadCommand () {
+	private PingCommand () {
 		/* empty */
 	}
 	
 	public void execute(Player player, CommandParameters params) {
-		if (player.isAuthorized(new Permission("org.opencraft.server.command.impl.LoadCommand.execute"))) {
-			if (params.getArgumentCount() != 1) {
-				player.getActionSender().sendChatMessage("Usage:");
-				player.getActionSender().sendChatMessage("/load <name>");
-				return;
-			}
-			if (!Server.getServer().hasWorld(params.getStringArgument(0))) {
-				player.getActionSender().sendChatMessage("Loading "+params.getStringArgument(0));
-				if (Server.getServer().loadLevel(params.getStringArgument(0))) {
-					player.getActionSender().sendChatMessage(params.getStringArgument(0) + " loaded");
-				} else {
-					player.getActionSender().sendChatMessage("No such level: " + params.getStringArgument(0));
-				}
-			} else {
-				player.getActionSender().sendChatMessage("World "+params.getStringArgument(0) + " is already loaded.");
-			}
-		} else {
-			player.getActionSender().sendChatMessage("You are not permitted to use /load");
-		}
+		player.getActionSender().sendChatMessage("Pong");
 	}
 
 }
