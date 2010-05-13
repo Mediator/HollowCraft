@@ -78,7 +78,7 @@ public class LoadCommand extends Command {
 			}
 			if (!Server.getServer().hasWorld(params.getStringArgument(0))) {
 				player.getActionSender().sendChatMessage("Loading "+params.getStringArgument(0));
-				if (Server.getServer().loadLevel(params.getStringArgument(0))) {
+				if (Server.getServer().loadWorld(params.getStringArgument(0))) {
 					player.getActionSender().sendChatMessage(params.getStringArgument(0) + " loaded");
 				} else {
 					player.getActionSender().sendChatMessage("No such level: " + params.getStringArgument(0));
