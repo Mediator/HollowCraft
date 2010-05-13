@@ -42,8 +42,6 @@ ROLE Op {
 	org.opencraft.server.command.impl.SayCommand.execute
 }
 
-ALLOW @Player to @ALL
-
 GROUP admins {
 	tdfischer
 	sidein
