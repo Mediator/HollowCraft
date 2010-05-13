@@ -137,7 +137,7 @@ public class ActionSender {
 				bldr.putShort("depth", level.getDepth());
 				logger.trace("Sending level finish");
 				session.send(bldr.toPacket());
-				sendAddEntity(session.getPlayer());
+				sendAddEntity(session.getPlayer(), -1);
 				sendTeleport(level.getSpawnPosition(), level.getSpawnRotation());
 				// now load the player's game (TODO in the future do this in parallel with loading the level)
 				// TODO: We should use this to save what world a player was last
@@ -163,14 +163,10 @@ public class ActionSender {
 		logger.trace("Sending teleport");
 		session.send(bldr.toPacket());
 	}
-	
-	/**
-	 * Sends the add entity packet.
-	 * @param entity The entity being added.
-	 */
-	public void sendAddEntity(Entity entity) {
+
+	public void sendAddEntity(Entity entity, int id) {
 		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(7));
-		bldr.putByte("id", entity.getId());
+		bldr.putByte("id", id);
 		bldr.putString("name", entity.getName());
 		bldr.putShort("x", entity.getPosition().getX());
 		bldr.putShort("y", entity.getPosition().getY());
@@ -179,6 +175,14 @@ public class ActionSender {
 		bldr.putByte("look", entity.getRotation().getLook());
 		logger.trace("Sending add entity");
 		session.send(bldr.toPacket());
+	}
+	
+	/**
+	 * Sends the add entity packet.
+	 * @param entity The entity being added.
+	 */
+	public void sendAddEntity(Entity entity) {
+		sendAddEntity(entity, entity.getId());
 	}
 	
 	/**
