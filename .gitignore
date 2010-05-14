@@ -8,3 +8,4 @@ data/savedGames
 *.swp
 log/
 dist/
+src/org/opencraft/server/Constants.java

@@ -8,6 +8,8 @@
 	<property name="slf4j.lib" value="/usr/share/java/slf4j/api.jar"/>
 	<property name="jython.lib" value="/usr/share/java/jython.jar"/>
 
+	<!-- Changing this property affects the value in
+		 org.opencraft.server.Constants.java -->
 	<property name="version" value="0.3b"/>
 
 	<property name="src" location="src"/>
@@ -29,6 +31,7 @@
 		<include name="doc/**"/>
 		<include name="build.xml"/>
 		<include name="README"/>
+		<exclude name="src/org/opencraft/server/Constants.java"/>
 		<include name="LICENSE"/>
 	</fileset>
 
@@ -43,6 +46,8 @@
 		<mkdir dir="data/savedGames"/>
 	</target>
 	<target name="javac" depends="init">
+		<copy file="${src}/org/opencraft/server/Constants.java.in" tofile="${src}/org/opencraft/server/Constants.java"/>
+		<replace file="${src}/org/opencraft/server/Constants.java" token="@VERSION@" value="${version}"/>
 		<javac srcdir="${src}" destdir="${build}" debug="true">
 			<classpath>
 				<files refid="libs"/>
@@ -54,6 +59,7 @@
 		<delete dir="${build}"/>
 		<delete dir="${dist}"/>
 		<delete dir="${lib}"/>
+		<delete file="${src}/org/opencraft/server/Constants.java"/>
 	</target>
 	<target name="build" depends="javac"/>
 	<target name="jar" depends="build">
