@@ -101,7 +101,8 @@ public class ScriptedGameMode extends GameModeAdapter<Player> {
 		PyObject m = interpreter.get(method);
 		if(m != null) {
 			try {
-				m.__call__(Py.javas2pys(args));
+				//FIXME: Why doesn't this compile after using system libraries?
+				//m.__call__(Py.javas2pys(args));
 			} catch (Exception ex) {
 				logger.error("Error invoking method.", ex);
 			}
