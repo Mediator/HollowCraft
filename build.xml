@@ -78,25 +78,19 @@
 				<include name="${dist}/opencraft-${version}.jar"/>
 			</files>
 		</copy>
-		<pathconvert refid="libs" pathsep=" " property="jar.classpath">
-			<mapper>
-				<chainedmapper>
-					<flattenmapper/>
-					<globmapper from="*" to="lib/"/>
-				</chainedmapper>
-			</mapper>
-		</pathconvert>
-		<jar destfile="${dist}/opencraft-full-${version}.jar" basedir="${build}" index="true">
-			<indexjars>
-				<files refid="libs"/>
-				<files>
-					<include name="${dist}/opencraft-${version}.jar"/>
-				</files>
-			</indexjars>
+		<unzip dest="${build}">
+			<files refid="libs"/>
+			<files>
+				<include name="${dist}/opencraft-${version}.jar"/>
+			</files>
+		</unzip>
+		<jar destfile="${dist}/opencraft-full-${version}.jar" basedir="${build}">
+			<files>
+				<include name="${dist}/opencraft-${version}.jar"/>
+			</files>
 			<manifest>
 				<attribute name="Built-by" value="The OpenCraft Team"/>
 				<attribute name="Main-Class" value="org.opencraft.server.Server"/>
-				<attribute name="Class-Path" value="${jar.classpath} lib/opencraft-${version}.jar"/>
 			</manifest>
 		</jar>
 	</target>
