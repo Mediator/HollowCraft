@@ -31,8 +31,8 @@ ROLE Player {
 
 ROLE Builder {
 	@Player
-	org.opencraft.server.permission.Build
-	org.opencraft.server.permission.Destroy
+	org.opencraft.server.Build
+	org.opencraft.server.Destroy
 }
 
 ROLE Op {
