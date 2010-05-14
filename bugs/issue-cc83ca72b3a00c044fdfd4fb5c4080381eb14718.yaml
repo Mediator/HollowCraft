@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Include LICENSE in the .jar files
+desc: ""
+type: :task
+component: opencraft-acm
+release: "0.3"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-05-14 06:23:43.772471 Z
+references: []
+
+id: cc83ca72b3a00c044fdfd4fb5c4080381eb14718
+log_events: 
+- - 2010-05-14 06:23:44.710265 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - ""
