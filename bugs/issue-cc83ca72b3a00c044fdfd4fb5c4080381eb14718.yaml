@@ -5,7 +5,7 @@ type: :task
 component: opencraft-acm
 release: "0.3"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2010-05-14 06:23:43.772471 Z
 references: []
@@ -16,3 +16,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - created
   - ""
+- - 2010-05-14 06:32:43.818477 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - changed status from unstarted to in_progress
+  - Might as well claim it.
