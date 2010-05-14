@@ -68,6 +68,10 @@ import org.opencraft.server.security.Policy;
 import org.opencraft.server.io.LevelManager;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.FileOutputStream;
+import java.util.zip.ZipInputStream;
+import java.util.zip.ZipEntry;
 import java.util.ArrayList;
 import java.text.ParseException;
 import org.slf4j.*;
@@ -87,17 +91,62 @@ public final class Server {
 
 	private final PlayerList m_players;
 
+
+	public static boolean bootstrap() {
+		File dataDir = new File("data/");
+		if (!dataDir.exists()) {
+			logger.info("Extracting resources from jar file.");
+			InputStream bootstrapZip = Server.class.getResourceAsStream("/bootstrap.zip");
+			if (bootstrapZip != null) {
+				dataDir.mkdir();
+
+				ZipInputStream bootstrap = new ZipInputStream(bootstrapZip);
+
+				ZipEntry current;
+				try {
+					while((current = bootstrap.getNextEntry()) != null) {
+						logger.info("Extracting data/{}", current.getName());
+						File dest = new File("data/"+current.getName());
+						if (current.isDirectory()) {
+							dest.mkdirs();
+							continue;
+						}
+						File dir = dest.getParentFile();
+						if (dir != null)
+							dir.mkdirs();
+						FileOutputStream out = new FileOutputStream(dest);
+						for(int c = bootstrap.read(); c != -1;c = bootstrap.read())
+							out.write(c);
+						bootstrap.closeEntry();
+						out.close();
+					}
+					bootstrap.close();
+				} catch (IOException e) {
+					logger.error("Bootstrap.zip is corrupt.", e);
+					return false;
+				}
+			} else {
+				logger.error("No bootstrap.zip found within the jar. Make sure you downloaded the right version!");
+				return false;
+			}
+		}
+		return true;
+	}
 	
 	/**
 	 * The entry point of the server application.
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		try {
-			INSTANCE = new Server();
-			INSTANCE.start();
-		} catch (Throwable t) {
-			logger.error("An error occurred whilst loading the server.", t);
+		if (bootstrap()) {
+			try {
+				INSTANCE = new Server();
+				INSTANCE.start();
+			} catch (Throwable t) {
+				logger.error("An error occurred whilst loading the server.", t);
+			}
+		} else {
+			logger.error("Bootstrap failed.");
 		}
 	}
 
