@@ -7,3 +7,4 @@ data/savedGames
 *.vim
 *.swp
 log/
+dist/

@@ -1,37 +1,119 @@
 <?xml version="1.0"?>
 <project name="opencraft" default="build" basedir=".">
-	<path id="libs">
-		<fileset dir="lib" includes="**/*.jar"/>
-	</path>
-	<path id="classes">
-		<fileset dir="bin" includes="**/*.class"/>
-	</path>
+
+	<!-- These should be the only lines you'd have to edit, if any. -->
+	<property name="xstream.lib" value="/usr/share/java/xstream.jar"/>
+	<property name="mina-core.lib" value="/usr/share/java/mina/core.jar"/>
+	<property name="slf4j.jdk.lib" value="/usr/share/java/slf4j/jdk14.jar"/>
+	<property name="slf4j.lib" value="/usr/share/java/slf4j/api.jar"/>
+	<property name="jython.lib" value="/usr/share/java/jython.jar"/>
+
+	<property name="version" value="0.3b"/>
+
+	<property name="src" location="src"/>
+	<property name="build" location="bin"/>
+	<property name="dist" location="dist"/>
+
+	<files id="libs" >
+		<include name="${xstream.lib}"/>
+		<include name="${mina-core.lib}"/>
+		<include name="${slf4j.jdk.lib}"/>
+		<include name="${slf4j.lib}"/>
+		<include name="${jython.lib}"/>
+	</files>
+
+	<fileset id="dist.files" dir=".">
+		<include name="data/**"/>
+		<include name="src/**"/>
+		<include name="contrib/**"/>
+		<include name="doc/**"/>
+		<include name="build.xml"/>
+		<include name="README"/>
+		<include name="LICENSE"/>
+	</fileset>
+
 	<target name="init">
-		<mkdir dir="bin"/>
+		<tstamp/>
+		<mkdir dir="${build}"/>
+		<mkdir dir="${dist}"/>
 		<mkdir dir="log"/>
+		<mkdir dir="lib"/>
 		<mkdir dir="data"/>
 		<mkdir dir="data/maps"/>
 		<mkdir dir="data/savedGames"/>
 	</target>
 	<target name="javac" depends="init">
-		<javac srcdir="src" classpath="${toString:libs}" destdir="bin" debug="true">
+		<javac srcdir="${src}" destdir="${build}" debug="true">
+			<classpath>
+				<files refid="libs"/>
+			</classpath>
 			<compilerarg value="-Xlint"/>
 		</javac>
 	</target>
-	<target name="gcj" depends="init">
-		<javac srcdir="src" classpath="${toString:libs}" compiler="gcj" destdir="bin" debug="true" />
-	</target>
 	<target name="clean">
-		<delete dir="bin"/>
+		<delete dir="${build}"/>
+		<delete dir="${dist}"/>
+		<delete dir="${lib}"/>
 	</target>
 	<target name="build" depends="javac"/>
-	<target name="rebuild" depends="clean,build"/>
-	<target name="run" depends="build">
-		<java classname="org.opencraft.server.Server" fork="true" maxmemory="1024m">
+	<target name="jar" depends="build">
+		<jar destfile="${dist}/opencraft-${version}.jar" basedir="${build}" includes="**/*.class">
+			<manifest>
+				<attribute name="Built-by" value="The OpenCraft Team"/>
+				<attribute name="Main-Class" value="org.opencraft.server.Server"/>
+			</manifest>
+		</jar>
+	</target>
+	<target name="jar-dist" depends="jar">
+		<mkdir dir="${build}/lib"/>
+		<copy todir="${build}/lib" flatten="true">
+			<files refid="libs"/>
+			<files>
+				<include name="${dist}/opencraft-${version}.jar"/>
+			</files>
+		</copy>
+		<pathconvert refid="libs" pathsep=" " property="jar.classpath">
+			<mapper>
+				<chainedmapper>
+					<flattenmapper/>
+					<globmapper from="*" to="lib/"/>
+				</chainedmapper>
+			</mapper>
+		</pathconvert>
+		<jar destfile="${dist}/opencraft-full-${version}.jar" basedir="${build}" index="true">
+			<indexjars>
+				<files refid="libs"/>
+				<files>
+					<include name="${dist}/opencraft-${version}.jar"/>
+				</files>
+			</indexjars>
+			<manifest>
+				<attribute name="Built-by" value="The OpenCraft Team"/>
+				<attribute name="Main-Class" value="org.opencraft.server.Server"/>
+				<attribute name="Class-Path" value="${jar.classpath} lib/opencraft-${version}.jar"/>
+			</manifest>
+		</jar>
+	</target>
+	<target name="dist" depends="clean,jar,jar-dist">
+		<tar destfile="${dist}/opencraft-${version}.tar">
+			<tarfileset refid="dist.files"/>
+		</tar>
+		<gzip destfile="${dist}/opencraft-${version}.tar.gz" src="${dist}/opencraft-${version}.tar"/>
+		<bzip2 destfile="${dist}/opencraft-${version}.tar.bz2" src="${dist}/opencraft-${version}.tar"/>
+	</target>
+	<target name="distcheck" depends="dist">
+		<mkdir dir="${build}/distcheck"/>
+		<gunzip src="${dist}/opencraft-${version}.tar.gz" dest="${build}/distcheck/opencraft-${version}.tar"/>
+		<untar src="${build}/distcheck/opencraft-${version}.tar" dest="${build}/distcheck"/>
+		<exec executable="ant" dir="${build}/distcheck">
+			<arg value="dist"/>
+		</exec>
+	</target>
+	<target name="run" depends="jar">
+		<java jar="${dist}/opencraft-${version}.jar" fork="true" maxmemory="1024m">
 			<sysproperty key="java.util.logging.config.file" value="data/logging.properties"/>
 			<classpath>
-				<pathelement path="${toString:libs}"/>
-				<pathelement path="bin"/>
+				<files refid="libs"/>
 		   	</classpath>
 			<assertions>
 				<enable/>
@@ -42,30 +124,11 @@
 		<java classname="org.opencraft.nbtedit.Main" fork="true" maxmemory="1024m">
 			<classpath>
 				<pathelement path="${toString:libs}"/>
-				<pathelement path="bin"/>
+				<pathelement path="${build}"/>
 		   	</classpath>
 			<assertions>
 				<enable/>
 			</assertions>
 		</java>
-	</target>
-	<target name="release" depends="rebuild">
-		<mkdir dir="release"/>
-		<jar destfile="release/opencraft.jar" basedir="bin" includes="**/*.class" update="true"/>
-		<copy todir="release/data">
-			<fileset dir="data">
-				<include name="*.xml"/>
-				<include name="*.properties"/>
-				<include name="savedGames"/>
-			</fileset>
-		</copy>
-		<copy todir="release">
-			<fileset dir="lib" includes="*.jar"/>
-			<fileset dir="." includes="*.TXT"/>
-			<fileset dir="." includes="run-release.bat"/>
-		</copy>
-		<copy todir="release/doc">
-			<fileset dir="doc" includes="**/*.TXT"/>
-		</copy>
 	</target>
 </project>
