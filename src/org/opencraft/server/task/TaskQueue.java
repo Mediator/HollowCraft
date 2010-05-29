@@ -65,7 +65,7 @@ public final class TaskQueue {
 	/**
 	 * The scheduled executor service backing this task queue.
 	 */
-	private ScheduledExecutorService service = Executors.newScheduledThreadPool(3);
+	private ScheduledExecutorService service = Executors.newScheduledThreadPool(1);
 	
 	/**
 	 * Default private constructor.
