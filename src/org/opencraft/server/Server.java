@@ -405,6 +405,7 @@ public final class Server {
 		if (session.isAuthenticated()) {
 			logger.trace("Unregistering session.");
 			World w = session.getPlayer().getWorld();
+			session.getPlayer().setId(-1);
 			w.removePlayer(session.getPlayer());
 			m_players.remove(session.getPlayer());
 			SavedGameManager.getSavedGameManager().queuePersistenceRequest(new SavePersistenceRequest(session.getPlayer()));

@@ -128,6 +128,7 @@ public class HeartbeatManager {
 				// assemble POST data
 				StringBuilder bldr = new StringBuilder();
 				for (Map.Entry<String, String> entry : parameters.entrySet()) {
+					logger.trace("Param: {} = {}", entry.getKey(), entry.getValue());
 					bldr.append(entry.getKey());
 					bldr.append('=');
 					try {

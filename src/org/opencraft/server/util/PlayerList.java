@@ -37,6 +37,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import org.slf4j.*;
 
 import org.opencraft.server.model.Player;
 
@@ -46,6 +47,8 @@ import org.opencraft.server.model.Player;
  */
 public class PlayerList {
 	
+	private static final Logger logger = LoggerFactory.getLogger(PlayerList.class);
+
 	/**
 	 * The maximum number of players.
 	 */
@@ -95,6 +98,8 @@ public class PlayerList {
 			if (players[i] == null) {
 				players[i] = player;
 				player.setId(i);
+				logger.trace("Setting {} as id for {}", i, player);
+				assert(player.getId() == i);
 				size++;
 				return true;
 			}
@@ -107,10 +112,11 @@ public class PlayerList {
 	 * @param player The player to remove.
 	 */
 	public void remove(Player player) {
-		int id = player.getId();
-		if (id != -1 && players[id] == player) {
-			players[id] = null;
-			size--;
+		for(int i = 0;i < players.length; i++) {
+			if (players[i] == player) {
+				players[i] = null;
+				size--;
+			}
 		}
 		player.setId(-1);
 	}
