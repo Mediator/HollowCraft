@@ -5,8 +5,8 @@ type: :task
 component: opencraft-acm
 release: "0.3"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-05-14 06:23:43.772471 Z
 references: []
 
@@ -20,3 +20,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - changed status from unstarted to in_progress
   - Might as well claim it.
+- - 2010-05-29 05:17:07.030992 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition fixed
+  - ""
