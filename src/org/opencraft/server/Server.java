@@ -130,6 +130,7 @@ public final class Server {
 				return false;
 			}
 		}
+		logger.info("Bootstrap complete. To configure the server, hit ctrl+c to kill it and edit the files in data/");
 		return true;
 	}
 	
