@@ -133,8 +133,7 @@
 		</exec>
 	</target>
 	<target name="run" depends="jar">
-		<java jar="${dist}/opencraft-${version}.jar" fork="true" maxmemory="1024m">
-			<sysproperty key="java.util.logging.config.file" value="data/logging.properties"/>
+		<java jar="${dist}/opencraft-server-${version}.jar" fork="true" maxmemory="1024m">
 			<classpath>
 				<files refid="libs"/>
 		   	</classpath>
