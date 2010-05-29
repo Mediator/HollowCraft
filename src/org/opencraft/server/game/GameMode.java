@@ -3,7 +3,7 @@ package org.opencraft.server.game;
 /*
  * OpenCraft License
  * 
- * Copyright (c) 2009 Graham Edgecombe, Søren Enevoldsen and Brett Russell.
+ * Copyright (c) 2009 Graham Edgecombe, SÃ¸ren Enevoldsen and Brett Russell.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -42,7 +42,7 @@ import org.opencraft.server.model.Player;
 /**
  * An interface which represents a specific type of game mode.
  * @author Graham Edgecombe
- * @author Søren Enevoldsen
+ * @author SÃ¸ren Enevoldsen
  */
 public interface GameMode<P extends Player> {
 	

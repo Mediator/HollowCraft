@@ -3,7 +3,7 @@ package org.opencraft.server.cluster;
 /*
  * OpenCraft License
  * 
- * Copyright (c) 2009 Graham Edgecombe, Søren Enevoldsen, Mark Farrell and Brett Russell.
+ * Copyright (c) 2009 Graham Edgecombe, SÃ¸ren Enevoldsen, Mark Farrell and Brett Russell.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without

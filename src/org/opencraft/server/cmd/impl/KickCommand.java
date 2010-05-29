@@ -7,7 +7,7 @@ import org.opencraft.server.model.Player;
 /*
  * OpenCraft License
  * 
- * Copyright (c) 2009 Graham Edgecombe, Søren Enevoldsen and Brett Russell.
+ * Copyright (c) 2009 Graham Edgecombe, SÃ¸ren Enevoldsen and Brett Russell.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,7 @@ import org.opencraft.server.model.Player;
 
 /**
  * Official /deop command **NEEDS PERSISTENCE**
- * @author Søren Enevoldsen
+ * @author SÃ¸ren Enevoldsen
  */
 
 public class KickCommand extends Command {

@@ -3,7 +3,7 @@ package org.opencraft.server.game.impl;
 /*
  * OpenCraft License
  * 
- * Copyright (c) 2009 Graham Edgecombe, Søren Enevoldsen and Brett Russell.
+ * Copyright (c) 2009 Graham Edgecombe, SÃ¸ren Enevoldsen and Brett Russell.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -50,7 +50,7 @@ import org.opencraft.server.model.Player;
  * in memory and greets them accordingly. Now also has the ability to use
  * brushes Has some of the official commands of which op and deop relies on
  * memory
- * @author Søren Enevoldsen
+ * @author SÃ¸ren Enevoldsen
  */
 
 public class ExperimentalGameMode extends GameModeAdapter<Player> {
