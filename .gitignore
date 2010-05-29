@@ -6,6 +6,7 @@ data/savedGames
 .ditz-config
 *.vim
 *.swp
+*.pyc
 log/
 dist/
 src/org/opencraft/server/Constants.java
