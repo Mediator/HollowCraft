@@ -76,6 +76,9 @@ import java.util.ArrayList;
 import java.text.ParseException;
 import org.slf4j.*;
 
+import java.util.logging.LogManager;
+import java.io.FileInputStream;
+
 
 /**
  * The core class of the OpenCraft server.
@@ -130,6 +133,8 @@ public final class Server {
 				return false;
 			}
 		}
+		File logDir = new File("log/");
+		logDir.mkdir();
 		logger.info("Bootstrap complete. To configure the server, hit ctrl+c to kill it and edit the files in data/");
 		return true;
 	}
@@ -140,6 +145,14 @@ public final class Server {
 	 */
 	public static void main(String[] args) {
 		if (bootstrap()) {
+			try {
+				//Done just in case the user is one of those new people who don't
+				//know about SLF4J, but still wants to configure the logging output.
+				File logConfig = new File("data/logging.properties");
+				LogManager.getLogManager().readConfiguration(new FileInputStream(logConfig));
+			} catch (Throwable t) {
+				logger.warn("Error loading the java.util.logging configuration.", t);
+			}
 			try {
 				INSTANCE = new Server();
 				INSTANCE.start();
