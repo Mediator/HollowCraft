@@ -23,10 +23,10 @@ By default, nobody has any permissions and isn't in any groups except for ALL.
 // Example permissions
 
 ROLE Player {
-	org.opencraft.server.command.impl.TeleportCommand.execute
-	org.opencraft.server.command.impl.GotoCommand.execute
-	org.opencraft.server.command.impl.HelpCommand.execute
-	org.opencraft.server.command.impl.SpawnCommand.execute
+	org.opencraft.server.cmd.impl.TeleportCommand.execute
+	org.opencraft.server.cmd.impl.GotoCommand.execute
+	org.opencraft.server.cmd.impl.HelpCommand.execute
+	org.opencraft.server.cmd.impl.SpawnCommand.execute
 }
 
 ROLE Builder {
