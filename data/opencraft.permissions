@@ -8,10 +8,8 @@ Blocks: These form the basic structure of a permission list file
 
 Permissions: Permissions specified refer to actual java.security.Permission classes
 	Examples:
-	org.opencraft.server.DestroyOwn	- Players may destroy blocks that they placed
 	org.opencraft.server.Build	- Players may place blocks
 	org.opencraft.server.Destroy	- Players may remove any blocks
-	org.opencraft.server.Fly	- Players may avoid gravity (i.e. with the world of minecraft client)
 
 Builtin Groups:
 	ALL         - Everyone.
@@ -27,6 +25,10 @@ ROLE Player {
 	org.opencraft.server.cmd.impl.GotoCommand.execute
 	org.opencraft.server.cmd.impl.HelpCommand.execute
 	org.opencraft.server.cmd.impl.SpawnCommand.execute
+	org.opencraft.server.cmd.impl.MeCommand.execute
+	org.opencraft.server.cmd.impl.LevelsCommand.execute
+	org.opencraft.server.cmd.impl.PingCommand.execute
+	org.opencraft.server.cmd.impl.RollCommand.execute
 }
 
 ROLE Builder {
@@ -37,20 +39,34 @@ ROLE Builder {
 
 ROLE Op {
 	@Builder
-	org.opencraft.server.command.impl.KickCommand.execute
-	org.opencraft.server.command.impl.SummonCommand.execute
-	org.opencraft.server.command.impl.SayCommand.execute
+	org.opencraft.server.cmd.impl.KickCommand.execute
+	org.opencraft.server.cmd.impl.SummonCommand.execute
+	org.opencraft.server.cmd.impl.SayCommand.execute
+	org.opencraft.server.cmd.impl.SetspawnCommand.execute
 }
 
 GROUP admins {
-	tdfischer
-	sidein
+	//Add your administrators here
 }
 
-ALLOW * to @admins
+GROUP operators {
+	//Add your operators here
+}
 
+GROUP builders {
+	//Add your builders here
+}
+
+
+//Grants the Player role to all players
 ALLOW @Player to @ALL
 
+//Gives admins everything
+ALLOW * to @admins
+ALLOW @Builder to @builders
+ALLOW @Op to @operators
+
+//Let everyone build on the default world
 WORLD default {
 	ALLOW @Builder to @ALL
 }
