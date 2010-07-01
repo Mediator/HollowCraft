@@ -151,6 +151,11 @@ POSSIBILITY OF SUCH DAMAGE.
       </fields>
     </packet>
     <packet>
+      <opcode>1</opcode>
+      <name>ping</name>
+      <fields/>
+    </packet>
+    <packet>
       <opcode>2</opcode>
       <name>level_init</name>
       <fields/>
