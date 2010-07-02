@@ -11,8 +11,8 @@ type: :bugfix
 component: security
 release: "0.3"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-07-02 06:26:34.620704 Z
 references: []
 
@@ -22,3 +22,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - created
   - reported by KillingSpree in IRC
+- - 2010-07-02 20:53:39.897226 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition fixed
+  - ""

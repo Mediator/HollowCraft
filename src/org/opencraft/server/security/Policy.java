@@ -61,6 +61,7 @@ public class Policy {
 	public void apply(Principal p) {
 		logger.trace("Clearing policy on {}", p);
 		p.clearPolicy();
+		logger.trace("Groups: {}", m_groups);
 		for(Group group : m_groups.values()) {
 			group.removeMember(p);
 		} if (m_userGroups.get(p.getName()) != null) {
@@ -77,11 +78,11 @@ public class Policy {
 		}
 	}
 
-	private HashMap<String, ArrayList<Permission>> m_userPermissions;
-	private HashMap<String, Role> m_roles;
+	private HashMap<String, ArrayList<Permission>> m_userPermissions = new HashMap<String, ArrayList<Permission>>();
+	private HashMap<String, Role> m_roles = new HashMap<String, Role>();
 
-	private HashMap<String, Group> m_groups;
-	private HashMap<String, ArrayList<Group>> m_userGroups;
+	private HashMap<String, Group> m_groups = new HashMap<String, Group>();
+	private HashMap<String, ArrayList<Group>> m_userGroups = new HashMap<String, ArrayList<Group>>();
 
 	public void readFrom(Reader r) throws ParseException, IOException {
 		m_userPermissions = new HashMap<String, ArrayList<Permission>>();

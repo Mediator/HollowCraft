@@ -150,6 +150,7 @@ public final class Server {
 				//know about SLF4J, but still wants to configure the logging output.
 				File logConfig = new File("data/logging.properties");
 				LogManager.getLogManager().readConfiguration(new FileInputStream(logConfig));
+				logger.debug("Loaded java.util.logging configuration.");
 			} catch (Throwable t) {
 				logger.warn("Error loading the java.util.logging configuration.", t);
 			}
@@ -244,9 +245,9 @@ public final class Server {
 			try {
 				w.setPolicy(new Policy(w.getName(), new BufferedReader(new FileReader("data/opencraft.permissions"))));
 			} catch (ParseException e) {
-				logger.warn("Error parsing policy, line "+e.getErrorOffset(), e);
+				logger.error("Error parsing policy, line "+e.getErrorOffset(), e);
 			} catch (IOException e) {
-				logger.warn("Error reading policy", e);
+				logger.error("Error reading policy", e);
 			}
 			m_worlds.put(name, new SoftReference<World>(w));
 			return true;
