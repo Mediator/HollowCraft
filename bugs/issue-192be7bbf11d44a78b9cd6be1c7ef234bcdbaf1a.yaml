@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Player Ghost
+desc: While running if a player disconnects the players rendered object will stay creating a ghost object
+type: :bugfix
+component: opencraft-acm
+release: "0.3"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-07-02 20:55:00.785330 Z
+references: []
+
+id: 192be7bbf11d44a78b9cd6be1c7ef234bcdbaf1a
+log_events: 
+- - 2010-07-02 20:55:18.591235 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - Submitted via the sourceforge tracker
