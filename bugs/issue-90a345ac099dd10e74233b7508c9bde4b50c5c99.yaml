@@ -1,0 +1,24 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Bad policy file causes crash
+desc: |-
+  Putting a block such as this:
+  GROUP admins {
+  // put admins here
+  }tdfischer
+  
+  causes a nullpointer at org.opencraft.server.security.Policy.apply(Policy.java:64)
+type: :bugfix
+component: security
+release: "0.3"
+reporter: Trever Fischer <tdfischer@fedoraproject.org>
+status: :unstarted
+disposition: 
+creation_time: 2010-07-02 06:26:34.620704 Z
+references: []
+
+id: 90a345ac099dd10e74233b7508c9bde4b50c5c99
+log_events: 
+- - 2010-07-02 06:26:42.597588 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - created
+  - reported by KillingSpree in IRC
