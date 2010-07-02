@@ -10,7 +10,7 @@
 
 	<!-- Changing this property affects the value in
 		 org.opencraft.server.Constants.java -->
-	<property name="version" value="0.3RC1"/>
+	<property name="version" value="0.3"/>
 
 	<property name="src" location="src"/>
 	<property name="build" location="bin"/>
