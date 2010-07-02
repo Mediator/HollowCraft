@@ -5,8 +5,8 @@ type: :bugfix
 component: opencraft-acm
 release: "0.3"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2010-07-02 20:55:00.785330 Z
 references: []
 
@@ -16,3 +16,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - created
   - Submitted via the sourceforge tracker
+- - 2010-07-02 20:57:32.489472 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition fixed
+  - Doesn't seem to be there, must've been fixed when we squashed the player list bug earlier.
