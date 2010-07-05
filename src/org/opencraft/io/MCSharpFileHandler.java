@@ -1,4 +1,4 @@
-package org.opencraft.server.io;
+package org.opencraft.io;
 
 /*
  * OpenCraft License

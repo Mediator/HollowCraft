@@ -37,7 +37,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import org.opencraft.server.io.PersistenceManager;
+import org.opencraft.io.PersistenceManager;
 import org.opencraft.server.model.Player;
 
 import com.thoughtworks.xstream.XStream;

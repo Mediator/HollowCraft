@@ -33,7 +33,7 @@
  */
 package org.opencraft.server.net;
 
-import org.opencraft.server.io.PersistenceManager;
+import org.opencraft.io.PersistenceManager;
 import org.opencraft.server.net.packet.PacketManager;
 
 /**

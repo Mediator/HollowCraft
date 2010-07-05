@@ -35,7 +35,7 @@ package org.opencraft.server.net;
 
 import java.util.Map;
 
-import org.opencraft.server.io.PersistenceManager;
+import org.opencraft.io.PersistenceManager;
 import org.opencraft.server.net.packet.handler.PacketHandlerManager;
 
 /**

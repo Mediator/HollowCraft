@@ -36,7 +36,7 @@ package org.opencraft.model;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.opencraft.server.io.PersistenceManager;
+import org.opencraft.io.PersistenceManager;
 
 /**
  * A class which manages <code>BlockDefinition</code>s and
