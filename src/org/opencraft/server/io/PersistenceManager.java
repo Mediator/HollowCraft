@@ -37,8 +37,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
-import org.opencraft.server.model.BlockDefinition;
-import org.opencraft.server.model.BlockManager;
+import org.opencraft.model.BlockDefinition;
+import org.opencraft.model.BlockManager;
 import org.opencraft.server.net.packet.PacketDefinition;
 import org.opencraft.server.net.packet.PacketField;
 import org.opencraft.server.net.packet.PacketManager;

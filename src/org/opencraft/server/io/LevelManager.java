@@ -35,7 +35,7 @@ package org.opencraft.server.io;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import org.opencraft.server.model.Level;
+import org.opencraft.model.Level;
 import org.opencraft.server.Configuration;
 import java.io.File;
 import java.util.Arrays;

@@ -1,6 +1,6 @@
-package org.opencraft.server.model;
+package org.opencraft.model;
 
-import org.opencraft.server.model.BlockConstants;
+import org.opencraft.model.BlockConstants;
 
 public  class Environment {
 	protected short SurroundingGroundHeight = 0;			// Height of surrounding ground (in blocks)

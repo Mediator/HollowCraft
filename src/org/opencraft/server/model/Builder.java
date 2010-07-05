@@ -34,7 +34,8 @@ package org.opencraft.server.model;
  */
 
 import java.util.Random;
-import org.opencraft.server.model.Level;
+import org.opencraft.model.Level;
+import org.opencraft.model.BlockConstants;
 import org.slf4j.*;
 
 /**

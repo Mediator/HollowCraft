@@ -33,7 +33,7 @@ package org.opencraft.server.extensions.brushes;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.server.model.Level;
+import org.opencraft.model.Level;
 import org.opencraft.server.model.Player;
 
 /**

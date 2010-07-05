@@ -34,8 +34,8 @@ package org.opencraft.server.net.packet.handler.impl;
  */
 
 import org.opencraft.server.model.Player;
-import org.opencraft.server.model.Position;
-import org.opencraft.server.model.Rotation;
+import org.opencraft.model.Position;
+import org.opencraft.model.Rotation;
 import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.net.packet.Packet;
 import org.opencraft.server.net.packet.handler.PacketHandler;

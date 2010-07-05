@@ -1,4 +1,4 @@
-package org.opencraft.server.model;
+package org.opencraft.model;
 
 /*
  * OpenCraft License

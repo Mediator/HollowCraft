@@ -37,11 +37,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.DataInputStream;
 import java.util.zip.GZIPInputStream;
-import org.opencraft.server.model.Level;
-import org.opencraft.server.model.Environment;
-import org.opencraft.server.model.Position;
-import org.opencraft.server.model.Rotation;
-import org.opencraft.server.model.BlockConstants;
+import org.opencraft.model.Level;
+import org.opencraft.model.Environment;
+import org.opencraft.model.Position;
+import org.opencraft.model.Rotation;
+import org.opencraft.model.BlockConstants;
 
 import org.slf4j.*;
 

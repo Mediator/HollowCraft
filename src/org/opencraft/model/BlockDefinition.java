@@ -1,4 +1,4 @@
-package org.opencraft.server.model;
+package org.opencraft.model;
 
 /*
  * OpenCraft License
@@ -32,6 +32,8 @@ package org.opencraft.server.model;
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+
+import org.opencraft.server.model.BlockBehaviour;
 
 /**
  * Represents an individual block type.

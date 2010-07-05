@@ -1,4 +1,4 @@
-package org.opencraft.server.model;
+package org.opencraft.model;
 
 /*
  * OpenCraft License
@@ -39,8 +39,10 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.ArrayList;
 import org.slf4j.*;
+import org.opencraft.server.model.OnBlockChangeHandler;
+import org.opencraft.server.model.Builder;
 
-import org.opencraft.server.model.Environment;
+import org.opencraft.model.Environment;
 import org.opencraft.server.model.impl.builders.LandscapeBuilder;
 
 /**

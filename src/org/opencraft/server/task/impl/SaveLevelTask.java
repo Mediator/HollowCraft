@@ -2,7 +2,7 @@ package org.opencraft.server.task.impl;
 
 import org.opencraft.server.task.ScheduledTask;
 import org.opencraft.server.io.LevelManager;
-import org.opencraft.server.model.Level;
+import org.opencraft.model.Level;
 import org.slf4j.*;
 
 /**

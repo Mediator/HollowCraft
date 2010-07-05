@@ -34,9 +34,9 @@ package org.opencraft.server.model.impl;
  */
 
 import org.opencraft.server.model.BlockBehaviour;
-import org.opencraft.server.model.BlockConstants;
-import org.opencraft.server.model.BlockManager;
-import org.opencraft.server.model.Level;
+import org.opencraft.model.BlockConstants;
+import org.opencraft.model.BlockManager;
+import org.opencraft.model.Level;
 
 /**
  * Handles the spreading of grass blocks to adjacent, sun-exposed dirt blocks.

@@ -48,7 +48,7 @@ import java.io.File;
 import org.apache.mina.core.service.IoAcceptor;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 import org.opencraft.server.model.World;
-import org.opencraft.server.model.Level;
+import org.opencraft.model.Level;
 import org.opencraft.server.net.SessionHandler;
 import org.opencraft.server.task.TaskQueue;
 import org.opencraft.server.task.impl.HeartbeatTask;

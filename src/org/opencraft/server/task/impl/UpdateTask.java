@@ -36,7 +36,7 @@ package org.opencraft.server.task.impl;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.opencraft.server.model.Entity;
+import org.opencraft.model.Entity;
 import org.opencraft.server.model.Player;
 import org.opencraft.server.model.World;
 import org.opencraft.server.Server;

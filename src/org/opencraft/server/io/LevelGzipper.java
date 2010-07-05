@@ -39,7 +39,7 @@ import java.util.concurrent.Executors;
 import java.util.zip.GZIPOutputStream;
 
 import org.apache.mina.core.buffer.IoBuffer;
-import org.opencraft.server.model.Level;
+import org.opencraft.model.Level;
 import org.opencraft.server.net.MinecraftSession;
 import org.slf4j.*;
 

@@ -40,7 +40,7 @@ import org.slf4j.*;
 
 import org.opencraft.server.Configuration;
 import org.opencraft.server.game.GameModeAdapter;
-import org.opencraft.server.model.Level;
+import org.opencraft.model.Level;
 import org.opencraft.server.model.Player;
 import org.python.core.Py;
 import org.python.core.PyObject;

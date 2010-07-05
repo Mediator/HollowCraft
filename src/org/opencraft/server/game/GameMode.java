@@ -36,7 +36,7 @@ package org.opencraft.server.game;
 import java.util.Map;
 
 import org.opencraft.server.cmd.Command;
-import org.opencraft.server.model.Level;
+import org.opencraft.model.Level;
 import org.opencraft.server.model.Player;
 
 /**

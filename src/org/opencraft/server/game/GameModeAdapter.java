@@ -38,7 +38,7 @@ import java.util.Map;
 
 import org.opencraft.server.cmd.Command;
 import org.opencraft.server.cmd.impl.*;
-import org.opencraft.server.model.Level;
+import org.opencraft.model.Level;
 import org.opencraft.server.model.Player;
 import org.opencraft.server.security.Permission;
 import org.slf4j.*;

@@ -39,9 +39,9 @@ import java.awt.Point;
 import java.lang.Math;
 
 import org.opencraft.server.model.Builder;
-import org.opencraft.server.model.BlockConstants;
-import org.opencraft.server.model.Position;
-import org.opencraft.server.model.Level;
+import org.opencraft.model.BlockConstants;
+import org.opencraft.model.Position;
+import org.opencraft.model.Level;
 
 /**
  * Builds a level.

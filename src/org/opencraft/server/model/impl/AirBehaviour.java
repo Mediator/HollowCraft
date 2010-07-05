@@ -34,8 +34,8 @@ package org.opencraft.server.model.impl;
  */
 
 import org.opencraft.server.model.BlockBehaviour;
-import org.opencraft.server.model.BlockConstants;
-import org.opencraft.server.model.Level;
+import org.opencraft.model.BlockConstants;
+import org.opencraft.model.Level;
 
 /**
  * A block behaviour that handles water. Takes into account water's preference

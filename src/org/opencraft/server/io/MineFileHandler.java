@@ -41,10 +41,10 @@ import java.io.DataInputStream;
 import java.io.Serializable;
 import java.io.ObjectInputStream;
 import java.util.zip.GZIPInputStream;
-import org.opencraft.server.model.Level;
-import org.opencraft.server.model.Environment;
-import org.opencraft.server.model.Rotation;
-import org.opencraft.server.model.Position;
+import org.opencraft.model.Level;
+import org.opencraft.model.Environment;
+import org.opencraft.model.Rotation;
+import org.opencraft.model.Position;
 
 /**
  * A level loader that loads up serialized levels.

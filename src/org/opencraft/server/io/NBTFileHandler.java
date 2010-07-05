@@ -40,10 +40,10 @@ import java.util.ArrayList;
 import org.jnbt.*;
 import java.io.*;
 
-import org.opencraft.server.model.Position;
-import org.opencraft.server.model.Rotation;
-import org.opencraft.server.model.Level;
-import org.opencraft.server.model.Environment;
+import org.opencraft.model.Position;
+import org.opencraft.model.Rotation;
+import org.opencraft.model.Level;
+import org.opencraft.model.Environment;
 import org.slf4j.*;
 
 /**

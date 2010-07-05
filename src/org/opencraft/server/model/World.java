@@ -41,6 +41,8 @@ import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.util.PlayerList;
 import org.opencraft.server.io.LevelManager;
 import org.opencraft.server.security.Policy;
+import org.opencraft.model.Entity;
+import org.opencraft.model.Level;
 import java.io.IOException;
 import org.slf4j.*;
 

@@ -42,7 +42,7 @@ import org.opencraft.server.extensions.brushes.Brush;
 import org.opencraft.server.extensions.brushes.BrushCommand;
 import org.opencraft.server.extensions.brushes.StandardBrush;
 import org.opencraft.server.game.GameModeAdapter;
-import org.opencraft.server.model.Level;
+import org.opencraft.model.Level;
 import org.opencraft.server.model.Player;
 
 /**
