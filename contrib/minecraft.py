@@ -119,6 +119,9 @@ class ServerConnection(object):
 	def getData(self, fmt):
 		return struct.unpack(fmt, self.read(struct.calcsize(fmt)))
 	
+	def onMessage(self, sender, text):
+		pass
+	
 	def server_message(self):
 		player, message = self.getData("b64s")
 		name = self.getPlayer(player).name
@@ -136,6 +139,7 @@ class ServerConnection(object):
 				if (hasattr(self, cmdName)):
 					cmd = getattr(self, cmdName)
 					cmd(self.getPlayer(player), args[1:])
+		self.onMessage(sender, text)
 	
 	def command_ping(self, sender, *args):
 		self.say("Pong")
