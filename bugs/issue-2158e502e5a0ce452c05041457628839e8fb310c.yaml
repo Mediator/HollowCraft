@@ -5,8 +5,8 @@ type: :task
 component: opencraft-acm
 release: "0.4"
 reporter: Trever Fischer <tdfischer@fedoraproject.org>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :wontfix
 creation_time: 2010-04-25 17:47:22.829425 Z
 references: []
 
@@ -20,3 +20,7 @@ log_events:
   - Trever Fischer <tdfischer@fedoraproject.org>
   - assigned to release 0.4 from unassigned
   - ""
+- - 2010-07-05 21:37:24.867263 Z
+  - Trever Fischer <tdfischer@fedoraproject.org>
+  - closed with disposition wontfix
+  - Not going to do this, since we're making a library for others to use that doesn't need all the server-specifics of the World class, but just the block representation of the Level class
