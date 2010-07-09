@@ -36,13 +36,13 @@ package org.opencraft.server.cmd.impl;
 import org.opencraft.server.cmd.Command;
 import org.opencraft.server.cmd.CommandParameters;
 import org.opencraft.server.model.Player;
-import org.opencraft.model.Level;
+import org.opencraft.server.model.World;
 import org.opencraft.model.Environment;
 import org.opencraft.server.model.Builder;
 import org.opencraft.server.Server;
 import org.opencraft.server.security.Permission;
 import org.opencraft.server.model.impl.builders.*;
-import org.opencraft.server.io.LevelManager;
+import org.opencraft.server.io.WorldManager;
 
 /**
  * A command that generates a new world
@@ -110,7 +110,7 @@ public class GenerateCommand extends Command {
 				}
 				String type = params.getStringArgument(4);
 
-				Level newlvl = new Level();
+				World newlvl = new World();
 				Builder b;
 				if (type.equalsIgnoreCase("Hills")) {
 					b = new LandscapeBuilder(newlvl);
@@ -138,8 +138,8 @@ public class GenerateCommand extends Command {
 					return;
 				}
 
-				newlvl.generateLevel(b, x, y, z, new Environment(), name, player.getName());
-				LevelManager.save(newlvl);
+				newlvl.generateWorld(b, x, y, z, new Environment(), name, player.getName());
+				WorldManager.save(newlvl);
 				player.getActionSender().sendChatMessage("World " + name + " created");
 			} catch (Exception e) {
 				player.getActionSender().sendChatMessage("/generate <name> <x> <y> <z> <type> [<theme>]");

@@ -35,7 +35,7 @@ package org.opencraft.server.net;
 
 
 import org.opencraft.model.Entity;
-import org.opencraft.model.Level;
+import org.opencraft.server.model.World;
 import org.opencraft.model.Position;
 import org.opencraft.model.Rotation;
 import org.opencraft.server.net.packet.PacketBuilder;
@@ -101,7 +101,7 @@ public class ActionSender {
 	/**
 	 * Sends the level init packet.
 	 */
-	public void sendLevelInit() {
+	public void sendWorldInit() {
 		session.setAuthenticated();
 		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(2));
 		logger.trace("Sending level init");
@@ -114,7 +114,7 @@ public class ActionSender {
 	 * @param chunk The chunk data.
 	 * @param percent The percentage.
 	 */
-	public void sendLevelBlock(int len, byte[] chunk, int percent) {
+	public void sendWorldBlock(int len, byte[] chunk, int percent) {
 		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(3));
 		bldr.putShort("chunk_length", len);
 		bldr.putByteArray("chunk_data", chunk);
@@ -126,11 +126,11 @@ public class ActionSender {
 	/**
 	 * Sends the level finish packet.
 	 */
-	public void sendLevelFinish() {
+	public void sendWorldFinish() {
 		TaskQueue.getTaskQueue().push(new Task() {
 			public void execute() {
 				// for thread safety
-				Level level = session.getPlayer().getWorld().getLevel();
+				World level = session.getPlayer().getWorld();
 				PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(4));
 				bldr.putShort("width", level.getWidth());
 				bldr.putShort("height", level.getHeight());

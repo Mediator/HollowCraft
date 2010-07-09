@@ -40,7 +40,7 @@ import org.slf4j.*;
 
 import org.opencraft.server.Configuration;
 import org.opencraft.server.game.GameModeAdapter;
-import org.opencraft.model.Level;
+import org.opencraft.server.model.World;
 import org.opencraft.server.model.Player;
 import org.python.core.Py;
 import org.python.core.PyObject;
@@ -120,7 +120,7 @@ public class ScriptedGameMode extends GameModeAdapter<Player> {
 	}
 	
 	@Override
-	public void setBlock(Player player, Level level, int x, int y, int z, int mode, int type) {
+	public void setBlock(Player player, World level, int x, int y, int z, int mode, int type) {
 		if(!delegate("setBlock", player, level, x, y, z, mode, type)) {
 			super.setBlock(player, level, x, y, z, mode, type);
 		}

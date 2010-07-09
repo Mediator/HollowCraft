@@ -32,6 +32,7 @@ package org.opencraft.server.model;
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+import org.opencraft.server.model.World;
 import org.opencraft.model.Level;
 
 /**

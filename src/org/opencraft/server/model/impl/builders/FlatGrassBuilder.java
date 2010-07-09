@@ -35,6 +35,7 @@ package org.opencraft.server.model.impl.builders;
 
 import org.opencraft.server.model.Builder;
 import org.opencraft.model.BlockConstants;
+import org.opencraft.server.model.World;
 import org.opencraft.model.Level;
 
 /**

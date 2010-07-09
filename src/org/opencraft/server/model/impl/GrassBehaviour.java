@@ -36,6 +36,7 @@ package org.opencraft.server.model.impl;
 import org.opencraft.server.model.BlockBehaviour;
 import org.opencraft.model.BlockConstants;
 import org.opencraft.model.BlockManager;
+import org.opencraft.server.model.World;
 import org.opencraft.model.Level;
 
 /**
@@ -49,11 +50,12 @@ public class GrassBehaviour implements BlockBehaviour {
 	}
 	
 	public void handlePassive(Level level, int x, int y, int z, int type) {
-		level.queueActiveBlockUpdate(x, y, z);
+		((World)level).queueActiveBlockUpdate(x, y, z);
 	}
 	
-	public void handleScheduledBehaviour(Level level, int x, int y, int z, int type) {
+	public void handleScheduledBehaviour(Level lvl, int x, int y, int z, int type) {
 		// do we need to die?
+		World level = (World)lvl;
 
 		byte aboveBlock = level.getBlock(x, y, z + 1);
 		// Should the block above us kill us?

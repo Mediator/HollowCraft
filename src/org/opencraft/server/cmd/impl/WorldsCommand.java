@@ -36,7 +36,7 @@ package org.opencraft.server.cmd.impl;
 import org.opencraft.server.cmd.Command;
 import org.opencraft.server.cmd.CommandParameters;
 import org.opencraft.server.model.Player;
-import org.opencraft.model.Level;
+import org.opencraft.server.model.World;
 import org.opencraft.model.Environment;
 import org.opencraft.server.model.Builder;
 import org.opencraft.server.Server;
@@ -48,18 +48,18 @@ import org.opencraft.server.model.impl.builders.*;
  * @author Adam Liszka
  */
 
-public class LevelsCommand extends Command {
+public class WorldsCommand extends Command {
 	
 	/**
 	 * The instance of this command.
 	 */
-	private static final LevelsCommand INSTANCE = new LevelsCommand();
+	private static final WorldsCommand INSTANCE = new WorldsCommand();
 	
 	/**
 	 * Gets the singleton instance of this command.
 	 * @return The singleton instance of this command.
 	 */
-	public static LevelsCommand getCommand() {
+	public static WorldsCommand getCommand() {
 		return INSTANCE;
 	}
 
@@ -70,7 +70,7 @@ public class LevelsCommand extends Command {
 	/**
 	 * Default private constructor.
 	 */
-	private LevelsCommand () {
+	private WorldsCommand () {
 		/* empty */
 	}
 	

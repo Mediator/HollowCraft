@@ -33,7 +33,7 @@ package org.opencraft.server.extensions.brushes;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.model.Level;
+import org.opencraft.server.model.World;
 import org.opencraft.server.model.Player;
 
 /**
@@ -64,7 +64,7 @@ public abstract class Brush {
 	 * @param mode
 	 * @param type Type of block
 	 */
-	public abstract void paint(Player player, Level level, int x, int y, int z, int mode, int type);
+	public abstract void paint(Player player, World level, int x, int y, int z, int mode, int type);
 	
 	/**
 	 * Set the radius

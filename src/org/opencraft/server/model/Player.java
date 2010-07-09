@@ -38,7 +38,7 @@ import java.util.Map;
 
 import org.opencraft.server.net.ActionSender;
 import org.opencraft.server.net.MinecraftSession;
-import org.opencraft.server.io.LevelGzipper;
+import org.opencraft.server.io.WorldGzipper;
 import org.opencraft.server.security.Group;
 import org.opencraft.server.security.Principal;
 import org.opencraft.server.security.Permission;
@@ -220,6 +220,6 @@ public class Player extends Entity implements Principal {
 		setWorld(world);
 		m_world.addPlayer(this);
 		m_world.getPolicy().apply(this);
-		LevelGzipper.getLevelGzipper().gzipLevel(session);
+		WorldGzipper.getWorldGzipper().gzipWorld(session);
 	}
 }

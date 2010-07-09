@@ -36,6 +36,7 @@ package org.opencraft.server.model.impl;
 import org.opencraft.server.model.BlockBehaviour;
 import org.opencraft.model.BlockConstants;
 import org.opencraft.model.BlockManager;
+import org.opencraft.server.model.World;
 import org.opencraft.model.Level;
 
 /**

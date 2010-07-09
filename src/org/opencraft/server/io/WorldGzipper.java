@@ -39,7 +39,7 @@ import java.util.concurrent.Executors;
 import java.util.zip.GZIPOutputStream;
 
 import org.apache.mina.core.buffer.IoBuffer;
-import org.opencraft.model.Level;
+import org.opencraft.server.model.World;
 import org.opencraft.server.net.MinecraftSession;
 import org.slf4j.*;
 
@@ -47,18 +47,18 @@ import org.slf4j.*;
  * A utility class for gzipping levels.
  * @author Graham Edgecombe
  */
-public final class LevelGzipper {
+public final class WorldGzipper {
 	
 	/**
 	 * The singleton instance.
 	 */
-	private static final LevelGzipper INSTANCE = new LevelGzipper();
+	private static final WorldGzipper INSTANCE = new WorldGzipper();
 	
 	/**
 	 * Gets the level gzipper.
 	 * @return The level gzipper.
 	 */
-	public static LevelGzipper getLevelGzipper() {
+	public static WorldGzipper getWorldGzipper() {
 		return INSTANCE;
 	}
 	
@@ -70,11 +70,11 @@ public final class LevelGzipper {
 	/**
 	 * Default private constructor.
 	 */
-	private LevelGzipper() {
+	private WorldGzipper() {
 		/* empty */
 	}
 
-	private static final Logger logger = LoggerFactory.getLogger(LevelGzipper.class);
+	private static final Logger logger = LoggerFactory.getLogger(WorldGzipper.class);
 
 	private class ChunkOutputStream extends OutputStream {
 		private MinecraftSession m_session;
@@ -103,9 +103,9 @@ public final class LevelGzipper {
 					percent = 254;
 				if (m_closed)
 					percent = 255;
-				m_session.getActionSender().sendLevelBlock(m_chunk.length, m_chunk, percent);
+				m_session.getActionSender().sendWorldBlock(m_chunk.length, m_chunk, percent);
 				m_chunk = new byte[0];
-				m_session.getActionSender().sendLevelFinish();
+				m_session.getActionSender().sendWorldFinish();
 				logger.trace("Chunk {}/{} sent.", m_blocksSent, m_blockCount);
 			}
 		}
@@ -122,17 +122,17 @@ public final class LevelGzipper {
 	 * Gzips and sends the level for the specified session.
 	 * @param session The session.
 	 */
-	public void gzipLevel(final MinecraftSession session) {
+	public void gzipWorld(final MinecraftSession session) {
 		logger.debug("Gzipping world to {}", session);
 		assert(session!=null);
 		assert(session.getPlayer()!=null);
 		assert(session.getPlayer().getWorld() != null);
-		Level level = session.getPlayer().getWorld().getLevel();
+		World level = session.getPlayer().getWorld();
 		final int width = level.getWidth();
 		final int height = level.getHeight();
 		final int depth = level.getDepth();
-		final byte[][][] blockData = (byte[][][])(session.getPlayer().getWorld().getLevel().getBlocks().clone());
-		session.getActionSender().sendLevelInit();
+		final byte[][][] blockData = (byte[][][])(session.getPlayer().getWorld().getBlocks().clone());
+		session.getActionSender().sendWorldInit();
 		/*service.submit(new Runnable() {
 			public void run() {
 				try {
@@ -187,10 +187,10 @@ public final class LevelGzipper {
 						byte[] chunk = new byte[len];
 						buf.get(chunk);
 						int percent = (int) ((double) buf.position() / (double) buf.limit() * 255D);
-						session.getActionSender().sendLevelBlock(len, chunk, percent);
+						session.getActionSender().sendWorldBlock(len, chunk, percent);
 					}
-					session.getActionSender().sendLevelFinish();
-					logger.trace("Level sent!");
+					session.getActionSender().sendWorldFinish();
+					logger.trace("World sent!");
 				} catch (IOException ex) {
 					session.getActionSender().sendLoginFailure("Failed to gzip level. Please try again.");
 				}

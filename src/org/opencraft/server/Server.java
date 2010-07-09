@@ -48,7 +48,6 @@ import java.io.File;
 import org.apache.mina.core.service.IoAcceptor;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 import org.opencraft.server.model.World;
-import org.opencraft.model.Level;
 import org.opencraft.server.net.SessionHandler;
 import org.opencraft.server.task.TaskQueue;
 import org.opencraft.server.task.impl.HeartbeatTask;
@@ -65,7 +64,7 @@ import org.opencraft.server.security.Group;
 import org.opencraft.server.security.Permission;
 import org.opencraft.server.security.Principal;
 import org.opencraft.server.security.Policy;
-import org.opencraft.server.io.LevelManager;
+import org.opencraft.server.io.WorldManager;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.InputStream;
@@ -215,10 +214,19 @@ public final class Server {
 		m_worlds = new HashMap<String,SoftReference<World>>();
 		if (!loadWorld(Configuration.getConfiguration().getDefaultMap())) {
 			logger.info("Generating default 256x256x64 world.");
-			Level lvl = new Level();
-			lvl.generateLevel();
+			World lvl = null;
+			try{
+				lvl = new World();
+			} catch (ClassNotFoundException e) {
+				logger.error("Couldn't create world.", e);
+			} catch (InstantiationException e) {
+				logger.error("Problem creating world.", e);
+			} catch (IllegalAccessException e) {
+				logger.error("Problem creating world.", e);
+			}
+			lvl.generateWorld();
 			lvl.setName(Configuration.getConfiguration().getDefaultMap());
-			LevelManager.save(lvl);
+			WorldManager.save(lvl);
 			boolean loaded = loadWorld(Configuration.getConfiguration().getDefaultMap());
 			assert(loaded);
 		}
@@ -237,7 +245,7 @@ public final class Server {
 		}
 		try {
 			logger.info("Loading level \""+name+"\"");
-			Level lvl = LevelManager.load(name);
+			World lvl = WorldManager.load(name);
 			if (lvl == null)
 				return false;
 			World w = new World(lvl);
@@ -263,7 +271,7 @@ public final class Server {
 		return false;
 	}
 
-	public boolean unloadLevel(String name) {
+	public boolean unloadWorld(String name) {
 		logger.info("Unloading level \""+name+"\"");
 		final Configuration c = Configuration.getConfiguration();
 		if (m_worlds.containsKey(name) && !name.equalsIgnoreCase(c.getDefaultMap())) {
@@ -391,7 +399,7 @@ public final class Server {
 		assert(session.getPlayer() == player);
 		logger.debug("Moving player to default world");
 		player.moveToWorld(getWorld(c.getDefaultMap()));
-		m_loginLogger.info("JOIN "+player.getName()+" "+player.getWorld().getLevel().getName());
+		m_loginLogger.info("JOIN "+player.getName()+" "+player.getWorld().getName());
 	}
 
 	public PlayerList getPlayerList() {

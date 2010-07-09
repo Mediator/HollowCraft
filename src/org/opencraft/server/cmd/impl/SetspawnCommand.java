@@ -69,8 +69,8 @@ public class SetspawnCommand extends Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
-		player.getWorld().getLevel().setSpawnPosition(player.getPosition());
-		player.getWorld().getLevel().setSpawnRotation(player.getRotation());
+		player.getWorld().setSpawnPosition(player.getPosition());
+		player.getWorld().setSpawnRotation(player.getRotation());
 	}
 
 }

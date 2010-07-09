@@ -36,6 +36,7 @@ package org.opencraft.server.model.impl;
 import org.opencraft.server.model.BlockBehaviour;
 import org.opencraft.model.BlockConstants;
 import org.opencraft.model.BlockManager;
+import org.opencraft.server.model.World;
 import org.opencraft.model.Level;
 
 /**
@@ -53,8 +54,8 @@ public class CavePlantBehaviour implements BlockBehaviour {
 	}
 	
 	public void handleScheduledBehaviour(Level level, int x, int y, int z, int type) {
-		if (BlockManager.getBlockManager().getBlock(level.getBlock(x, y, z + 1)).isLiquid() || level.getLightDepth(x, y) < z) {
-			level.setBlock(x, y, z, BlockConstants.AIR);
+		if (BlockManager.getBlockManager().getBlock(level.getBlock(x, y, z + 1)).isLiquid() || ((World)level).getLightDepth(x, y) < z) {
+			((World)level).setBlock(x, y, z, BlockConstants.AIR);
 		}
 	}
 	

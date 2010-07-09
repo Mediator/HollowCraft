@@ -35,7 +35,7 @@ package org.opencraft.server.io;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import org.opencraft.model.Level;
+import org.opencraft.server.model.World;
 import org.opencraft.server.Configuration;
 import java.io.File;
 import java.util.Arrays;
@@ -43,17 +43,17 @@ import org.slf4j.*;
 import org.opencraft.io.*;
 
 /**
- * A Class to handle loading and saving of Levels
+ * A Class to handle loading and saving of Worlds
  * @author Adam Liszka
  */
-public final class LevelManager {
+public final class WorldManager {
 
-	private static final Logger logger = LoggerFactory.getLogger(LevelManager.class);
+	private static final Logger logger = LoggerFactory.getLogger(WorldManager.class);
 
 	/**
 	 * Default private constructor.
 	 */
-	private LevelManager() { /* empty */ }
+	private WorldManager() { /* empty */ }
 
 	private static class Version implements Comparable<Version> {
 		public File file;
@@ -133,9 +133,9 @@ public final class LevelManager {
 	/**
 	 * Determines the appropriate file type and loads it.
 	 * @param filename The name of the file to unzip
-	 * @return The Level
+	 * @return The World
 	 */
-	public static Level load(String mapName) throws IOException {
+	public static World load(String mapName) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		Version latest = getLatestVersion(mapName);
 		if (latest != null) {
 			File mapFile = getLatestVersion(mapName).file;
@@ -143,11 +143,11 @@ public final class LevelManager {
 
 			try {
 				if (ext.equalsIgnoreCase("mclevel")) {
-					return NBTFileHandler.load(mapFile.getPath());
+					return new World(NBTFileHandler.load(mapFile.getPath()));
 				} else if (ext.equalsIgnoreCase("dat") || ext.equalsIgnoreCase("mine")) {
-					return MineFileHandler.load(mapFile.getPath());
+					return new World(MineFileHandler.load(mapFile.getPath()));
 				} else if (ext.equalsIgnoreCase("lvl")) {
-					return MCSharpFileHandler.load(mapFile.getPath());
+					return new World(MCSharpFileHandler.load(mapFile.getPath()));
 				}
 				logger.info("Unknown file extension {}. Trying all known formats.", ext);
 			} catch (IOException e) {
@@ -156,24 +156,24 @@ public final class LevelManager {
 
 			try {
 				logger.info("Trying NBT .mclevel");
-				return NBTFileHandler.load(mapFile.getPath());
+				return new World(NBTFileHandler.load(mapFile.getPath()));
 			} catch (IOException e) { }
 
 			try {
 				logger.info("Trying old .mine/.dat");
-				return MineFileHandler.load(mapFile.getPath());
+				return new World(MineFileHandler.load(mapFile.getPath()));
 			} catch (IOException e) { }
 
 			try {
 				logger.info("Trying MCSharp .lvl");
-				return MCSharpFileHandler.load(mapFile.getPath());
+				return new World(MCSharpFileHandler.load(mapFile.getPath()));
 			} catch (IOException e) { }
 		}
 
 		/*
 		logger.info("Generating level instead of loading.");
-		Level lvl = new Level();
-		lvl.generateLevel();
+		World lvl = new World();
+		lvl.generateWorld();
 		lvl.setName(mapName);
 		return lvl;
 		*/
@@ -182,11 +182,11 @@ public final class LevelManager {
 	}
 
 	/**
-	 * Determines the appropriate file type and saves the Level.
+	 * Determines the appropriate file type and saves the World.
 	 * @param filename The name of the file to unzip
-	 * @return The Level
+	 * @return The World
 	 */
-	public static void save(Level lvl) {
+	public static void save(World lvl) {
 		File nextFile = getNextFile(lvl.getName());
 		File temp = new File("data/maps/"+lvl.getName()+"/"+lvl.getName()+".tmp");
 		NBTFileHandler.save(lvl, temp.getPath());

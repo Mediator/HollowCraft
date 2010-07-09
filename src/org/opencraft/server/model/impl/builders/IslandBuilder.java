@@ -41,6 +41,7 @@ import java.lang.Math;
 import org.opencraft.server.model.Builder;
 import org.opencraft.model.BlockConstants;
 import org.opencraft.model.Position;
+import org.opencraft.server.model.World;
 import org.opencraft.model.Level;
 
 /**

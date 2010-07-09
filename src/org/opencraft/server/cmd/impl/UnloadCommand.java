@@ -77,7 +77,7 @@ public class UnloadCommand extends Command {
 				return;
 			}
 			if (Server.getServer().hasWorld(params.getStringArgument(0))) {
-				if (Server.getServer().unloadLevel(params.getStringArgument(0))) {
+				if (Server.getServer().unloadWorld(params.getStringArgument(0))) {
 					player.getActionSender().sendChatMessage("Unloaded "+params.getStringArgument(0));
 				} else {
 					player.getActionSender().sendChatMessage(params.getStringArgument(0) + " is still loaded");

@@ -38,7 +38,7 @@ import java.util.Map;
 
 import org.opencraft.server.cmd.Command;
 import org.opencraft.server.cmd.impl.*;
-import org.opencraft.model.Level;
+import org.opencraft.server.model.World;
 import org.opencraft.server.model.Player;
 import org.opencraft.server.security.Permission;
 import org.slf4j.*;
@@ -71,7 +71,7 @@ public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 		registerCommand(MeCommand.getCommand());
 		registerCommand(RollCommand.getCommand());
 		registerCommand(GenerateCommand.getCommand());
-		registerCommand(LevelsCommand.getCommand());
+		registerCommand(WorldsCommand.getCommand());
 		registerCommand(LoadCommand.getCommand());
 		registerCommand(UnloadCommand.getCommand());
 		registerCommand(PingCommand.getCommand());
@@ -120,7 +120,7 @@ public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 	}
 	
 	// Default implementation
-	public void setBlock(Player player, Level level, int x, int y, int z, int mode, int type) {
+	public void setBlock(Player player, World level, int x, int y, int z, int mode, int type) {
 		logger.trace("Setting block mode {} type {}", mode, type);
 		if (mode == 1 && !player.isAuthorized(Permission.BUILD)) {
 			logger.trace("Not permitted to build.");

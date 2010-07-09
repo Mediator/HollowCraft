@@ -36,6 +36,7 @@ package org.opencraft.server.model.impl;
 import org.opencraft.server.model.BlockBehaviour;
 import org.opencraft.model.BlockConstants;
 import org.opencraft.model.BlockManager;
+import org.opencraft.server.model.World;
 import org.opencraft.model.Level;
 
 /**
@@ -45,14 +46,15 @@ import org.opencraft.model.Level;
 
 public class LavaBehaviour implements BlockBehaviour {
 	public void handlePassive(Level level, int x, int y, int z, int type) {
-		level.queueActiveBlockUpdate(x, y, z);
+		((World)level).queueActiveBlockUpdate(x, y, z);
 	}
 	
 	public void handleDestroy(Level level, int x, int y, int z, int type) {
 		
 	}
 	
-	public void handleScheduledBehaviour(Level level, int x, int y, int z, int type) {
+	public void handleScheduledBehaviour(Level lvl, int x, int y, int z, int type) {
+		World level = (World)lvl;
 		// represents the different directions lava can spread
 		// x, y, z
 		int[][] spreadRules = { { 0, 0, -1 }, { 1, 0, 0 }, { -1, 0, 0 }, { 0, 1, 0 }, { 0, -1, 0 } };

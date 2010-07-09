@@ -69,7 +69,7 @@ public class SpawnCommand extends Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
-		player.teleport(player.getWorld().getLevel().getSpawnPosition(), player.getWorld().getLevel().getSpawnRotation());
+		player.teleport(player.getWorld().getSpawnPosition(), player.getWorld().getSpawnRotation());
 	}
 
 }

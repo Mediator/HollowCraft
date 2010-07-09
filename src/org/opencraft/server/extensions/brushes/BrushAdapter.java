@@ -34,7 +34,7 @@ package org.opencraft.server.extensions.brushes;
  */
 
 import org.opencraft.model.BlockConstants;
-import org.opencraft.model.Level;
+import org.opencraft.server.model.World;
 import org.opencraft.server.model.Player;
 
 /**
@@ -164,7 +164,7 @@ public abstract class BrushAdapter extends Brush {
 	 * @param z z position
 	 * @return Returns true if block at position is build-able (changeable)
 	 */
-	protected boolean positionIsBuildable(Level level, int x, int y, int z) {
+	protected boolean positionIsBuildable(World level, int x, int y, int z) {
 		return typeIsBuildable(level.getBlock(x, y, z));
 	}
 	
@@ -184,7 +184,7 @@ public abstract class BrushAdapter extends Brush {
 	}
 	
 	@Override
-	public void paint(Player player, Level level, int x, int y, int z, int mode, int type) {
+	public void paint(Player player, World level, int x, int y, int z, int mode, int type) {
 		boolean add = (mode == 1 ? true : false);
 		if (add)
 			paintBlocks(player, level, x, y, z, add, type);
@@ -202,7 +202,7 @@ public abstract class BrushAdapter extends Brush {
 	 * @param build
 	 * @param type
 	 */
-	protected abstract void paintBlocks(Player player, Level level, int x, int y, int z, boolean add, int type);
+	protected abstract void paintBlocks(Player player, World level, int x, int y, int z, boolean add, int type);
 	
 	@Override
 	public int setHeight(int newHeight) {

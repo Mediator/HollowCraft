@@ -35,6 +35,7 @@ package org.opencraft.server.model.impl;
 
 import org.opencraft.server.model.BlockBehaviour;
 import org.opencraft.model.BlockConstants;
+import org.opencraft.server.model.World;
 import org.opencraft.model.Level;
 
 /**
@@ -45,14 +46,15 @@ import org.opencraft.model.Level;
 public class AirBehaviour implements BlockBehaviour {
 	
 	public void handlePassive(Level level, int x, int y, int z, int type) {
-		level.queueActiveBlockUpdate(x, y, z);
+		((World)level).queueActiveBlockUpdate(x, y, z);
 	}
 	
 	public void handleDestroy(Level level, int x, int y, int z, int type) {
 		
 	}
 	
-	public void handleScheduledBehaviour(Level level, int x, int y, int z, int type) {
+	public void handleScheduledBehaviour(Level lvl, int x, int y, int z, int type) {
+		World level = (World)(lvl);
 		if (level.getBlock(x+1, y, z) == BlockConstants.WATER &&  level.getBlock(x-1, y, z) == BlockConstants.WATER && level.getBlock(x, y+1, z) == BlockConstants.WATER && level.getBlock(x, y-1, z) == BlockConstants.WATER) {
 			level.setBlock(x, y, z, BlockConstants.WATER);
 		}

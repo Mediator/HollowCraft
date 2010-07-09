@@ -36,7 +36,7 @@ package org.opencraft.server.game;
 import java.util.Map;
 
 import org.opencraft.server.cmd.Command;
-import org.opencraft.model.Level;
+import org.opencraft.server.model.World;
 import org.opencraft.server.model.Player;
 
 /**
@@ -82,7 +82,7 @@ public interface GameMode<P extends Player> {
 	 * @param mode 1/0 adding/removing
 	 * @param type typeId of the block
 	 */
-	public void setBlock(P player, Level level, int x, int y, int z, int mode, int type);
+	public void setBlock(P player, World level, int x, int y, int z, int mode, int type);
 	
 	/**
 	 * Broadcasts a chat message.

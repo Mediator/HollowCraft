@@ -16,6 +16,8 @@ public  class Environment {
 
 	public Environment() { }
 
+	public Object clone() throws CloneNotSupportedException { return super.clone(); }
+
 	// Mutators for SurroundingGroundHeight
 	public short getSurroundingGroundHeight() {
 		return SurroundingGroundHeight;

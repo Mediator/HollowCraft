@@ -1,21 +1,21 @@
 package org.opencraft.server.task.impl;
 
 import org.opencraft.server.task.ScheduledTask;
-import org.opencraft.server.io.LevelManager;
-import org.opencraft.model.Level;
+import org.opencraft.server.io.WorldManager;
+import org.opencraft.server.model.World;
 import org.slf4j.*;
 
 /**
- * A Task that will automatically save a Level.
+ * A Task that will automatically save a World.
  * @author Adam Liszka
  */
-public final class SaveLevelTask extends ScheduledTask {
+public final class SaveWorldTask extends ScheduledTask {
 	
 	private static final long DELAY = 120 * 1000; // Every 2 minutes
-	private Level m_lvl;
-	private Logger logger = LoggerFactory.getLogger(SaveLevelTask.class);
+	private World m_lvl;
+	private Logger logger = LoggerFactory.getLogger(SaveWorldTask.class);
 	
-	public SaveLevelTask(Level lvl) {
+	public SaveWorldTask(World lvl) {
 		super(DELAY);
 		m_lvl = lvl;
 		execute();
@@ -26,7 +26,7 @@ public final class SaveLevelTask extends ScheduledTask {
 		if (this.getDelay() == 0) {
 			this.setDelay(DELAY);
 		}
-		LevelManager.save(m_lvl);
+		WorldManager.save(m_lvl);
 	}
 	
 }

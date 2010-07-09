@@ -36,6 +36,7 @@ package org.opencraft.server.model.impl;
 import org.opencraft.server.Configuration;
 import org.opencraft.server.model.BlockBehaviour;
 import org.opencraft.model.BlockConstants;
+import org.opencraft.server.model.World;
 import org.opencraft.model.Level;
 
 /**
@@ -47,7 +48,8 @@ public class SpongeBehaviour implements BlockBehaviour {
 	
 	private int spongeRadius = Configuration.getConfiguration().getSpongeRadius();
 	
-	public void handlePassive(Level level, int x, int y, int z, int type) {
+	public void handlePassive(Level lvl, int x, int y, int z, int type) {
+		World level = (World)lvl;
 		for (int spongeX = -1 * spongeRadius; spongeX <= spongeRadius; spongeX++) {
 			for (int spongeY = -1 * spongeRadius; spongeY <= spongeRadius; spongeY++) {
 				for (int spongeZ = -1 * spongeRadius; spongeZ <= spongeRadius; spongeZ++) {
@@ -58,7 +60,8 @@ public class SpongeBehaviour implements BlockBehaviour {
 		}
 	}
 	
-	public void handleDestroy(Level level, int x, int y, int z, int type) {
+	public void handleDestroy(Level lvl, int x, int y, int z, int type) {
+		World level = (World)lvl;
 		for (int spongeX = -1 * (spongeRadius + 1); spongeX <= spongeRadius + 1; spongeX++) {
 			for (int spongeY = -1 * (spongeRadius + 1); spongeY <= spongeRadius + 1; spongeY++) {
 				for (int spongeZ = -1 * (spongeRadius + 1); spongeZ <= spongeRadius + 1; spongeZ++) {

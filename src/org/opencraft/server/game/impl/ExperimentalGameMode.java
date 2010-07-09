@@ -42,7 +42,7 @@ import org.opencraft.server.extensions.brushes.Brush;
 import org.opencraft.server.extensions.brushes.BrushCommand;
 import org.opencraft.server.extensions.brushes.StandardBrush;
 import org.opencraft.server.game.GameModeAdapter;
-import org.opencraft.model.Level;
+import org.opencraft.server.model.World;
 import org.opencraft.server.model.Player;
 
 /**
@@ -104,7 +104,7 @@ public class ExperimentalGameMode extends GameModeAdapter<Player> {
 	}
 	
 	@Override
-	public void setBlock(Player player, Level level, int x, int y, int z, int mode, int type) {
+	public void setBlock(Player player, World level, int x, int y, int z, int mode, int type) {
 		super.setBlock(player, level, x, y, z, mode, type);
 		((Brush) player.getAttribute("brush")).paint(player, level, x, y, z, mode, type);
 	}

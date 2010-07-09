@@ -36,6 +36,7 @@ package org.opencraft.server.model.impl;
 import org.opencraft.server.model.BlockBehaviour;
 import org.opencraft.model.BlockConstants;
 import org.opencraft.model.BlockManager;
+import org.opencraft.server.model.World;
 import org.opencraft.model.Level;
 
 import java.util.Random;
@@ -52,10 +53,11 @@ public class SurfacePlantBehaviour implements BlockBehaviour {
 	}
 	
 	public void handlePassive(Level level, int x, int y, int z, int type) {
-		level.queueActiveBlockUpdate(x, y, z);
+		((World)level).queueActiveBlockUpdate(x, y, z);
 	}
 	
-	public void handleScheduledBehaviour(Level level, int x, int y, int z, int type) {
+	public void handleScheduledBehaviour(Level lvl, int x, int y, int z, int type) {
+		World level = (World) lvl;
 		level.queueActiveBlockUpdate(x, y, z);
 		Random r = new Random();
 		if (BlockManager.getBlockManager().getBlock(level.getBlock(x, y, z - 1)).getId() != BlockConstants.DIRT && BlockManager.getBlockManager().getBlock(level.getBlock(x, y, z - 1)).getId() != BlockConstants.GRASS || level.getLightDepth(x, y) > z || BlockManager.getBlockManager().getBlock(level.getBlock(x, y, z + 1)).isLiquid()) {

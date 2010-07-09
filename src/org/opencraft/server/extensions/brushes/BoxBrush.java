@@ -33,7 +33,7 @@ package org.opencraft.server.extensions.brushes;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.model.Level;
+import org.opencraft.server.model.World;
 import org.opencraft.server.model.Player;
 
 /**
@@ -51,7 +51,7 @@ public class BoxBrush extends BrushAdapter {
 	}
 	
 	@Override
-	protected void paintBlocks(Player player, Level level, int x, int y, int z, boolean adding, int type) {
+	protected void paintBlocks(Player player, World level, int x, int y, int z, boolean adding, int type) {
 		
 		setOffsetsFromPerspective(player);
 		

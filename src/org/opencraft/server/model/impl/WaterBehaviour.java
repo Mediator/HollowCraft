@@ -37,6 +37,7 @@ import org.opencraft.server.Configuration;
 import org.opencraft.server.model.BlockBehaviour;
 import org.opencraft.model.BlockConstants;
 import org.opencraft.model.BlockManager;
+import org.opencraft.server.model.World;
 import org.opencraft.model.Level;
 
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ import java.util.Collections;
 public class WaterBehaviour implements BlockBehaviour {
 	
 	public void handlePassive(Level level, int x, int y, int z, int type) {
-		level.queueActiveBlockUpdate(x, y, z);
+		((World)level).queueActiveBlockUpdate(x, y, z);
 	}
 	
 	public void handleDestroy(Level level, int x, int y, int z, int type) {
@@ -74,7 +75,7 @@ public class WaterBehaviour implements BlockBehaviour {
 		for (int spongeX = (-1 * spongeRadius); spongeX <= spongeRadius; spongeX++) {
 			for (int spongeY = (-1 * spongeRadius); spongeY <= spongeRadius; spongeY++) {
 				for (int spongeZ = (-1 * spongeRadius); spongeZ <= spongeRadius; spongeZ++) {
-					if (level.getBlock(x + spongeX, y + spongeY, z + spongeZ) == BlockConstants.SPONGE)
+					if (((World)level).getBlock(x + spongeX, y + spongeY, z + spongeZ) == BlockConstants.SPONGE)
 						return;
 				}
 			}
