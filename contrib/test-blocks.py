@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import minecraft
+from minecraft import *
 
 class TestBot(ServerConnection):
 	def __init__(self, user, passwd, host, port):
