@@ -131,6 +131,7 @@ public final class WorldGzipper {
 		final int width = level.getWidth();
 		final int height = level.getHeight();
 		final int depth = level.getDepth();
+		logger.debug("Depth {}", depth);
 		final byte[][][] blockData = (byte[][][])(session.getPlayer().getWorld().getBlocks().clone());
 		session.getActionSender().sendWorldInit();
 		/*service.submit(new Runnable() {

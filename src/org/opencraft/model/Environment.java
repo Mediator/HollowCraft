@@ -2,7 +2,7 @@ package org.opencraft.model;
 
 import org.opencraft.model.BlockConstants;
 
-public  class Environment {
+public class Environment implements Cloneable {
 	protected short SurroundingGroundHeight = 0;			// Height of surrounding ground (in blocks)
 	protected byte  SurroundingGroundType = BlockConstants.ADMINIUM;// Block ID of surrounding ground
 	protected short SurroundingWaterHeight = 1;			// Height of surrounding water (in blocks)

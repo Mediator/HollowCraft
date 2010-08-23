@@ -69,7 +69,6 @@ public class Level {
 	protected int m_depth;
 	protected byte[][][] m_blocks;
 	protected byte[][][] m_data;
-	protected short[][] m_lightDepths;
 	protected Rotation m_spawnRotation;
 	protected Position m_spawnPosition;
 
@@ -89,14 +88,15 @@ public class Level {
 		try{
 			m_env = (Environment) other.m_env.clone();
 		} catch (CloneNotSupportedException e) {
+			m_logger.info("Error: {}", e);
 			m_env = null;
 		}
 		m_fileType = other.m_fileType;
 		m_width = other.m_width;
 		m_height = other.m_height;
+		m_depth = other.m_depth;
 		m_blocks = other.m_blocks.clone();
 		m_data = other.m_blocks.clone();
-		m_lightDepths = other.m_lightDepths.clone();
 		m_spawnRotation = other.m_spawnRotation;
 		m_spawnPosition = other.m_spawnPosition;
 	}
@@ -183,6 +183,7 @@ public class Level {
 
 	// TODO: Delete these and use title
 	public void setName(String name) {
+		m_logger.debug("Setting name to {}", name);
 		m_title = name;
 	}
 
@@ -223,6 +224,7 @@ public class Level {
 	}
 
 	public void setBlocks(byte[][][] blocks, byte[][][] data, int width, int height, int depth) {
+		m_logger.trace("Setting size of {}x{}x"+depth, width, height);
 		m_blocks = blocks;
 		m_data = data;
 		m_width = width;

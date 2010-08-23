@@ -37,6 +37,7 @@ import org.opencraft.server.Configuration;
 import org.opencraft.server.task.impl.SaveWorldTask;
 import org.opencraft.server.task.TaskQueue;
 import org.opencraft.server.game.GameMode;
+import org.opencraft.server.game.impl.SandboxGameMode;
 import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.util.PlayerList;
 import org.opencraft.server.io.WorldManager;
@@ -93,12 +94,17 @@ public final class World extends Level {
 	 */
 	private GameMode<Player> gameMode;
 
+	private short[][] m_lightDepths;
+
 	public World(Level other) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		super(other);
+		assert(other.getDepth() > 0);
+		assert(getDepth() == other.getDepth());
 		init();
 	}
 
 	public World() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+		super();
 		init();
 	}
 
@@ -121,6 +127,8 @@ public final class World extends Level {
 		});
 		TaskQueue.getTaskQueue().schedule(new SaveWorldTask(this));
 		logger.info("Active game mode : " + gameMode.getClass().getName() + ".");
+		m_lightDepths = new short[m_width][m_height];
+		recalculateAllLightDepths();
 	}
 
 	public void generateWorld() {
@@ -371,16 +379,6 @@ public final class World extends Level {
 		recalculateAllLightDepths();
 	}
 	
-	/**
-	 * Default private constructor.
-	 * @throws ClassNotFoundException
-	 * @throws IllegalAccessException
-	 * @throws InstantiationException
-	 */
-
-	public World(World lvl) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-		m_policy = new Policy();
-	}
 
 	public void finalize() {
 		logger.info("Finalizing world, saving level.");
