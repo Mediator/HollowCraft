@@ -18,7 +18,6 @@ public final class SaveWorldTask extends ScheduledTask {
 	public SaveWorldTask(World lvl) {
 		super(DELAY);
 		m_lvl = lvl;
-		execute();
 	}
 	
 	public void execute() {
