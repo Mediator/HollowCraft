@@ -51,6 +51,7 @@ import org.opencraft.server.model.World;
 import org.opencraft.server.net.SessionHandler;
 import org.opencraft.server.task.TaskQueue;
 import org.opencraft.server.task.impl.HeartbeatTask;
+import org.opencraft.server.task.Task;
 import org.opencraft.server.task.impl.UpdateTask;
 import org.opencraft.server.task.impl.FListHeartbeatTask;
 import org.opencraft.server.heartbeat.HeartbeatManager;
@@ -164,6 +165,14 @@ public final class Server {
 		}
 	}
 
+	boolean m_debug = true;
+
+	public void taskError(Task t) {
+		if (m_debug) {
+			System.exit(1);
+		}
+	}
+
 	private HashMap<String,SoftReference<World>> m_worlds;
 
 	private static Server INSTANCE;
@@ -225,7 +234,9 @@ public final class Server {
 				logger.error("Problem creating world.", e);
 			}
 			lvl.generateWorld();
+			logger.debug("Setting name to {}", Configuration.getConfiguration().getDefaultMap());
 			lvl.setName(Configuration.getConfiguration().getDefaultMap());
+			logger.debug("Saving");
 			WorldManager.save(lvl);
 			boolean loaded = loadWorld(Configuration.getConfiguration().getDefaultMap());
 			assert(loaded);
@@ -249,14 +260,19 @@ public final class Server {
 			if (lvl == null)
 				return false;
 			World w = new World(lvl);
+			assert(lvl.getDepth() > 0);
+			assert(w.getDepth() > 0);
 			logger.info("Loading policy for {}...", w);
 			try {
-				w.setPolicy(new Policy(w.getName(), new BufferedReader(new FileReader("data/opencraft.permissions"))));
+				w.setPolicy(new Policy(new FileReader("data/opencraft.permissions")));
 			} catch (ParseException e) {
 				logger.error("Error parsing policy, line "+e.getErrorOffset(), e);
 			} catch (IOException e) {
 				logger.error("Error reading policy", e);
 			}
+			logger.trace("Policy:");
+			logger.trace("{}", w.getPolicy());
+			logger.trace("Seems good.");
 			m_worlds.put(name, new SoftReference<World>(w));
 			return true;
 		} catch (InstantiationException e) {

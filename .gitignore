@@ -9,4 +9,4 @@ data/savedGames
 *.pyc
 log/
 dist/
-src/org/opencraft/server/Constants.java
+gen/

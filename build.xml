@@ -7,6 +7,7 @@
 	<property name="slf4j.jdk.lib" value="/usr/share/java/slf4j/jdk14.jar"/>
 	<property name="slf4j.lib" value="/usr/share/java/slf4j/api.jar"/>
 	<property name="jython.lib" value="/usr/share/java/jython.jar"/>
+	<property name="antlr-runtime.lib" value="/usr/share/java/antlr-3.2.jar"/>
 
 	<!-- Changing this property affects the value in
 		 org.opencraft.server.Constants.java -->
@@ -15,6 +16,7 @@
 	<property name="src" location="src"/>
 	<property name="build" location="bin"/>
 	<property name="dist" location="dist"/>
+	<property name="gen" location="gen"/>
 
 	<files id="libs" >
 		<include name="${xstream.lib}"/>
@@ -22,6 +24,7 @@
 		<include name="${slf4j.jdk.lib}"/>
 		<include name="${slf4j.lib}"/>
 		<include name="${jython.lib}"/>
+		<include name="${antlr-runtime.lib}"/>
 	</files>
 
 	<fileset id="dist.docs" dir=".">
@@ -37,7 +40,6 @@
 		<include name="src/**"/>
 		<include name="contrib/**"/>
 		<include name="build.xml"/>
-		<exclude name="src/org/opencraft/server/Constants.java"/>
 	</fileset>
 
 	<fileset id="dist.data" dir="data">
@@ -49,29 +51,39 @@
 		<tstamp/>
 		<mkdir dir="${build}"/>
 		<mkdir dir="${dist}"/>
+		<mkdir dir="${gen}"/>
 		<mkdir dir="log"/>
 		<mkdir dir="lib"/>
 		<mkdir dir="data"/>
 		<mkdir dir="data/maps"/>
 		<mkdir dir="data/savedGames"/>
 	</target>
+	<target name="antlr" depends="init">
+	    <java jar="${antlr-runtime.lib}" fork="true">
+			<arg line="-fo"/>
+			<arg value="${gen}"/>
+			<arg value="${src}/SecurityPolicy.g"/>
+		</java>
+	</target>
 	<target name="javac" depends="init">
-		<copy file="${src}/org/opencraft/server/Constants.java.in" tofile="${src}/org/opencraft/server/Constants.java"/>
-		<replace file="${src}/org/opencraft/server/Constants.java" token="@VERSION@" value="${version}"/>
-		<javac srcdir="${src}" destdir="${build}" debug="true">
+		<copy file="${src}/org/opencraft/server/Constants.java.in" tofile="${gen}/Constants.java"/>
+		<replace file="${gen}/Constants.java" token="@VERSION@" value="${version}"/>
+		<javac destdir="${build}" debug="true">
+			<src path="${src}"/>
+			<src path="${gen}"/>
 			<classpath>
 				<files refid="libs"/>
 			</classpath>
-			<compilerarg value="-Xlint"/>
+			<!-- <compilerarg value="-Xlint"/> -->
 		</javac>
 	</target>
 	<target name="clean">
 		<delete dir="${build}"/>
 		<delete dir="${dist}"/>
 		<delete dir="${lib}"/>
-		<delete file="${src}/org/opencraft/server/Constants.java"/>
+		<delete dir="${gen}"/>
 	</target>
-	<target name="build" depends="javac"/>
+	<target name="build" depends="antlr,javac"/>
 	<target name="jar" depends="build">
 		<copy file="LICENSE" tofile="${build}/META-INF/OpenCraft.LICENSE"/>
 		<jar destfile="${dist}/opencraft-server-${version}.jar" basedir="${build}">
@@ -132,10 +144,11 @@
 			<arg value="dist"/>
 		</exec>
 	</target>
-	<target name="run" depends="jar">
-		<java jar="${dist}/opencraft-server-${version}.jar" fork="true" maxmemory="1024m">
+	<target name="run" depends="javac">
+		<java classname="org.opencraft.server.Server" fork="true" maxmemory="1024m">
 			<classpath>
 				<files refid="libs"/>
+				<pathelement path="${build}"/>
 		   	</classpath>
 			<assertions>
 				<enable/>

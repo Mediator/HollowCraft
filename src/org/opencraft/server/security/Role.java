@@ -31,3 +31,4 @@ public class Role extends Permission {
 		return false;
 	}
 }
+

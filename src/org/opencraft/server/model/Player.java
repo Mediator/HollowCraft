@@ -39,9 +39,9 @@ import java.util.Map;
 import org.opencraft.server.net.ActionSender;
 import org.opencraft.server.net.MinecraftSession;
 import org.opencraft.server.io.WorldGzipper;
-import org.opencraft.server.security.Group;
 import org.opencraft.server.security.Principal;
 import org.opencraft.server.security.Permission;
+import org.opencraft.server.security.Policy;
 import org.opencraft.model.Entity;
 import org.opencraft.model.Position;
 import org.opencraft.model.Rotation;
@@ -62,11 +62,6 @@ public class Player extends Entity implements Principal {
 	private static final Logger logger = LoggerFactory.getLogger(Player.class);
 	
 	private ArrayList<Permission> m_permissions = new ArrayList<Permission>();
-
-	/**
-	 * The player's name.
-	 */
-	private final String name;
 	
 	/**
 	 * A map of attributes that can be attached to this player.
@@ -78,8 +73,8 @@ public class Player extends Entity implements Principal {
 	 * @param name The player's name.
 	 */
 	public Player(MinecraftSession session, String name) {
+		m_policyRef = new org.opencraft.server.security.Player(name);
 		this.session = session;
-		this.name = name;
 	}
 
 	public String toString() {
@@ -134,42 +129,34 @@ public class Player extends Entity implements Principal {
 		return false;
 	}
 	
-	@Override
 	public String getName() {
-		return name;
+		return name();
+	}
+
+	public String name() {
+		return m_policyRef.name();
 	}
 
 	public Permission[] getPermissions() {
-		return m_permissions.toArray(new Permission[m_permissions.size()]);
+		return m_policyRef.getPermissions();
 	}
 
-	public void addPermission(Permission p) {
-		m_permissions.add(p);
-	}
-
-	public void clearPolicy() {
-		m_permissions = new ArrayList<Permission>();
+	public void grant(Permission p) {
+		m_policyRef.grant(p);
 	}
 
 	public boolean isAuthorized(Permission perm) {
-		for(Permission p : m_permissions) {
-			logger.trace("Testing {} against user permission {}", perm, p);
-			if (p.implies(perm)) {
-				logger.trace("{} granted to player directly.", perm);
-				return true;
-			}
-		}
-		for(Group group : getWorld().getPolicy().getGroups()) {
-			if (group.hasMember(this)) {
-				logger.trace("Testing group {} for {}", group, perm);
-				if (group.isAuthorized(perm)) {
-					logger.trace("Authorized by {}", group);
-					return true;
-				}
-			}
-		}
-		logger.trace("Not authorized for {}", perm);
-		return false;
+		return m_policyRef.isAuthorized(perm);
+	}
+
+	private org.opencraft.server.security.Player m_policyRef;
+
+	public Policy policy() {
+		return m_policyRef.policy();
+	}
+
+	public void setPolicy(Policy p) {
+		m_policyRef.setPolicy(p);
 	}
 	
 	/**
@@ -217,9 +204,10 @@ public class Player extends Entity implements Principal {
 		if (m_world != null)
 			m_world.removePlayer(this);
 		assert(world != null);
+		assert(world.getDepth() > 0);
 		setWorld(world);
 		m_world.addPlayer(this);
-		m_world.getPolicy().apply(this);
+		setPolicy(m_world.getPolicy());
 		WorldGzipper.getWorldGzipper().gzipWorld(session);
 	}
 }

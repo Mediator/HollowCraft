@@ -37,8 +37,10 @@ import java.util.ArrayList;
 
 public interface Principal {
 	public boolean isAuthorized(Permission permission);
+	public void setPolicy(Policy p);
 	public Permission[] getPermissions();
-	public void addPermission(Permission p);
-	public void clearPolicy();
-	public String getName();
+	public void grant(Permission p);
+	public String name();
+	public Policy policy();
 }
+

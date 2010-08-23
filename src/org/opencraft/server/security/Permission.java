@@ -42,6 +42,10 @@ public class Permission {
 		return true;
 	}
 
+	public String name() {
+		return m_name;
+	}
+
 	public String toString() {
 		return m_name;
 	}

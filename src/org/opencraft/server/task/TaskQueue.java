@@ -36,6 +36,7 @@ package org.opencraft.server.task;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import org.opencraft.server.Server;
 import org.slf4j.*;
 
 /**
@@ -85,6 +86,7 @@ public final class TaskQueue {
 					task.execute();
 				} catch (Throwable t) {
 					logger.error("Error during task execution.", t);
+					Server.getServer().taskError(task);
 				}
 			}
 		});
