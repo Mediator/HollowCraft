@@ -65,7 +65,7 @@
 			<arg value="${src}/SecurityPolicy.g"/>
 		</java>
 	</target>
-	<target name="javac" depends="init">
+	<target name="javac" depends="init,antlr">
 		<copy file="${src}/org/opencraft/server/Constants.java.in" tofile="${gen}/Constants.java"/>
 		<replace file="${gen}/Constants.java" token="@VERSION@" value="${version}"/>
 		<javac destdir="${build}" debug="true">
@@ -83,7 +83,7 @@
 		<delete dir="${lib}"/>
 		<delete dir="${gen}"/>
 	</target>
-	<target name="build" depends="antlr,javac"/>
+	<target name="build" depends="javac"/>
 	<target name="jar" depends="build">
 		<copy file="LICENSE" tofile="${build}/META-INF/OpenCraft.LICENSE"/>
 		<jar destfile="${dist}/opencraft-server-${version}.jar" basedir="${build}">
@@ -144,7 +144,7 @@
 			<arg value="dist"/>
 		</exec>
 	</target>
-	<target name="run" depends="javac">
+	<target name="run" depends="build">
 		<java classname="org.opencraft.server.Server" fork="true" maxmemory="1024m">
 			<classpath>
 				<files refid="libs"/>
