@@ -36,6 +36,7 @@ package org.opencraft.server.net;
 import org.apache.mina.core.session.IoSession;
 import org.opencraft.server.net.packet.Packet;
 import org.opencraft.server.model.Player;
+import org.opencraft.server.net.Protocol;
 import java.net.SocketAddress;
 
 /**
@@ -51,6 +52,10 @@ public abstract class OCSession extends Connectable{
 	 * <code>MinecraftSession</code>.
 	 */
 	protected final IoSession session;
+
+	public Protocol protocol() {
+		return (Protocol)session.getAttribute("protocol");
+	}
 
 	/**
 	 * Creates the Minecraft session.

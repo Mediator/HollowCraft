@@ -93,7 +93,7 @@ public final class MinecraftSession extends OCSession{
 	 */
 	@Override
 	public void handle(Packet packet) {
-		PersistingHandlerManager.getPacketHandlerManager().handlePacket(this, packet);
+		protocol().handler().handlePacket(this, packet);
 	}
 
 	

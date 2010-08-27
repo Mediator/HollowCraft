@@ -77,7 +77,7 @@ public final class SessionHandler extends IoHandlerAdapter {
 	@Override
 	public void sessionOpened(IoSession session) throws Exception {
 		logger.trace("Session opened. Queuing for initialization.");
-		session.getFilterChain().addFirst("protocol", new ProtocolCodecFilter(new MinecraftCodecFactory(PersistingPacketManager.getPacketManager())));
+		session.getFilterChain().addFirst("protocol", new ProtocolCodecFilter(new MinecraftCodecFactory()));
 		TaskQueue.getTaskQueue().push(new SessionOpenedTask(session));
 	}
 	

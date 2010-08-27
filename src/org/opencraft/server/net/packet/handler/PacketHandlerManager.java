@@ -61,7 +61,7 @@ public class PacketHandlerManager<SessionType extends OCSession> {
 	 * Default private constructor.
 	 */
 	@SuppressWarnings("unchecked")
-	protected PacketHandlerManager(Map<Integer, String> map) {
+	public PacketHandlerManager(Map<Integer, String> map) {
 		try {
 			Map<Integer, String> handlers = map;
 			for (Map.Entry<Integer, String> handler : handlers.entrySet()) {

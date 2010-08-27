@@ -56,9 +56,9 @@ public final class MinecraftCodecFactory implements ProtocolCodecFactory {
 	private final ProtocolEncoder encoder;
 	
 	
-	public MinecraftCodecFactory(PacketManager manager)
+	public MinecraftCodecFactory()
 	{
-		decoder = new MinecraftProtocolDecoder(manager);
+		decoder = new MinecraftProtocolDecoder();
 		encoder = new MinecraftProtocolEncoder();
 	}
 	

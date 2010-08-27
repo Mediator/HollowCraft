@@ -76,7 +76,7 @@ public class ActionSender {
 	 * @param op Operator flag.
 	 */
 	public void sendLoginResponse(int protocolVersion, String name, String message, boolean op) {
-		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(0));
+		PacketBuilder bldr = new PacketBuilder(session.protocol().packets().getOutgoingPacket(0));
 		bldr.putByte("protocol_version", protocolVersion);
 		bldr.putString("server_name", name);
 		bldr.putString("server_message", message);
@@ -91,7 +91,7 @@ public class ActionSender {
 	 */
 	public void sendLoginFailure(String message) {
 		logger.info("Login failure: {}", message);
-		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(14));
+		PacketBuilder bldr = new PacketBuilder(session.protocol().packets().getOutgoingPacket(14));
 		bldr.putString("reason", message);
 		logger.trace("Sending login failure");
 		session.send(bldr.toPacket());
@@ -103,7 +103,7 @@ public class ActionSender {
 	 */
 	public void sendWorldInit() {
 		session.setAuthenticated();
-		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(2));
+		PacketBuilder bldr = new PacketBuilder(session.protocol().packets().getOutgoingPacket(2));
 		logger.trace("Sending level init");
 		session.send(bldr.toPacket());
 	}
@@ -115,7 +115,7 @@ public class ActionSender {
 	 * @param percent The percentage.
 	 */
 	public void sendWorldBlock(int len, byte[] chunk, int percent) {
-		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(3));
+		PacketBuilder bldr = new PacketBuilder(session.protocol().packets().getOutgoingPacket(3));
 		bldr.putShort("chunk_length", len);
 		bldr.putByteArray("chunk_data", chunk);
 		bldr.putByte("percent", percent);
@@ -131,7 +131,7 @@ public class ActionSender {
 			public void execute() {
 				// for thread safety
 				World level = session.getPlayer().getWorld();
-				PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(4));
+				PacketBuilder bldr = new PacketBuilder(session.protocol().packets().getOutgoingPacket(4));
 				bldr.putShort("width", level.getWidth());
 				bldr.putShort("height", level.getHeight());
 				bldr.putShort("depth", level.getDepth());
@@ -153,7 +153,7 @@ public class ActionSender {
 	 * @param rotation The new rotation.
 	 */
 	public void sendTeleport(Position position, Rotation rotation) {
-		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(8));
+		PacketBuilder bldr = new PacketBuilder(session.protocol().packets().getOutgoingPacket(8));
 		bldr.putByte("id", -1);
 		bldr.putShort("x", position.getX());
 		bldr.putShort("y", position.getY());
@@ -165,7 +165,7 @@ public class ActionSender {
 	}
 
 	public void sendAddEntity(Entity entity, int id) {
-		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(7));
+		PacketBuilder bldr = new PacketBuilder(session.protocol().packets().getOutgoingPacket(7));
 		bldr.putByte("id", id);
 		bldr.putString("name", entity.getName());
 		bldr.putShort("x", entity.getPosition().getX());
@@ -206,7 +206,7 @@ public class ActionSender {
 		
 		if (deltaX > Byte.MAX_VALUE || deltaX < Byte.MIN_VALUE || deltaY > Byte.MAX_VALUE || deltaY < Byte.MIN_VALUE || deltaZ > Byte.MAX_VALUE || deltaZ < Byte.MIN_VALUE || deltaRotation > Byte.MAX_VALUE || deltaRotation < Byte.MIN_VALUE || deltaLook > Byte.MAX_VALUE || deltaLook < Byte.MIN_VALUE) {
 			// teleport
-			PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(8));
+			PacketBuilder bldr = new PacketBuilder(session.protocol().packets().getOutgoingPacket(8));
 			bldr.putByte("id", entity.getId());
 			bldr.putShort("x", position.getX());
 			bldr.putShort("y", position.getY());
@@ -216,7 +216,7 @@ public class ActionSender {
 			session.send(bldr.toPacket());
 		} else {
 			// send move and rotate packet
-			PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(9));
+			PacketBuilder bldr = new PacketBuilder(session.protocol().packets().getOutgoingPacket(9));
 			bldr.putByte("id", entity.getId());
 			bldr.putByte("delta_x", deltaX);
 			bldr.putByte("delta_y", deltaY);
@@ -232,7 +232,7 @@ public class ActionSender {
 	 * @param entity The entity being removed.
 	 */
 	public void sendRemoveEntity(Entity entity) {
-		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(12));
+		PacketBuilder bldr = new PacketBuilder(session.protocol().packets().getOutgoingPacket(12));
 		bldr.putByte("id", entity.getOldId());
 		logger.trace("Sending remove entity");
 		session.send(bldr.toPacket());
@@ -246,7 +246,7 @@ public class ActionSender {
 	 * @param type BlockDefinition type.
 	 */
 	public void sendBlock(int x, int y, int z, byte type) {
-		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(6));
+		PacketBuilder bldr = new PacketBuilder(session.protocol().packets().getOutgoingPacket(6));
 		bldr.putShort("x", x);
 		bldr.putShort("y", y);
 		bldr.putShort("z", z);
@@ -269,7 +269,7 @@ public class ActionSender {
 	 * @param message The message.
 	 */
 	public void sendChatMessage(int id, String message) {
-		PacketBuilder bldr = new PacketBuilder(PersistingPacketManager.getPacketManager().getOutgoingPacket(13));
+		PacketBuilder bldr = new PacketBuilder(session.protocol().packets().getOutgoingPacket(13));
 		bldr.putByte("id", id);
 		bldr.putString("message", message);
 		logger.trace("Sending chat message: {}", message);

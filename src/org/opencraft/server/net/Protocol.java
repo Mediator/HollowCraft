@@ -1,3 +1,4 @@
+package org.opencraft.server.net;
 
 /*
  * OpenCraft License
@@ -31,28 +32,56 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.opencraft.server.net;
 
-import org.opencraft.io.PersistenceManager;
 import org.opencraft.server.net.packet.PacketManager;
+import org.opencraft.server.net.packet.handler.PacketHandlerManager;
+import org.opencraft.io.PersistenceManager;
+import java.util.Map;
 
-/**
- * @author Mark Farrell
- * A packet manager with persistence.
- */
-public class PersistingPacketManager extends PacketManager{
+public class Protocol {
+	public enum Version {
+		Classic,
+		Alpha
+	}
 
-	/**
-	 * The packet manager instance.
-	 */
-	private static final PacketManager INSTANCE = (PacketManager) PersistenceManager.getPersistenceManager().load("data/packets.xml");;
-	
-	
-	/**
-	 * Gets the packet manager instance.
-	 * @return The packet manager instance.
-	 */
-	public static PacketManager getPacketManager() {
-		return INSTANCE;
+	PacketHandlerManager m_handler;
+	PacketManager m_packets;
+
+	private Version m_version;
+
+	public Protocol(Version v) {
+		m_version = v;
+	}
+
+	public PacketHandlerManager handler() {
+		if (m_handler == null)
+			m_handler = handler(m_version);
+		return m_handler;
+	}
+
+	public static PacketHandlerManager handler(Version v) {
+		switch(v) {
+			case Classic:
+				return new PacketHandlerManager((Map<Integer,String>) PersistenceManager.getPersistenceManager().load("data/protocol/classic/packetHandlers.xml"));
+			case Alpha:
+				return new PacketHandlerManager((Map<Integer,String>) PersistenceManager.getPersistenceManager().load("data/protocol/alpha/packetHandlers.xml"));
+		}
+		return null;
+	}
+
+	public PacketManager packets() {
+		if (m_packets == null)
+			m_packets = packets(m_version);
+		return m_packets; 
+	}
+
+	public static PacketManager packets(Version v) {
+		switch(v) {
+			case Classic:
+				return (PacketManager) PersistenceManager.getPersistenceManager().load("data/protocol/classic/packets.xml");
+			case Alpha:
+				return (PacketManager) PersistenceManager.getPersistenceManager().load("data/protocol/alpha/packets.xml");
+		}
+		return null;
 	}
 }

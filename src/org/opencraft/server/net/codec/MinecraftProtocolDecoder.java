@@ -41,10 +41,13 @@ import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.CumulativeProtocolDecoder;
 import org.apache.mina.filter.codec.ProtocolDecoderOutput;
+import org.apache.mina.filter.codec.ProtocolCodecFilter;
+import org.apache.mina.filter.codec.ProtocolCodecFactory;
 import org.opencraft.server.net.packet.Packet;
 import org.opencraft.server.net.packet.PacketDefinition;
 import org.opencraft.server.net.packet.PacketField;
 import org.opencraft.server.net.packet.PacketManager;
+import org.opencraft.server.net.Protocol;
 
 /**
  * An implement of a <code>ProtocolDecoder</code> which decodes buffers into
@@ -57,18 +60,29 @@ public final class MinecraftProtocolDecoder extends CumulativeProtocolDecoder {
 	 * The current packet being decoded.
 	 */
 	private PacketDefinition currentPacket = null;
-	private PacketManager manager;
 	
-	public MinecraftProtocolDecoder(PacketManager manager)
+	public MinecraftProtocolDecoder()
 	{
-		this.manager = manager;
 	}
+
 	@Override
 	protected boolean doDecode(IoSession session, IoBuffer buffer, ProtocolDecoderOutput out) throws Exception {
+		if (!session.containsAttribute("protocol")) {
+			int opcode = buffer.getUnsigned();
+			Protocol protocol;
+			if (opcode == 0) {
+				protocol = new Protocol(Protocol.Version.Classic);
+			} else {
+				protocol = new Protocol(Protocol.Version.Alpha);
+			}
+			session.setAttribute("protocol", protocol);
+			buffer.position(0);
+		}
+		Protocol p = (Protocol) session.getAttribute("protocol");
 		if (currentPacket == null) {
 			if (buffer.remaining() >= 1) {
 				int opcode = buffer.getUnsigned();
-				currentPacket = manager.getIncomingPacket(opcode);
+				currentPacket = p.packets().getIncomingPacket(opcode);
 				if (currentPacket == null) {
 					throw new IOException("Unknown incoming packet type (opcode = " + opcode + ").");
 				}
@@ -108,9 +122,7 @@ public final class MinecraftProtocolDecoder extends CumulativeProtocolDecoder {
 			currentPacket = null;
 			out.write(packet);
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
-	
 }
