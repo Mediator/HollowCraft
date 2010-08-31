@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import minecraft
 
-class TestBot(minecraft.ServerConnection):
-	def onSelfSpawn(self, myID):
+class TestBot(minecraft.AlphaConnection):
+	def onSelfSpawn(self):
 		self.log("Connection success.")
 		self.running = False
 

@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 from minecraft import *
 
-class TestBot(ServerConnection):
+class TestBot(AlphaConnection):
 	def __init__(self, user, passwd, host, port):
 		super(TestBot, self).__init__(user, passwd, host, port);
 		self.blockCount = 0
 
-	def onSelfSpawn(self, pid):
-		self.client_destroyBlock(128, 128, 32, 1);
-		self.client_createBlock(128, 128, 32, 1);
+	def onSelfSpawn(self):
+		self.client_setBlock(28, 28, 32, 0, 0);
+		self.client_setBlock(28, 28, 32, 1, 0);
 	
 	def onSetBlock(self, x, y, z, type):
 		self.blockCount+=1
