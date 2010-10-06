@@ -60,9 +60,9 @@ public final class MCSharpFileHandler {
 		return (int)(((s>>8)&0xff)+((s << 8)&0xff00));
 	}
 
-	public static Level load(String filename) throws IOException {
+	public static ClassicLevel load(String filename) throws IOException {
 		logger.trace("Loading {}", filename);
-		Level lvl = new Level();
+		ClassicLevel lvl = new ClassicLevel();
 		FileInputStream in = new FileInputStream(filename);
 		GZIPInputStream decompressor = new GZIPInputStream(in);
 
@@ -97,6 +97,7 @@ public final class MCSharpFileHandler {
 				data.readFully(row);
 				for(int x = 0;x<width;x++) {
 					blocks[x][y][z] = translateBlock(row[x]);
+					blocks[x][y][z] = (byte)translateBlock(row[x]);
 				}
 			}
 		}
@@ -104,7 +105,7 @@ public final class MCSharpFileHandler {
 		lvl.setBlocks(blocks, new byte[width][height][depth], width, height, depth);
 		lvl.setSpawnPosition(new Position(spawnX, spawnY, spawnZ));
 		lvl.setSpawnRotation(new Rotation(spawnRotation, spawnPitch));
-		lvl.setEnvironment(new Environment());
+		lvl.setEnvironment(new ClassicEnvironment());
 
 		return lvl;
 	}

@@ -69,8 +69,8 @@ public final class MineFileHandler {
 	 * @param filename The name of the file to unzip
 	 * @return The uncompressed Level
 	 */
-	public static Level load(String filename) throws IOException {
-		Level lvl = new Level();
+	public static ClassicLevel load(String filename) throws IOException {
+		ClassicLevel lvl = new ClassicLevel();
 		FileInputStream in = new FileInputStream(filename);
 		GZIPInputStream decompressor = new GZIPInputStream(in);
 		DataInputStream data = new DataInputStream(decompressor);
@@ -85,7 +85,7 @@ public final class MineFileHandler {
 		}
 
 		if (level != null) {
-			Environment env = new Environment();
+			ClassicEnvironment env = new ClassicEnvironment();
 
 			int width  = level.width;
 			int height = level.height;
@@ -121,7 +121,7 @@ public final class MineFileHandler {
 		return lvl;
 	}
 
-	public static void save(Level lvl, String filename) {
+	public static void save(ClassicLevel lvl, String filename) {
 		//We'd need to basically steal code from minecraft to do this, since
 		//there doesn't seem to be a way to make a ObjectStreamClass from
 		//scratch with a custom class name.

@@ -72,8 +72,8 @@ public final class NBTFileHandler {
 	 * @param filename The name of the file to Load
 	 * @return The loaded Level
 	 */
-	public static Level load(String filename) throws IOException {
-		Level lvl = new Level();
+	public static ClassicLevel load(String filename) throws IOException {
+		ClassicLevel lvl = new ClassicLevel();
 		NBTInputStream nbtin;
 
 		logger.trace("Loading in {}", filename);
@@ -92,10 +92,10 @@ public final class NBTFileHandler {
 		return lvl;
 	}
 
-	private static void unpackEnvironment(Level lvl, Map<String, Tag> items) {
+	private static void unpackEnvironment(ClassicLevel lvl, Map<String, Tag> items) {
 		CompoundTag etag = (CompoundTag)(items.get("Environment"));
 		Map<String, Tag> eItems = etag.getValue();
-		Environment env = new Environment();
+		ClassicEnvironment env = new ClassicEnvironment();
 
 		// A single missing property should not stop any other property from being loaded. All vars already have a default variable
 		try { env.setSurroundingGroundHeight(((ShortTag)(eItems.get("SurroundingGroundHeight"))).getValue());	} catch (NullPointerException e) { }
@@ -112,7 +112,7 @@ public final class NBTFileHandler {
 		lvl.setEnvironment(env);
 	}
 
-	private static void unpackMap(Level lvl, Map<String, Tag> items) {
+	private static void unpackMap(ClassicLevel lvl, Map<String, Tag> items) {
 		CompoundTag map = (CompoundTag)(items.get("Map"));
 		Map<String, Tag> mapItems = map.getValue();
 
@@ -171,15 +171,15 @@ public final class NBTFileHandler {
 		}
 	}
 
-	private static void unpackEntities(Level lvl, Map<String, Tag> items) {
+	private static void unpackEntities(ClassicLevel lvl, Map<String, Tag> items) {
 		//TODO
 	}
 
-	private static void unpackTileEntities(Level lvl, Map<String, Tag> items) {
+	private static void unpackTileEntities(ClassicLevel lvl, Map<String, Tag> items) {
 		//TODO
 	}
 
-	private static void unpackAbout(Level lvl, Map<String, Tag> items) {
+	private static void unpackAbout(ClassicLevel lvl, Map<String, Tag> items) {
 		CompoundTag about = (CompoundTag)(items.get("About"));
 		Map<String, Tag> aboutItems = about.getValue();
 		lvl.setTitle(((StringTag)(aboutItems.get("Name"))).getValue());
@@ -195,7 +195,7 @@ public final class NBTFileHandler {
 	//
 	//
 
-	public static void save(Level lvl, String filename) {
+	public static void save(ClassicLevel lvl, String filename) {
 		HashMap<String, Tag> rootItems = new HashMap<String, Tag>();
 
 			
@@ -222,14 +222,14 @@ public final class NBTFileHandler {
 		}
 	}
 
-	private static CompoundTag packEnvironment(Level lvl) {
+	private static CompoundTag packEnvironment(ClassicLevel lvl) {
 		HashMap<String, Tag> eItems = new HashMap<String, Tag>();
-		Environment env = lvl.getEnvironment();
+		ClassicEnvironment env = lvl.getEnvironment();
 
 		ShortTag sgh = new ShortTag("SurroundingGroundHeight", (short)env.getSurroundingGroundHeight());
-		ByteTag  sgt = new ByteTag("SurroundingGroundType", env.getSurroundingGroundType());
+		ByteTag  sgt = new ByteTag("SurroundingGroundType", (byte)env.getSurroundingGroundType());
 		ShortTag swh = new ShortTag("SurroundingWaterHeight", (short)env.getSurroundingWaterHeight());
-		ByteTag  swt = new ByteTag("SurroundingWaterType", env.getSurroundingWaterType());
+		ByteTag  swt = new ByteTag("SurroundingWaterType", (byte)env.getSurroundingWaterType());
 		ShortTag clh = new ShortTag("CloudHeight", (short)env.getCloudHeight());
 		ShortTag tod = new ShortTag("TimeOfDay", env.getTimeOfDay());
 		IntTag   clc = new IntTag("CloudColor", env.getCloudColor());
@@ -250,7 +250,7 @@ public final class NBTFileHandler {
 		return new CompoundTag("Environment", eItems);
 	}
 
-	private static CompoundTag packMap(Level lvl) {
+	private static CompoundTag packMap(ClassicLevel lvl) {
 		HashMap<String, Tag> mapItems = new HashMap<String, Tag>();
  
 		// Map data
@@ -319,7 +319,7 @@ public final class NBTFileHandler {
 
 	}
 
-	private static CompoundTag packEntities(Level lvl) {
+	private static CompoundTag packEntities(ClassicLevel lvl) {
 		HashMap<String, Tag> entities = new HashMap<String, Tag>();
 
 		//
@@ -358,7 +358,7 @@ public final class NBTFileHandler {
 		return new CompoundTag("Entities", entities);
 	}
 
-	private static CompoundTag packAbout(Level lvl) {
+	private static CompoundTag packAbout(ClassicLevel lvl) {
 		HashMap<String, Tag> aboutItems = new HashMap<String, Tag>();
 
 		StringTag name;
