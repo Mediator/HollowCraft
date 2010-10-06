@@ -1,4 +1,10 @@
 <!--
+  HollowCraft License
+   Copyright (c) 2010 Caleb Champlin.
+   All rights reserved
+   This license must be include in all copied, cloned and derived works 
+-->
+<!--
 
 OpenCraft License
 
@@ -35,106 +41,250 @@ POSSIBILITY OF SUCH DAMAGE.
 <packets>
   <incoming>
     <packet>
-      <opcode>0</opcode>
-      <name>authentication_request</name>
+      <opcode>1</opcode>
+      <name>login</name>
       <fields>
         <field>
           <name>protocol_version</name>
-          <type>BYTE</type>
+          <type>INT</type>
         </field>
         <field>
           <name>username</name>
           <type>STRING</type>
         </field>
         <field>
-          <name>verification_key</name>
+          <name>password</name>
           <type>STRING</type>
         </field>
+      </fields>
+    </packet>
+    <packet>
+      <opcode>2</opcode>
+      <name>handshake</name>
+      <fields>
         <field>
-          <name>unused</name>
-          <type>BYTE</type>
+          <name>username</name>
+          <type>STRING</type>
         </field>
       </fields>
+    </packet>
+    <packet>
+      <opcode>0</opcode>
+      <name>keepalive</name>
+      <fields />
     </packet>
     <packet>
       <opcode>5</opcode>
-      <name>set_tile</name>
-      <fields>
-        <field>
-          <name>x</name>
-          <type>SHORT</type>
-        </field>
-        <field>
-          <name>z</name>
-          <type>SHORT</type>
-        </field>
-        <field>
-          <name>y</name>
-          <type>SHORT</type>
-        </field>
-        <field>
-          <name>mode</name>
-          <type>BYTE</type>
-        </field>
+      <name>inventory</name>
+            <fields>
         <field>
           <name>type</name>
+          <type>INT</type>
+        </field>
+        <field>
+          <name>count</name>
+          <type>SHORT</type>
+        </field>
+        <field>
+          <name>payload</name>
+          <type>INVENTORY</type>
+        </field>
+      </fields>
+    </packet>
+    <packet>
+      <opcode>10</opcode>
+      <name>flying</name>
+      <fields>
+        <field>
+          <name>flying</name>
           <type>BYTE</type>
         </field>
       </fields>
     </packet>
     <packet>
-      <opcode>8</opcode>
-      <name>move_and_rotate</name>
-      <fields>
-        <field>
-          <name>unused</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>x</name>
-          <type>SHORT</type>
-        </field>
-        <field>
-          <name>z</name>
-          <type>SHORT</type>
-        </field>
-        <field>
-          <name>y</name>
-          <type>SHORT</type>
-        </field>
-        <field>
-          <name>rotation</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>look</name>
-          <type>BYTE</type>
-        </field>
-      </fields>
+      <opcode>12</opcode>
+      <name>look</name>
+    	<fields>
+    		<field>
+    			<name>rotation</name>
+    			<type>FLOAT</type>
+    		</field>
+    		<field>
+    			<name>pitch</name>
+    			<type>FLOAT</type>
+    		</field>
+			<field>
+    			<name>flying</name>
+    			<type>BYTE</type>
+    		</field>
+    	</fields>
+    </packet>
+    <packet>
+      <opcode>11</opcode>
+      <name>move</name>
+    	<fields>
+    		<field>
+    			<name>x</name>
+    			<type>DOUBLE</type>
+    		</field>
+    		<field>
+    			<name>y</name>
+    			<type>DOUBLE</type>
+    		</field>
+    		<field>
+    			<name>stance</name>
+    			<type>DOUBLE</type>
+    		</field>
+			<field>
+    			<name>z</name>
+    			<type>DOUBLE</type>
+    		</field>
+    		<field>
+    			<name>flying</name>
+    			<type>BYTE</type>
+    		</field>
+    	</fields>
     </packet>
     <packet>
       <opcode>13</opcode>
-      <name>message</name>
-      <fields>
-        <field>
-          <name>unused</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>message</name>
-          <type>STRING</type>
-        </field>
-      </fields>
+      <name>move_and_look</name>
+    	<fields>
+    		<field>
+    			<name>x</name>
+    			<type>DOUBLE</type>
+    		</field>
+    		<field>
+    			<name>y</name>
+    			<type>DOUBLE</type>
+    		</field>
+			<field>
+    			<name>stance</name>
+    			<type>DOUBLE</type>
+    		</field>
+    		<field>
+    			<name>z</name>
+    			<type>DOUBLE</type>
+    		</field>
+    		<field>
+    			<name>rotation</name>
+    			<type>FLOAT</type>
+    		</field>
+			<field>
+    			<name>pitch</name>
+    			<type>FLOAT</type>
+    		</field>
+			<field>
+    			<name>flying</name>
+    			<type>BYTE</type>
+    		</field>
+    	</fields>
+    </packet>
+    <packet>
+    	<opcode>14</opcode>
+    	<name>dig</name>
+    	<fields>
+    		<field>
+    			<name>status</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>x</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>y</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>z</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>face</name>
+    			<type>BYTE</type>
+    		</field>
+    	</fields>
+    </packet>
+        <packet>
+    	<opcode>15</opcode>
+    	<name>place</name>
+    	<fields>
+    		<field>
+    			<name>blockid</name>
+    			<type>SHORT</type>
+    		</field>
+    		<field>
+    			<name>x</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>y</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>Z</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>direction</name>
+    			<type>BYTE</type>
+    		</field>
+    	</fields>
+    </packet>
+    <packet>
+    	<opcode>16</opcode>
+    	<name>holding</name>
+    	<fields>
+    	    <field>
+    			<name>entity</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>item</name>
+    			<type>SHORT</type>
+    		</field>
+    	</fields>
+    </packet>
+    <packet>
+    	<opcode>18</opcode>
+    	<name>arm_animation</name>
+    	<fields>
+    	    <field>
+    			<name>entity</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>position</name>
+    			<type>BYTE</type>
+    		</field>
+    	</fields>
+    </packet>
+    <packet>
+    	<opcode>255</opcode>
+    	<name>quit</name>
+    	<fields>
+    		<field>
+    			<name>message</name>
+    			<type>STRING</type>
+    		</field>
+    	</fields>
     </packet>
   </incoming>
   <outgoing>
-    <packet>
+     <packet>
       <opcode>0</opcode>
-      <name>authentication_response</name>
+      <shouldqueue>false</shouldqueue>
+      <name>keepalive</name>
+      <fields />
+    </packet>
+    <packet>
+      <opcode>1</opcode>
+      <shouldqueue>false</shouldqueue>
+      <name>login_response</name>
       <fields>
         <field>
           <name>protocol_version</name>
-          <type>BYTE</type>
+          <type>INT</type>
         </field>
         <field>
           <name>server_name</name>
@@ -144,257 +294,371 @@ POSSIBILITY OF SUCH DAMAGE.
           <name>server_message</name>
           <type>STRING</type>
         </field>
-        <field>
-          <name>user_type</name>
-          <type>BYTE</type>
-        </field>
       </fields>
     </packet>
     <packet>
-      <opcode>1</opcode>
-      <name>ping</name>
-      <fields/>
-    </packet>
-    <packet>
       <opcode>2</opcode>
-      <name>level_init</name>
-      <fields/>
-    </packet>
-    <packet>
-      <opcode>3</opcode>
-      <name>level_block</name>
-      <fields>
+      <shouldqueue>false</shouldqueue>
+      <name>handshake_response</name>
+            <fields>
         <field>
-          <name>chunk_length</name>
-          <type>SHORT</type>
-        </field>
-        <field>
-          <name>chunk_data</name>
-          <type>BYTE_ARRAY</type>
-        </field>
-        <field>
-          <name>percent</name>
-          <type>BYTE</type>
+          <name>server_hash</name>
+          <type>STRING</type>
         </field>
       </fields>
     </packet>
     <packet>
       <opcode>4</opcode>
-      <name>level_finish</name>
+      <shouldqueue>true</shouldqueue>
+      <name>time</name>
       <fields>
         <field>
-          <name>width</name>
+          <name>time</name>
+          <type>LONG</type>
+        </field>
+      </fields>
+    </packet>
+    <packet>
+      <opcode>5</opcode>
+      <shouldqueue>true</shouldqueue>
+      <name>inventory</name>
+            <fields>
+        <field>
+          <name>type</name>
+          <type>INT</type>
+        </field>
+        <field>
+          <name>count</name>
           <type>SHORT</type>
         </field>
         <field>
-          <name>depth</name>
-          <type>SHORT</type>
-        </field>
-        <field>
-          <name>height</name>
-          <type>SHORT</type>
+          <name>payload</name>
+          <type>INVENTORY</type>
         </field>
       </fields>
     </packet>
     <packet>
       <opcode>6</opcode>
-      <name>set_tile</name>
+      <shouldqueue>false</shouldqueue>
+      <name>spawn</name>
       <fields>
         <field>
           <name>x</name>
-          <type>SHORT</type>
-        </field>
-        <field>
-          <name>z</name>
-          <type>SHORT</type>
+          <type>INT</type>
         </field>
         <field>
           <name>y</name>
-          <type>SHORT</type>
-        </field>
-        <field>
-          <name>type</name>
-          <type>BYTE</type>
-        </field>
-      </fields>
-    </packet>
-    <packet>
-      <opcode>7</opcode>
-      <name>add_entity</name>
-      <fields>
-        <field>
-          <name>id</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>name</name>
-          <type>STRING</type>
-        </field>
-        <field>
-          <name>x</name>
-          <type>SHORT</type>
+          <type>INT</type>
         </field>
         <field>
           <name>z</name>
-          <type>SHORT</type>
-        </field>
-        <field>
-          <name>y</name>
-          <type>SHORT</type>
-        </field>
-        <field>
-          <name>rotation</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>look</name>
-          <type>BYTE</type>
+          <type>INT</type>
         </field>
       </fields>
     </packet>
     <packet>
-      <opcode>8</opcode>
-      <name>teleport</name>
-      <fields>
-        <field>
-          <name>id</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>x</name>
-          <type>SHORT</type>
-        </field>
-        <field>
-          <name>z</name>
-          <type>SHORT</type>
-        </field>
-        <field>
-          <name>y</name>
-          <type>SHORT</type>
-        </field>
-        <field>
-          <name>rotation</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>look</name>
-          <type>BYTE</type>
-        </field>
-      </fields>
+    	<opcode>13</opcode>
+    	<shouldqueue>true</shouldqueue>
+    	<name>move_and_look</name>
+    	<fields>
+    		<field>
+    			<name>x</name>
+    			<type>DOUBLE</type>
+    		</field>
+    		<field>
+    			<name>y</name>
+    			<type>DOUBLE</type>
+    		</field>
+			<field>
+    			<name>stance</name>
+    			<type>DOUBLE</type>
+    		</field>
+    		<field>
+    			<name>z</name>
+    			<type>DOUBLE</type>
+    		</field>
+    		<field>
+    			<name>rotation</name>
+    			<type>FLOAT</type>
+    		</field>
+			<field>
+    			<name>pitch</name>
+    			<type>FLOAT</type>
+    		</field>
+			<field>
+    			<name>flying</name>
+    			<type>BYTE</type>
+    		</field>
+    	</fields>
     </packet>
     <packet>
-      <opcode>9</opcode>
-      <name>move_and_rotate</name>
-      <fields>
-        <field>
-          <name>id</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>delta_x</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>delta_z</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>delta_y</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>delta_rotation</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>delta_look</name>
-          <type>BYTE</type>
-        </field>
-      </fields>
+    	<opcode>16</opcode>
+    	<shouldqueue>true</shouldqueue>
+    	<name>holding</name>
+    	<fields>
+    	    <field>
+    			<name>entity</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>item</name>
+    			<type>SHORT</type>
+    		</field>
+    	</fields>
     </packet>
     <packet>
-      <opcode>10</opcode>
-      <name>rotate</name>
-      <fields>
-        <field>
-          <name>id</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>delta_rotation</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>delta_look</name>
-          <type>BYTE</type>
-        </field>
-      </fields>
-    </packet>  
-    <packet>
-      <opcode>11</opcode>
-      <name>move</name>
-      <fields>
-        <field>
-          <name>id</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>delta_x</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>delta_z</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>delta_y</name>
-          <type>BYTE</type>
-        </field>
-      </fields>
+    	<opcode>18</opcode>
+    	<shouldqueue>true</shouldqueue>
+    	<name>arm_animation</name>
+    	<fields>
+    	    <field>
+    			<name>entity</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>position</name>
+    			<type>BYTE</type>
+    		</field>
+    	</fields>
     </packet>
     <packet>
-      <opcode>12</opcode>
-      <name>remove_entity</name>
-      <fields>
-        <field>
-          <name>id</name>
-          <type>BYTE</type>
-        </field>
-      </fields>
+    	<opcode>21</opcode>
+    	<shouldqueue>true</shouldqueue>
+    	<name>pickup_spawn</name>
+    	<fields>
+    	    <field>
+    			<name>entity_id</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>item</name>
+    			<type>SHORT</type>
+    		</field>
+    		<field>
+    			<name>count</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>x</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>y</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>z</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>rotation</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>pitch</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>roll</name>
+    			<type>BYTE</type>
+    		</field>
+    	</fields>
     </packet>
     <packet>
-      <opcode>13</opcode>
-      <name>message</name>
-      <fields>
-        <field>
-          <name>id</name>
-          <type>BYTE</type>
-        </field>
-        <field>
-          <name>message</name>
-          <type>STRING</type>
-        </field>
-      </fields>
+    	<opcode>31</opcode>
+    	<shouldqueue>true</shouldqueue>
+    	<name>entity_move</name>
+    	<fields>
+    	    <field>
+    			<name>entity</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>x</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>y</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>z</name>
+    			<type>BYTE</type>
+    		</field>
+    	</fields>
     </packet>
     <packet>
-      <opcode>14</opcode>
-      <name>disconnect</name>
-      <fields>
-        <field>
-          <name>reason</name>
-          <type>STRING</type>
-        </field>
-      </fields>
+    	<opcode>32</opcode>
+    	<shouldqueue>true</shouldqueue>
+    	<name>entity_look</name>
+    	<fields>
+    	    <field>
+    			<name>entity</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>rotation</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>pitch</name>
+    			<type>BYTE</type>
+    		</field>
+    	</fields>
     </packet>
     <packet>
-      <opcode>15</opcode>
-      <name>set_user_type</name>
-      <fields>
-        <field>
-          <name>user_type</name>
-          <type>BYTE</type>
-        </field>
-      </fields>
+    	<opcode>33</opcode>
+    	<shouldqueue>true</shouldqueue>
+    	<name>entity_movelook</name>
+    	<fields>
+    	    <field>
+    			<name>entity</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>x</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>y</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>z</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>rotation</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>pitch</name>
+    			<type>BYTE</type>
+    		</field>
+    	</fields>
+    </packet>
+    <packet>
+    	<opcode>34</opcode>
+    	<shouldqueue>true</shouldqueue>
+    	<name>teleport</name>
+    	<fields>
+    	    <field>
+    			<name>entity</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>x</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>y</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>z</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>rotation</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>pitch</name>
+    			<type>BYTE</type>
+    		</field>
+    	</fields>
+    </packet>
+    <packet>
+    	<opcode>50</opcode>
+    	<shouldqueue>false</shouldqueue>
+    	<name>chunk_prequeue</name>
+    	<fields>
+    		<field>
+    			<name>x</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>z</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>mode</name>
+    			<type>BYTE</type>
+    		</field>
+    	</fields>
+    </packet>
+    <packet>
+    	<opcode>51</opcode>
+    	<shouldqueue>false</shouldqueue>
+    	<name>chunk</name>
+    	<fields>
+    		<field>
+    			<name>x</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>y</name>
+    			<type>SHORT</type>
+    		</field>
+    		<field>
+    			<name>z</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>size_x</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>size_y</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>size_z</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>chunk</name>
+    			<type>BYTE_ARRAY</type>
+    		</field>
+    	</fields>
+    </packet>
+    <packet>
+    	<opcode>53</opcode>
+    	<shouldqueue>true</shouldqueue>
+    	<name>change_block</name>
+    	<fields>
+    		<field>
+    			<name>x</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>y</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>z</name>
+    			<type>INT</type>
+    		</field>
+    		<field>
+    			<name>type</name>
+    			<type>BYTE</type>
+    		</field>
+    		<field>
+    			<name>metadata</name>
+    			<type>BYTE</type>
+    		</field>
+    	</fields>
+    </packet>
+    <packet>
+    	<opcode>255</opcode>
+    	<shouldqueue>false</shouldqueue>
+    	<name>kick</name>
+    	<fields>
+    		<field>
+    			<name>message</name>
+    			<type>STRING</type>
+    		</field>
+    	</fields>
     </packet>
   </outgoing>
 </packets>

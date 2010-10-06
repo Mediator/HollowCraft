@@ -1,4 +1,10 @@
 <!--
+  HollowCraft License
+   Copyright (c) 2010 Caleb Champlin.
+   All rights reserved
+   This license must be include in all copied, cloned and derived works 
+-->
+<!--
 
 OpenCraft License
 
@@ -35,18 +41,54 @@ POSSIBILITY OF SUCH DAMAGE.
 <map>
   <entry>
     <int>0</int>
-    <string>org.opencraft.server.net.packet.handler.impl.AuthenticationPacketHandler</string>
+    <string>org.hollowcraft.server.net.packet.handler.impl.KeepAlivePacketHandler</string>
+  </entry>
+  <entry>
+    <int>1</int>
+    <string>org.hollowcraft.server.net.packet.handler.impl.LoginPacketHandler</string>
+  </entry>
+  <entry>
+    <int>2</int>
+    <string>org.hollowcraft.server.net.packet.handler.impl.HandshakePacketHandler</string>
   </entry>
   <entry>
     <int>5</int>
-    <string>org.opencraft.server.net.packet.handler.impl.ConstructionPacketHandler</string>
+    <string>org.hollowcraft.server.net.packet.handler.impl.InventoryPacketHandler</string>
   </entry>
   <entry>
-    <int>8</int>
-    <string>org.opencraft.server.net.packet.handler.impl.MovementPacketHandler</string>
+    <int>10</int>
+    <string>org.hollowcraft.server.net.packet.handler.impl.FlyingPacketHandler</string>
   </entry>
   <entry>
     <int>13</int>
-    <string>org.opencraft.server.net.packet.handler.impl.MessagePacketHandler</string>
+    <string>org.hollowcraft.server.net.packet.handler.impl.MoveLookPacketHandler</string>
+  </entry>
+  <entry>
+    <int>11</int>
+    <string>org.hollowcraft.server.net.packet.handler.impl.MovePacketHandler</string>
+  </entry>
+    <entry>
+    <int>12</int>
+    <string>org.hollowcraft.server.net.packet.handler.impl.LookPacketHandler</string>
+  </entry>
+  <entry>
+    <int>14</int>
+    <string>org.hollowcraft.server.net.packet.handler.impl.DigPacketHandler</string>
+  </entry>
+  <entry>
+    <int>15</int>
+    <string>org.hollowcraft.server.net.packet.handler.impl.PlacePacketHandler</string>
+  </entry>
+  <entry>
+    <int>16</int>
+    <string>org.hollowcraft.server.net.packet.handler.impl.HoldingPacketHandler</string>
+  </entry>
+    <entry>
+    <int>18</int>
+    <string>org.hollowcraft.server.net.packet.handler.impl.ArmAnimationPacketHandler</string>
+  </entry>
+  <entry>
+    <int>255</int>
+    <string>org.hollowcraft.server.net.packet.handler.impl.QuitPacketHandler</string>
   </entry>
 </map>
