@@ -58,12 +58,16 @@ import org.slf4j.LoggerFactory;
  * @author Caleb Champlin
  */
 public final class MinecraftProtocolEncoder extends ProtocolEncoderAdapter {
-	
+	private static final Logger logger = LoggerFactory.getLogger(MinecraftProtocolEncoder.class);
 	public void encode(IoSession session, Object message, ProtocolEncoderOutput out) throws Exception {
+		logger.debug("Encoding packet");
 		Packet packet = (Packet) message;
 		PacketDefinition def = packet.getDefinition();
 		IoBuffer buf = IoBuffer.allocate(def.getLength() + 1);
+		buf.setAutoExpand(true);
 		buf.put((byte) def.getOpcode());
+		int fieldlength;
+		byte[] data;
 		for (PacketField field : def.getFields()) {
 			switch (field.getType()) {
 			case BYTE:
@@ -78,25 +82,34 @@ public final class MinecraftProtocolEncoder extends ProtocolEncoderAdapter {
 			case LONG:
 				buf.putLong(packet.getNumericField(field.getName()).longValue());
 				break;
+			case DOUBLE:
+				buf.putDouble(packet.getNumericField(field.getName()).doubleValue());
+				break;
+			case FLOAT:
+				buf.putFloat(packet.getNumericField(field.getName()).floatValue());
+				break;
+			case INVENTORY:
+				data = packet.getByteArrayField(field.getName());
+				buf.put(data);
+				break;
 			case BYTE_ARRAY:
-				byte[] data = packet.getByteArrayField(field.getName());
-				byte[] resized = Arrays.copyOf(data, 1024);
-				buf.put(resized);
+				data = packet.getByteArrayField(field.getName());
+				fieldlength = data.length;
+				buf.putInt(fieldlength);
+				buf.put(data);
 				break;
 			case STRING:
 				String str = packet.getStringField(field.getName());
 				data = str.getBytes();
-				resized = Arrays.copyOf(data, 64);
-				for (int i = 0; i < resized.length; i++) {
-					if (resized[i] == 0) {
-						resized[i] = ' ';
-					}
-				}
-				buf.put(resized);
+				fieldlength = (int)data.length;
+				buf.putShort((short)fieldlength);
+				buf.put(data);
 				break;
 			}
 		}
 		buf.flip();
+		//System.out.println("Hex dump of outline: " + buf.getHexDump());
+		logger.debug("Writing out encoded packet");
 		out.write(buf);
 	}
 	

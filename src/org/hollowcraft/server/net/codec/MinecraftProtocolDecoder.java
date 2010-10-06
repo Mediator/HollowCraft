@@ -67,15 +67,21 @@ import org.slf4j.LoggerFactory;
  */
 public final class MinecraftProtocolDecoder extends CumulativeProtocolDecoder {
 	
+	
+	/**
+	 * Logger instance.
+	 */
+	private static final Logger logger = LoggerFactory.getLogger(MinecraftProtocolDecoder.class);
+	
 	/**
 	 * The current packet being decoded.
 	 */
 	private PacketDefinition currentPacket = null;
-	
+	private String curHex = "";
 	public MinecraftProtocolDecoder()
 	{
 	}
-
+	
 	@Override
 	protected boolean doDecode(IoSession session, IoBuffer buffer, ProtocolDecoderOutput out) throws Exception {
 		if (!session.containsAttribute("protocol")) {
@@ -83,16 +89,20 @@ public final class MinecraftProtocolDecoder extends CumulativeProtocolDecoder {
 			Protocol protocol;
 			if (opcode == 0) {
 				protocol = new Protocol(Protocol.Version.Classic);
+				System.out.println("Protocol Set To Classic");
 			} else {
 				protocol = new Protocol(Protocol.Version.Alpha);
+				System.out.println("Protocol Set To Alpha");
 			}
 			session.setAttribute("protocol", protocol);
 			buffer.position(0);
 		}
 		Protocol p = (Protocol) session.getAttribute("protocol");
+		int opcode = -1;
+		curHex += buffer.getHexDump() + " | ";
 		if (currentPacket == null) {
 			if (buffer.remaining() >= 1) {
-				int opcode = buffer.getUnsigned();
+				opcode = buffer.getUnsigned();
 				currentPacket = p.packets().getIncomingPacket(opcode);
 				if (currentPacket == null) {
 					throw new IOException("Unknown incoming packet type (opcode = " + opcode + ").");
@@ -101,39 +111,114 @@ public final class MinecraftProtocolDecoder extends CumulativeProtocolDecoder {
 				return false;
 			}
 		}
-		if (buffer.remaining() >= currentPacket.getLength()) {
-			Map<String, Object> values = new HashMap<String, Object>();
-			for (PacketField field : currentPacket.getFields()) {
-				Object value = null;
-				switch (field.getType()) {
-				case BYTE:
-					value = buffer.get();
-					break;
-				case SHORT:
-					value = buffer.getShort();
-					break;
-				case INT:
-					value = buffer.getInt();
-					break;
-				case LONG:
-					value = buffer.getLong();
-					break;
-				case BYTE_ARRAY:
-					value = IoBuffer.allocate(1024).put(buffer);
-					break;
-				case STRING:
-					byte[] bytes = new byte[64];
-					buffer.get(bytes);
-					value = new String(bytes).trim();
-					break;
-				}
-				values.put(field.getName(), value);
+		//logger.info("Hexdump of packet: (" + ((currentPacket == null) ? "unknown" : currentPacket.getOpcode()) + " ) [ " + curHex + " ]");
+		int bufferPos = buffer.position();
+		Map<String, Object> values = new HashMap<String, Object>();
+		for (PacketField field : currentPacket.getFields()) {
+			if (field.getType().getLength() > 0 && buffer.remaining() < field.getType().getLength())
+			{
+				curHex = "";
+				buffer.position(bufferPos);
+				return false;
 			}
-			Packet packet = new Packet(currentPacket, values);
-			currentPacket = null;
-			out.write(packet);
-			return true;
+			Object value = null;
+			int fieldlength;
+			switch (field.getType()) {
+			case BYTE:
+				value = buffer.get();
+				break;
+			case SHORT:
+				value = buffer.getShort();
+				break;
+			case INT:
+				value = buffer.getInt();
+				break;
+			case LONG:
+				value = buffer.getLong();
+				break;
+			case FLOAT:
+				value = buffer.getFloat();
+				break;
+			case DOUBLE:
+				value = buffer.getDouble();
+				break;
+			case INVENTORY:
+				//This data type really blows
+				fieldlength = ((Number)values.get("count")).shortValue();
+				IoBuffer inventoryData = IoBuffer.allocate(fieldlength  * DataType.SHORT.getLength());
+				inventoryData.setAutoExpand(true);
+				short id,health;
+				byte count;
+				
+				for (int idx = 0; idx < fieldlength; idx++)
+				{
+					if(buffer.remaining() < (DataType.SHORT.getLength()))
+					{
+						curHex = "";
+						buffer.position(bufferPos);
+						return false;
+					}
+					id = buffer.getShort();
+					inventoryData.putShort(id);
+					if (id != -1)
+					{
+						if(buffer.remaining() < (DataType.BYTE.getLength() + DataType.SHORT.getLength()))
+						{
+							curHex = "";
+							buffer.position(bufferPos);
+							return false;
+						}
+						count = buffer.get();
+						health = buffer.getShort();
+						fieldlength += 1;
+						inventoryData.put(count);
+						inventoryData.putShort(health);
+					}
+						
+				}
+				value = inventoryData;
+				break;
+			case BYTE_ARRAY:
+				if(buffer.remaining() < DataType.INT.getLength())
+				{
+					curHex = "";
+					buffer.position(bufferPos);
+					return false;
+				}
+				fieldlength = buffer.getInt();
+				if (buffer.remaining() < fieldlength ||  fieldlength <= 0)
+				{
+					curHex = "";
+					buffer.position(bufferPos);
+					return false;
+				}
+				value = IoBuffer.allocate(fieldlength).put(buffer);
+				break;
+			case STRING:
+				if(buffer.remaining() < DataType.SHORT.getLength())
+				{
+					curHex = "";
+					buffer.position(bufferPos);
+					return false;
+				}
+				fieldlength = (int)buffer.getShort();
+				if (buffer.remaining() < fieldlength ||  fieldlength <= 0)
+				{
+					curHex = "";
+					buffer.position(bufferPos);
+					return false;
+				}
+				byte[] bytes = new byte[fieldlength];
+				buffer.get(bytes);
+				value = new String(bytes).trim();
+				break;
+			}
+			values.put(field.getName(), value);
 		}
-		return false;
+		Packet packet = new Packet(currentPacket, values);
+		currentPacket = null;
+		curHex = "";
+		out.write(packet);
+		return true;
 	}
 }
