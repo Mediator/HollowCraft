@@ -55,17 +55,18 @@ public class ClassicPixelBuilder extends Builder {
 	}
 
 	public void  generate() {
+		short cloth_white = BlockManager.getBlockManager().getBlock("CLOTH_WITE").getId();
 		for(int x = 0; x < m_width; x++) {
 			for(int z = 0; z < m_depth; z++) {
-				m_blocks[x][0][z] = BlockConstants.CLOTH_WHITE;
-				m_blocks[x][m_height-1][z] = BlockConstants.CLOTH_WHITE;
+				m_blocks[x][0][z] = (byte)cloth_white;
+				m_blocks[x][m_height-1][z] = (byte)cloth_white;
 			}
 		}
 
 		for(int y = 1;y < m_height - 1; y++) {
 			for(int z = 0; z < m_depth; z++) {
-				m_blocks[0][y][z] = BlockConstants.CLOTH_WHITE;
-				m_blocks[m_width-1][y][z] = BlockConstants.CLOTH_WHITE;
+				m_blocks[0][y][z] = (byte)cloth_white;
+				m_blocks[m_width-1][y][z] = (byte)cloth_white;
 			}
 		}
 	}

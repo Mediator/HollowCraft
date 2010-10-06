@@ -51,28 +51,32 @@ import org.hollowcraft.server.model.impl.worlds.ClassicWorld;
  */
 
 public class LavaBehaviour implements BlockBehaviour {
-	public void handlePassive(Level level, int x, int y, int z, int type) {
-		((World)level).queueActiveBlockUpdate(x, y, z);
+	public void handlePassive(ClassicLevel level, Position pos, int type) {
+		((ClassicWorld)level).queueActiveBlockUpdate(pos);
 	}
 	
-	public void handleDestroy(Level level, int x, int y, int z, int type) {
+	public void handleDestroy(ClassicLevel level, Position pos, int type) {
 		
 	}
 	
-	public void handleScheduledBehaviour(Level lvl, int x, int y, int z, int type) {
-		World level = (World)lvl;
+	public void handleScheduledBehaviour(ClassicLevel lvl, Position pos, int type) {
+		short water = BlockManager.getBlockManager().getBlock("WATER").getId();
+		short still_water = BlockManager.getBlockManager().getBlock("STILL_WATER").getId();
+		short rock = BlockManager.getBlockManager().getBlock("ROCK").getId();
+		short lava = BlockManager.getBlockManager().getBlock("LAVA").getId();
+		ClassicWorld level = (ClassicWorld)lvl;
 		// represents the different directions lava can spread
 		// x, y, z
 		int[][] spreadRules = { { 0, 0, -1 }, { 1, 0, 0 }, { -1, 0, 0 }, { 0, 1, 0 }, { 0, -1, 0 } };
 		// then, spread outward
 		for (int i = 0; i <= spreadRules.length - 1; i++) {
-			byte thisOutwardBlock = level.getBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2]);
+			byte thisOutwardBlock = level.getBlock(new Position(pos.getX() + spreadRules[i][0], pos.getY() + spreadRules[i][1], pos.getZ() + spreadRules[i][2]));
 			
 			// check for lava
-			if (thisOutwardBlock == BlockConstants.WATER || thisOutwardBlock == BlockConstants.STILL_WATER) {
-				level.setBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2], BlockConstants.ROCK);
+			if (thisOutwardBlock == water || thisOutwardBlock == still_water) {
+				level.setBlock(new Position(pos.getX() + spreadRules[i][0], pos.getY() + spreadRules[i][1], pos.getZ() + spreadRules[i][2]), rock);
 			} else if (!BlockManager.getBlockManager().getBlock(thisOutwardBlock).isSolid() && !BlockManager.getBlockManager().getBlock(thisOutwardBlock).isLiquid()) {
-				level.setBlock(x + spreadRules[i][0], y + spreadRules[i][1], z + spreadRules[i][2], BlockConstants.LAVA);
+				level.setBlock(new Position(pos.getX() + spreadRules[i][0], pos.getY() + spreadRules[i][1], pos.getZ() + spreadRules[i][2]), lava);
 			}
 		}
 	}

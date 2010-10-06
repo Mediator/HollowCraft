@@ -68,22 +68,22 @@ public abstract class Builder {
 
 	// for use in theming
 	protected String m_theme;
-	protected byte m_grassBlock;
-	protected byte m_leavesBlock;
+	protected short m_grassBlock;
+	protected short m_leavesBlock;
 
 	public void setSeed(long seed) {
 		m_seed = seed;
 		m_random = new Random(seed);
 	}
 
-	public Builder(Level level) {
+	public Builder(ClassicLevel level) {
 		setSummer();
 		setLevel(level);
 		m_seed = 0;
 		m_random = new Random();
 	}
 
-	public void setLevel(Level level) {
+	public void setLevel(ClassicLevel level) {
 		m_height = level.getHeight();
 		m_width = level.getWidth();
 		m_depth = level.getDepth();
@@ -97,20 +97,20 @@ public abstract class Builder {
 	}
 
 	public void setSummer() {
-		m_grassBlock = BlockConstants.GRASS;
-		m_leavesBlock = BlockConstants.LEAVES;
+		m_grassBlock = BlockManager.getBlockManager().getBlock("GRASS").getId();
+		m_leavesBlock = BlockManager.getBlockManager().getBlock("LEAVES").getId();
 		m_theme = "Summer";
 	}
 
 	public void setWinter() {
-		m_grassBlock = BlockConstants.CLOTH_WHITE;
-		m_leavesBlock = BlockConstants.CLOTH_WHITE;
+		m_grassBlock = BlockManager.getBlockManager().getBlock("CLOTH").getId();
+		m_leavesBlock = BlockManager.getBlockManager().getBlock("CLOTH_WHITE").getId();
 		m_theme = "Winter";
 	}
 
 	public void setOasis() {
-		m_grassBlock = BlockConstants.SAND;
-		m_leavesBlock = BlockConstants.LEAVES;
+		m_grassBlock = BlockManager.getBlockManager().getBlock("SAND").getId();
+		m_leavesBlock = BlockManager.getBlockManager().getBlock("LEAVES").getId();
 		m_theme = "Oasis";
 	}
 }

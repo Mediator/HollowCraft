@@ -52,32 +52,33 @@ import org.hollowcraft.server.model.impl.worlds.ClassicWorld;
  */
 public class AirBehaviour implements BlockBehaviour {
 	
-	public void handlePassive(Level level, int x, int y, int z, int type) {
-		((World)level).queueActiveBlockUpdate(x, y, z);
+	public void handlePassive(ClassicLevel level, Position pos, int type) {
+		((ClassicWorld)level).queueActiveBlockUpdate(pos);
 	}
 	
-	public void handleDestroy(Level level, int x, int y, int z, int type) {
+	public void handleDestroy(ClassicLevel level, Position pos, int type) {
 		
 	}
 	
-	public void handleScheduledBehaviour(Level lvl, int x, int y, int z, int type) {
-		World level = (World)(lvl);
-		if (level.getBlock(x+1, y, z) == BlockConstants.WATER &&  level.getBlock(x-1, y, z) == BlockConstants.WATER && level.getBlock(x, y+1, z) == BlockConstants.WATER && level.getBlock(x, y-1, z) == BlockConstants.WATER) {
-			level.setBlock(x, y, z, BlockConstants.WATER);
+	public void handleScheduledBehaviour(ClassicLevel lvl, Position pos, int type) {
+		ClassicWorld level = (ClassicWorld)(lvl);
+		short waterID = BlockManager.getBlockManager().getBlock("WATER").getId();
+		if (level.getBlock(new Position(pos.getX()+1, pos.getY(), pos.getZ())) == waterID &&  level.getBlock(new Position(pos.getX()-1, pos.getY(), pos.getZ())) == waterID && level.getBlock(new Position(pos.getX(), pos.getY()+1, pos.getZ())) == waterID && level.getBlock(new Position(pos.getX(), pos.getY()-1, pos.getZ())) == waterID) {
+			level.setBlock(pos, waterID);
 		}
-		if (z < level.getDepth()/2 && z > level.getDepth()/2-3) {
-			if (x == 0)
-				level.setBlock(x, y, z, BlockConstants.WATER);
-			if (x == level.getWidth()-1)
-				level.setBlock(x, y, z, BlockConstants.WATER);
-			if (y == 0)
-				level.setBlock(x, y, z, BlockConstants.WATER);
-			if (y == level.getHeight()-1)
-				level.setBlock(x, y, z, BlockConstants.WATER);
+		if (pos.getZ() < level.getDepth()/2 && pos.getZ() > level.getDepth()/2-3) {
+			if (pos.getX() == 0)
+				level.setBlock(pos, waterID);
+			if (pos.getX() == level.getWidth()-1)
+				level.setBlock(pos, waterID);
+			if (pos.getY() == 0)
+				level.setBlock(pos, waterID);
+			if (pos.getY() == level.getHeight()-1)
+				level.setBlock(pos, waterID);
 		}
-		if (level.getBlock(x, y, z+1) == BlockConstants.WATER) {
-			level.setBlock(x, y, z, BlockConstants.WATER);
-			level.setBlock(x, y, z+1, BlockConstants.AIR);
+		if (level.getBlock(new Position(pos.getX(), pos.getY(), pos.getZ()+1)) == waterID) {
+			level.setBlock(pos, waterID);
+			level.setBlock(new Position(pos.getX(), pos.getY(), pos.getZ()+1), BlockManager.getBlockManager().getBlock("AIR").getId());
 		}
 	}
 }

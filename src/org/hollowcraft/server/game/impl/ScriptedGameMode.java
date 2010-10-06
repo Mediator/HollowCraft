@@ -127,9 +127,9 @@ public class ScriptedGameMode extends GameModeAdapter<Player> {
 	}
 	
 	@Override
-	public void setBlock(Player player, World level, int x, int y, int z, int mode, int type) {
-		if(!delegate("setBlock", player, level, x, y, z, mode, type)) {
-			super.setBlock(player, level, x, y, z, mode, type);
+	public void setBlock(Player player, World level, Position pos, int mode, int type) {
+		if(!delegate("setBlock", player, level, pos, mode, type)) {
+			super.setBlock(player, level, pos, mode, type);
 		}
 	}
 	

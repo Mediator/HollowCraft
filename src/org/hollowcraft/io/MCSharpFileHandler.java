@@ -96,7 +96,6 @@ public final class MCSharpFileHandler {
 				byte[] row = new byte[height];
 				data.readFully(row);
 				for(int x = 0;x<width;x++) {
-					blocks[x][y][z] = translateBlock(row[x]);
 					blocks[x][y][z] = (byte)translateBlock(row[x]);
 				}
 			}
@@ -110,11 +109,11 @@ public final class MCSharpFileHandler {
 		return lvl;
 	}
 
-	public static byte translateBlock(byte b) {
+	public static short translateBlock(byte b) {
 		if (b <= 49)
 			return b;
 		if (b == 111)
-			return BlockConstants.TREE_TRUNK;
-		return BlockConstants.AIR;
+			return BlockManager.getBlockManager().getBlock("TREE_TRUNK").getId();
+		return BlockManager.getBlockManager().getBlock("AIR").getId();
 	}
 }

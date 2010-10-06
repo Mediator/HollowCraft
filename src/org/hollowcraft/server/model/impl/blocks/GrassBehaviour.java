@@ -51,44 +51,45 @@ import org.hollowcraft.server.model.impl.worlds.ClassicWorld;
  */
 public class GrassBehaviour implements BlockBehaviour {
 
-	public void handleDestroy(Level level, int x, int y, int z, int type) {
+	public void handleDestroy(ClassicLevel level, Position pos, int type) {
 		
 	}
 	
-	public void handlePassive(Level level, int x, int y, int z, int type) {
-		((World)level).queueActiveBlockUpdate(x, y, z);
+	public void handlePassive(ClassicLevel level, Position pos, int type) {
+		((ClassicWorld)level).queueActiveBlockUpdate(pos);
 	}
 	
-	public void handleScheduledBehaviour(Level lvl, int x, int y, int z, int type) {
+	public void handleScheduledBehaviour(ClassicLevel lvl, Position pos, int type) {
 		// do we need to die?
-		World level = (World)lvl;
-
-		byte aboveBlock = level.getBlock(x, y, z + 1);
+		ClassicWorld level = (ClassicWorld)lvl;
+		short dirt = BlockManager.getBlockManager().getBlock("DIRT").getId();
+		short grass = BlockManager.getBlockManager().getBlock("GRASS").getId();
+		byte aboveBlock = level.getBlock(new Position(pos.getX(), pos.getY(), pos.getZ() + 1));
 		// Should the block above us kill us?
 		if (BlockManager.getBlockManager().getBlock(aboveBlock).doesBlockLight() || BlockManager.getBlockManager().getBlock(aboveBlock).isLiquid()) {
-			level.setBlock(x, y, z, BlockConstants.DIRT);
+			level.setBlock(pos, dirt);
 			return;
 		}
 
 		//spread
-		for (int h = (x == 0 ? 0 : -1); h <= (x == level.getWidth() - 1 ? 0 : 1); h++) {
-			for (int i = (y == 0 ? 0 : -1); i <= (y == level.getHeight() - 1 ? 0 : 1); i++) {
-				for (int j = (z == 0 ? 0 : -1); j <= (z == level.getDepth() - 1 ? 0 : 1); j++) {
-					if (level.getBlock(x + h, y + i, z + j) == BlockConstants.DIRT) {
-						if (z + j < level.getDepth()) {
+		for (int h = (pos.getX() == 0 ? 0 : -1); h <= (pos.getX() == level.getWidth() - 1 ? 0 : 1); h++) {
+			for (int i = (pos.getY() == 0 ? 0 : -1); i <= (pos.getY() == level.getHeight() - 1 ? 0 : 1); i++) {
+				for (int j = (pos.getZ() == 0 ? 0 : -1); j <= (pos.getZ() == level.getDepth() - 1 ? 0 : 1); j++) {
+					if (level.getBlock(new Position(pos.getX() + h, pos.getY() + i, pos.getZ() + j)) == dirt) {
+						if (pos.getZ() + j < level.getDepth()) {
 							// Is the block above it liquid?
-							if (BlockManager.getBlockManager().getBlock(level.getBlock(x + h, y + i, z + j + 1)).isLiquid()) {
+							if (BlockManager.getBlockManager().getBlock(level.getBlock(new Position(pos.getX() + h, pos.getY() + i, pos.getZ() + j + 1))).isLiquid()) {
 								break;
 							}
 
 							// Is the block smothered by something?
-							if (BlockManager.getBlockManager().getBlock(level.getBlock(x + h, y + i, z + j + 1)).doesBlockLight()) {
+							if (BlockManager.getBlockManager().getBlock(level.getBlock(new Position(pos.getX() + h, pos.getY() + i, pos.getZ() + j + 1))).doesBlockLight()) {
 								break;
 							}
 						}
 			
 						// Grow the grass
-						level.setBlock(x + h, y + i, z + j, BlockConstants.GRASS);
+						level.setBlock(new Position(pos.getX() + h, pos.getY() + i, pos.getZ() + j), grass);
 					}
 				}
 			}

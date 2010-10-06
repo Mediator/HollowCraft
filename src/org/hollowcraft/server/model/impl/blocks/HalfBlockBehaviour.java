@@ -51,18 +51,18 @@ import org.hollowcraft.server.model.impl.worlds.ClassicWorld;
  */
 public class HalfBlockBehaviour implements BlockBehaviour {
 	
-	public void handleDestroy(Level level, int x, int y, int z, int type) {
+	public void handleDestroy(ClassicLevel level, Position pos, int type) {
 		
 	}
 	
-	public void handlePassive(Level level, int x, int y, int z, int type) {
-		if (BlockManager.getBlockManager().getBlock(level.getBlock(x, y, z - 1)).isHalfBlock()) {
-			level.setBlock(x, y, z, BlockConstants.AIR);
-			level.setBlock(x, y, z - 1, BlockManager.getBlockManager().getBlock(type).getFullCounterpart());
+	public void handlePassive(ClassicLevel level, Position pos, int type) {
+		if (BlockManager.getBlockManager().getBlock(level.getBlock(new Position(pos.getX(), pos.getY(), pos.getZ() - 1))).isHalfBlock()) {
+			level.setBlock(pos, BlockManager.getBlockManager().getBlock("AIR").getId());
+			level.setBlock(new Position(pos.getX(), pos.getY(), pos.getZ() - 1), BlockManager.getBlockManager().getBlock((short)type).getFullCounterpart());
 		}
 	}
 	
-	public void handleScheduledBehaviour(Level level, int x, int y, int z, int type) {
+	public void handleScheduledBehaviour(ClassicLevel level, Position pos, int type) {
 		
 	}
 	

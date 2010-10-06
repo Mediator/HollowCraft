@@ -55,31 +55,35 @@ public class SpongeBehaviour implements BlockBehaviour {
 	
 	private int spongeRadius = Configuration.getConfiguration().getSpongeRadius();
 	
-	public void handlePassive(Level lvl, int x, int y, int z, int type) {
-		World level = (World)lvl;
+	public void handlePassive(ClassicLevel lvl, Position pos, int type) {
+		short water = BlockManager.getBlockManager().getBlock("WATER").getId();
+		short still_water = BlockManager.getBlockManager().getBlock("STILL_WATER").getId();
+		short air = BlockManager.getBlockManager().getBlock("AIR").getId();
+		ClassicWorld level = (ClassicWorld)lvl;
 		for (int spongeX = -1 * spongeRadius; spongeX <= spongeRadius; spongeX++) {
 			for (int spongeY = -1 * spongeRadius; spongeY <= spongeRadius; spongeY++) {
 				for (int spongeZ = -1 * spongeRadius; spongeZ <= spongeRadius; spongeZ++) {
-					if (level.getBlock(x + spongeX, y + spongeY, z + spongeZ) == BlockConstants.WATER || level.getBlock(x + spongeX, y + spongeY, z + spongeZ) == BlockConstants.STILL_WATER)
-						level.setBlock(x + spongeX, y + spongeY, z + spongeZ, BlockConstants.AIR);
+					if (level.getBlock(new Position(pos.getX() + spongeX, pos.getY() + spongeY, pos.getZ() + spongeZ)) == water || level.getBlock(new Position(pos.getX() + spongeX, pos.getY() + spongeY, pos.getZ() + spongeZ)) == still_water)
+						level.setBlock(new Position(pos.getX() + spongeX, pos.getY() + spongeY, pos.getZ() + spongeZ), air);
 				}
 			}
 		}
 	}
 	
-	public void handleDestroy(Level lvl, int x, int y, int z, int type) {
-		World level = (World)lvl;
+	public void handleDestroy(ClassicLevel lvl, Position pos, int type) {
+		short water = BlockManager.getBlockManager().getBlock("WATER").getId();
+		ClassicWorld level = (ClassicWorld)lvl;
 		for (int spongeX = -1 * (spongeRadius + 1); spongeX <= spongeRadius + 1; spongeX++) {
 			for (int spongeY = -1 * (spongeRadius + 1); spongeY <= spongeRadius + 1; spongeY++) {
 				for (int spongeZ = -1 * (spongeRadius + 1); spongeZ <= spongeRadius + 1; spongeZ++) {
-					if (level.getBlock(x + spongeX, y + spongeY, z + spongeZ) == BlockConstants.WATER)
-						level.queueActiveBlockUpdate(x + spongeX, y + spongeY, z + spongeZ);
+					if (level.getBlock(new Position(pos.getX() + spongeX, pos.getY() + spongeY, pos.getZ() + spongeZ)) == water)
+						level.queueActiveBlockUpdate(new Position(pos.getX() + spongeX, pos.getY() + spongeY, pos.getZ() + spongeZ));
 				}
 			}
 		}
 	}
 	
-	public void handleScheduledBehaviour(Level level, int x, int y, int z, int type) {
+	public void handleScheduledBehaviour(ClassicLevel level, Position pos, int type) {
 		
 	}
 	

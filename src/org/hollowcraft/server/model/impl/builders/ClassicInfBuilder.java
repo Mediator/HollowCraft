@@ -58,6 +58,8 @@ public class ClassicInfBuilder extends Builder {
 	}
 
 	public void  generate() {
+		short grass = BlockManager.getBlockManager().getBlock("GRASS").getId();
+		short dirt = BlockManager.getBlockManager().getBlock("DIRT").getId();
 		for (int x = 0; x < m_width; x++) {
 			for (int y = 0; y < m_height; y++) {
 				int i = m_width / 2 - m_width + x;
@@ -65,9 +67,9 @@ public class ClassicInfBuilder extends Builder {
 				int k = calcPoint(i, j, m_seed);
 				if (k < 0) k = 0;
 				if (k > m_depth - 1) k = m_depth - 1;
-				m_blocks[x][y][k] = BlockConstants.GRASS;
+				m_blocks[x][y][k] = (byte)grass;
 				for (int z = k - 1; z >= 0; z--) {
-					m_blocks[x][y][z] = BlockConstants.DIRT;
+					m_blocks[x][y][z] = (byte)dirt;
 				}
 			}
 		}
@@ -86,10 +88,11 @@ public class ClassicInfBuilder extends Builder {
 	}
 
 	public void simulateOceanFlood() {
+		short air = BlockManager.getBlockManager().getBlock("AIR").getId();
 		int oceanLevel = m_depth / 2 - 1;
 		for (int x = 0; x < m_width; x++) {
 			for (int y = 0; y < m_height; y++) {
-				if (m_blocks[x][y][oceanLevel] == BlockConstants.AIR) {
+				if (m_blocks[x][y][oceanLevel] == (byte)air) {
 					floodBlock(x, y, oceanLevel);
 				}
 			}
@@ -97,12 +100,17 @@ public class ClassicInfBuilder extends Builder {
 	}
 
 	private void floodBlock(int x, int y, int oceanLevel) {
+		short air = BlockManager.getBlockManager().getBlock("AIR").getId();
+		short water = BlockManager.getBlockManager().getBlock("WATER").getId();
+		short sand = BlockManager.getBlockManager().getBlock("SAND").getId();
+		short grass = BlockManager.getBlockManager().getBlock("GRASS").getId();
+		short dirt = BlockManager.getBlockManager().getBlock("DIRT").getId();
 		for (int z = oceanLevel; true; z--) {
 			if (z < 0) { break; }
-				if (m_blocks[x][y][z] == BlockConstants.AIR) {
-					m_blocks[x][y][z] = BlockConstants.WATER;
-				} else if (m_blocks[x][y][z + 1] == BlockConstants.WATER && (m_blocks[x][y][z] == BlockConstants.DIRT || m_blocks[x][y][z] == BlockConstants.GRASS)) {
-					m_blocks[x][y][z] = BlockConstants.SAND;
+				if (m_blocks[x][y][z] == air) {
+					m_blocks[x][y][z] = (byte)water;
+				} else if (m_blocks[x][y][z + 1] == water && (m_blocks[x][y][z] == dirt || m_blocks[x][y][z] == grass)) {
+					m_blocks[x][y][z] = (byte)sand;
 					break;
 				}
 			}

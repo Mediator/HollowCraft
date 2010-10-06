@@ -42,21 +42,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.hollowcraft.server.model.BlockBehaviour;
+
 /**
  * Represents an individual block type.
  * @author Brett Russell
  * @author Caleb Champlin
  */
 public class BlockDefinition {
-	
-	/**
-	 * A method that exists for legacy reasons.
-	 * @param id The block id.
-	 * @return The block definition.
-	 */
-	public static BlockDefinition forId(int id) {
-		return BlockManager.getBlockManager().getBlock(id);
-	}
 	
 	/**
 	 * The block name.
@@ -66,7 +58,7 @@ public class BlockDefinition {
 	/**
 	 * The block ID.
 	 */
-	private int bid;
+	private short bid;
 	
 	/**
 	 * The block's solidity.
@@ -91,7 +83,7 @@ public class BlockDefinition {
 	/**
 	 * The block's "full" version if it is a halfblock.
 	 */
-	private int fullCounterpart;
+	private short fullCounterpart;
 	
 	/**
 	 * The block's behaviour, as a string.
@@ -123,13 +115,15 @@ public class BlockDefinition {
 
 	private int strength;
 	
+	
+	private List<EntityDrop> drops;
 	/**
 	 * Constructor.
 	 * @throws ClassNotFoundException
 	 * @throws IllegalAccessException
 	 * @throws InstantiationException
 	 */
-	private BlockDefinition(String name, int bid, boolean solid, boolean liquid, boolean blocksLight, boolean halfBlock, boolean doesThink, boolean isPlant, long thinkTimer, int fullCounterpart, String behaviourName, boolean gravity, int strength) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+	private BlockDefinition(String name, short bid, boolean solid, boolean liquid, boolean blocksLight, boolean halfBlock, boolean doesThink, boolean isPlant, long thinkTimer, short fullCounterpart, String behaviourName, boolean gravity, int strength, List<EntityDrop> drops) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		this.name = name;
 		this.bid = bid;
 		this.solid = solid;
@@ -140,6 +134,7 @@ public class BlockDefinition {
 		this.isPlant = isPlant;
 		this.thinkTimer = thinkTimer;
 		this.fullCounterpart = fullCounterpart;
+		this.drops = drops;
 		this.behaviourName = behaviourName.trim();
 		this.gravity = gravity;
 		this.strength = strength;
@@ -156,7 +151,7 @@ public class BlockDefinition {
 	 * @throws InstantiationException
 	 */
 	private Object readResolve() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-		return new BlockDefinition(name, bid, solid, liquid, blocksLight, halfBlock, doesThink, isPlant, thinkTimer, fullCounterpart, behaviourName, gravity, strength);
+		return new BlockDefinition(name, bid, solid, liquid, blocksLight, halfBlock, doesThink, isPlant, thinkTimer, fullCounterpart, behaviourName, gravity, strength, drops);
 	}
 	
 	/**
@@ -171,7 +166,7 @@ public class BlockDefinition {
 	 * Gets the ID.
 	 * @return The ID.
 	 */
-	public int getId() {
+	public short getId() {
 		return bid;
 	}
 	
@@ -230,11 +225,11 @@ public class BlockDefinition {
 	 * @param y The y coordinate.
 	 * @param z The z coordinate.
 	 */
-	public void behavePassive(Level level, int x, int y, int z) {
+	public void behavePassive(ClassicLevel level, Position pos) {
 		if (behaviour == null) {
 			return;
 		}
-		this.behaviour.handlePassive(level, x, y, z, this.bid);
+		this.behaviour.handlePassive(level, pos, this.bid);
 	}
 	
 	/**
@@ -244,11 +239,11 @@ public class BlockDefinition {
 	 * @param y The y coordinate.
 	 * @param z The z coordinate.
 	 */
-	public void behaveDestruct(Level level, int x, int y, int z) {
+	public void behaveDestruct(ClassicLevel level, Position pos) {
 		if (behaviour == null) {
 			return;
 		}
-		this.behaviour.handleDestroy(level, x, y, z, this.bid);
+		this.behaviour.handleDestroy(level, pos, this.bid);
 	}
 	
 	/**
@@ -258,11 +253,11 @@ public class BlockDefinition {
 	 * @param y The y coordinate.
 	 * @param z The z coordinate.
 	 */
-	public void behaveSchedule(Level level, int x, int y, int z) {
+	public void behaveSchedule(ClassicLevel level, Position pos) {
 		if (behaviour == null) {
 			return;
 		}
-		this.behaviour.handleScheduledBehaviour(level, x, y, z, this.bid);
+		this.behaviour.handleScheduledBehaviour(level, pos, this.bid);
 	}
 	
 	/**
@@ -285,7 +280,7 @@ public class BlockDefinition {
 	 * Gets the fullsize counterpart for this block.
 	 * @return The fullsize counterpart ID.
 	 */
-	public int getFullCounterpart() {
+	public short getFullCounterpart() {
 		if (halfBlock) {
 			return fullCounterpart;
 		} else {

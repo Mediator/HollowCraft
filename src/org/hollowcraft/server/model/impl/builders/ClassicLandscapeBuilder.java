@@ -84,20 +84,24 @@ public class ClassicLandscapeBuilder extends Builder {
 	}
 
 	public void generateTerrain() {
+		short air = BlockManager.getBlockManager().getBlock("AIR").getId();
+		short rock = BlockManager.getBlockManager().getBlock("ROCK").getId();
+		short grass = BlockManager.getBlockManager().getBlock("GRASS").getId();
+		short dirt = BlockManager.getBlockManager().getBlock("DIRT").getId();
 		for(int x = 0;x<m_width;x++) {
 			for(int y = 0;y<m_height;y++) {
 				double value;
 				value = getValue(x/200.0, y/200.0, m_depth/2/200.0);
 				int height = (int)(Math.max(-1,Math.min(1, value))*m_depth/4);
 				for(int z = 0;z<m_depth/2+height-5;z++) {
-					m_blocks[x][y][z] = BlockConstants.ROCK;
+					m_blocks[x][y][z] = (byte)rock;
 				}
 				for(int z = m_depth/2+height-5;z<m_depth/2+height;z++) {
-					m_blocks[x][y][z] = BlockConstants.DIRT;
+					m_blocks[x][y][z] = (byte)dirt;
 				}
-				m_blocks[x][y][m_depth/2+height] = BlockConstants.GRASS;
+				m_blocks[x][y][m_depth/2+height] = (byte)grass;
 				for(int z = m_depth/2+height+1;z<m_depth;z++) {
-					m_blocks[x][y][z] = BlockConstants.AIR;
+					m_blocks[x][y][z] = (byte)air;
 				}
 			}
 		}
@@ -523,6 +527,8 @@ public class ClassicLandscapeBuilder extends Builder {
 
 
 	public void plantTrees() {
+		short air = BlockManager.getBlockManager().getBlock("AIR").getId();
+		short dirt = BlockManager.getBlockManager().getBlock("DIRT").getId();
 		ArrayList<Position> treeList = new ArrayList<Position>();
 		for(int x = 2; x < m_width - 3; x++) {
 			for(int y = 2; y < m_height - 3; y++) {
@@ -535,11 +541,11 @@ public class ClassicLandscapeBuilder extends Builder {
 				if (!tooClose) {
 					if (m_random.nextInt(100) <= 5) {
 						for(int z = m_depth-8; z > 0; z--) {
-							if ((m_blocks[x][y][z] == BlockConstants.DIRT || m_blocks[x][y][z] == m_grassBlock) && m_blocks[x][y][z+1] == BlockConstants.AIR) {
+							if ((m_blocks[x][y][z] == dirt || m_blocks[x][y][z] == m_grassBlock) && m_blocks[x][y][z+1] == air) {
 								plantTree(x, y, z);
 								treeList.add(new Position(x, y, z));
 								break;
-							} else if (z < m_depth-1 && m_blocks[x][y][z+1] != BlockConstants.AIR) {
+							} else if (z < m_depth-1 && m_blocks[x][y][z+1] != air) {
 								break;
 							}
 						}
@@ -550,41 +556,46 @@ public class ClassicLandscapeBuilder extends Builder {
 	}
 
 	public void plantTree(int rootX, int rootY, int rootZ) {
+		short air = BlockManager.getBlockManager().getBlock("AIR").getId();
+		short tree_trunk = BlockManager.getBlockManager().getBlock("TREE_TRUNK").getId();
 		// Place Leaves
 		int top = rootZ + 4;
 		// Top Layer
-		m_blocks[rootX][rootY][top+2] = m_leavesBlock;
-		m_blocks[rootX-1][rootY][top+2] = m_leavesBlock;
-		m_blocks[rootX+1][rootY][top+2] = m_leavesBlock;
-		m_blocks[rootX][rootY-1][top+2] = m_leavesBlock;
-		m_blocks[rootX][rootY+1][top+2] = m_leavesBlock;
+		m_blocks[rootX][rootY][top+2] = (byte)m_leavesBlock;
+		m_blocks[rootX-1][rootY][top+2] = (byte)m_leavesBlock;
+		m_blocks[rootX+1][rootY][top+2] = (byte)m_leavesBlock;
+		m_blocks[rootX][rootY-1][top+2] = (byte)m_leavesBlock;
+		m_blocks[rootX][rootY+1][top+2] = (byte)m_leavesBlock;
 		// Mid Top Layer
 		for (int x = rootX - 1; x < rootX + 2; x++) {
 			for (int y = rootY - 1; y < rootY + 2; y++) {
-				m_blocks[x][y][top+1] = m_leavesBlock;
+				m_blocks[x][y][top+1] = (byte)m_leavesBlock;
 			}
 		}
 		// Bottom layers
 		for (int x = rootX - 2; x < rootX + 3; x++) {
 			for (int y = rootY - 2; y < rootY + 3; y++) {
-				m_blocks[x][y][top] = m_leavesBlock;
-				m_blocks[x][y][top-1] = m_leavesBlock;
+				m_blocks[x][y][top] = (byte)m_leavesBlock;
+				m_blocks[x][y][top-1] = (byte)m_leavesBlock;
 			}
 		}
 		// Mid Bottom Layer - Leaf Removal
-		m_blocks[rootX-2][rootY-2][top] = BlockConstants.AIR;
-		m_blocks[rootX-2][rootY+2][top] = BlockConstants.AIR;
-		m_blocks[rootX+2][rootY-2][top] = BlockConstants.AIR;
-		m_blocks[rootX+2][rootY+2][top] = BlockConstants.AIR;
+		m_blocks[rootX-2][rootY-2][top] = (byte)air;
+		m_blocks[rootX-2][rootY+2][top] = (byte)air;;
+		m_blocks[rootX+2][rootY-2][top] = (byte)air;;
+		m_blocks[rootX+2][rootY+2][top] = (byte)air;;
 
 		// This is last because the leaves are placed over top areas where there should be a trunk
 		// Make the trunk
 		for(int z = rootZ;z < rootZ + 5;z++) {
-			m_blocks[rootX][rootY][z] = BlockConstants.TREE_TRUNK;
+			m_blocks[rootX][rootY][z] = (byte)tree_trunk;
 		}
 	}
 
 	public void generateCaverns(int count) {
+		short air = BlockManager.getBlockManager().getBlock("AIR").getId();
+		short water = BlockManager.getBlockManager().getBlock("WATER").getId();
+		short lava = BlockManager.getBlockManager().getBlock("LAVA").getId();
 		for (int i = 0; i < count;i++) {
 			int x = m_random.nextInt(m_width);
 			int y = m_random.nextInt(m_height);
@@ -593,11 +604,11 @@ public class ClassicLandscapeBuilder extends Builder {
 			radius = 6;
 			int type = m_random.nextInt(100);
 			if (type > 90)
-				type = BlockConstants.LAVA;
+				type = lava;
 			else if (type > 45)
-				type = BlockConstants.AIR;
+				type = air;
 			else
-				type = BlockConstants.WATER;
+				type = water;
 			for (int m = 0;m < 2; m++) {
 				BUBBLE_GEN: for(int j = x-radius;j<x+radius*2;j++) {
 					if (j < 0)
@@ -627,6 +638,9 @@ public class ClassicLandscapeBuilder extends Builder {
 	}
 
 	public void raiseTerrain() {
+		short air = BlockManager.getBlockManager().getBlock("AIR").getId();
+		short grass = BlockManager.getBlockManager().getBlock("GRASS").getId();
+		short dirt = BlockManager.getBlockManager().getBlock("DIRT").getId();
 		boolean[][][] prevContour = new boolean[m_width][m_height][m_depth];
 		boolean[][][] curContour = new boolean[m_width][m_height][m_depth];
 		for(int x = 0;x<m_width;x++) {
@@ -649,15 +663,15 @@ public class ClassicLandscapeBuilder extends Builder {
 		for(int x = 0;x<m_width;x++) {
 			for(int y = 0;y<m_height;y++) {
 				for(int z = 0;z<m_depth;z++) {
-					byte type = (byte)BlockConstants.AIR;
+					byte type = (byte)air;
 					if (curContour[x][y][m_depth-1-z]) {
 						if (z > 1) {
 							if (curContour[x][y][m_depth-z-2])
-								type = (byte)BlockConstants.DIRT;
+								type = (byte)dirt;
 							else
-								type = BlockConstants.GRASS;
+								type = (byte)grass;
 						} else {
-							type =(byte)BlockConstants.DIRT;
+							type =(byte)dirt;
 						}
 					}
 					m_blocks[x][y][z] = type;
@@ -764,11 +778,12 @@ public class ClassicLandscapeBuilder extends Builder {
 	}*/
 
 	public void buildLavaBed(int depth) {
+		short lava = BlockManager.getBlockManager().getBlock("LAVA").getId();
 		m_logger.debug("Building lava bed.");
 		for (int z = 0;z < depth; z++) {
 			for(int x = 0;x < m_width; x++) {
 				for (int y = 0; y < m_height; y++ ) {
-					m_blocks[x][y][z] = (byte) BlockConstants.LAVA;
+					m_blocks[x][y][z] = (byte)lava;
 				}
 			}
 		}
@@ -776,20 +791,21 @@ public class ClassicLandscapeBuilder extends Builder {
 
 
 	public void simulateOceanFlood() {
+		short air = BlockManager.getBlockManager().getBlock("AIR").getId();
 		if (m_width < 2 || m_height < 2) { return; }
 
 		LinkedList<Point> toFlood = new LinkedList<Point>();
 		int oceanLevel = m_depth / 2 - 1;
 
 		for (int x = 0; x < m_width; x++) {
-			if (m_blocks[x][0][oceanLevel] == BlockConstants.AIR) {
+			if (m_blocks[x][0][oceanLevel] == (byte)air) {
 				floodBlock(x, 0, oceanLevel);
-				if (m_blocks[x][1][oceanLevel] == BlockConstants.AIR) {
+				if (m_blocks[x][1][oceanLevel] == (byte)air) {
 					toFlood.add(new Point(x, 1));
 				}			}
-			if (m_blocks[x][m_height - 1][oceanLevel] == BlockConstants.AIR) {
+			if (m_blocks[x][m_height - 1][oceanLevel] == (byte)air) {
 				floodBlock(x, m_height - 1, oceanLevel);
-				if (m_blocks[x][m_height - 2][oceanLevel] == BlockConstants.AIR) {
+				if (m_blocks[x][m_height - 2][oceanLevel] == (byte)air) {
 					toFlood.add(new Point(x, m_height - 2));
 				}
 			}
@@ -799,15 +815,15 @@ public class ClassicLandscapeBuilder extends Builder {
 		processFlood(toFlood);
 
 		for (int y = 0; y < m_height; y++) {
-			if (m_blocks[0][y][oceanLevel] == BlockConstants.AIR) {
+			if (m_blocks[0][y][oceanLevel] == (byte)air) {
 				floodBlock(0, y, oceanLevel);
-				if (m_blocks[1][y][oceanLevel] == BlockConstants.AIR) {
+				if (m_blocks[1][y][oceanLevel] == (byte)air) {
 					toFlood.add(new Point(1, y));
 				}
 			}
-			if (m_blocks[m_width - 1][y][oceanLevel] == BlockConstants.AIR) {
+			if (m_blocks[m_width - 1][y][oceanLevel] == (byte)air) {
 				floodBlock(m_width - 1, y, oceanLevel);
-				if (m_blocks[m_width - 2][y][oceanLevel] == BlockConstants.AIR) {
+				if (m_blocks[m_width - 2][y][oceanLevel] == (byte)air) {
 					toFlood.add(new Point(m_width - 2, y));
 				}
 
@@ -819,26 +835,28 @@ public class ClassicLandscapeBuilder extends Builder {
 	}
 
 	private void processFlood(LinkedList<Point> toFlood) {
+		short air = BlockManager.getBlockManager().getBlock("AIR").getId();
+		short water = BlockManager.getBlockManager().getBlock("WATER").getId();
 		int oceanLevel = m_depth / 2 - 1;
 		while (toFlood.size() > 0) {
 			Point p = toFlood.removeFirst();
-			if (m_blocks[(int)(p.getX())][(int)(p.getY())][oceanLevel] != BlockConstants.WATER) {
+			if (m_blocks[(int)(p.getX())][(int)(p.getY())][oceanLevel] != (byte)water) {
 
 				floodBlock((int)(p.getX()), (int)(p.getY()), oceanLevel);
 
-				if (p.getX() > 0 && m_blocks[(int)(p.getX() - 1)][(int)(p.getY())][oceanLevel] == BlockConstants.AIR) {
+				if (p.getX() > 0 && m_blocks[(int)(p.getX() - 1)][(int)(p.getY())][oceanLevel] == (byte)air) {
 					toFlood.add(new Point((int)(p.getX() - 1), (int)(p.getY())));
 				}
 				
-				if (p.getX() < m_width -1 && m_blocks[(int)(p.getX() + 1)][(int)(p.getY())][oceanLevel] == BlockConstants.AIR) {
+				if (p.getX() < m_width -1 && m_blocks[(int)(p.getX() + 1)][(int)(p.getY())][oceanLevel] == (byte)air) {
 					toFlood.add(new Point((int)(p.getX() + 1), (int)(p.getY())));
 				}
 				
-				if (p.getY() > 0 && m_blocks[(int)(p.getX())][(int)(p.getY() - 1)][oceanLevel] == BlockConstants.AIR) {
+				if (p.getY() > 0 && m_blocks[(int)(p.getX())][(int)(p.getY() - 1)][oceanLevel] == (byte)air) {
 					toFlood.add(new Point((int)(p.getX()), (int)(p.getY() - 1)));
 				}
 				
-				if (p.getY() < m_height -1 && m_blocks[(int)(p.getX())][(int)(p.getY() + 1)][oceanLevel] == BlockConstants.AIR) {
+				if (p.getY() < m_height -1 && m_blocks[(int)(p.getX())][(int)(p.getY() + 1)][oceanLevel] == (byte)air) {
 					toFlood.add(new Point((int)(p.getX()), (int)(p.getY() + 1)));
 				}
 			}
@@ -847,10 +865,12 @@ public class ClassicLandscapeBuilder extends Builder {
 
 	// Needs tweaking
 	private void createBeach(int x, int y, int z) {
+		short sand = BlockManager.getBlockManager().getBlock("SAND").getId();
+		short grass = BlockManager.getBlockManager().getBlock("GRASS").getId();
 		if (x >= m_width || x < 0 || y >= m_height || y < 0)
 			return;
-		if (m_blocks[x][y][z] == BlockConstants.GRASS) {
-			m_blocks[x][y][z] = BlockConstants.SAND;
+		if (m_blocks[x][y][z] == grass) {
+			m_blocks[x][y][z] = (byte)sand;
 			createBeach(x+1, y, z);
 			createBeach(x-1, y, z);
 			createBeach(x, y+1, z);
@@ -859,7 +879,12 @@ public class ClassicLandscapeBuilder extends Builder {
 	}
 
 	private void floodBlock(int x, int y, int oceanLevel) {
-		if (m_blocks[x][y][oceanLevel] == BlockConstants.WATER) {
+		short air = BlockManager.getBlockManager().getBlock("AIR").getId();
+		short water = BlockManager.getBlockManager().getBlock("WATER").getId();
+		short sand = BlockManager.getBlockManager().getBlock("SAND").getId();
+		short grass = BlockManager.getBlockManager().getBlock("GRASS").getId();
+		short dirt = BlockManager.getBlockManager().getBlock("DIRT").getId();
+		if (m_blocks[x][y][oceanLevel] == water) {
 			return;
 		}
 		createBeach(x+1, y, oceanLevel);
@@ -868,12 +893,12 @@ public class ClassicLandscapeBuilder extends Builder {
 		createBeach(x, y-1, oceanLevel);
 		for (int z = oceanLevel; true; z--) {
 			if (z < 0) { break; }
-			if (m_blocks[x][y][z] == BlockConstants.AIR) {
-				m_blocks[x][y][z] = BlockConstants.WATER;
-			} else if (m_blocks[x][y][z + 1] == BlockConstants.WATER && (m_blocks[x][y][z] == BlockConstants.DIRT || m_blocks[x][y][z] == BlockConstants.GRASS)) {
-				m_blocks[x][y][z] = BlockConstants.SAND;
-				if (m_blocks[x][y][z-1] == BlockConstants.DIRT || m_blocks[x][y][z-1] == BlockConstants.GRASS) {
-					m_blocks[x][y][z-1] = BlockConstants.SAND;
+			if (m_blocks[x][y][z] == air) {
+				m_blocks[x][y][z] = (byte)water;
+			} else if (m_blocks[x][y][z + 1] == water && (m_blocks[x][y][z] == dirt || m_blocks[x][y][z] == grass)) {
+				m_blocks[x][y][z] = (byte)sand;
+				if (m_blocks[x][y][z-1] == dirt || m_blocks[x][y][z-1] == grass) {
+					m_blocks[x][y][z-1] = (byte)sand;
 				}
 				break;
 			}
@@ -881,20 +906,25 @@ public class ClassicLandscapeBuilder extends Builder {
 	}
 
 	protected void makeSnow() {
+		short cloth_white = BlockManager.getBlockManager().getBlock("CLOTH_WHITE").getId();
+		short water = BlockManager.getBlockManager().getBlock("WATER").getId();
+		short sand = BlockManager.getBlockManager().getBlock("SAND").getId();
+		short grass = BlockManager.getBlockManager().getBlock("GRASS").getId();
+		short dirt = BlockManager.getBlockManager().getBlock("DIRT").getId();
 		for(int x = 0;x<m_width;x++) {
 			for(int y = 0;y<m_height;y++) {
 				for(int z = 0;z<m_depth;z++) {
-					if (m_blocks[x][y][z] == BlockConstants.GRASS) {
-						m_blocks[x][y][z] = BlockConstants.CLOTH_WHITE;
-						if (m_blocks[x][y][z - 1] == BlockConstants.DIRT) {
-							m_blocks[x][y][z - 1] = BlockConstants.CLOTH_WHITE;
+					if (m_blocks[x][y][z] == grass) {
+						m_blocks[x][y][z] = (byte)cloth_white;
+						if (m_blocks[x][y][z - 1] == dirt) {
+							m_blocks[x][y][z - 1] = (byte)cloth_white;
 						}
 					}
-					if (z == m_depth/2 - 1 && m_blocks[x][y][z] == BlockConstants.SAND) {
-						m_blocks[x][y][z] = BlockConstants.CLOTH_WHITE;
+					if (z == m_depth/2 - 1 && m_blocks[x][y][z] == sand) {
+						m_blocks[x][y][z] = (byte)cloth_white;
 					}
-					if (z < m_depth/2 - 1 && m_blocks[x][y][z] == BlockConstants.SAND) {
-						m_blocks[x][y][z] = BlockConstants.DIRT;
+					if (z < m_depth/2 - 1 && m_blocks[x][y][z] == sand) {
+						m_blocks[x][y][z] = (byte)dirt;
 					}
 				}
 			}
@@ -902,13 +932,16 @@ public class ClassicLandscapeBuilder extends Builder {
 	}
 
 	protected void makeSand() {
+		short sand = BlockManager.getBlockManager().getBlock("SAND").getId();
+		short grass = BlockManager.getBlockManager().getBlock("GRASS").getId();
+		short dirt = BlockManager.getBlockManager().getBlock("DIRT").getId();
 		for(int x = 0;x<m_width;x++) {
 			for(int y = 0;y<m_height;y++) {
 				for(int z = 0;z<m_depth;z++) {
-					if (m_blocks[x][y][z] == BlockConstants.GRASS) {
-						m_blocks[x][y][z] = BlockConstants.SAND;
-						if (m_blocks[x][y][z - 1] == BlockConstants.DIRT) {
-							m_blocks[x][y][z - 1] = BlockConstants.SAND;
+					if (m_blocks[x][y][z] == grass) {
+						m_blocks[x][y][z] = (byte)sand;
+						if (m_blocks[x][y][z - 1] == dirt) {
+							m_blocks[x][y][z - 1] = (byte)sand;
 						}
 					}
 				}

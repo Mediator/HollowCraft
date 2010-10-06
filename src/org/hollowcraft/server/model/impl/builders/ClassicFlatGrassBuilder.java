@@ -56,13 +56,14 @@ public class ClassicFlatGrassBuilder extends Builder {
 	}
 
 	public void  generate() {
+		short dirt =  BlockManager.getBlockManager().getBlock("DIRT").getId();
 		for(int x = 0; x < m_width; x++) {
 			for(int y = 0;y < m_height; y++) {
 				for(int z = 0; z <= m_depth / 2; z++) {
 					if (z < m_depth / 2) {
-						m_blocks[x][y][z] = BlockConstants.DIRT;
+						m_blocks[x][y][z] = (byte)dirt;
 					} else {
-						m_blocks[x][y][z] = m_grassBlock;
+						m_blocks[x][y][z] = (byte)m_grassBlock;
 					}
 				}
 			}

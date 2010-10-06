@@ -44,6 +44,7 @@ import java.util.List;
 import org.hollowcraft.io.PersistenceManager;
 import org.hollowcraft.server.Configuration;
 
+
 /**
  * A class which manages <code>BlockDefinition</code>s and
  * <code>BlockBehaviour</code>s.
@@ -56,7 +57,7 @@ public final class BlockManager {
 	/**
 	 * The packet manager instance.
 	 */
-	private static final BlockManager INSTANCE = (BlockManager) PersistenceManager.getPersistenceManager().load("data/blocks.xml");
+	private static final BlockManager INSTANCE = (BlockManager) PersistenceManager.getPersistenceManager().load(Configuration.getConfiguration().getBlockDefinitions());
 	
 	/**
 	 * Gets the packet manager instance.
@@ -100,8 +101,23 @@ public final class BlockManager {
 	 * @param id The id.
 	 * @return The block definition.
 	 */
-	public BlockDefinition getBlock(int id) {
+	public BlockDefinition getBlock(short id) {
 		return blocksArray[id];
+	}
+	
+	/**
+	 * Gets an incoming block definition.
+	 * @param name The name of the block.
+	 * @return The block definition.
+	 */
+	public BlockDefinition getBlock(String name) {
+		for (BlockDefinition def : blocksArray)
+		{
+			if (def != null)
+				if (def.getName().equalsIgnoreCase(name))
+					return def;
+		}
+		return null;
 	}
 	
 }

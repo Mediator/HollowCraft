@@ -127,17 +127,27 @@ public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 	}
 	
 	// Default implementation
-	public void setBlock(Player player, World level, int x, int y, int z, int mode, int type) {
-		logger.trace("Setting block mode {} type {}", mode, type);
-		if (mode == 1 && !player.isAuthorized(Permission.BUILD)) {
-			logger.trace("Not permitted to build.");
-			player.getSession().getActionSender().sendBlock(x, y, z, level.getBlock(x, y, z));
-		} else if (mode == 0 && !player.isAuthorized(Permission.DESTROY)) {
-			logger.trace("Not permitted to destroy.");
-			player.getSession().getActionSender().sendBlock(x, y, z, level.getBlock(x, y, z));
+	public void setBlock(Player player, World level, Position pos, int mode, int type) {
+		logger.debug("Setting block mode {} type {}", mode, type);
+		if (mode == 1 && false && !player.isAuthorized(Permission.BUILD)) {
+			logger.info("Not permitted to build.");
+			try {
+			//	player.getSession().getActionSender().sendBlock(pos, level.getBlock(pos),level.getBlockMeta(pos));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (mode == 0 && false && !player.isAuthorized(Permission.DESTROY)) {
+			logger.info("Not permitted to destroy.");
+			try {
+			//	player.getSession().getActionSender().sendBlock(pos, level.getBlock(pos), level.getBlockMeta(pos));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
-			logger.trace("Building is OK!");
-			level.setBlock(x, y, z, (byte) (mode == 1 ? type : 0));
+			logger.debug("Building is OK!");
+			level.setBlock(pos, (byte) (mode == 1 ? type : 0));
 		}
 	}
 	

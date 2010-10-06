@@ -51,17 +51,17 @@ import org.hollowcraft.server.model.impl.worlds.ClassicWorld;
  */
 public class CavePlantBehaviour implements BlockBehaviour {
 	
-	public void handleDestroy(Level level, int x, int y, int z, int type) {
+	public void handleDestroy(ClassicLevel level, Position pos, int type) {
 		
 	}
 	
-	public void handlePassive(Level level, int x, int y, int z, int type) {
+	public void handlePassive(ClassicLevel level, Position pos, int type) {
 		
 	}
 	
-	public void handleScheduledBehaviour(Level level, int x, int y, int z, int type) {
-		if (BlockManager.getBlockManager().getBlock(level.getBlock(x, y, z + 1)).isLiquid() || ((World)level).getLightDepth(x, y) < z) {
-			((World)level).setBlock(x, y, z, BlockConstants.AIR);
+	public void handleScheduledBehaviour(ClassicLevel level, Position pos, int type) {
+		if (BlockManager.getBlockManager().getBlock(level.getBlock(new Position(pos.getX(), pos.getY(), pos.getZ() + 1))).isLiquid() || ((ClassicWorld)level).getLightDepth(pos.getX(), pos.getY()) < pos.getZ()) {
+			((ClassicWorld)level).setBlock(pos, BlockManager.getBlockManager().getBlock("AIR").getId());
 		}
 	}
 	

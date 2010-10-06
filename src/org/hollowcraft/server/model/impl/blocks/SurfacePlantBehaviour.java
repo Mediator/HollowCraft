@@ -54,27 +54,34 @@ import java.util.Random;
  */
 public class SurfacePlantBehaviour implements BlockBehaviour {
 	
-	public void handleDestroy(Level level, int x, int y, int z, int type) {
+	public void handleDestroy(ClassicLevel level, Position pos, int type) {
 		
 	}
 	
-	public void handlePassive(Level level, int x, int y, int z, int type) {
-		((World)level).queueActiveBlockUpdate(x, y, z);
+	public void handlePassive(ClassicLevel level, Position pos, int type) {
+		((ClassicWorld)level).queueActiveBlockUpdate(pos);
 	}
 	
-	public void handleScheduledBehaviour(Level lvl, int x, int y, int z, int type) {
-		World level = (World) lvl;
-		level.queueActiveBlockUpdate(x, y, z);
+	public void handleScheduledBehaviour(ClassicLevel lvl, Position pos, int type) {
+		short air = BlockManager.getBlockManager().getBlock("AIR").getId();
+		short water = BlockManager.getBlockManager().getBlock("WATER").getId();
+		short still_water = BlockManager.getBlockManager().getBlock("STILL_WATER").getId();
+		ClassicWorld level = (ClassicWorld) lvl;
+		level.queueActiveBlockUpdate(pos);
 		Random r = new Random();
-		if (BlockManager.getBlockManager().getBlock(level.getBlock(x, y, z - 1)).getId() != BlockConstants.DIRT && BlockManager.getBlockManager().getBlock(level.getBlock(x, y, z - 1)).getId() != BlockConstants.GRASS || level.getLightDepth(x, y) > z || BlockManager.getBlockManager().getBlock(level.getBlock(x, y, z + 1)).isLiquid()) {
-			level.setBlock(x, y, z, BlockConstants.AIR);
+		if (BlockManager.getBlockManager().getBlock(level.getBlock(new Position(pos.getX(), pos.getY(), pos.getZ() - 1))).getId() != BlockManager.getBlockManager().getBlock("DIRT").getId() && 
+		    BlockManager.getBlockManager().getBlock(level.getBlock(new Position(pos.getX(), pos.getY(), pos.getZ() - 1))).getId() != BlockManager.getBlockManager().getBlock("GRASS").getId() || 
+		    level.getLightDepth(pos.getX(), pos.getY()) > pos.getZ() || 
+		    BlockManager.getBlockManager().getBlock(level.getBlock(new Position(pos.getX(), pos.getY(), pos.getZ() + 1))).isLiquid()) {
+			level.setBlock(pos, air);
 		}
 		int spongeRadius = 2;
 		for (int spongeX = -1 * spongeRadius; spongeX <= spongeRadius; spongeX++) {
 			for (int spongeY = -1 * spongeRadius; spongeY <= spongeRadius; spongeY++) {
 				for (int spongeZ = -1 * spongeRadius; spongeZ <= spongeRadius; spongeZ++) {
-					if (level.getBlock(x + spongeX, y + spongeY, z + spongeZ) == BlockConstants.WATER || level.getBlock(x + spongeX, y + spongeY, z + spongeZ) == BlockConstants.STILL_WATER && r.nextBoolean() ) {
-						level.setBlock(x + spongeX, y + spongeY, z + spongeZ, BlockConstants.AIR);
+					if (level.getBlock(new Position(pos.getX() + spongeX, pos.getY() + spongeY, pos.getZ() + spongeZ)) == water || 
+						level.getBlock(new Position(pos.getX() + spongeX, pos.getY() + spongeY, pos.getZ() + spongeZ)) == still_water && r.nextBoolean() ) {
+						level.setBlock(new Position(pos.getX() + spongeX, pos.getY() + spongeY, pos.getZ() + spongeZ), air);
 						return;
 					}
 				}
