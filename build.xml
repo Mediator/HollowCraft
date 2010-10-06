@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
+<project name="hollowcraft" default="build" basedir=".">
 
 	<!-- These should be the only lines you'd have to edit, if any. -->
-	<property name="xstream.lib" value="/usr/share/java/xstream.jar"/>
-	<property name="mina-core.lib" value="/usr/share/java/mina/core.jar"/>
-	<property name="slf4j.jdk.lib" value="/usr/share/java/slf4j/jdk14.jar"/>
-	<property name="slf4j.lib" value="/usr/share/java/slf4j/api.jar"/>
-	<property name="jython.lib" value="/usr/share/java/jython.jar"/>
-	<property name="antlr-runtime.lib" value="/usr/share/java/antlr-3.2.jar"/>
+	<property name="xstream.lib" value="lib\xstream.jar"/>
+	<property name="mina-core.lib" value="lib\core.jar"/>
+	<property name="slf4j.jdk.lib" value="lib\jdk14.jar"/>
+	<property name="slf4j.lib" value="lib\api.jar"/>
+	<property name="jython.lib" value="lib\jython.jar"/>
+	<property name="antlr-runtime.lib" value="lib\antlr-3.2.jar"/>
 
 	<!-- Changing this property affects the value in
 		 org.hollowcraft.server.Constants.java -->
@@ -17,7 +18,8 @@
 	<property name="dist" location="dist"/>
 	<property name="gen" location="gen"/>
 
-	<files id="libs" >
+
+	<files id="libs">
 		<include name="${xstream.lib}"/>
 		<include name="${mina-core.lib}"/>
 		<include name="${slf4j.jdk.lib}"/>
@@ -26,6 +28,9 @@
 		<include name="${antlr-runtime.lib}"/>
 	</files>
 
+	<fileset id="libs.local" dir="./lib/">
+		<include name="*.jar"/>
+	</fileset>
 	<fileset id="dist.docs" dir=".">
 		<include name="doc/**"/>
 		<include name="README"/>
@@ -34,6 +39,7 @@
 
 	<fileset id="dist.files" dir=".">
 		<include name="data/**"/>
+		<exclude name="data/worlds"/>
 		<exclude name="data/maps"/>
 		<exclude name="data/savedGames"/>
 		<include name="src/**"/>
@@ -44,8 +50,8 @@
 	<fileset id="dist.data" dir="data">
 		<exclude name="maps"/>
 		<exclude name="savedGames"/>
+		<exclude name="worlds"/>
 	</fileset>
-
 	<target name="init">
 		<tstamp/>
 		<mkdir dir="${build}"/>
@@ -71,7 +77,8 @@
 			<src path="${src}"/>
 			<src path="${gen}"/>
 			<classpath>
-				<files refid="libs"/>
+				<files refid="libs" />
+				<fileset refid="libs.local" />
 			</classpath>
 			<!-- <compilerarg value="-Xlint"/> -->
 		</javac>
