@@ -38,7 +38,9 @@ package org.hollowcraft.model;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -52,19 +54,23 @@ public abstract class Entity {
 	 * A collection of local entities.
 	 */
 	private final Set<Entity> localEntities = new HashSet<Entity>();
-	private Position oldPosition;
-	private Position position;
-	private Rotation oldRotation;
-	private Rotation rotation;
+	
+	private AbsolutePosition oldPosition;
+	private AbsolutePosition position;
+	private AbsoluteRotation oldRotation;
+	private AbsoluteRotation rotation;
+	private boolean onGround;
+	private boolean oldOnGround;
 	private int id = -1;
 	private int oldId = -1;
-	
+
 	/**
 	 * Default public constructor.
 	 */
 	public Entity() {
-		position = new Position(0, 0, 0);
-		rotation = new Rotation(0, 0);
+		position = new AbsolutePosition(0, 0, 0);
+		rotation = new AbsoluteRotation(0, 0);
+		onGround = true;
 		resetOldPositionAndRotation();
 	}
 	
@@ -75,7 +81,7 @@ public abstract class Entity {
 	public Set<Entity> getLocalEntities() {
 		return localEntities;
 	}
-	
+		
 	/**
 	 * Gets the id.
 	 * @return The id.
@@ -107,7 +113,7 @@ public abstract class Entity {
 	 * Sets the rotation.
 	 * @param rotation The rotation.
 	 */
-	public void setRotation(Rotation rotation) {
+	public void setRotation(AbsoluteRotation rotation) {
 		this.rotation = rotation;
 	}
 	
@@ -115,7 +121,7 @@ public abstract class Entity {
 	 * Gets the rotation.
 	 * @return The rotation.
 	 */
-	public Rotation getRotation() {
+	public AbsoluteRotation getRotation() {
 		return rotation;
 	}
 	
@@ -123,7 +129,7 @@ public abstract class Entity {
 	 * Sets the position.
 	 * @param position The position.
 	 */
-	public void setPosition(Position position) {
+	public void setPosition(AbsolutePosition position) {
 		this.position = position;
 	}
 	
@@ -131,7 +137,7 @@ public abstract class Entity {
 	 * Gets the position.
 	 * @return The position.
 	 */
-	public Position getPosition() {
+	public AbsolutePosition getPosition() {
 		return position;
 	}
 	
@@ -139,7 +145,7 @@ public abstract class Entity {
 	 * Gets the old position.
 	 * @return The old position.
 	 */
-	public Position getOldPosition() {
+	public AbsolutePosition getOldPosition() {
 		return oldPosition;
 	}
 	
@@ -147,7 +153,7 @@ public abstract class Entity {
 	 * Gets the old rotation.
 	 * @return The old rotation.
 	 */
-	public Rotation getOldRotation() {
+	public AbsoluteRotation getOldRotation() {
 		return oldRotation;
 	}
 	
@@ -157,6 +163,30 @@ public abstract class Entity {
 	public void resetOldPositionAndRotation() {
 		oldPosition = position;
 		oldRotation = rotation;
+		oldOnGround = onGround;
+	}
+	
+	/**
+	 * Sets whether or not an entity is on the ground
+	 * @return On Ground
+	 */
+	public boolean getOnGround() {
+		return onGround;
+	}
+	
+	/**
+	 * Sets whether or not an entity is on the ground
+	 */
+	public void setOnGround(boolean value) {
+		onGround = value;
+	}
+	
+	/**
+	 * Sets whether or not an entity is on the ground
+	 * @return On Ground
+	 */
+	public boolean getOldOnGround() {
+		return oldOnGround;
 	}
 	
 	/**
