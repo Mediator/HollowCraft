@@ -54,57 +54,19 @@ import org.slf4j.*;
  * @author Brett Russell
  * @author Caleb Champlin
  */
-public class Level {
+public interface Level {
 	
-	protected String m_title;
-	protected String m_author;
-	protected long m_created;
-	protected Environment m_env;
-	protected OnBlockChangeHandler m_handler;
 
-	public void setOnBlockChangeHandler(OnBlockChangeHandler handler) {
-		m_handler = handler;
-	}
+	// TODO: Delete these and use title
+	public String getName();
 
-	protected String m_fileType;
+	// TODO: Delete these and use title
+	public void setName(String name);
 
-	protected int m_width;
-	protected int m_height;
-	protected int m_depth;
-	protected byte[][][] m_blocks;
-	protected byte[][][] m_data;
-	protected Rotation m_spawnRotation;
-	protected Position m_spawnPosition;
+	public void setTitle(String title);
 
-
-	protected static final Logger m_logger = LoggerFactory.getLogger(Level.class);
-
-	public Level() {
-	}
-
-	/**
-	 * Copy constructor
-	 */
-	public Level(Level other) {
-		m_title = other.m_title;
-		m_author = other.m_author;
-		m_created = other.m_created;
-		try{
-			m_env = (Environment) other.m_env.clone();
-		} catch (CloneNotSupportedException e) {
-			m_logger.info("Error: {}", e);
-			m_env = null;
-		}
-		m_fileType = other.m_fileType;
-		m_width = other.m_width;
-		m_height = other.m_height;
-		m_depth = other.m_depth;
-		m_blocks = other.m_blocks.clone();
-		m_data = other.m_blocks.clone();
-		m_spawnRotation = other.m_spawnRotation;
-		m_spawnPosition = other.m_spawnPosition;
-	}
-
+	public String getTitle();
+	
 	/**
 	 * Sets a block and updates the neighbours.
 	 * @param x The x coordinate.
@@ -112,9 +74,7 @@ public class Level {
 	 * @param z The z coordinate.
 	 * @param type The type id.
 	 */
-	public void setBlock(int x, int y, int z, int type) {
-		m_blocks[x][y][z] = (byte) type;
-	}
+	public void setBlock(Position pos, int type);
 	
 	/**
 	 * Gets a block.
@@ -123,148 +83,7 @@ public class Level {
 	 * @param z The z coordinate.
 	 * @return The type id.
 	 */
-	public byte getBlock(int x, int y, int z) {
-		if (x >= 0 && y >= 0 && z >= 0 && x < m_width && y < m_height && z < m_depth) {
-			return m_blocks[x][y][z];
-		} else {
-			return (byte) BlockConstants.BEDROCK;
-		}
-	}
-
-
-	/**
-	 * Returns if a block is somehow touching bedrock
-	 * @param x The x coordinate.
-	 * @param y The y coordinate.
-	 * @param z The z coordinate.
-	 * @return If a block is stable
-	 */
-	public boolean blockIsStable(int x, int y, int z) {
-		return blockIsStable(x, y, z, new ArrayList<Position>(), 0); 
-	}
-
-	private boolean blockIsStable(int x, int y, int z, ArrayList<Position> visited, int distance) {
-		Position p = new Position(x, y, z);
-		for (Position pos : visited) {
-			if (pos.equals(p)) {
-				visited.add(p);
-				return false;
-			}
-		}
-		visited.add(p);
-		int strength = BlockManager.getBlockManager().getBlock(getBlock(x,y,z)).getStrength();
-		if (strength == -1)
-			return true;
-		if (!BlockManager.getBlockManager().getBlock(getBlock(x, y, z)).isSolid() && !BlockManager.getBlockManager().getBlock(getBlock(x, y, z)).isPlant())
-			return false;
-		if (BlockManager.getBlockManager().getBlock(getBlock(x, y, z)).isLiquid())
-			return false;
-		if (distance > 40)
-			return true;
-		if (blockIsStable(x, y, z-1, visited, distance+1))
-			return true;
-		if (strength == 0)
-			return false;
-		if (distance > strength)
-			return false;
-		if (blockIsStable(x+1, y, z, visited, distance+1))
-			return true;
-		if (blockIsStable(x-1, y, z, visited, distance+1))
-			return true;
-		if (blockIsStable(x, y+1, z, visited, distance+1))
-			return true;
-		if (blockIsStable(x, y-1, z, visited, distance+1))
-			return true;
-		if (blockIsStable(x, y, z+1, visited, distance+1))
-			return true;
-		return false;
-	}
-
-	// TODO: Delete these and use title
-	public String getName() {
-		return m_title;
-	}
-
-	// TODO: Delete these and use title
-	public void setName(String name) {
-		m_logger.debug("Setting name to {}", name);
-		m_title = name;
-	}
-
-	public void setTitle(String title) {
-		m_title = title;
-	}
-
-	public String getTitle() {
-		return m_title;
-	}
-
-	public String getAuthor() {
-		return m_author;
-	}
-
-	public void setAuthor(String author) {
-		m_author = author;
-	}
-
-	public byte[][][] getBlocks() {
-		return m_blocks;
-	}
-
-	public byte[][][] getData() {
-		return m_data;
-	}
-
-	public int getWidth() {
-		return m_width;
-	}
+	public byte getBlock(Position pos);
+	public byte getBlockMeta(Position pos);
 	
-	public int getHeight() {
-		return m_height;
-	}
-	
-	public int getDepth() {
-		return m_depth;
-	}
-
-	public void setBlocks(byte[][][] blocks, byte[][][] data, int width, int height, int depth) {
-		m_logger.trace("Setting size of {}x{}x"+depth, width, height);
-		m_blocks = blocks;
-		m_data = data;
-		m_width = width;
-		m_height = height;
-		m_depth = depth;
-	}
-
-	public long getCreationDate() {
-		return m_created;
-	}
-
-	public void setCreationDate(long date) {
-		m_created = date;
-	}
-
-	public Environment getEnvironment() {
-		return m_env;
-	}
-
-	public void setEnvironment(Environment env) {
-		m_env = env;
-	}
-
-	public void setSpawnRotation(Rotation spawnRotation) {
-		m_spawnRotation = spawnRotation;
-	}
-
-	public Rotation getSpawnRotation() {
-		return m_spawnRotation;
-	}
-	
-	public void setSpawnPosition(Position spawnPosition) {
-		m_spawnPosition = spawnPosition;
-	}
-	
-	public Position getSpawnPosition() {
-		return m_spawnPosition;
-	}
 }
