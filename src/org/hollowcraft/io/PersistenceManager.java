@@ -91,6 +91,8 @@ public final class PersistenceManager {
 		xstream.alias("field", PacketField.class);
 		xstream.alias("blocks", BlockManager.class);
 		xstream.alias("block", BlockDefinition.class);
+		xstream.alias("items", ItemManager.class);
+		xstream.alias("item", ItemDefinition.class);
 	}
 	
 	/**
