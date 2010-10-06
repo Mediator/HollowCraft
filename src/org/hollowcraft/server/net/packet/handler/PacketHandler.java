@@ -1,5 +1,10 @@
-package org.opencraft.server.net.packet.handler;
-
+package org.hollowcraft.server.net.packet.handler;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -33,12 +38,13 @@ package org.opencraft.server.net.packet.handler;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.server.net.OCSession;
-import org.opencraft.server.net.packet.Packet;
+import org.hollowcraft.server.net.OCSession;
+import org.hollowcraft.server.net.packet.Packet;
 
 /**
  * Describes the methods necessary for a packet handler.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public interface PacketHandler<SessionType extends OCSession> {
 	

@@ -1,4 +1,4 @@
-package org.opencraft.server.util;
+package org.hollowcraft.server.util;
 
 /*
  * OpenCraft License

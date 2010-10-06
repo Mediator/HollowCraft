@@ -1,5 +1,10 @@
-package org.opencraft.server.game;
-
+package org.hollowcraft.server.game;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -36,17 +41,19 @@ package org.opencraft.server.game;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.opencraft.server.cmd.Command;
-import org.opencraft.server.cmd.impl.*;
-import org.opencraft.server.model.World;
-import org.opencraft.server.model.Player;
-import org.opencraft.server.security.Permission;
+import org.hollowcraft.model.Position;
+import org.hollowcraft.server.cmd.Command;
+import org.hollowcraft.server.cmd.impl.*;
+import org.hollowcraft.server.model.Player;
+import org.hollowcraft.server.model.World;
+import org.hollowcraft.server.security.Permission;
 import org.slf4j.*;
 
 /**
  * An implementation of a game mode that does the majority of the work for the
  * game mode developer.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public abstract class GameModeAdapter<P extends Player> implements GameMode<P> {
 	

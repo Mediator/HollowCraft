@@ -1,4 +1,4 @@
-package org.opencraft.server.security;
+package org.hollowcraft.server.security;
 
 public class Player implements Principal {
 	private String m_name;

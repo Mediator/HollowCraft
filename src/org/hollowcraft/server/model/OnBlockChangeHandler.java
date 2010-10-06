@@ -1,5 +1,13 @@
-package org.opencraft.server.model;
+package org.hollowcraft.server.model;
 
+import org.hollowcraft.model.Position;
+
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -36,8 +44,9 @@ package org.opencraft.server.model;
 /**
  * Handles when blocks change
  * @author Trever Fischer
+ * @author Caleb Champlin
  */
 
 public interface OnBlockChangeHandler {
-	void onBlockChange(int x, int y, int z);
+	void onBlockChange(Position pos);
 }

@@ -1,5 +1,10 @@
-package org.opencraft.server.task;
-
+package org.hollowcraft.server.task;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -36,6 +41,7 @@ package org.opencraft.server.task;
 /**
  * Represents a task that is executed on the <code>TaskQueue</code>.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public interface Task {
 	

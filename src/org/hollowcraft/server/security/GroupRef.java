@@ -1,4 +1,4 @@
-package org.opencraft.server.security;
+package org.hollowcraft.server.security;
 
 public class GroupRef extends Group {
 	public GroupRef(Policy p, String name) {

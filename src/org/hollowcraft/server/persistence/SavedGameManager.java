@@ -1,5 +1,10 @@
-package org.opencraft.server.persistence;
-
+package org.hollowcraft.server.persistence;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -37,14 +42,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import org.opencraft.io.PersistenceManager;
-import org.opencraft.server.model.Player;
+import org.hollowcraft.io.PersistenceManager;
+import org.hollowcraft.server.model.Player;
 
 import com.thoughtworks.xstream.XStream;
 
 /**
  * The core class of the saved game system.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  *
  */
 public class SavedGameManager {

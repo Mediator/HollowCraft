@@ -1,5 +1,10 @@
-package org.opencraft.server.game.impl;
-
+package org.hollowcraft.server.game.impl;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -33,8 +38,8 @@ package org.opencraft.server.game.impl;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.server.game.GameModeAdapter;
-import org.opencraft.server.model.Player;
+import org.hollowcraft.server.game.GameModeAdapter;
+import org.hollowcraft.server.model.Player;
 
 /**
  * An implementation of the creative game mode.

@@ -1,9 +1,14 @@
-package org.opencraft.server.net.codec;
-
+package org.hollowcraft.server.net.codec;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
- * Copyright (c) 2009 Graham Edgecombe, SÃ¸ren Enevoldsen and Brett Russell.
+ * Copyright (c) 2009 Graham Edgecombe, Søren Enevoldsen and Brett Russell.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -43,16 +48,22 @@ import org.apache.mina.filter.codec.CumulativeProtocolDecoder;
 import org.apache.mina.filter.codec.ProtocolDecoderOutput;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.ProtocolCodecFactory;
-import org.opencraft.server.net.packet.Packet;
-import org.opencraft.server.net.packet.PacketDefinition;
-import org.opencraft.server.net.packet.PacketField;
-import org.opencraft.server.net.packet.PacketManager;
-import org.opencraft.server.net.Protocol;
+import org.hollowcraft.server.net.Protocol;
+import org.hollowcraft.server.net.packet.DataType;
+import org.hollowcraft.server.net.packet.Packet;
+import org.hollowcraft.server.net.packet.PacketDefinition;
+import org.hollowcraft.server.net.packet.PacketField;
+import org.hollowcraft.server.net.packet.PacketManager;
+import org.hollowcraft.server.net.packet.handler.PacketHandlerManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * An implement of a <code>ProtocolDecoder</code> which decodes buffers into
  * Minecraft packet objects then dispatches them.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
+ * @changes 10/03/10 Caleb Champlin - Full support for alpha protocol and packet decoding
  */
 public final class MinecraftProtocolDecoder extends CumulativeProtocolDecoder {
 	

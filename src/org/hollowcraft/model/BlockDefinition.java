@@ -1,5 +1,10 @@
-package org.opencraft.model;
-
+package org.hollowcraft.model;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -33,11 +38,14 @@ package org.opencraft.model;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.server.model.BlockBehaviour;
+import java.util.LinkedList;
+import java.util.List;
 
+import org.hollowcraft.server.model.BlockBehaviour;
 /**
  * Represents an individual block type.
  * @author Brett Russell
+ * @author Caleb Champlin
  */
 public class BlockDefinition {
 	

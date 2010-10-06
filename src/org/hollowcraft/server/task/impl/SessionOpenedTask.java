@@ -1,5 +1,10 @@
-package org.opencraft.server.task.impl;
-
+package org.hollowcraft.server.task.impl;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -34,13 +39,14 @@ package org.opencraft.server.task.impl;
  */
 
 import org.apache.mina.core.session.IoSession;
-import org.opencraft.server.net.MinecraftSession;
-import org.opencraft.server.task.Task;
+import org.hollowcraft.server.net.MinecraftSession;
+import org.hollowcraft.server.task.Task;
 import org.slf4j.*;
 
 /**
  * A task which opens a session.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public final class SessionOpenedTask implements Task {
 	

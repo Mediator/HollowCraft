@@ -1,10 +1,10 @@
-package org.opencraft.server.security;
+package org.hollowcraft.server.security;
 import org.slf4j.*;
 
 public class Permission {
-	public static final Permission BUILD = new Permission("org.opencraft.server.Build");
-	public static final Permission DESTROY = new Permission("org.opencraft.server.Destroy");
-	public static final Permission DESTROY_OWN = new Permission("org.opencraft.server.DestroyOwn");
+	public static final Permission BUILD = new Permission("org.hollowcraft.server.Build");
+	public static final Permission DESTROY = new Permission("org.hollowcraft.server.Destroy");
+	public static final Permission DESTROY_OWN = new Permission("org.hollowcraft.server.DestroyOwn");
 
 	private String m_name;
 	public Permission(String name) {

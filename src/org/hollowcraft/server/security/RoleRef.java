@@ -1,4 +1,4 @@
-package org.opencraft.server.security;
+package org.hollowcraft.server.security;
 
 public class RoleRef extends Role {
 	private Policy m_policy;

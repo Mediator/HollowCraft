@@ -1,5 +1,10 @@
-package org.opencraft.model;
-
+package org.hollowcraft.model;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -36,6 +41,7 @@ package org.opencraft.model;
 /**
  * The Base Class for all entities for use with the NBT file format.
  * @author Adam Liszka
+ * @author Caleb Champlin
  */
 public class MCObject {
 	String m_id;

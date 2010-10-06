@@ -1,4 +1,4 @@
-package org.opencraft.server.cmd.impl;
+package org.hollowcraft.server.cmd.impl;
 
 /*
  * OpenCraft License
@@ -33,15 +33,15 @@ package org.opencraft.server.cmd.impl;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.server.cmd.Command;
-import org.opencraft.server.cmd.CommandParameters;
-import org.opencraft.server.model.Player;
-import org.opencraft.server.model.World;
-import org.opencraft.model.Environment;
-import org.opencraft.server.model.Builder;
-import org.opencraft.server.Server;
-import org.opencraft.server.security.Permission;
-import org.opencraft.server.model.impl.builders.*;
+import org.hollowcraft.model.Environment;
+import org.hollowcraft.server.Server;
+import org.hollowcraft.server.cmd.Command;
+import org.hollowcraft.server.cmd.CommandParameters;
+import org.hollowcraft.server.model.Builder;
+import org.hollowcraft.server.model.Player;
+import org.hollowcraft.server.model.World;
+import org.hollowcraft.server.model.impl.builders.*;
+import org.hollowcraft.server.security.Permission;
 
 /**
  * A command that generates a new world

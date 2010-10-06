@@ -1,4 +1,4 @@
-package org.opencraft.server.cluster;
+package org.hollowcraft.server.cluster;
 
 /*
  * OpenCraft License
@@ -41,9 +41,9 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.transport.socket.SocketConnector;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
-import org.opencraft.server.net.Connectable;
-import org.opencraft.server.net.State;
-import org.opencraft.server.net.codec.MinecraftCodecFactory;
+import org.hollowcraft.server.net.Connectable;
+import org.hollowcraft.server.net.State;
+import org.hollowcraft.server.net.codec.MinecraftCodecFactory;
 import org.slf4j.*;
 
 /**

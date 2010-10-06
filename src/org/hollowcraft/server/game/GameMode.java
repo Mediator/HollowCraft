@@ -1,5 +1,10 @@
-package org.opencraft.server.game;
-
+package org.hollowcraft.server.game;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -35,14 +40,16 @@ package org.opencraft.server.game;
 
 import java.util.Map;
 
-import org.opencraft.server.cmd.Command;
-import org.opencraft.server.model.World;
-import org.opencraft.server.model.Player;
+import org.hollowcraft.model.Position;
+import org.hollowcraft.server.cmd.Command;
+import org.hollowcraft.server.model.Player;
+import org.hollowcraft.server.model.World;
 
 /**
  * An interface which represents a specific type of game mode.
  * @author Graham Edgecombe
  * @author Søren Enevoldsen
+ * @author Caleb Champlin
  */
 public interface GameMode<P extends Player> {
 	

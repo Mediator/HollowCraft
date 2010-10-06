@@ -1,4 +1,4 @@
-package org.opencraft.server.cmd;
+package org.hollowcraft.server.cmd;
 
 /*
  * OpenCraft License

@@ -1,5 +1,10 @@
-package org.opencraft.server.task;
-
+package org.hollowcraft.server.task;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -36,6 +41,7 @@ package org.opencraft.server.task;
 /**
  * Represents a task which can be repeated multiple times and then stopoped.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public abstract class ScheduledTask implements Task {
 	

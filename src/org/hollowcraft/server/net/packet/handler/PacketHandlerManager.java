@@ -1,5 +1,10 @@
-package org.opencraft.server.net.packet.handler;
-
+package org.hollowcraft.server.net.packet.handler;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -34,14 +39,16 @@ package org.opencraft.server.net.packet.handler;
  */
 
 import java.util.Map;
+
+import org.hollowcraft.server.net.OCSession;
+import org.hollowcraft.server.net.packet.Packet;
 import org.slf4j.*;
 
-import org.opencraft.server.net.OCSession;
-import org.opencraft.server.net.packet.Packet;
 
 /**
  * A class which manages <code>PacketHandler</code>s.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public class PacketHandlerManager<SessionType extends OCSession> {
 	

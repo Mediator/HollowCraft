@@ -1,5 +1,10 @@
-package org.opencraft.server.heartbeat;
-
+package org.hollowcraft.server.heartbeat;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -48,6 +53,7 @@ import org.slf4j.*;
 /**
  * A class which manages heartbeats.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public class FListHeartbeatManager {
 	

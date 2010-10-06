@@ -1,5 +1,10 @@
-package org.opencraft.server.net;
-
+package org.hollowcraft.server.net;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -34,14 +39,18 @@ package org.opencraft.server.net;
  */
 
 import org.apache.mina.core.session.IoSession;
-import org.opencraft.server.model.Player;
-import org.opencraft.server.net.packet.Packet;
-import org.opencraft.server.Server;
+import org.hollowcraft.server.Configuration;
+import org.hollowcraft.server.Server;
+import org.hollowcraft.server.io.WorldManager;
+import org.hollowcraft.server.model.Player;
+import org.hollowcraft.server.net.actions.ActionSender;
+import org.hollowcraft.server.net.packet.Packet;
 import org.slf4j.*;
 
 /**
  * Manages a connected Minecraft session.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public final class MinecraftSession extends OCSession{
 	

@@ -1,5 +1,10 @@
-package org.opencraft.server.game.impl;
-
+package org.hollowcraft.server.game.impl;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -38,10 +43,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import org.slf4j.*;
 
-import org.opencraft.server.Configuration;
-import org.opencraft.server.game.GameModeAdapter;
-import org.opencraft.server.model.World;
-import org.opencraft.server.model.Player;
+import org.hollowcraft.model.Position;
+import org.hollowcraft.server.Configuration;
+import org.hollowcraft.server.game.GameModeAdapter;
+import org.hollowcraft.server.model.Player;
+import org.hollowcraft.server.model.World;
 import org.python.core.Py;
 import org.python.core.PyObject;
 import org.python.util.PythonInterpreter;
@@ -49,6 +55,7 @@ import org.python.util.PythonInterpreter;
 /**
  * A game mode which delegates methods to a script.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  *
  */
 public class ScriptedGameMode extends GameModeAdapter<Player> {

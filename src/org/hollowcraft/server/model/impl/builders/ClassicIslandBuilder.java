@@ -1,5 +1,10 @@
-package org.opencraft.server.model.impl.builders;
-
+package org.hollowcraft.server.model.impl.builders;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -38,25 +43,26 @@ import java.util.ArrayList;
 import java.awt.Point;
 import java.lang.Math;
 
-import org.opencraft.server.model.Builder;
-import org.opencraft.model.BlockConstants;
-import org.opencraft.model.Position;
-import org.opencraft.server.model.World;
-import org.opencraft.model.Level;
+import org.hollowcraft.model.BlockManager;
+import org.hollowcraft.model.ClassicLevel;
+import org.hollowcraft.model.Position;
+import org.hollowcraft.server.model.Builder;
+import org.hollowcraft.server.model.impl.worlds.ClassicWorld;
 
 /**
  * Builds a level.
  * @author Trever Fischer <tdfischer@fedoraproject.org>
+ * @author Caleb Champlin
  */
 
-public class IslandBuilder extends Builder {
+public class ClassicIslandBuilder extends Builder {
 
 	private int[][] m_contour;
 
 	int m_scale = 1;
 
 
-	public IslandBuilder(Level level) {
+	public ClassicIslandBuilder(ClassicLevel level) {
 		super(level);
 		m_contour = new int[m_width][m_height];
 	}

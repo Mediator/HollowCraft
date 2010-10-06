@@ -1,5 +1,10 @@
-package org.opencraft.io;
-
+package org.hollowcraft.io;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -37,19 +42,23 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
-import org.opencraft.model.BlockDefinition;
-import org.opencraft.model.BlockManager;
-import org.opencraft.server.net.packet.PacketDefinition;
-import org.opencraft.server.net.packet.PacketField;
-import org.opencraft.server.net.packet.PacketManager;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+
+import org.hollowcraft.model.BlockDefinition;
+import org.hollowcraft.model.BlockManager;
+import org.hollowcraft.model.ItemDefinition;
+import org.hollowcraft.model.ItemManager;
+import org.hollowcraft.server.net.packet.PacketDefinition;
+import org.hollowcraft.server.net.packet.PacketField;
+import org.hollowcraft.server.net.packet.PacketManager;
 import org.slf4j.*;
 
 /**
  * A class which manages XStream persistence.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public final class PersistenceManager {
 	

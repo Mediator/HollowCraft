@@ -1,5 +1,10 @@
-package org.opencraft.server.model.impl.builders;
-
+package org.hollowcraft.server.model.impl.builders;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -38,26 +43,27 @@ import java.util.LinkedList;
 import java.util.ArrayList;
 import java.lang.Math;
 
-import org.opencraft.server.model.Builder;
-import org.opencraft.model.BlockConstants;
-import org.opencraft.model.Position;
-import org.opencraft.server.model.World;
-import org.opencraft.model.Level;
+import org.hollowcraft.model.BlockManager;
+import org.hollowcraft.model.ClassicLevel;
+import org.hollowcraft.model.Position;
+import org.hollowcraft.server.model.Builder;
+import org.hollowcraft.server.model.impl.worlds.ClassicWorld;
 import org.slf4j.*;
 
 /**
  * Builds a level.
  * @author Trever Fischer <tdfischer@fedoraproject.org>
+ * @author Caleb Champlin
  */
 
-public class LandscapeBuilder extends Builder {
+public class ClassicLandscapeBuilder extends Builder {
 
 
-	public LandscapeBuilder(Level level) {
+	public ClassicLandscapeBuilder(ClassicLevel level) {
 		super(level);
 	}
 
-	private static final Logger logger = LoggerFactory.getLogger(LandscapeBuilder.class);
+	private static final Logger logger = LoggerFactory.getLogger(ClassicLandscapeBuilder.class);
 
 	public void generate() {
 		m_seed = m_random.nextInt();

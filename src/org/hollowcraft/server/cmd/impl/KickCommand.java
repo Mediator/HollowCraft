@@ -1,8 +1,8 @@
-package org.opencraft.server.cmd.impl;
+package org.hollowcraft.server.cmd.impl;
 
-import org.opencraft.server.cmd.Command;
-import org.opencraft.server.cmd.CommandParameters;
-import org.opencraft.server.model.Player;
+import org.hollowcraft.server.cmd.Command;
+import org.hollowcraft.server.cmd.CommandParameters;
+import org.hollowcraft.server.model.Player;
 
 /*
  * OpenCraft License

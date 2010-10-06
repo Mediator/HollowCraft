@@ -1,4 +1,13 @@
+package org.hollowcraft.server.net;
 /*
+
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
+/*
+
  * OpenCraft License
  * 
  * Copyright (c) 2009 Graham Edgecombe, Søren Enevoldsen, Mark Farrell and Brett Russell.
@@ -30,18 +39,18 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.opencraft.server.net;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
 
 import org.apache.mina.core.session.IoSession;
-import org.opencraft.server.net.packet.Packet;
+import org.hollowcraft.server.net.packet.Packet;
 
 import org.slf4j.*;
 
 /**
  * @author Mark Farrell
+ * @author Caleb Champlin
  * Represents an object that is bound to either end of a socket.
  */
 public abstract class Connectable {

@@ -1,5 +1,10 @@
-package org.opencraft.server.net;
-
+package org.hollowcraft.server.net;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -34,13 +39,17 @@ package org.opencraft.server.net;
  */
 
 import org.apache.mina.core.session.IoSession;
-import org.opencraft.server.net.packet.Packet;
-import org.opencraft.server.model.Player;
-import org.opencraft.server.net.Protocol;
+import org.hollowcraft.server.model.Player;
+import org.hollowcraft.server.net.Protocol;
+import org.hollowcraft.server.net.packet.Packet;
+import org.hollowcraft.server.persistence.LoadPersistenceRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.net.SocketAddress;
 
 /**
  * @author Mark Farrell
+ * @author Caleb Champlin
  * The base class for all sessions .
  */
 public abstract class OCSession extends Connectable{

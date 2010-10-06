@@ -1,5 +1,10 @@
-package org.opencraft.server.util;
-
+package org.hollowcraft.server.util;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -37,9 +42,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.hollowcraft.server.model.Player;
 import org.slf4j.*;
 
-import org.opencraft.server.model.Player;
 
 /**
  * A class which manages the list of connected players.

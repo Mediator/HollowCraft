@@ -1,5 +1,10 @@
-package org.opencraft.server.net.codec;
-
+package org.hollowcraft.server.net.codec;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -37,11 +42,12 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFactory;
 import org.apache.mina.filter.codec.ProtocolDecoder;
 import org.apache.mina.filter.codec.ProtocolEncoder;
-import org.opencraft.server.net.packet.PacketManager;
+import org.hollowcraft.server.net.packet.PacketManager;
 
 /**
  * A <code>ProtocolCodecFactory</code> for the Minecraft protocol.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public final class MinecraftCodecFactory implements ProtocolCodecFactory {
 	

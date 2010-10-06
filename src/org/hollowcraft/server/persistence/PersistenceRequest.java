@@ -1,5 +1,10 @@
-package org.opencraft.server.persistence;
-
+package org.hollowcraft.server.persistence;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -34,13 +39,15 @@ package org.opencraft.server.persistence;
  */
 
 import java.io.IOException;
+
+import org.hollowcraft.server.model.Player;
 import org.slf4j.*;
 
-import org.opencraft.server.model.Player;
 
 /**
  * Represents a single persistence request.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  *
  */
 public abstract class PersistenceRequest implements Runnable {

@@ -1,5 +1,10 @@
-package org.opencraft.server.model;
-
+package org.hollowcraft.server.model;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -34,14 +39,16 @@ package org.opencraft.server.model;
  */
 
 import java.util.Random;
-import org.opencraft.server.model.World;
-import org.opencraft.model.BlockConstants;
-import org.opencraft.model.Level;
+
+import org.hollowcraft.model.BlockManager;
+import org.hollowcraft.model.ClassicLevel;
+import org.hollowcraft.server.model.impl.worlds.ClassicWorld;
 import org.slf4j.*;
 
 /**
  * Level Builder Interface.
  * @author Adam Liszka
+ * @author Caleb Champlin
  */
 
 public abstract class Builder {

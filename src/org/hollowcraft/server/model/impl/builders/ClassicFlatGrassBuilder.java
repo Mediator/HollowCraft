@@ -1,5 +1,10 @@
-package org.opencraft.server.model.impl.builders;
-
+package org.hollowcraft.server.model.impl.builders;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -33,19 +38,20 @@ package org.opencraft.server.model.impl.builders;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.server.model.Builder;
-import org.opencraft.model.BlockConstants;
-import org.opencraft.server.model.World;
-import org.opencraft.model.Level;
+import org.hollowcraft.model.BlockManager;
+import org.hollowcraft.model.ClassicLevel;
+import org.hollowcraft.server.model.Builder;
+import org.hollowcraft.server.model.impl.worlds.ClassicWorld;
 
 /**
  * Builds a level.
  * @author Adam Liszka
+ * @author Caleb Champlin
  */
 
-public class FlatGrassBuilder extends Builder {
+public class ClassicFlatGrassBuilder extends Builder {
 
-	public FlatGrassBuilder(Level level) {
+	public ClassicFlatGrassBuilder(ClassicLevel level) {
 		super(level);
 	}
 

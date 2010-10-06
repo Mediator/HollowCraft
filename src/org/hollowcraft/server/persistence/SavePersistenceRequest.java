@@ -1,5 +1,10 @@
-package org.opencraft.server.persistence;
-
+package org.hollowcraft.server.persistence;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -37,13 +42,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import org.opencraft.server.model.Player;
+import org.hollowcraft.server.model.Player;
 
 import com.thoughtworks.xstream.XStream;
 
 /**
  * A persistence request which saves the specified player.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  *
  */
 public class SavePersistenceRequest extends PersistenceRequest {

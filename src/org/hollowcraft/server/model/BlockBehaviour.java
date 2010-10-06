@@ -1,5 +1,10 @@
-package org.opencraft.server.model;
-
+package org.hollowcraft.server.model;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -32,13 +37,14 @@ package org.opencraft.server.model;
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-import org.opencraft.server.model.World;
-import org.opencraft.model.Level;
+import org.hollowcraft.model.ClassicLevel;
+import org.hollowcraft.model.Position;
 
 /**
  * Contains various methods handling block behavior.
  * @author Brett Russell
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public interface BlockBehaviour {
 	

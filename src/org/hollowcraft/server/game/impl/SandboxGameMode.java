@@ -1,5 +1,10 @@
-package org.opencraft.server.game.impl;
-
+package org.hollowcraft.server.game.impl;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -38,12 +43,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.opencraft.server.game.GameModeAdapter;
-import org.opencraft.server.model.Player;
+import org.hollowcraft.server.game.GameModeAdapter;
+import org.hollowcraft.server.model.Player;
+import org.hollowcraft.server.model.impl.worlds.AlphaWorld;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A game mode in which building is free and anything goes.
  * @author Adam Liszka
+ * @author Caleb Champlin
  */
 
 public class SandboxGameMode extends GameModeAdapter<Player> {

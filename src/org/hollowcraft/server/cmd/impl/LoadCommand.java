@@ -1,4 +1,4 @@
-package org.opencraft.server.cmd.impl;
+package org.hollowcraft.server.cmd.impl;
 
 /*
  * OpenCraft License
@@ -33,11 +33,11 @@ package org.opencraft.server.cmd.impl;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.server.cmd.Command;
-import org.opencraft.server.cmd.CommandParameters;
-import org.opencraft.server.model.Player;
-import org.opencraft.server.Server;
-import org.opencraft.server.security.Permission;
+import org.hollowcraft.server.Server;
+import org.hollowcraft.server.cmd.Command;
+import org.hollowcraft.server.cmd.CommandParameters;
+import org.hollowcraft.server.model.Player;
+import org.hollowcraft.server.security.Permission;
 
 /**
  * A command to send a player to a new world

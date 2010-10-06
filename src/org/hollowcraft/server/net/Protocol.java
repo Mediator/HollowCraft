@@ -1,5 +1,10 @@
-package org.opencraft.server.net;
-
+package org.hollowcraft.server.net;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -33,11 +38,16 @@ package org.opencraft.server.net;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.server.net.packet.PacketManager;
-import org.opencraft.server.net.packet.handler.PacketHandlerManager;
-import org.opencraft.io.PersistenceManager;
-import java.util.Map;
+import org.hollowcraft.io.PersistenceManager;
+import org.hollowcraft.server.net.packet.PacketManager;
+import org.hollowcraft.server.net.packet.handler.PacketHandlerManager;
 
+import java.util.Map;
+/**
+ * Handle different protocol implemetnations
+ * @author tdfischer
+ * @author Caleb Champlin
+ */
 public class Protocol {
 	public enum Version {
 		Classic,

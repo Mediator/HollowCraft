@@ -1,5 +1,10 @@
-package org.opencraft.model;
-
+package org.hollowcraft.model;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -36,13 +41,15 @@ package org.opencraft.model;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.opencraft.io.PersistenceManager;
+import org.hollowcraft.io.PersistenceManager;
+import org.hollowcraft.server.Configuration;
 
 /**
  * A class which manages <code>BlockDefinition</code>s and
  * <code>BlockBehaviour</code>s.
  * @author Graham Edgecombe
  * @author Brett Russell
+ * @author Caleb Champlin
  */
 public final class BlockManager {
 	

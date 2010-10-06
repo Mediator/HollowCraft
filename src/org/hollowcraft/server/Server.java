@@ -1,5 +1,10 @@
-package org.opencraft.server;
-
+package org.hollowcraft.server;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -47,25 +52,28 @@ import java.io.File;
 
 import org.apache.mina.core.service.IoAcceptor;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
-import org.opencraft.server.model.World;
-import org.opencraft.server.net.SessionHandler;
-import org.opencraft.server.task.TaskQueue;
-import org.opencraft.server.task.impl.HeartbeatTask;
-import org.opencraft.server.task.Task;
-import org.opencraft.server.task.impl.UpdateTask;
-import org.opencraft.server.task.impl.FListHeartbeatTask;
-import org.opencraft.server.heartbeat.HeartbeatManager;
-import org.opencraft.server.util.SetManager;
-import org.opencraft.server.net.MinecraftSession;
-import org.opencraft.server.util.PlayerList;
-import org.opencraft.server.model.Player;
-import org.opencraft.server.persistence.SavedGameManager;
-import org.opencraft.server.persistence.SavePersistenceRequest;
-import org.opencraft.server.security.Group;
-import org.opencraft.server.security.Permission;
-import org.opencraft.server.security.Principal;
-import org.opencraft.server.security.Policy;
-import org.opencraft.server.io.WorldManager;
+import org.hollowcraft.server.heartbeat.HeartbeatManager;
+import org.hollowcraft.server.io.WorldManager;
+import org.hollowcraft.server.model.BlockBehaviour;
+import org.hollowcraft.server.model.Player;
+import org.hollowcraft.server.model.World;
+import org.hollowcraft.server.net.MinecraftSession;
+import org.hollowcraft.server.net.SessionHandler;
+import org.hollowcraft.server.persistence.SavePersistenceRequest;
+import org.hollowcraft.server.persistence.SavedGameManager;
+import org.hollowcraft.server.security.Group;
+import org.hollowcraft.server.security.Permission;
+import org.hollowcraft.server.security.Policy;
+import org.hollowcraft.server.security.Principal;
+import org.hollowcraft.server.task.Task;
+import org.hollowcraft.server.task.TaskQueue;
+import org.hollowcraft.server.task.impl.FListHeartbeatTask;
+import org.hollowcraft.server.task.impl.HeartbeatTask;
+import org.hollowcraft.server.task.impl.KeepAliveTask;
+import org.hollowcraft.server.task.impl.UpdateTask;
+import org.hollowcraft.server.util.PlayerList;
+import org.hollowcraft.server.util.SetManager;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.InputStream;
@@ -74,6 +82,7 @@ import java.util.zip.ZipInputStream;
 import java.util.zip.ZipEntry;
 import java.util.ArrayList;
 import java.text.ParseException;
+
 import org.slf4j.*;
 
 import java.util.logging.LogManager;
@@ -83,6 +92,7 @@ import java.io.FileInputStream;
 /**
  * The core class of the OpenCraft server.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public final class Server {
 	

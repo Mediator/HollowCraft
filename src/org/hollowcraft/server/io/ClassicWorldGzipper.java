@@ -1,5 +1,10 @@
-package org.opencraft.server.io;
-
+package org.hollowcraft.server.io;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -39,26 +44,27 @@ import java.util.concurrent.Executors;
 import java.util.zip.GZIPOutputStream;
 
 import org.apache.mina.core.buffer.IoBuffer;
-import org.opencraft.server.model.World;
-import org.opencraft.server.net.MinecraftSession;
+import org.hollowcraft.server.model.impl.worlds.ClassicWorld;
+import org.hollowcraft.server.net.MinecraftSession;
 import org.slf4j.*;
 
 /**
  * A utility class for gzipping levels.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
-public final class WorldGzipper {
+public final class ClassicWorldGzipper {
 	
 	/**
 	 * The singleton instance.
 	 */
-	private static final WorldGzipper INSTANCE = new WorldGzipper();
+	private static final ClassicWorldGzipper INSTANCE = new ClassicWorldGzipper();
 	
 	/**
 	 * Gets the level gzipper.
 	 * @return The level gzipper.
 	 */
-	public static WorldGzipper getWorldGzipper() {
+	public static ClassicWorldGzipper getWorldGzipper() {
 		return INSTANCE;
 	}
 	
@@ -70,11 +76,11 @@ public final class WorldGzipper {
 	/**
 	 * Default private constructor.
 	 */
-	private WorldGzipper() {
+	private ClassicWorldGzipper() {
 		/* empty */
 	}
 
-	private static final Logger logger = LoggerFactory.getLogger(WorldGzipper.class);
+	private static final Logger logger = LoggerFactory.getLogger(ClassicWorldGzipper.class);
 
 	private class ChunkOutputStream extends OutputStream {
 		private MinecraftSession m_session;

@@ -1,5 +1,10 @@
-package org.opencraft.server.net.packet;
-
+package org.hollowcraft.server.net.packet;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -36,6 +41,7 @@ package org.opencraft.server.net.packet;
 /**
  * Represents a type of packet.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public final class PacketDefinition {
 	

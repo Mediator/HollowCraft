@@ -1,5 +1,10 @@
-package org.opencraft.io;
-
+package org.hollowcraft.io;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -37,18 +42,20 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+
+import org.hollowcraft.model.ClassicEnvironment;
+import org.hollowcraft.model.ClassicLevel;
+import org.hollowcraft.model.Position;
+import org.hollowcraft.model.Rotation;
 import org.jnbt.*;
 import java.io.*;
 
-import org.opencraft.model.Position;
-import org.opencraft.model.Rotation;
-import org.opencraft.model.Level;
-import org.opencraft.model.Environment;
 import org.slf4j.*;
 
 /**
  * A frontend to the JNBT file reader
  * @author Adam Liszka
+ * @author Caleb champlin
  */
 public final class NBTFileHandler {
 

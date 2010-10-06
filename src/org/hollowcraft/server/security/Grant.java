@@ -1,4 +1,4 @@
-package org.opencraft.server.security;
+package org.hollowcraft.server.security;
 
 public class Grant {
 	private Permission m_perm;

@@ -1,5 +1,10 @@
-package org.opencraft.server.task;
-
+package org.hollowcraft.server.task;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -36,12 +41,14 @@ package org.opencraft.server.task;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import org.opencraft.server.Server;
+
+import org.hollowcraft.server.Server;
 import org.slf4j.*;
 
 /**
  * Manages the task queue.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public final class TaskQueue {
 	

@@ -1,4 +1,4 @@
-package org.opencraft.server.cmd;
+package org.hollowcraft.server.cmd;
 
 /*
  * OpenCraft License
@@ -33,7 +33,7 @@ package org.opencraft.server.cmd;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.server.model.Player;
+import org.hollowcraft.server.model.Player;
 
 /**
  * Represents a specific command.

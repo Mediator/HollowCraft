@@ -1,5 +1,10 @@
-package org.opencraft.server.net.packet;
-
+package org.hollowcraft.server.net.packet;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -38,7 +43,8 @@ import java.util.List;
 
 /**
  * A utility class for managing the whole packet system.
- * @param Graham Edgecombe
+ * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public class PacketManager {
 	

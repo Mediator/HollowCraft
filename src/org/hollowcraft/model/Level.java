@@ -1,5 +1,10 @@
-package org.opencraft.model;
-
+package org.hollowcraft.model;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -38,17 +43,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 import java.util.ArrayList;
-import org.slf4j.*;
-import org.opencraft.server.model.OnBlockChangeHandler;
-import org.opencraft.server.model.Builder;
 
-import org.opencraft.model.Environment;
-import org.opencraft.server.model.impl.builders.LandscapeBuilder;
+import org.hollowcraft.server.model.Builder;
+import org.hollowcraft.server.model.OnBlockChangeHandler;
+import org.slf4j.*;
 
 /**
  * Represents the actual level.
  * @author Graham Edgecombe
  * @author Brett Russell
+ * @author Caleb Champlin
  */
 public class Level {
 	

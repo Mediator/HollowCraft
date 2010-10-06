@@ -1,5 +1,10 @@
-package org.opencraft.server.net;
-
+package org.hollowcraft.server.net;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -35,6 +40,7 @@ package org.opencraft.server.net;
 /**
  * Various connection states.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public enum State {
 	

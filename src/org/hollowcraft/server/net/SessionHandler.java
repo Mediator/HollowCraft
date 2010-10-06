@@ -1,5 +1,10 @@
-package org.opencraft.server.net;
-
+package org.hollowcraft.server.net;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -36,12 +41,12 @@ package org.opencraft.server.net;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
-import org.opencraft.server.net.codec.MinecraftCodecFactory;
-import org.opencraft.server.net.packet.Packet;
-import org.opencraft.server.task.TaskQueue;
-import org.opencraft.server.task.impl.SessionClosedTask;
-import org.opencraft.server.task.impl.SessionMessageTask;
-import org.opencraft.server.task.impl.SessionOpenedTask;
+import org.hollowcraft.server.net.codec.MinecraftCodecFactory;
+import org.hollowcraft.server.net.packet.Packet;
+import org.hollowcraft.server.task.TaskQueue;
+import org.hollowcraft.server.task.impl.SessionClosedTask;
+import org.hollowcraft.server.task.impl.SessionMessageTask;
+import org.hollowcraft.server.task.impl.SessionOpenedTask;
 import org.slf4j.*;
 
 /**
@@ -49,6 +54,7 @@ import org.slf4j.*;
  * from MINA and passes them onto the necessary subsystem in the OpenCraft
  * server.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public final class SessionHandler extends IoHandlerAdapter {
 	

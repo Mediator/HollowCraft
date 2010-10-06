@@ -1,5 +1,10 @@
-package org.opencraft.server.net.codec;
-
+package org.hollowcraft.server.net.codec;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -39,14 +44,18 @@ import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolEncoderAdapter;
 import org.apache.mina.filter.codec.ProtocolEncoderOutput;
-import org.opencraft.server.net.packet.Packet;
-import org.opencraft.server.net.packet.PacketDefinition;
-import org.opencraft.server.net.packet.PacketField;
+import org.hollowcraft.server.net.actions.impl.AlphaActionSender;
+import org.hollowcraft.server.net.packet.Packet;
+import org.hollowcraft.server.net.packet.PacketDefinition;
+import org.hollowcraft.server.net.packet.PacketField;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * An implementation of a <code>ProtocolEncoder</code> which encodes Minecraft
  * packet objects into buffers and then dispatches them.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public final class MinecraftProtocolEncoder extends ProtocolEncoderAdapter {
 	

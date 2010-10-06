@@ -1,5 +1,10 @@
-package org.opencraft.server;
-
+package org.hollowcraft.server;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -39,11 +44,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.opencraft.server.game.impl.CreativeGameMode;
+import org.hollowcraft.server.game.impl.CreativeGameMode;
 
 /**
  * Manages server configuration.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public class Configuration {
 	

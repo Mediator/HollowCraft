@@ -1,5 +1,10 @@
-package org.opencraft.model;
-
+package org.hollowcraft.model;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -39,6 +44,7 @@ import java.util.Set;
 /**
  * The superclass for players and mobs.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public abstract class Entity {
 	

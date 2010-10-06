@@ -1,5 +1,10 @@
-package org.opencraft.server.model;
-
+package org.hollowcraft.server.model;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -36,16 +41,20 @@ package org.opencraft.server.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.opencraft.server.net.ActionSender;
-import org.opencraft.server.net.MinecraftSession;
-import org.opencraft.server.io.WorldGzipper;
-import org.opencraft.server.security.Principal;
-import org.opencraft.server.security.Permission;
-import org.opencraft.server.security.Policy;
-import org.opencraft.model.Entity;
-import org.opencraft.model.Position;
-import org.opencraft.model.Rotation;
+
 import java.util.ArrayList;
+
+import org.hollowcraft.model.AbsolutePosition;
+import org.hollowcraft.model.AbsoluteRotation;
+import org.hollowcraft.model.Animation;
+import org.hollowcraft.model.Entity;
+import org.hollowcraft.server.io.WorldManager;
+import org.hollowcraft.server.model.World;
+import org.hollowcraft.server.net.MinecraftSession;
+import org.hollowcraft.server.net.actions.ActionSender;
+import org.hollowcraft.server.security.Permission;
+import org.hollowcraft.server.security.Policy;
+import org.hollowcraft.server.security.Principal;
 import org.slf4j.*;
 
 /**

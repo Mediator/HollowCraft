@@ -1,5 +1,10 @@
-package org.opencraft.server.task.impl;
-
+package org.hollowcraft.server.task.impl;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -36,16 +41,18 @@ package org.opencraft.server.task.impl;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.opencraft.model.Entity;
-import org.opencraft.server.model.Player;
-import org.opencraft.server.model.World;
-import org.opencraft.server.Server;
-import org.opencraft.server.task.ScheduledTask;
+import org.hollowcraft.model.Animation;
+import org.hollowcraft.model.Entity;
+import org.hollowcraft.server.Server;
+import org.hollowcraft.server.model.Player;
+import org.hollowcraft.server.model.World;
+import org.hollowcraft.server.task.ScheduledTask;
 import org.slf4j.*;
 
 /**
  * Updates the players and game world.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public class UpdateTask extends ScheduledTask {
 	

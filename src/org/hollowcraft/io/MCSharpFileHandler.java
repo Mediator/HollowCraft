@@ -1,5 +1,10 @@
-package org.opencraft.io;
-
+package org.hollowcraft.io;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -37,12 +42,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.DataInputStream;
 import java.util.zip.GZIPInputStream;
-import org.opencraft.model.Level;
-import org.opencraft.model.Environment;
-import org.opencraft.model.Position;
-import org.opencraft.model.Rotation;
-import org.opencraft.model.BlockConstants;
 
+
+import org.hollowcraft.model.BlockManager;
+import org.hollowcraft.model.ClassicEnvironment;
+import org.hollowcraft.model.ClassicLevel;
+import org.hollowcraft.model.Position;
+import org.hollowcraft.model.Rotation;
 import org.slf4j.*;
 
 public final class MCSharpFileHandler {

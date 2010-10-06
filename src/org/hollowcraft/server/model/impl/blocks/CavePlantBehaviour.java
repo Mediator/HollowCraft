@@ -1,5 +1,10 @@
-package org.opencraft.server.model.impl;
-
+package org.hollowcraft.server.model.impl.blocks;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -33,15 +38,16 @@ package org.opencraft.server.model.impl;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.opencraft.server.model.BlockBehaviour;
-import org.opencraft.model.BlockConstants;
-import org.opencraft.model.BlockManager;
-import org.opencraft.server.model.World;
-import org.opencraft.model.Level;
+import org.hollowcraft.model.BlockManager;
+import org.hollowcraft.model.ClassicLevel;
+import org.hollowcraft.model.Position;
+import org.hollowcraft.server.model.BlockBehaviour;
+import org.hollowcraft.server.model.impl.worlds.ClassicWorld;
 
 /**
  * A block behaviour that handles plants which require darkness.
  * @author Brett Russell
+ * @author Caleb Champlin
  */
 public class CavePlantBehaviour implements BlockBehaviour {
 	

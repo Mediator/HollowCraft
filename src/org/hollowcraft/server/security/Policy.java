@@ -1,4 +1,4 @@
-package org.opencraft.server.security;
+package org.hollowcraft.server.security;
 
 import org.slf4j.*;
 import java.util.ArrayList;

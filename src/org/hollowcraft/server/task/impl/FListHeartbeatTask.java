@@ -1,5 +1,10 @@
-package org.opencraft.server.task.impl;
-
+package org.hollowcraft.server.task.impl;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -36,16 +41,17 @@ package org.opencraft.server.task.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.opencraft.server.Configuration;
-import org.opencraft.server.Constants;
-import org.opencraft.server.heartbeat.FListHeartbeatManager;
-import org.opencraft.server.heartbeat.HeartbeatManager;
-import org.opencraft.server.task.ScheduledTask;
-import org.opencraft.server.Server;
+import org.hollowcraft.server.Configuration;
+import org.hollowcraft.server.Constants;
+import org.hollowcraft.server.Server;
+import org.hollowcraft.server.heartbeat.FListHeartbeatManager;
+import org.hollowcraft.server.heartbeat.HeartbeatManager;
+import org.hollowcraft.server.task.ScheduledTask;
 
 /**
  * A task which sends a heartbeat periodically to the master server.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public class FListHeartbeatTask extends ScheduledTask {
 	

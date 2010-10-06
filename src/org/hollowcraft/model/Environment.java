@@ -1,5 +1,6 @@
-package org.opencraft.model;
+package org.hollowcraft.model;
 
+/*
 import org.opencraft.model.BlockConstants;
 
 public class Environment implements Cloneable {
@@ -13,7 +14,16 @@ public class Environment implements Cloneable {
 	protected int   SkyColor = 0x0040FF;				// Hexadecimal value for the color of the sky
 	protected int   FogColor = 0xCCCCCC;				// Hexadecimal value for the color of the fog
 	protected byte  SkyBrightness = 75;				// The brightness of the sky, from 0 to 100
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 
+/**
+ * Represents a world environment
+ * @author Caleb champlin
+ */
 	public Environment() { }
 
 	public Object clone() throws CloneNotSupportedException { return super.clone(); }

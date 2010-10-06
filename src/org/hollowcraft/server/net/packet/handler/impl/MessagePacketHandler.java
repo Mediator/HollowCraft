@@ -1,5 +1,10 @@
-package org.opencraft.server.net.packet.handler.impl;
-
+package org.hollowcraft.server.net.packet.handler.impl;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -37,19 +42,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.opencraft.server.cmd.Command;
-import org.opencraft.server.cmd.CommandParameters;
-import org.opencraft.server.net.MinecraftSession;
-import org.opencraft.server.net.packet.Packet;
-import org.opencraft.server.net.packet.handler.PacketHandler;
-import org.opencraft.server.security.Permission;
+import org.hollowcraft.server.cmd.Command;
+import org.hollowcraft.server.cmd.CommandParameters;
+import org.hollowcraft.server.net.MinecraftSession;
+import org.hollowcraft.server.net.packet.Packet;
+import org.hollowcraft.server.net.packet.handler.PacketHandler;
+import org.hollowcraft.server.security.Permission;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A class which handles message and comamnd packets.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public class MessagePacketHandler implements PacketHandler<MinecraftSession> {
-	
+	private static final Logger logger = LoggerFactory.getLogger(LookPacketHandler.class);
 	public void handlePacket(MinecraftSession session, Packet packet) {
 		if (!session.isAuthenticated()) {
 			return;

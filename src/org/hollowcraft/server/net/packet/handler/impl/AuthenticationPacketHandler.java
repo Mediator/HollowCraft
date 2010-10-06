@@ -1,5 +1,10 @@
-package org.opencraft.server.net.packet.handler.impl;
-
+package org.hollowcraft.server.net.packet.handler.impl;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -32,18 +37,20 @@ package org.opencraft.server.net.packet.handler.impl;
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+import org.hollowcraft.server.Constants;
+import org.hollowcraft.server.net.MinecraftSession;
+import org.hollowcraft.server.net.packet.Packet;
+import org.hollowcraft.server.net.packet.handler.PacketHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import org.slf4j.*;
+import org.hollowcraft.server.Server;
 
-import org.opencraft.server.Constants;
-import org.opencraft.server.net.MinecraftSession;
-import org.opencraft.server.net.packet.Packet;
-import org.opencraft.server.net.packet.handler.PacketHandler;
-import org.opencraft.server.Server;
 
 /**
  * Handles the incoming authentication packet.
  * @author Graham Edgecombe
+ * @author Caleb Champlin
  */
 public final class AuthenticationPacketHandler implements PacketHandler<MinecraftSession> {
 	

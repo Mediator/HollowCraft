@@ -1,5 +1,10 @@
-package org.opencraft.model;
-
+package org.hollowcraft.model;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
 /*
  * OpenCraft License
  * 
@@ -36,6 +41,7 @@ package org.opencraft.model;
 /**
  * Represents a location in the game world.
  * @author Graham Edgecombe
+ * @author Caleb champlin
  */
 public final class Position {
 	
