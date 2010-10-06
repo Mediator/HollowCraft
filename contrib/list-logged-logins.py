@@ -29,7 +29,7 @@ class LogRecordHandler(xml.sax.ContentHandler):
 			self.stamp = chars
 
 		if (self.curTag == "logger"):
-			if (chars == "org.opencraft.server.Server.Logins"):
+			if (chars == "org.hollowcraft.server.Server.Logins"):
 				self.loginRecord = True
 			else:
 				self.loginRecord = False

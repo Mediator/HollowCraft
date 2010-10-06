@@ -1,11 +1,6 @@
-OpenCraft
+HollowCraft
 
 For more information about the license, see LICENSE.
-
-For more information about the project, see http://opencraft.sf.net/
-
-Complete, up-to-date documentation is available at http://opencraft.sf.net/docs
-
 
 Compiling
 =========
@@ -29,16 +24,16 @@ Running
 =======
 There are different methods of running the server. The easiest is to type
 ``ant run''. This goes through the stages of compilation and finally results in
-the opencraft-server-<release>.jar file being built to dist/, which then gets
-ran. If you want to run opencraft-server.jar by itself, you'll need to pass the
+the hollowcraft-server-<release>.jar file being built to dist/, which then gets
+ran. If you want to run hollowcraft-server.jar by itself, you'll need to pass the
 class path of all the libraries needed, and it assumes you've got a proper data/
 directory.
 
-opencraft.jar contains a bootstrap.zip file, which contains a pre-built data/
-directory. If you'd prefer to use your system libraries for running OpenCraft,
+hollowcraft.jar contains a bootstrap.zip file, which contains a pre-built data/
+directory. If you'd prefer to use your system libraries for running HollowCraft,
 you'll want this one.
 
-opencraft-full.jar contains all the libraries you need along with bootstrap.zip.
+hollowcraft-full.jar contains all the libraries you need along with bootstrap.zip.
 If you're having trouble getting the libraries together or the term 'classpath'
 is pretty foreign to you, you'll want that one. Just run it with ``java -jar
 /path/to/opencraft-full.jar''. It'll Just Work like magic.

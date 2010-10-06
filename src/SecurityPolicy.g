@@ -17,11 +17,11 @@ tokens {
 }
 
 @header {
-	package org.opencraft.server.security;
+	package org.hollowcraft.server.security;
 }
 
 @lexer::header {
-	package org.opencraft.server.security;
+	package org.hollowcraft.server.security;
 }
 
 policy:	version block* EOF!;

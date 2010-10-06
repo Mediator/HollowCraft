@@ -8,8 +8,8 @@ Blocks: These form the basic structure of a permission list file
 
 Permissions: Permissions specified refer to actual java.security.Permission classes
 	Examples:
-	org.opencraft.server.Build	- Players may place blocks
-	org.opencraft.server.Destroy	- Players may remove any blocks
+	org.hollowcraft.server.Build	- Players may place blocks
+	org.hollowcraft.server.Destroy	- Players may remove any blocks
 
 Builtin Groups:
 	ALL         - Everyone.
@@ -21,28 +21,28 @@ By default, nobody has any permissions and isn't in any groups except for ALL.
 // Example permissions
 
 ROLE Player {
-	org.opencraft.server.cmd.impl.TeleportCommand.execute
-	org.opencraft.server.cmd.impl.GotoCommand.execute
-	org.opencraft.server.cmd.impl.HelpCommand.execute
-	org.opencraft.server.cmd.impl.SpawnCommand.execute
-	org.opencraft.server.cmd.impl.MeCommand.execute
-	org.opencraft.server.cmd.impl.LevelsCommand.execute
-	org.opencraft.server.cmd.impl.PingCommand.execute
-	org.opencraft.server.cmd.impl.RollCommand.execute
+	org.hollowcraft.server.cmd.impl.TeleportCommand.execute
+	org.hollowcraft.server.cmd.impl.GotoCommand.execute
+	org.hollowcraft.server.cmd.impl.HelpCommand.execute
+	org.hollowcraft.server.cmd.impl.SpawnCommand.execute
+	org.hollowcraft.server.cmd.impl.MeCommand.execute
+	org.hollowcraft.server.cmd.impl.LevelsCommand.execute
+	org.hollowcraft.server.cmd.impl.PingCommand.execute
+	org.hollowcraft.server.cmd.impl.RollCommand.execute
 }
 
 ROLE Builder {
 	@Player
-	org.opencraft.server.Build
-	org.opencraft.server.Destroy
+	org.hollowcraft.server.Build
+	org.hollowcraft.server.Destroy
 }
 
 ROLE Op {
 	@Builder
-	org.opencraft.server.cmd.impl.KickCommand.execute
-	org.opencraft.server.cmd.impl.SummonCommand.execute
-	org.opencraft.server.cmd.impl.SayCommand.execute
-	org.opencraft.server.cmd.impl.SetspawnCommand.execute
+	org.hollowcraft.server.cmd.impl.KickCommand.execute
+	org.hollowcraft.server.cmd.impl.SummonCommand.execute
+	org.hollowcraft.server.cmd.impl.SayCommand.execute
+	org.hollowcraft.server.cmd.impl.SetspawnCommand.execute
 }
 
 GROUP admins {

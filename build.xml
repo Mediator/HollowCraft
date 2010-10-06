@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<project name="opencraft" default="build" basedir=".">
 
 	<!-- These should be the only lines you'd have to edit, if any. -->
 	<property name="xstream.lib" value="/usr/share/java/xstream.jar"/>
@@ -10,7 +9,7 @@
 	<property name="antlr-runtime.lib" value="/usr/share/java/antlr-3.2.jar"/>
 
 	<!-- Changing this property affects the value in
-		 org.opencraft.server.Constants.java -->
+		 org.hollowcraft.server.Constants.java -->
 	<property name="version" value="0.3"/>
 
 	<property name="src" location="src"/>
@@ -66,7 +65,7 @@
 		</java>
 	</target>
 	<target name="javac" depends="init,antlr">
-		<copy file="${src}/org/opencraft/server/Constants.java.in" tofile="${gen}/Constants.java"/>
+		<copy file="${src}/org/hollowcraft/server/Constants.java.in" tofile="${gen}/Constants.java"/>
 		<replace file="${gen}/Constants.java" token="@VERSION@" value="${version}"/>
 		<javac destdir="${build}" debug="true">
 			<src path="${src}"/>
@@ -85,15 +84,15 @@
 	</target>
 	<target name="build" depends="javac"/>
 	<target name="jar" depends="build">
-		<copy file="LICENSE" tofile="${build}/META-INF/OpenCraft.LICENSE"/>
-		<jar destfile="${dist}/opencraft-server-${version}.jar" basedir="${build}">
+		<copy file="LICENSE" tofile="${build}/META-INF/HollowCraft.LICENSE"/>
+		<jar destfile="${dist}/hollowcraft-server-${version}.jar" basedir="${build}">
 			<files>
 				<include name="META-INF"/>
 				<include name="**/*.class"/>
 			</files>
 			<manifest>
-				<attribute name="Built-by" value="The OpenCraft Team"/>
-				<attribute name="Main-Class" value="org.opencraft.server.Server"/>
+				<attribute name="Built-by" value="The HollowCraft Team"/>
+				<attribute name="Main-Class" value="org.hollowcraft.server.Server"/>
 			</manifest>
 		</jar>
 	</target>
@@ -102,50 +101,50 @@
 			<fileset refid="dist.data"/>
 			<fileset refid="dist.docs"/>
 		</zip>
-		<jar destfile="${dist}/opencraft-${version}.jar" basedir="${build}">
+		<jar destfile="${dist}/hollowcraft-${version}.jar" basedir="${build}">
 			<manifest>
-				<attribute name="Built-by" value="The OpenCraft Team"/>
-				<attribute name="Main-Class" value="org.opencraft.server.Server"/>
+				<attribute name="Built-by" value="The HollowCraft Team"/>
+				<attribute name="Main-Class" value="org.hollowcraft.server.Server"/>
 			</manifest>
 		</jar>
 		<mkdir dir="${build}/lib"/>
 		<copy todir="${build}/lib" flatten="true">
 			<files refid="libs"/>
 			<files>
-				<include name="${dist}/opencraft-server-${version}.jar"/>
+				<include name="${dist}/hollowcraft-server-${version}.jar"/>
 			</files>
 		</copy>
 		<unzip dest="${build}">
 			<files refid="libs"/>
 			<files>
-				<include name="${dist}/opencraft-server-${version}.jar"/>
+				<include name="${dist}/hollowcraft-server-${version}.jar"/>
 			</files>
 		</unzip>
-		<jar destfile="${dist}/opencraft-full-${version}.jar" basedir="${build}">
+		<jar destfile="${dist}/hollowcraft-full-${version}.jar" basedir="${build}">
 			<manifest>
-				<attribute name="Built-by" value="The OpenCraft Team"/>
-				<attribute name="Main-Class" value="org.opencraft.server.Server"/>
+				<attribute name="Built-by" value="The HollowCraft Team"/>
+				<attribute name="Main-Class" value="org.hollowcraft.server.Server"/>
 			</manifest>
 		</jar>
 	</target>
 	<target name="dist" depends="clean,jar,jar-dist">
-		<tar destfile="${dist}/opencraft-${version}.tar">
+		<tar destfile="${dist}/hollowcraft-${version}.tar">
 			<tarfileset refid="dist.files"/>
 			<tarfileset refid="dist.docs"/>
 		</tar>
-		<gzip destfile="${dist}/opencraft-${version}.tar.gz" src="${dist}/opencraft-${version}.tar"/>
-		<bzip2 destfile="${dist}/opencraft-${version}.tar.bz2" src="${dist}/opencraft-${version}.tar"/>
+		<gzip destfile="${dist}/hollowcraft-${version}.tar.gz" src="${dist}/hollowcraft-${version}.tar"/>
+		<bzip2 destfile="${dist}/hollowcraft-${version}.tar.bz2" src="${dist}/hollowcraft-${version}.tar"/>
 	</target>
 	<target name="distcheck" depends="dist">
 		<mkdir dir="${build}/distcheck"/>
-		<gunzip src="${dist}/opencraft-${version}.tar.gz" dest="${build}/distcheck/opencraft-${version}.tar"/>
-		<untar src="${build}/distcheck/opencraft-${version}.tar" dest="${build}/distcheck"/>
+		<gunzip src="${dist}/hollowcraft-${version}.tar.gz" dest="${build}/distcheck/hollowcraft-${version}.tar"/>
+		<untar src="${build}/distcheck/hollowcraft-${version}.tar" dest="${build}/distcheck"/>
 		<exec executable="ant" dir="${build}/distcheck">
 			<arg value="dist"/>
 		</exec>
 	</target>
 	<target name="run" depends="build">
-		<java classname="org.opencraft.server.Server" fork="true" maxmemory="1024m">
+		<java classname="org.hollowcraft.server.Server" fork="true" maxmemory="1024m">
 			<classpath>
 				<files refid="libs"/>
 				<pathelement path="${build}"/>
@@ -153,10 +152,11 @@
 			<assertions>
 				<enable/>
 			</assertions>
+			<arg value="-server" />
 		</java>
 	</target>
 	<target name="run-nbtedit" depends="build">
-		<java classname="org.opencraft.nbtedit.Main" fork="true" maxmemory="1024m">
+		<java classname="org.hollowcraft.nbtedit.Main" fork="true" maxmemory="1024m">
 			<classpath>
 				<pathelement path="${toString:libs}"/>
 				<pathelement path="${build}"/>
@@ -164,6 +164,7 @@
 			<assertions>
 				<enable/>
 			</assertions>
+			<arg value="-server" />
 		</java>
 	</target>
 </project>
