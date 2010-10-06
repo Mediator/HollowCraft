@@ -71,7 +71,9 @@ public class GotoCommand extends Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
-		if (player.isAuthorized(new Permission("org.opencraft.server.Worlds."+params.getStringArgument(0)+".goto"))) {
+		try
+		{
+		if (player.isAuthorized(new Permission("org.hollowcraft.server.Worlds."+params.getStringArgument(0)+".goto"))) {
 			if (Server.getServer().hasWorld(params.getStringArgument(0))) {
 				player.getActionSender().sendChatMessage("Loading "+params.getStringArgument(0));
 				player.moveToWorld(Server.getServer().getWorld(params.getStringArgument(0)));
@@ -80,6 +82,11 @@ public class GotoCommand extends Command {
 			}
 		} else {
 			player.getActionSender().sendChatMessage("You are not permitted to go to "+params.getStringArgument(0));
+		}
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
 		}
 	}
 

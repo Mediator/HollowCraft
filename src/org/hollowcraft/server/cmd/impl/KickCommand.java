@@ -69,6 +69,8 @@ public class KickCommand extends Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
+		try
+		{
 		// Player using command is OP?
 		if (params.getArgumentCount() == 1) {
 			for (Player other : player.getWorld().getPlayerList().getPlayers()) {
@@ -83,6 +85,11 @@ public class KickCommand extends Command {
 		} else {
 			player.getActionSender().sendChatMessage("Wrong number of arguments");
 			player.getActionSender().sendChatMessage("/kick <name>");
+		}
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
 		}
 	}
 

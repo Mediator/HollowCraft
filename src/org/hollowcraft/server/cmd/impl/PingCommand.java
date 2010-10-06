@@ -71,7 +71,14 @@ public class PingCommand extends Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
+		try
+		{
 		player.getActionSender().sendChatMessage("Pong");
+	}
+	catch (Exception ex)
+	{
+		ex.printStackTrace();
+	}
 	}
 
 }

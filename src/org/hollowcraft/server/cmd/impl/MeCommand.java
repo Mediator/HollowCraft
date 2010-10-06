@@ -69,6 +69,8 @@ public class MeCommand extends Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
+		try
+		{
 		if (params.getArgumentCount() == 0) {
 			player.getActionSender().sendChatMessage("No message to send");
 			player.getActionSender().sendChatMessage("/me <message>");
@@ -79,6 +81,11 @@ public class MeCommand extends Command {
 			message += params.getStringArgument(i) + " ";
 		message += params.getStringArgument(params.getArgumentCount() - 1);
 		player.getWorld().broadcast(message);
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 	
 }

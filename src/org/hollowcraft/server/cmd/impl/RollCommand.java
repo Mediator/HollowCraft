@@ -71,6 +71,8 @@ public class RollCommand extends Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
+try
+{
 		if (params.getArgumentCount() != 1) {
 			player.getActionSender().sendChatMessage("<dice>d<sides>");
 			player.getActionSender().sendChatMessage("Roll a dice with <sides> number of sides");
@@ -106,6 +108,11 @@ public class RollCommand extends Command {
 			player.getActionSender().sendChatMessage("Please input valid numbers");
 		}
 		player.getActionSender().sendChatMessage(message);
+}
+catch (Exception ex)
+{
+	ex.printStackTrace();
+}
 	}
 	
 }

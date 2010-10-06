@@ -69,6 +69,8 @@ public class HelpCommand extends Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
+		try
+		{
 		String message = player.getWorld().getGameMode().listCommands();
 		while (message.length() > 0) {
 			// this is a short list so send it and leave
@@ -89,6 +91,11 @@ public class HelpCommand extends Command {
 				}
 				end -= 1;
 			}
+		}
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
 		}
 	}
 

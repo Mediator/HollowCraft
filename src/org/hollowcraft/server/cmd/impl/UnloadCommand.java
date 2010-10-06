@@ -71,6 +71,8 @@ public class UnloadCommand extends Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
+		try
+		{
 			if (params.getArgumentCount() != 1) {
 				player.getActionSender().sendChatMessage("Usage:");
 				player.getActionSender().sendChatMessage("/unload <name>");
@@ -85,6 +87,11 @@ public class UnloadCommand extends Command {
 			} else {
 				player.getActionSender().sendChatMessage("World "+params.getStringArgument(0) + " is not loaded.");
 			}
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 
 }

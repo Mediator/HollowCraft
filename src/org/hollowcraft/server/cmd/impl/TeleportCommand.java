@@ -69,6 +69,8 @@ public class TeleportCommand extends Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
+		try
+		{
 		if (params.getArgumentCount() == 1) {
 			for (Player other : player.getWorld().getPlayerList().getPlayers()) {
 				if (other.getName().toLowerCase().equals(params.getStringArgument(0).toLowerCase())) {
@@ -83,5 +85,10 @@ public class TeleportCommand extends Command {
 			player.getActionSender().sendChatMessage("Wrong number of arguments");
 		}
 		player.getActionSender().sendChatMessage("/tp <name>");
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 }

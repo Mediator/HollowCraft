@@ -69,6 +69,8 @@ public class SummonCommand extends Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
+		try
+		{
 		// Player using command is OP?
 		if (params.getArgumentCount() == 1) {
 			for (Player other : player.getWorld().getPlayerList().getPlayers()) {
@@ -85,5 +87,10 @@ public class SummonCommand extends Command {
 			player.getActionSender().sendChatMessage("Wrong number of arguments");
 		}
 		player.getActionSender().sendChatMessage("/summon <name>");
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 }

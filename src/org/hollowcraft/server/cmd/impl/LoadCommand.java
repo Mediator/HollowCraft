@@ -71,6 +71,8 @@ public class LoadCommand extends Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
+		try
+		{
 			if (params.getArgumentCount() != 1) {
 				player.getActionSender().sendChatMessage("Usage:");
 				player.getActionSender().sendChatMessage("/load <name>");
@@ -86,6 +88,11 @@ public class LoadCommand extends Command {
 			} else {
 				player.getActionSender().sendChatMessage("World "+params.getStringArgument(0) + " is already loaded.");
 			}
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 
 }

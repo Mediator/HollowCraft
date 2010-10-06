@@ -75,6 +75,8 @@ public class WorldsCommand extends Command {
 	}
 	
 	public void execute(Player player, CommandParameters params) {
+		try
+		{
 		String[] names = Server.getServer().getLoadedWorldNames();
 		player.getActionSender().sendChatMessage("Loaded Worlds:");
 		String message = "" + (char)(0xf);
@@ -99,6 +101,11 @@ public class WorldsCommand extends Command {
 
 		player.getActionSender().sendChatMessage("Unloaded Worlds:");
 		player.getActionSender().sendChatMessage("-Not implemented yet-");
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 
 }
