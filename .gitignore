@@ -3,10 +3,16 @@ data/banned.txt
 data/ops.txt
 data/maps
 data/savedGames
+data/worlds
 .ditz-config
 *.vim
 *.swp
 *.pyc
+*.settings
+cmd.bat
+.classpath
 log/
 dist/
 gen/
+lib/
+bugs
