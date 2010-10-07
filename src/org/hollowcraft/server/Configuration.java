@@ -66,7 +66,7 @@ public class Configuration {
 	public static void readConfiguration() throws FileNotFoundException, IOException {
 		synchronized (Configuration.class) {
 			Properties props = new Properties();
-			InputStream is = new FileInputStream("./data/opencraft.properties");
+			InputStream is = new FileInputStream("./data/hollowcraft.properties");
 			try {
 				props.load(is);
 				configuration = new Configuration(props);
@@ -132,13 +132,27 @@ public class Configuration {
 	private String scriptName;
 	
 	/**
+	 * The world handler implementation
+	 */
+	private String worldManager;
+	
+	/**
+	 * The action sender implementation
+	 */
+	private String actionSender;
+	
+	private String blockDefinitions;
+	
+	private String itemDefinitions;
+	
+	/**
 	 * Creates the configuration from the specified properties object.
 	 * @param props The properties object.
 	 */
 	public Configuration(Properties props) {
-		name = props.getProperty("name", "OpenCraft Server");
+		name = props.getProperty("name", "HollowCraft Server");
 		port = Integer.valueOf(props.getProperty("port", "25565"));
-		message = props.getProperty("message", "http://opencraft.sf.net/");
+		message = props.getProperty("message", "HollowCraft!");
 		maximumPlayers = Integer.valueOf(props.getProperty("max_players", "16"));
 		publicServer = Boolean.valueOf(props.getProperty("public", "false"));
 		verifyNames = Boolean.valueOf(props.getProperty("verify_names", "false"));
@@ -146,6 +160,10 @@ public class Configuration {
 		gameMode = props.getProperty("game_mode", CreativeGameMode.class.getName());
 		scriptName = props.getProperty("script_name", null);
 		defaultMap = props.getProperty("defaultMap", "default");
+		worldManager = props.getProperty("worldManager", "org.hollowcraft.server.io.impl.AlphaWorldManager");
+		actionSender = props.getProperty("actionSender", "org.hollowcraft.server.net.actions.impl.AlphaActionSender");
+		blockDefinitions = props.getProperty("blockDefinitions", "data/items/alpha/blocks.xml");
+		itemDefinitions = props.getProperty("itemDefitions", "data/items/alpha/items.xml");
 		useFList = Boolean.valueOf(props.getProperty("useFList", "false"));
 		backupCount = Integer.valueOf(props.getProperty("backupCount", "-1"));
 		backupPeriod = Integer.valueOf(props.getProperty("backupPeriod", "30"));
@@ -246,6 +264,38 @@ public class Configuration {
 	 */
 	public String getScriptName() {
 		return scriptName;
+	}
+	
+	/**
+	 * Gets the world manager name.
+	 * @return The world manager name.
+	 */
+	public String getWorldManager() {
+		return worldManager;
+	}
+	
+	/**
+	 * Gets the action sender name.
+	 * @return The action sender name.
+	 */
+	public String getActionSender() {
+		return actionSender;
+	}
+	
+	/**
+	 * Gets the block definitions.
+	 * @return The block definitions.
+	 */
+	public String getBlockDefinitions() {
+		return blockDefinitions;
+	}
+	
+	/**
+	 * Gets the item definitions.
+	 * @return The item definitions.
+	 */
+	public String getItemDefinitions() {
+		return itemDefinitions;
 	}
 	
 }
