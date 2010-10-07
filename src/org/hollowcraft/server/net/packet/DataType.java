@@ -64,16 +64,30 @@ public enum DataType {
 	 * Standard long data type.
 	 */
 	LONG(8),
+	
+	/**
+	 * Standard float data type
+	 */
+	FLOAT(4),
+	
+	/**
+	 * Standard double data type
+	 */
+	DOUBLE(8),
 
 	/**
-	 * Fixed-length (1024) byte array data type.
+	 * Byte array data type.
 	 */
-	BYTE_ARRAY(1024),
+	BYTE_ARRAY(0),
 
 	/**
-	 * Fixed length (64 ASCII bytes) string data type.
+	 * Inventory byte array data type
 	 */
-	STRING(64);
+	INVENTORY(0),
+	/**
+	 * String data type.
+	 */
+	STRING(0);
 	
 	/**
 	 * The length of the data type, in bytes.
