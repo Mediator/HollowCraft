@@ -45,6 +45,7 @@ import org.hollowcraft.server.net.packet.Packet;
 import org.hollowcraft.server.persistence.LoadPersistenceRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.net.SocketAddress;
 
 /**
@@ -55,7 +56,7 @@ import java.net.SocketAddress;
 public abstract class OCSession extends Connectable{
 	
 
-	
+	private static final Logger logger = LoggerFactory.getLogger(OCSession.class);
 	/**
 	 * The <code>IoSession</code> associated with this
 	 * <code>MinecraftSession</code>.
