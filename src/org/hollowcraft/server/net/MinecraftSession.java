@@ -58,7 +58,7 @@ public final class MinecraftSession extends OCSession{
 	/**
 	 * The action sender associated with this session.
 	 */
-	private final ActionSender actionSender = new ActionSender(this);
+	private final ActionSender actionSender = selectActionSender(this);
 	
 	private final static Logger logger = LoggerFactory.getLogger(MinecraftSession.class);
 	
@@ -71,6 +71,20 @@ public final class MinecraftSession extends OCSession{
 	public MinecraftSession(IoSession sess) {
 		super(sess);
 	}
+	
+	private static ActionSender selectActionSender(MinecraftSession session)
+	{
+		try
+		{
+		return (ActionSender) Class.forName(Configuration.getConfiguration().getActionSender()).getConstructor(new Class[] {org.hollowcraft.server.net.MinecraftSession.class}).newInstance(new Object[] {session});	
+		}
+		catch (Exception ex)
+		{
+			logger.info("Failed to create action sender implementation", ex);
+			return null;
+		}
+	}
+	
 	/**
 	 * Gets the action sender associated with this session.
 	 * @return The action sender.
@@ -102,6 +116,7 @@ public final class MinecraftSession extends OCSession{
 	 */
 	@Override
 	public void handle(Packet packet) {
+		logger.debug("Handling Packet : packet name=" + packet.getDefinition().getName() );
 		protocol().handler().handlePacket(this, packet);
 	}
 
