@@ -143,9 +143,6 @@ public final class PacketBuilder {
 	 */
 	public PacketBuilder putString(String name, String value) {
 		validateField(name, DataType.STRING);
-		if (value.length() > 64) {
-			throw new IllegalArgumentException("String exceeds maximum length of 64 characters.");
-		}
 		values.put(name, value);
 		return this;
 	}
@@ -157,11 +154,42 @@ public final class PacketBuilder {
 	 */
 	public PacketBuilder putByteArray(String name, byte[] value) {
 		validateField(name, DataType.BYTE_ARRAY);
-		if (value.length > 1024) {
-			throw new IllegalArgumentException("Byte array exceeds maximum length of 1024 characters.");
-		}
 		values.put(name, value);
 		return this;
 	}
+	
+	/**
+	 * Puts an inventory byte array.
+	 * @param name The name.
+	 * @param value The byte array.
+	 */
+	public PacketBuilder putInventory(String name, byte[] value) {
+		validateField(name, DataType.INVENTORY);
+		values.put(name, value);
+		return this;
+	}
+	
+	/**
+	 * Puts a double.
+	 * @param name The name.
+	 * @param value The value.
+	 */
+	public PacketBuilder putDouble(String name, double value) {
+		validateField(name, DataType.DOUBLE);
+		values.put(name, value);
+		return this;
+	}
+	
+	/**
+	 * Puts a float.
+	 * @param name The name.
+	 * @param value The value.
+	 */
+	public PacketBuilder putFloat(String name, float value) {
+		validateField(name, DataType.FLOAT);
+		values.put(name, value);
+		return this;
+	}
+	
 	
 }
