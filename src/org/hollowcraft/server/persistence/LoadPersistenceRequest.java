@@ -57,6 +57,8 @@ import com.thoughtworks.xstream.XStream;
  */
 public class LoadPersistenceRequest extends PersistenceRequest {
 	
+	private static final Logger logger = LoggerFactory.getLogger(LoadPersistenceRequest.class);
+	
 	/**
 	 * Creates the load request.
 	 * @param player The player to load.
@@ -75,7 +77,7 @@ public class LoadPersistenceRequest extends PersistenceRequest {
 			try {
 				Map<String, Object> attributes = (Map<String, Object>) xs.fromXML(new FileInputStream(file));
 				for(Map.Entry<String, Object> entry : attributes.entrySet()) {
-					player.setAttribute(entry.getKey(), entry.getValue());
+					player.setAttribute(entry.getKey(), entry.getValue(),true);
 				}
 			} catch (RuntimeException ex) {
 				throw new IOException(ex.getMessage());
