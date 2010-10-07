@@ -79,6 +79,8 @@ public class GenerateCommand extends Command {
 	public void execute(Player player, CommandParameters params) {
 			String theme = "Summer";
 			if (params.getArgumentCount() > 6 || params.getArgumentCount() < 5) {
+				try
+				{
 				player.getActionSender().sendChatMessage("<name> - The name of the map");
 				player.getActionSender().sendChatMessage("<x> <y> <z> - The width, height, and depth of the level");
 				player.getActionSender().sendChatMessage("<type> - The type of level to generate");
@@ -86,6 +88,11 @@ public class GenerateCommand extends Command {
 				player.getActionSender().sendChatMessage("<theme> - The tile set to use");
 				player.getActionSender().sendChatMessage("Valid themes are 'Summer' 'Winter' 'Oasis'");
 				player.getActionSender().sendChatMessage("/generate <name> <x> <y> <z> <type> [<theme>]");
+				}
+				catch (Exception ex)
+				{
+					ex.printStackTrace();
+				}
 				return;
 			}
 
@@ -111,14 +118,14 @@ public class GenerateCommand extends Command {
 				}
 				String type = params.getStringArgument(4);
 
-				World newlvl = new World();
+				ClassicWorld newlvl = new ClassicWorld();
 				Builder b;
 				if (type.equalsIgnoreCase("Hills")) {
-					b = new LandscapeBuilder(newlvl);
+					b = new ClassicLandscapeBuilder(newlvl);
 				} else if (type.equalsIgnoreCase("Flat")) {
-					b = new FlatGrassBuilder(newlvl);
+					b = new ClassicFlatGrassBuilder(newlvl);
 				} else if (type.equalsIgnoreCase("Pixel")) {
-					b = new PixelBuilder(newlvl);
+					b = new ClassicPixelBuilder(newlvl);
 				} else {
 					player.getActionSender().sendChatMessage("Valid types are 'Hills' 'Flat' 'Pixel'");
 					return;
@@ -139,11 +146,18 @@ public class GenerateCommand extends Command {
 					return;
 				}
 
-				newlvl.generateWorld(b, x, y, z, new Environment(), name, player.getName());
-				WorldManager.save(newlvl);
+				newlvl.generateWorld(b, x, y, z, new ClassicEnvironment(), name, player.getName());
+				WorldManager.getInstance().save(newlvl);
 				player.getActionSender().sendChatMessage("World " + name + " created");
 			} catch (Exception e) {
+				try
+				{
 				player.getActionSender().sendChatMessage("/generate <name> <x> <y> <z> <type> [<theme>]");
+				}
+				catch (Exception ex)
+				{
+					ex.printStackTrace();
+				}
 			}
 	}
 
