@@ -57,6 +57,7 @@ import org.slf4j.LoggerFactory;
 
 public class SandboxGameMode extends GameModeAdapter<Player> {
 	
+	private static final Logger logger = LoggerFactory.getLogger(SandboxGameMode.class);
 	/**
 	 * A map of players who have connected.
 	 */
@@ -70,19 +71,32 @@ public class SandboxGameMode extends GameModeAdapter<Player> {
 	
 	public void playerConnected(Player player) {
 		super.playerConnected(player);
+		logger.debug("Sandbox player connected");
 		String name = player.getName();
 		// New player?
 		if (!visitors.containsKey(name)) {
-			player.getSession().getActionSender().sendChatMessage("Welcome " + name + ".");
+			try {
+				player.getSession().getActionSender().sendChatMessage("Welcome " + name + ".");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				logger.warn("Failed to send chat message");
+			}
 		} else {
 			// Welcome back.
 			String lastConnectDate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(visitors.get(name));
-			player.getSession().getActionSender().sendChatMessage("Welcome back " + name + ".");
-			player.getSession().getActionSender().sendChatMessage("You last connect was: " + lastConnectDate + ".");
+			try {
+				player.getSession().getActionSender().sendChatMessage("Welcome back " + name + ".");
+				player.getSession().getActionSender().sendChatMessage("You last connect was: " + lastConnectDate + ".");
+			} catch (Exception e) {
+				logger.warn("Failed to send chat message");
+			}
+			
 			
 		}
+		logger.debug("Sandbox player add to list");
 		// Remember connection time
 		visitors.put(name, new Date());
+		logger.debug("Sandbox player complete");
 	}
 	
 	public void broadcastChatMessage(Player player, String message) { // TODO:
