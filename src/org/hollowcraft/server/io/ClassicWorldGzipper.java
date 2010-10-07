@@ -109,9 +109,19 @@ public final class ClassicWorldGzipper {
 					percent = 254;
 				if (m_closed)
 					percent = 255;
-				m_session.getActionSender().sendWorldBlock(m_chunk.length, m_chunk, percent);
+				try {
+					m_session.getActionSender().sendWorldBlock(m_chunk.length, m_chunk, percent);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				m_chunk = new byte[0];
-				m_session.getActionSender().sendWorldFinish();
+				try {
+					m_session.getActionSender().sendWorldFinish();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				logger.trace("Chunk {}/{} sent.", m_blocksSent, m_blockCount);
 			}
 		}
@@ -133,13 +143,18 @@ public final class ClassicWorldGzipper {
 		assert(session!=null);
 		assert(session.getPlayer()!=null);
 		assert(session.getPlayer().getWorld() != null);
-		World level = session.getPlayer().getWorld();
+		ClassicWorld level = (ClassicWorld)session.getPlayer().getWorld();
 		final int width = level.getWidth();
 		final int height = level.getHeight();
 		final int depth = level.getDepth();
 		logger.debug("Depth {}", depth);
-		final byte[][][] blockData = (byte[][][])(session.getPlayer().getWorld().getBlocks().clone());
-		session.getActionSender().sendWorldInit();
+		final byte[][][] blockData = (byte[][][])(level.getBlocks().clone());
+		try {
+			session.getActionSender().sendWorldInit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		/*service.submit(new Runnable() {
 			public void run() {
 				try {
@@ -194,12 +209,27 @@ public final class ClassicWorldGzipper {
 						byte[] chunk = new byte[len];
 						buf.get(chunk);
 						int percent = (int) ((double) buf.position() / (double) buf.limit() * 255D);
-						session.getActionSender().sendWorldBlock(len, chunk, percent);
+						try {
+							session.getActionSender().sendWorldBlock(len, chunk, percent);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
-					session.getActionSender().sendWorldFinish();
+					try {
+						session.getActionSender().sendWorldFinish();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					logger.trace("World sent!");
 				} catch (IOException ex) {
-					session.getActionSender().sendLoginFailure("Failed to gzip level. Please try again.");
+					try {
+						session.getActionSender().sendLoginFailure("Failed to gzip level. Please try again.");
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		});
