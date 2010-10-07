@@ -66,6 +66,8 @@ public class Player extends Entity implements Principal {
 	/**
 	 * The player's session.
 	 */
+	private boolean hasLoadedWorld;
+	
 	private final MinecraftSession session;
 
 	private static final Logger logger = LoggerFactory.getLogger(Player.class);
@@ -77,12 +79,20 @@ public class Player extends Entity implements Principal {
 	 */
 	private final Map<String, Object> attributes = new HashMap<String, Object>();
 	
+	
+	private final Map<String, Animation> animations = new HashMap<String, Animation>();
+	private short holdingID = 0;
+	private short oldHoldingID = 0;
+	
+	
 	/**
 	 * Creates the player.
 	 * @param name The player's name.
 	 */
 	public Player(MinecraftSession session, String name) {
-		m_policyRef = new org.opencraft.server.security.Player(name);
+		oldHoldingID = 0;
+		holdingID = 0;
+		m_policyRef = new org.hollowcraft.server.security.Player(name);
 		this.session = session;
 	}
 
@@ -98,6 +108,32 @@ public class Player extends Entity implements Principal {
 	 * no previous attribute with that name.
 	 */
 	public Object setAttribute(String name, Object value) {
+		return attributes.put(name, value);
+	}
+	
+	
+	/**
+	 * Sets an attribute of this player.
+	 * @param name The name of the attribute.
+	 * @param value The value of the attribute.
+	 * @return The old value of the attribute, or <code>null</code> if there was
+	 * no previous attribute with that name.
+	 */
+	public Object setAttribute(String name, Object value, boolean init) {
+		
+		//TODO Find a better way to do this :)
+		if (init)
+		{
+			if (name.equalsIgnoreCase("holdingid"));
+				holdingID = ((Number)value).shortValue();
+			if (name.equalsIgnoreCase("onground"));
+				super.setOnGround(((Boolean)value).booleanValue());
+			if (name.equalsIgnoreCase("position"));
+				super.setPosition((AbsolutePosition)value);
+			if (name.equalsIgnoreCase("rotation"));
+				super.setRotation((AbsoluteRotation)value);
+				
+		}
 		return attributes.put(name, value);
 	}
 	
@@ -130,6 +166,50 @@ public class Player extends Entity implements Principal {
 		return attributes.remove(name);
 	}
 
+	
+	
+	public Animation getAnimation(String name)
+	{
+		if (animations.containsKey(name))
+			return animations.get(name);
+		return null;
+	}
+	public Animation[] getAnimations()
+	{
+		return (Animation[])animations.values().toArray();
+	}
+	public void addAnimation(Animation animation)
+	{
+		
+		animations.put(animation.getName(), animation);
+	}
+	public void removeAnimation(Animation animation)
+	{
+		animations.remove(animation.getName());
+	}
+	public void resetOldPositionAndRotation() {
+		super.resetOldPositionAndRotation();
+		oldHoldingID = holdingID;
+	}
+	
+	
+	/**
+	 * Gets the item the entity is holding
+	 * @return item id
+	 */
+	public short getHoldingID() {
+		return holdingID;
+	}
+	
+
+	/**
+	 * Sets the item the entity is holding
+	 */
+	public short getOldHoldingID() {
+		return oldHoldingID;
+	}
+	
+	
 	public boolean equals(Object another) {
 		if (another instanceof Player) {
 			Player p = (Player) another;
@@ -158,7 +238,7 @@ public class Player extends Entity implements Principal {
 		return m_policyRef.isAuthorized(perm);
 	}
 
-	private org.opencraft.server.security.Player m_policyRef;
+	private org.hollowcraft.server.security.Player m_policyRef;
 
 	public Policy policy() {
 		return m_policyRef.policy();
@@ -192,10 +272,10 @@ public class Player extends Entity implements Principal {
 		return attributes;
 	}
 
-	public void teleport(Position position, Rotation rotation) {
+	public void teleport(AbsolutePosition position, AbsoluteRotation rotation) {
 		setPosition(position);
 		setRotation(rotation);
-		session.getActionSender().sendTeleport(position, rotation);
+	//	session.getActionSender().sendTeleport(position, rotation);
 	}
 
 	private World m_world;
@@ -203,9 +283,76 @@ public class Player extends Entity implements Principal {
 	public World getWorld() {
 		return m_world;
 	}
+	
+	private boolean chunksLoaded;
+	private int xLoadedChunks = 0;
+	private int zLoadedChunks = 0;
+	public boolean getChunksLoaded()
+	{
+		return chunksLoaded;
+	}
+	
+	public void setChunksLoaded(boolean value)
+	{
+		chunksLoaded = value;
+	}
+	
+	public int getXLoadedChunks()
+	{
+		return xLoadedChunks;
+	}
+	
+	public void setXLoadedChunks(int value)
+	{
+		xLoadedChunks = value;
+	}
+	
+	public int getZLoadedChunks()
+	{
+		return zLoadedChunks;
+	}
+	
+	public void setZLoadedChunks(int value)
+	{
+		zLoadedChunks = value;
+	}
 
 	public void setWorld(World world) {
 		m_world = world;
+	}
+	
+	/**
+	 * Sets the item the entity is holding
+	 */
+	public void setHoldingID(short value) {
+		holdingID = value;
+		setAttribute("holdingID", value);
+	}
+	
+	/**
+	 * Sets whether or not an entity is on the ground
+	 */
+	public void setOnGround(boolean value) {
+		super.setOnGround(value);
+		setAttribute("onGround", value);
+	}
+	
+	/**
+	 * Sets the position.
+	 * @param position The position.
+	 */
+	public void setPosition(AbsolutePosition position) {
+		super.setPosition(position);
+		setAttribute("position", position);
+	}
+	
+	/**
+	 * Sets the rotation.
+	 * @param rotation The rotation.
+	 */
+	public void setRotation(AbsoluteRotation rotation) {
+		super.setRotation(rotation);
+		setAttribute("rotation",rotation);
 	}
 
 	public void moveToWorld(World world) {
@@ -213,10 +360,23 @@ public class Player extends Entity implements Principal {
 		if (m_world != null)
 			m_world.removePlayer(this);
 		assert(world != null);
-		assert(world.getDepth() > 0);
 		setWorld(world);
 		m_world.addPlayer(this);
 		setPolicy(m_world.getPolicy());
-		WorldGzipper.getWorldGzipper().gzipWorld(session);
+		try
+		{
+		WorldManager.getInstance().gzipWorld(session);
+		}
+		catch (Exception ex)
+		{
+			logger.info("Failed to get world manager session in player move to world", ex);
+		}
+	}
+
+	public boolean getHasLoadedWorld() {
+		return hasLoadedWorld;
+	}
+	public void setHasLoadedWorld(boolean value) {
+		hasLoadedWorld = value;
 	}
 }
