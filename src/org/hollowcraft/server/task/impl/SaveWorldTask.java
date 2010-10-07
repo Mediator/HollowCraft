@@ -65,7 +65,12 @@ public final class SaveWorldTask extends ScheduledTask {
 		if (this.getDelay() == 0) {
 			this.setDelay(DELAY);
 		}
-		WorldManager.save(m_lvl);
+		try {
+			WorldManager.getInstance().save(m_lvl);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
