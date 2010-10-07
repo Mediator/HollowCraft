@@ -40,30 +40,51 @@ package org.hollowcraft.server.net.packet.handler.impl;
 
 import org.hollowcraft.model.AbsolutePosition;
 import org.hollowcraft.model.AbsoluteRotation;
+import org.hollowcraft.model.Position;
+import org.hollowcraft.model.Rotation;
+import org.hollowcraft.server.io.WorldManager;
 import org.hollowcraft.server.model.Player;
 import org.hollowcraft.server.net.MinecraftSession;
 import org.hollowcraft.server.net.packet.Packet;
 import org.hollowcraft.server.net.packet.handler.PacketHandler;
 
 /**
- * A packet handler which handles movement packets.
- * @author Graham Edgecombe
+ * A packet handler which handles movement/look packets.
  * @author Caleb Champlin
  */
-public class MovementPacketHandler implements PacketHandler<MinecraftSession> {
+public class MoveLookPacketHandler implements PacketHandler<MinecraftSession> {
 	
 	public void handlePacket(MinecraftSession session, Packet packet) {
 		if (!session.isAuthenticated()) {
 			return;
 		}
-		final int x = packet.getNumericField("x").intValue();
-		final int y = packet.getNumericField("y").intValue();
-		final int z = packet.getNumericField("z").intValue();
-		final int rotation = packet.getNumericField("rotation").intValue();
-		final int look = packet.getNumericField("look").intValue();
-		final Player player = session.getPlayer();
-		player.setPosition(new AbsolutePosition(x, y, z));
-		player.setRotation(new AbsoluteRotation(rotation, look));
+		if (!session.getPlayer().getHasLoadedWorld())
+			return;
+		AbsolutePosition newPos = new AbsolutePosition(packet.getNumericField("x").doubleValue(),packet.getNumericField("y").doubleValue(),packet.getNumericField("z").doubleValue());
+		session.getPlayer().setPosition(newPos);
+		AbsoluteRotation newRot = new AbsoluteRotation(packet.getNumericField("rotation").floatValue(),packet.getNumericField("pitch").floatValue());
+		
+		 // Clean the rotation and pitch
+		while (newRot.getRotation() > 360f)
+			newRot = new AbsoluteRotation(newRot.getRotation() - 360f, newRot.getLook());
+		while (newRot.getRotation() < 0f)
+			newRot = new AbsoluteRotation(newRot.getRotation() + 360f, newRot.getLook());
+		while (newRot.getLook() > 360f)
+			newRot = new AbsoluteRotation(newRot.getRotation(), newRot.getLook() - 360f);
+		while (newRot.getLook() < 0f)
+			newRot = new AbsoluteRotation(newRot.getRotation(), newRot.getLook() + 360f);
+		
+		
+		session.getPlayer().setRotation(newRot);
+		
+		try
+		{
+		WorldManager.getInstance().gzipWorld(session);
+		}
+		catch (Exception ex)
+		{
+			//TODO HANDLE THIS
+		}
 	}
 	
 }

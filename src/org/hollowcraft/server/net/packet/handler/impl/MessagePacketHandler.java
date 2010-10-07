@@ -81,10 +81,24 @@ public class MessagePacketHandler implements PacketHandler<MinecraftSession> {
 					parts = partsList.toArray(new String[0]);
 					c.execute(session.getPlayer(), new CommandParameters(parts));
 				} else {
+					try
+					{
 					session.getActionSender().sendChatMessage("Invalid command.");
+					}
+					catch (Exception ex)
+					{
+						logger.warn("Failed to send chat message");
+					}
 				}
 			} else {
+				try
+				{
 				session.getActionSender().sendChatMessage("You are not permitted to execute the "+parts[0]+" command.");
+				}
+				catch (Exception ex)
+				{
+					logger.warn("Failed to send chat message");
+				}
 			}
 		} else {
 			session.getPlayer().getWorld().getGameMode().broadcastChatMessage(session.getPlayer(), message);

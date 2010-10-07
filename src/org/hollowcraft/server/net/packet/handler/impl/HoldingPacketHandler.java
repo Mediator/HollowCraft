@@ -1,0 +1,32 @@
+package org.hollowcraft.server.net.packet.handler.impl;
+/*
+ * HollowCraft License
+ *  Copyright (c) 2010 Caleb Champlin.
+ *  All rights reserved
+ *  This license must be include in all copied, cloned and derived works 
+ */
+
+
+import org.hollowcraft.model.Position;
+import org.hollowcraft.model.Rotation;
+import org.hollowcraft.server.model.Player;
+import org.hollowcraft.server.net.MinecraftSession;
+import org.hollowcraft.server.net.packet.Packet;
+import org.hollowcraft.server.net.packet.handler.PacketHandler;
+
+/**
+ * A packet handler which handles flying packets.
+ * @author Caleb Champlin
+ */
+public class HoldingPacketHandler implements PacketHandler<MinecraftSession> {
+	
+	public void handlePacket(MinecraftSession session, Packet packet) {
+		if (!session.isAuthenticated()) {
+			return;
+		}
+		short itemID = packet.getNumericField("item").shortValue();
+		session.getPlayer().setHoldingID(itemID);
+		//TODO CHECK IF THE PLAYER HAS THIS ITEM EQUIPED
+	}
+	
+}
