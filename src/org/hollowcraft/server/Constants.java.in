@@ -34,16 +34,16 @@ package org.hollowcraft.server;
  */
 
 /**
- * Holds global constants for the OpenCraft server.
+ * Holds global constants for the HollowCraft server.
  * @author Graham Edgecombe
  */
 public final class Constants {
 	
 	/**
-	 * The protocol version of Minecraft that this version of OpenCraft is
+	 * The protocol version of Minecraft that this version of HollowCraft is
 	 * compatible with.
 	 */
-	public static final int PROTOCOL_VERSION = 7;
+	public static final int PROTOCOL_VERSION = 2;
 	
 	/**
 	 * The heartbeat server.
