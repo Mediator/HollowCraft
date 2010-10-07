@@ -74,18 +74,28 @@ public abstract class Connectable {
 	protected void send(Packet packet, IoSession session) {
 		synchronized (this) {
 			final String name = packet.getDefinition().getName();
-			final boolean unqueuedPacket = name.equals("authentication_response") || name.endsWith("level_init") || name.equals("level_block") || name.equals("level_finish") || name.equals("disconnect");
+			logger.debug("Should queue packet: name=" + name + " state=" + state + " queue=" + packet.getDefinition().getShouldQueue());
 			if (state == State.READY) {
+				try
+				{
 				if (queuedPackets.size() > 0) {
 					for (Packet queuedPacket : queuedPackets) {
+						logger.debug("Sending queued packet " + queuedPacket.getDefinition().getName());
 						session.write(queuedPacket);
 					}
 					queuedPackets.clear();
 				}
+				logger.debug("Sending normal packet " + packet.getDefinition().getName());
 				session.write(packet);
-			} else if (unqueuedPacket) {
+				}
+				catch (Exception ex)
+				{
+					logger.info("Exception sending packet");
+				}
+			} else if (!packet.getDefinition().getShouldQueue()) {
 				session.write(packet);
 			} else {
+				logger.debug("Adding packet to queue " + packet.getDefinition().getName());
 				queuedPackets.add(packet);
 			}
 		}
