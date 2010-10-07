@@ -125,6 +125,8 @@ public class HeartbeatManager {
 	private String connectHash;
 
 	public String getConnectHash() {
+		if (connectHash == null || connectHash.length() == 0)
+			return "unknown";
 		return connectHash;
 	}
 
