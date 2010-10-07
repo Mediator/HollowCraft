@@ -104,7 +104,8 @@ public final class Server {
 
 	private final PlayerList m_players;
 
-
+	private WorldManager m_worldManager;
+	
 	public static boolean bootstrap() {
 		File dataDir = new File("data/");
 		if (!dataDir.exists()) {
@@ -228,28 +229,28 @@ public final class Server {
 		SetManager.getSetManager().reloadSets();
 		m_players = new PlayerList();
 		
+		logger.info("Fetching world manager...");
+		try
+		{
+			this.m_worldManager = (WorldManager) Class.forName(Configuration.getConfiguration().getWorldManager()).newInstance();
+		}
+		catch (InstantiationException ex)
+		{
+			logger.info("Failed to intantiate world manager.");
+		}
+		catch (IllegalAccessException ex)
+		{
+			logger.info("Failed to access world manager.");
+		}
+		catch (ClassNotFoundException ex)
+		{
+			logger.info("Failed to locate world manager.");
+		}
 		acceptor.setHandler(new SessionHandler());
 		logger.info("Initializing games...");
 		m_worlds = new HashMap<String,SoftReference<World>>();
 		if (!loadWorld(Configuration.getConfiguration().getDefaultMap())) {
-			logger.info("Generating default 256x256x64 world.");
-			World lvl = null;
-			try{
-				lvl = new World();
-			} catch (ClassNotFoundException e) {
-				logger.error("Couldn't create world.", e);
-			} catch (InstantiationException e) {
-				logger.error("Problem creating world.", e);
-			} catch (IllegalAccessException e) {
-				logger.error("Problem creating world.", e);
-			}
-			lvl.generateWorld();
-			logger.debug("Setting name to {}", Configuration.getConfiguration().getDefaultMap());
-			lvl.setName(Configuration.getConfiguration().getDefaultMap());
-			logger.debug("Saving");
-			WorldManager.save(lvl);
-			boolean loaded = loadWorld(Configuration.getConfiguration().getDefaultMap());
-			assert(loaded);
+			logger.info("Failed to load default world.");
 		}
 	}
 
@@ -266,12 +267,10 @@ public final class Server {
 		}
 		try {
 			logger.info("Loading level \""+name+"\"");
-			World lvl = WorldManager.load(name);
+			World lvl = WorldManager.getInstance().load(name);
 			if (lvl == null)
 				return false;
-			World w = new World(lvl);
-			assert(lvl.getDepth() > 0);
-			assert(w.getDepth() > 0);
+			World w = lvl;
 			logger.info("Loading policy for {}...", w);
 			try {
 				w.setPolicy(new Policy(new FileReader("data/opencraft.permissions")));
@@ -280,9 +279,9 @@ public final class Server {
 			} catch (IOException e) {
 				logger.error("Error reading policy", e);
 			}
-			logger.trace("Policy:");
-			logger.trace("{}", w.getPolicy());
-			logger.trace("Seems good.");
+			logger.info("Policy:");
+			logger.info("{}", w.getPolicy());
+			logger.info("Seems good.");
 			m_worlds.put(name, new SoftReference<World>(w));
 			return true;
 		} catch (InstantiationException e) {
@@ -340,6 +339,7 @@ public final class Server {
 		logger.info("Initializing server...");	
 		logger.info("Starting tasks");
 		TaskQueue.getTaskQueue().schedule(new UpdateTask());
+		TaskQueue.getTaskQueue().schedule(new KeepAliveTask());
 		TaskQueue.getTaskQueue().schedule(new HeartbeatTask());
 		if (Configuration.getConfiguration().getUseFList())
 			TaskQueue.getTaskQueue().schedule(new FListHeartbeatTask());
@@ -361,7 +361,14 @@ public final class Server {
 			Scanner fread = new Scanner(banned);
 			while (fread.hasNextLine()) {
 				if (username.equalsIgnoreCase(fread.nextLine())) {
+					try
+					{
 					session.getActionSender().sendLoginFailure("Banned.");
+					}
+					catch (Exception ex)
+					{
+						logger.warn("Unable to send login failure");
+					}
 					logger.info("Refused {}: {} is banned.", session, username);
 					break;
 				}
@@ -372,7 +379,14 @@ public final class Server {
 		// verify name
 		if (Configuration.getConfiguration().isVerifyingNames()) {
 			if (verificationKey.equals("--")) {
+				try
+				{
 				session.getActionSender().sendLoginFailure("Cannot verify names with ip= based URLs");
+				}
+				catch (Exception ex)
+				{
+					logger.warn("Unable to send login failure");
+				}
 			}
 			long salt = HeartbeatManager.getHeartbeatManager().getSalt();
 			String hash = new StringBuilder().append(String.valueOf(salt)).append(username).toString();
@@ -385,7 +399,14 @@ public final class Server {
 			digest.update(hash.getBytes());
 			String test = new BigInteger(1, digest.digest()).toString(16);
 			if (!verificationKey.equals(test)) {
+				try
+				{
 				session.getActionSender().sendLoginFailure("Illegal name.");
+				}
+				catch (Exception ex)
+				{
+					logger.warn("Unable to send login failure");
+				}
 				return;
 			}
 		}
@@ -393,7 +414,14 @@ public final class Server {
 		char[] nameChars = username.toCharArray();
 		for (char nameChar : nameChars) {
 			if (nameChar < ' ' || nameChar > '\177') {
+				try
+				{
 				session.getActionSender().sendLoginFailure("Invalid name!");
+				}
+				catch (Exception ex)
+				{
+					logger.warn("Unable to send login failure");
+				}
 				logger.info("Refused {}, invalid login name.", username);
 				return;
 			}
@@ -403,7 +431,14 @@ public final class Server {
 			if (p.getName().equalsIgnoreCase(username)) {
 				// Should it not be the person attempting to connect who gets dropped?
 				// FIXME
+				try
+				{
 				p.getSession().getActionSender().sendLoginFailure("Logged in from another computer.");
+				}
+				catch (Exception ex)
+				{
+					logger.warn("Unable to send login failure");
+				}
 				logger.info("Kicked {}, logged in from another computer.", p);
 				break;
 			}
@@ -411,7 +446,14 @@ public final class Server {
 		// attempt to add the player
 		final Player player = new Player(session, username);
 		if (!m_players.add(player)) {
+			try
+			{
 			player.getSession().getActionSender().sendLoginFailure("Too many players online!");
+		}
+		catch (Exception ex)
+		{
+			logger.warn("Unable to send login failure");
+		}
 			logger.warn("Too many players online!");
 			return;
 		}
@@ -420,9 +462,101 @@ public final class Server {
 
 		session.setPlayer(player);
 		final Configuration c = Configuration.getConfiguration();
+		try
+		{
 		session.getActionSender().sendLoginResponse(Constants.PROTOCOL_VERSION, c.getName(), c.getMessage(), false);
-		assert(getWorld(c.getDefaultMap()) != null);
-		assert(session.getPlayer() == player);
+		}
+		catch (Exception ex)
+		{
+			logger.warn("Unable to send login response");
+		}
+		logger.debug("Moving player to default world");
+		player.moveToWorld(getWorld(c.getDefaultMap()));
+		m_loginLogger.info("JOIN "+player.getName()+" "+player.getWorld().getName());
+	}
+	
+	public void register(MinecraftSession session, String username) {
+		// check if the player is banned
+		try {
+			File banned = new File("data/banned.txt");
+			Scanner fread = new Scanner(banned);
+			while (fread.hasNextLine()) {
+				if (username.equalsIgnoreCase(fread.nextLine())) {
+					try
+					{
+					session.getActionSender().sendLoginFailure("Banned.");
+					}
+					catch (Exception ex)
+					{
+						logger.warn("Unable to send login failure");
+					}
+					logger.info("Refused {}: {} is banned.", session, username);
+					break;
+				}
+			}
+			fread.close();
+		} catch (IOException e) { }
+
+		// check if name is valid
+		char[] nameChars = username.toCharArray();
+		for (char nameChar : nameChars) {
+			if (nameChar < ' ' || nameChar > '\177') {
+				try
+				{
+				session.getActionSender().sendLoginFailure("Invalid name!");
+				}
+				catch (Exception ex)
+				{
+					logger.warn("Unable to send login failure");
+				}
+				logger.info("Refused {}, invalid login name.", username);
+				return;
+			}
+		}
+		// disconnect any existing players with the same name
+		for (Player p : m_players.getPlayers()) {
+			if (p.getName().equalsIgnoreCase(username)) {
+				// Should it not be the person attempting to connect who gets dropped?
+				// FIXME
+				try
+				{
+					p.getSession().getActionSender().sendLoginFailure("Logged in from another computer.");
+				}
+				catch (Exception ex)
+				{
+					logger.warn("Unable to send login failure");
+				}
+				logger.info("Kicked {}, logged in from another computer.", p);
+				break;
+			}
+		}
+		// attempt to add the player
+		final Player player = new Player(session, username);
+		if (!m_players.add(player)) {
+			try
+			{
+			player.getSession().getActionSender().sendLoginFailure("Too many players online!");
+			}
+			catch (Exception ex)
+			{
+				logger.warn("Unable to send login failure");
+			}
+			logger.warn("Too many players online!");
+			return;
+		}
+		// final setup
+		m_loginLogger.info("LOGIN "+player.getName()+" "+session.getAddress().toString());
+
+		session.setPlayer(player);
+		final Configuration c = Configuration.getConfiguration();
+		try
+		{
+		session.getActionSender().sendLoginResponse(Constants.PROTOCOL_VERSION, c.getName(), c.getMessage(), false);
+		}
+		catch (Exception ex)
+		{
+			logger.warn("Unable to sendl login response");
+		}
 		logger.debug("Moving player to default world");
 		player.moveToWorld(getWorld(c.getDefaultMap()));
 		m_loginLogger.info("JOIN "+player.getName()+" "+player.getWorld().getName());
