@@ -94,7 +94,14 @@ public abstract class PersistenceRequest implements Runnable {
 			logger.info(getClass().getName() + " for : " + player.getName() + " succeeded.");
 		} catch (IOException ex) {
 			logger.error(getClass().getName() + " for : " + player.getName() + " failed.", ex);
+			try
+			{
 			player.getSession().getActionSender().sendLoginFailure("Persistence request failed. Please try again.");
+			}
+			catch (Exception e)
+			{
+				logger.warn("Failed to send login failure");
+			}
 		}
 	}
 	
