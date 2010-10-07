@@ -73,11 +73,16 @@ public class Policy {
 	}
 
 	public boolean isAuthorized(Permission permission, Principal target) {
-		logger.debug("Checking {} for {} permission", target, permission);
+		logger.info("Checking {} for {} permission", target, permission);
 		Grant test = new Grant(target, permission);
 		for(Grant g : m_grants) {
-			logger.debug("Comparing {} against {}", test, g);
+			logger.info("Comparing {} against {}" + g.equals(test), test, g);
 			if (g.equals(test))
+				return true;
+		}
+		for (Policy p : m_worlds.values())
+		{
+			if (p.isAuthorized(permission, target))
 				return true;
 		}
 		return false;
@@ -142,7 +147,14 @@ public class Policy {
 		for(int i = 1;i<node.getChildCount();i++) {
 			switch(node.getChild(i).getType()) {
 				case SecurityPolicyLexer.ID:
+					try
+					{
 					member = new Player(node.getChild(i).getText());
+			}
+			catch (Exception ex)
+			{
+				ex.printStackTrace();
+			}
 					break;
 				case SecurityPolicyLexer.REFERENCE:
 					member = new GroupRef(this, node.getChild(i).getText());
@@ -172,12 +184,18 @@ public class Policy {
 					perm = new RoleRef(this, node.getChild(i).getChild(0).getText());
 					break;
 				case SecurityPolicyLexer.FQN:
-					perm = new Permission(node.getChild(i).getChild(0).getText());
+					String result = node.getChild(i).getChild(0).getText();
+					for (int x = 1; x < node.getChild(i).getChildCount();x++)
+						result += "." + node.getChild(i).getChild(x).getText();
+					logger.debug("FQN" + result);
+					perm = new Permission(result);
 					break;
 			}
-		}
+			
 		if (perm != null)
 			role.addPermission(perm);
+		perm = null;
+		}
 	}
 
 	public void grant(Principal target, Permission perm) {
@@ -201,7 +219,14 @@ public class Policy {
 				break;
 			case SecurityPolicyLexer.STRING:
 			case SecurityPolicyLexer.ID:
+				try
+				{
 				target = new Player(node.getChild(1).getChild(0).getText());
+				}
+				catch (Exception ex)
+				{
+					ex.printStackTrace();
+				}
 				target.setPolicy(this);
 				break;
 		}

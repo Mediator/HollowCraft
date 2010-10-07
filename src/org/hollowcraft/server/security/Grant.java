@@ -19,6 +19,10 @@ public class Grant {
 	public boolean equals(Object o) {
 		if (o instanceof Grant) {
 			Grant other = (Grant)o;
+			if (((m_target.name().equalsIgnoreCase("ALL") || m_target.name().equalsIgnoreCase("@ALL")) ||
+			(other.m_target.name().equalsIgnoreCase("ALL") || other.m_target.name().equalsIgnoreCase("@ALL"))) &&
+			m_perm.implies(other.m_perm))
+				return true;
 			return m_target.equals(other.m_target) && m_perm.implies(other.m_perm);
 		}
 		return false;

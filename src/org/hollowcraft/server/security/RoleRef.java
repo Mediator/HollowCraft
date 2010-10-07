@@ -17,6 +17,9 @@ public class RoleRef extends Role {
 	}
 
 	public boolean implies(Permission p) {
+		assert (m_policy != null);
+		assert (name() != null);
+		assert(p != null);
 		return m_policy.role(name()).implies(p);
 	}
 
