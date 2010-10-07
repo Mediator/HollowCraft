@@ -51,6 +51,11 @@ public final class PacketDefinition {
 	private final int opcode;
 	
 	/**
+	 * Whether or not this packet should be queued
+	 */
+	private final boolean shouldqueue;
+	
+	/**
 	 * The name of this packet.
 	 */
 	private final String name;
@@ -71,10 +76,11 @@ public final class PacketDefinition {
 	 * @param name The name.
 	 * @param fields The fields.
 	 */
-	public PacketDefinition(int opcode, String name, PacketField[] fields) {
+	public PacketDefinition(int opcode, String name, boolean shouldqueue, PacketField[] fields) {
 		this.opcode = opcode;
 		this.name = name;
 		this.fields = fields;
+		this.shouldqueue = shouldqueue;
 		// compute packet length
 		int length = 0;
 		for (PacketField field : fields) {
@@ -89,7 +95,7 @@ public final class PacketDefinition {
 	 */
 	private Object readResolve() {
 		// ensures length is computed
-		return new PacketDefinition(opcode, name, fields);
+		return new PacketDefinition(opcode, name, shouldqueue, fields);
 	}
 	
 	/**
@@ -108,6 +114,14 @@ public final class PacketDefinition {
 		return name;
 	}
 	
+	/**
+	 * Gets whether or not the packet should queue
+	 * @return Whether or not to queue the packet.
+	 */
+	public boolean getShouldQueue()
+	{
+		return shouldqueue;
+	}
 	/**
 	 * Gets the fields in this packet.
 	 * @return The fields in this packet.
