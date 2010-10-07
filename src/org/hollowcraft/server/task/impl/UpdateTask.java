@@ -76,6 +76,7 @@ public class UpdateTask extends ScheduledTask {
 			world.getGameMode().tick();
 			logger.trace("Player list length: {}", world.getPlayerList().getPlayers().size());
 			for (Player player : world.getPlayerList().getPlayers()) {
+				//player.getActionSender().sendKeepAlive();
 				Set<Entity> localEntities = player.getLocalEntities();
 				Iterator<Entity> localEntitiesIterator = localEntities.iterator();
 				while (localEntitiesIterator.hasNext()) {
@@ -83,24 +84,51 @@ public class UpdateTask extends ScheduledTask {
 					if (localEntity.getId() == -1) {
 						localEntitiesIterator.remove();
 						logger.trace("Sending removeEntity to other player");
+						try
+						{
 						player.getSession().getActionSender().sendRemoveEntity(localEntity);
+						}
+						catch (Exception ex)
+						{
+							logger.warn("Failed to send remove entity");
+						}
 					} else {
 						logger.trace("Sending updateEntity to other player");
+						try
+						{
 						player.getSession().getActionSender().sendUpdateEntity(localEntity);
+						}
+						catch (Exception ex)
+						{
+							logger.warn("Failed to send update entity");
+						}
 					}
 				}
 				for (Player otherEntity : world.getPlayerList().getPlayers()) {
 					if (!localEntities.contains(otherEntity) && otherEntity != player) {
 						localEntities.add(otherEntity);
 						logger.trace("Sending addEntity to other player");
+						try
+						{
 						player.getSession().getActionSender().sendAddEntity(otherEntity);
+						}
+						catch (Exception ex)
+						{
+							logger.warn("Failed to send add entity");
+						}
+						
 					}
 				}
 			}
 			for (Player player : world.getPlayerList().getPlayers()) {
 				player.resetOldPositionAndRotation();
+				for (Animation animation : player.getAnimations())
+					animation.resetPosition();
 			}
-			world.applyBlockBehaviour();
+			// We need to rethink how block behavior is going to work in alpha
+			// maybe something similar to the current system would work idk
+			//TODO FIX THIS
+			//world.applyBlockBehaviour();
 		}
 	}
 	
